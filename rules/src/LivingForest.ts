@@ -1,8 +1,8 @@
-import {SecretInformation, SimultaneousGame} from '@gamepark/rules-api'
+import {IncompleteInformation, SimultaneousGame} from '@gamepark/rules-api'
 import GameState from './GameState'
 import GameView from './GameView'
 import {isGameOptions, LivingForestOptions} from './LivingForestOptions'
-import {drawCard} from './moves/DrawCard'
+import {drawCard, drawCardMove} from './moves/DrawCard'
 import Move from './moves/Move'
 import MoveType from './moves/MoveType'
 import MoveView from './moves/MoveView'
@@ -18,7 +18,7 @@ import SpiritOfNature from './SpiritOfNature'
  * Later on, you can also implement "Competitive", "Undo", "TimeLimit" and "Eliminations" to add further features to the game.
  */
 export default class LivingForest extends SimultaneousGame<GameState, Move, SpiritOfNature>
-  implements SecretInformation<GameState, GameView, Move, MoveView, SpiritOfNature> {
+  implements IncompleteInformation<GameState, GameView, Move, MoveView, SpiritOfNature> {
   /**
    * This constructor is called when the game "restarts" from a previously saved state.
    * @param state The state of the game
@@ -36,10 +36,10 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   constructor(arg: GameState | LivingForestOptions) {
     if (isGameOptions(arg)) {
       super({
-        players: arg.players.map(player => ({spirit: player.id, ready: false})),
+        players: arg.players.map(player => ({spirit: player.id, ready: false, deck: [], line: [], discard: []})),
         phase: Phase.GuardianAnimals,
-        sacredTreeOwner: arg.players[0].id,
-        deck: []})
+        sacredTreeOwner: arg.players[0].id
+      })
     } else {
       super(arg)
     }
@@ -74,11 +74,17 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * - isLegal(move: Move):boolean, for security; and
    * - A class that implements "Dummy" to provide a custom Dummy player.
    */
-  getLegalMoves(): Move[] {
-    return [
-      {type: MoveType.SpendGold, playerId: this.state.players[0].spirit, quantity: 5},
-      {type: MoveType.DrawCard, playerId: this.state.players[0].spirit}
-    ]
+  getLegalMoves(spirit: SpiritOfNature): Move[] {
+    const player = this.getPlayer(spirit)
+    if (this.state.phase === Phase.GuardianAnimals) {
+      if (player.deck.length > 0) {
+        return [drawCardMove(spirit)] // + setReadyMove(spirit)
+      } else if (player.discard.length > 0) {
+        // [shuffleMove(spirit), setReadyMove(spirit)]
+      }
+    }
+    // TODO: Action phase
+    return []
   }
 
   /**
@@ -125,18 +131,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * @return What a person can see from the game state
    */
   getView(): GameView {
-    return {...this.state, deck: this.state.deck.length}
-  }
-
-  /**
-   * If you game has "SecretInformation", you must also implement "getPlayerView", returning the information visible by a specific player.
-   * @param playerId Identifier of the player
-   * @return what the player can see
-   */
-  getPlayerView(playerId: SpiritOfNature): GameView {
-    console.log(playerId)
-    // Here we could, for example, return a "playerView" with only the number of cards in hand for the other player only.
-    return {...this.state, deck: this.state.deck.length}
+    return {...this.state, players: this.state.players.map(p => ({...p, deck: p.deck.length}))}
   }
 
   /**
@@ -148,23 +143,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * @return What a person should know about the move that was played
    */
   getMoveView(move: Move): MoveView {
-    return move
-  }
-
-  /**
-   * If you game has secret information, sometime you need to alter a Move depending on which player it is.
-   * For example, if a card is drawn, the id of the revealed card should be ADDED to the Move in the MoveView, but only for the played that draws!
-   * Sometime, you will hide information: for example if a player secretly choose a card, you will hide the card to the other players or spectators.
-   *
-   * @param move The move that has been played
-   * @param playerId Identifier of the player seeing the move
-   * @return What a person should know about the move that was played
-   */
-  getPlayerMoveView(move: Move, playerId: SpiritOfNature): MoveView {
-    console.log(playerId)
-    if (move.type === MoveType.DrawCard && move.playerId === playerId) {
-      return {...move, card: this.state.deck[0]}
-    }
     return move
   }
 }

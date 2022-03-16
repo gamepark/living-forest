@@ -10,7 +10,6 @@ type GameState = {
   phase: Phase
   sacredTreeOwner: SpiritOfNature
   currentPlayer?: SpiritOfNature
-  deck: number[]
 }
 
 export default GameState

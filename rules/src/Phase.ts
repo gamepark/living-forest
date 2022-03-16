@@ -1,5 +1,5 @@
 enum Phase {
-  GuardianAnimals, Action, EndOfTurn
+  GuardianAnimals = 1, Action, EndOfTurn
 }
 
 export default Phase

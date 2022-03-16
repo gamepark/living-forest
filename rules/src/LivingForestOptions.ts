@@ -22,7 +22,7 @@ export type LivingForestOptions = {
  * @return true if arg is a Game options
  */
 export function isGameOptions(arg: GameState | LivingForestOptions): arg is LivingForestOptions {
-  return typeof (arg as GameState).deck === 'undefined'
+  return (arg as GameState).phase === undefined
 }
 
 /**
