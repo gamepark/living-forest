@@ -35,7 +35,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    */
   constructor(arg: GameState | LivingForestOptions) {
     if (isGameOptions(arg)) {
-      super({players: arg.players.map(player => ({spirit: player.id})), phase: Phase.GuardianAnimals, deck: []})
+      super({
+        players: arg.players.map(player => ({spirit: player.id, ready: false})),
+        phase: Phase.GuardianAnimals,
+        sacredTreeOwner: arg.players[0].id,
+        deck: []})
     } else {
       super(arg)
     }
@@ -48,8 +52,16 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
     return false
   }
 
-  isTurnToPlay(_playerId: SpiritOfNature): boolean {
-    return false
+  isTurnToPlay(spirit: SpiritOfNature): boolean {
+    if (this.state.phase === Phase.GuardianAnimals) {
+      return !this.getPlayer(spirit).ready
+    } else {
+      return this.state.currentPlayer === spirit
+    }
+  }
+
+  getPlayer(spirit: SpiritOfNature) {
+    return this.state.players.find(p => p.spirit === spirit)!
   }
 
   /**
