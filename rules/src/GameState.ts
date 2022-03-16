@@ -1,3 +1,4 @@
+import Phase from './Phase'
 import PlayerState from './PlayerState'
 
 /**
@@ -5,7 +6,7 @@ import PlayerState from './PlayerState'
  */
 type GameState = {
   players: PlayerState[]
-  round: number
+  phase: Phase
   deck: number[]
 }
 

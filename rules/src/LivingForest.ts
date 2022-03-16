@@ -7,6 +7,7 @@ import Move from './moves/Move'
 import MoveType from './moves/MoveType'
 import MoveView from './moves/MoveView'
 import {spendGold} from './moves/SpendGold'
+import Phase from './Phase'
 import SpiritOfNature from './SpiritOfNature'
 
 /**
@@ -34,7 +35,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    */
   constructor(arg: GameState | LivingForestOptions) {
     if (isGameOptions(arg)) {
-      super({players: arg.players.map(player => ({spirit: player.id})), round: 1, deck: []})
+      super({players: arg.players.map(player => ({spirit: player.id})), phase: Phase.GuardianAnimals, deck: []})
     } else {
       super(arg)
     }
