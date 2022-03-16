@@ -20,7 +20,7 @@ export default function App() {
   return (
     <DndProvider options={HTML5ToTouch}>
       {!loading && <GameDisplay game={game}/>}
-      <LoadingScreen display={loading} author="Someone" artist="Somebody" publisher="Nobody" developer="You"/>
+      <LoadingScreen display={loading} author="Aske Christiansen" artist="Apolline Etienne" publisher="Ludonaute" developer="Laetitia Decoudu"/>
       <Header><HeaderText loading={loading} game={game}/></Header>
       <Menu/>
       <FailuresDialog/>
