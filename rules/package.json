@@ -1,5 +1,5 @@
 {
-  "name": "@gamepark/board-game-template",
+  "name": "@gamepark/living-forest",
   "version": "0.0.0",
   "description": "Board Game Template rules for Game Park",
   "main": "dist/index.js",

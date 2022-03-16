@@ -1,12 +1,12 @@
 import {css, Global} from '@emotion/react'
-import {MyBoardGameOptionsSpec} from '@gamepark/board-game-template/MyBoardGameOptions'
-import MyBoardGame from '@gamepark/board-game-template/MyBoardGame'
+import {LivingForestOptionsSpec} from '@gamepark/living-forest/LivingForestOptions'
+import LivingForest from '@gamepark/living-forest/LivingForest'
 import {GameProvider, setupTranslation} from '@gamepark/react-client'
 import normalize from 'emotion-normalize'
 import {StrictMode} from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import MyBoardGameView from './MyBoardGameView'
+import LivingForestView from './LivingForestView'
 import translations from './translations.json'
 
 setupTranslation(translations)
@@ -60,7 +60,7 @@ const style = css`
 
 ReactDOM.render(
   <StrictMode>
-    <GameProvider game="my-board-game" Rules={MyBoardGame} RulesView={MyBoardGameView} optionsSpec={MyBoardGameOptionsSpec}>
+    <GameProvider game="living-forest" Rules={LivingForest} RulesView={LivingForestView} optionsSpec={LivingForestOptionsSpec}>
       <App/>
     </GameProvider>
     <Global styles={[normalize, style]}/>

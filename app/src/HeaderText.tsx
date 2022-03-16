@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import GameView from '@gamepark/board-game-template/GameView'
-import {getPlayerName} from '@gamepark/board-game-template/MyBoardGameOptions'
+import GameView from '@gamepark/living-forest/GameView'
+import {getPlayerName} from '@gamepark/living-forest/LivingForestOptions'
 import {usePlayerId} from '@gamepark/react-client'
 import {useTranslation} from 'react-i18next'
 
