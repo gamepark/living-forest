@@ -1,12 +1,12 @@
-import {SecretInformation, SequentialGame} from '@gamepark/rules-api'
+import {SecretInformation, SimultaneousGame} from '@gamepark/rules-api'
 import GameState from './GameState'
 import GameView from './GameView'
+import {isGameOptions, LivingForestOptions} from './LivingForestOptions'
 import {drawCard} from './moves/DrawCard'
 import Move from './moves/Move'
 import MoveType from './moves/MoveType'
 import MoveView from './moves/MoveView'
 import {spendGold} from './moves/SpendGold'
-import {isGameOptions, LivingForestOptions} from './LivingForestOptions'
 import SpiritOfNature from './SpiritOfNature'
 
 /**
@@ -16,7 +16,7 @@ import SpiritOfNature from './SpiritOfNature'
  * If the game contains information that some players know, but the other players does not, it must implement "SecretInformation" instead.
  * Later on, you can also implement "Competitive", "Undo", "TimeLimit" and "Eliminations" to add further features to the game.
  */
-export default class LivingForest extends SequentialGame<GameState, Move, SpiritOfNature>
+export default class LivingForest extends SimultaneousGame<GameState, Move, SpiritOfNature>
   implements SecretInformation<GameState, GameView, Move, MoveView, SpiritOfNature> {
   /**
    * This constructor is called when the game "restarts" from a previously saved state.
@@ -34,7 +34,7 @@ export default class LivingForest extends SequentialGame<GameState, Move, Spirit
    */
   constructor(arg: GameState | LivingForestOptions) {
     if (isGameOptions(arg)) {
-      super({players: arg.players.map(player => ({color: player.id})), round: 1, deck: []})
+      super({players: arg.players.map(player => ({spirit: player.id})), round: 1, deck: []})
     } else {
       super(arg)
     }
@@ -47,13 +47,8 @@ export default class LivingForest extends SequentialGame<GameState, Move, Spirit
     return false
   }
 
-  /**
-   * Retrieves the player which must act. It is used to secure the game and prevent players from acting outside their turns.
-   * Only required in a SequentialGame.
-   * @return The identifier of the player whose turn it is
-   */
-  getActivePlayer(): SpiritOfNature | undefined {
-    return undefined // You must return undefined only when game is over, otherwise the game will be blocked.
+  isTurnToPlay(_playerId: SpiritOfNature): boolean {
+    return false
   }
 
   /**
@@ -68,8 +63,8 @@ export default class LivingForest extends SequentialGame<GameState, Move, Spirit
    */
   getLegalMoves(): Move[] {
     return [
-      {type: MoveType.SpendGold, playerId: this.getActivePlayer()!, quantity: 5},
-      {type: MoveType.DrawCard, playerId: this.getActivePlayer()!}
+      {type: MoveType.SpendGold, playerId: this.state.players[0].spirit, quantity: 5},
+      {type: MoveType.DrawCard, playerId: this.state.players[0].spirit}
     ]
   }
 
