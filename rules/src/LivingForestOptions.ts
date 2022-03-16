@@ -1,12 +1,12 @@
 import {OptionsSpec} from '@gamepark/rules-api'
 import {TFunction} from 'i18next'
 import GameState from './GameState'
-import PlayerColor, {playerColors} from './PlayerColor'
+import SpiritOfNature, {playerColors} from './SpiritOfNature'
 
 /**
  * This is the options for each players in the game.
  */
-type LivingForestPlayerOptions = { id: PlayerColor }
+type LivingForestPlayerOptions = { id: SpiritOfNature }
 
 /**
  * This is the type of object that the game receives when a new game is started.
@@ -39,15 +39,15 @@ export const LivingForestOptionsSpec: OptionsSpec<LivingForestOptions> = {
   }
 }
 
-export function getPlayerName(playerId: PlayerColor, t: TFunction) {
+export function getPlayerName(playerId: SpiritOfNature, t: TFunction) {
   switch (playerId) {
-    case PlayerColor.Red:
-      return t('Red player')
-    case PlayerColor.Blue:
-      return t('Blue player')
-    case PlayerColor.Green:
-      return t('Green player')
-    case PlayerColor.Yellow:
-      return t('Yellow player')
+    case SpiritOfNature.Winter:
+      return t('Winter Spirit')
+    case SpiritOfNature.Spring:
+      return t('Spring Spirit')
+    case SpiritOfNature.Summer:
+      return t('Summer Spirit')
+    case SpiritOfNature.Autumn:
+      return t('Autumn Spirit')
   }
 }

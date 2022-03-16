@@ -1,5 +1,5 @@
-import PlayerColor from './PlayerColor'
+import SpiritOfNature from './SpiritOfNature'
 
 export default interface PlayerState {
-  color: PlayerColor
+  color: SpiritOfNature
 }
