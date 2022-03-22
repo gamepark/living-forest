@@ -20,7 +20,7 @@ export function isDrawCardView(move: DrawCard | DrawCardView): move is DrawCardV
 
 export function drawCard(state: GameState, move: DrawCard) {
   const player = state.players.find(p => p.spirit === move.spirit)!
-  player.line.push(player.deck.pop()!)
+  player.line.push(player.deck.shift()!)
 }
 
 export function drawCardMove(spirit: SpiritOfNature): DrawCard {

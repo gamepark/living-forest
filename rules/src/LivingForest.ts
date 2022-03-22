@@ -1,4 +1,5 @@
 import {IncompleteInformation, SimultaneousGame} from '@gamepark/rules-api'
+import shuffle from 'lodash.shuffle'
 import GameState from './GameState'
 import GameView from './GameView'
 import {isGameOptions, LivingForestOptions} from './LivingForestOptions'
@@ -6,7 +7,8 @@ import {drawCard, drawCardMove} from './moves/DrawCard'
 import Move from './moves/Move'
 import MoveType from './moves/MoveType'
 import MoveView from './moves/MoveView'
-import {spendGold} from './moves/SpendGold'
+import {shuffleDiscard, shuffleDiscardMove} from './moves/ShuffleDiscard'
+import {shuffleToDraw, shuffleToDrawMove} from './moves/ShuffleToDraw'
 import Phase from './Phase'
 import SpiritOfNature from './SpiritOfNature'
 
@@ -80,7 +82,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       if (player.deck.length > 0) {
         return [drawCardMove(spirit)] // + setReadyMove(spirit)
       } else if (player.discard.length > 0) {
-        // [shuffleMove(spirit), setReadyMove(spirit)]
+        return [shuffleToDrawMove(spirit)] // , setReadyMove(spirit)
       }
     }
     // TODO: Action phase
@@ -94,10 +96,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    */
   play(move: Move): void {
     switch (move.type) {
-      case MoveType.SpendGold:
-        return spendGold(this.state, move)
       case MoveType.DrawCard:
         return drawCard(this.state, move)
+      case MoveType.ShuffleToDraw:
+        return shuffleToDraw(this.state, move)
+      case MoveType.ShuffleDiscard:
+        return shuffleDiscard(this.state, move)
     }
   }
 
@@ -114,16 +118,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    *
    * @return The next automatic consequence that should be played in current game state.
    */
-  getAutomaticMove(): void | Move {
-    /**
-     * Example:
-     * for (const player of this.state.players) {
-     *   if (player.mustDraw) {
-     *     return {type: MoveType.DrawCard, playerId: player.color}
-     *   }
-     * }
-     */
-    return
+  getAutomaticMove(): Move[] {
+    const shufflingPlayer = this.state.players.find(p => p.shuffle)
+    if (shufflingPlayer) {
+      return [shuffleDiscardMove(shufflingPlayer.spirit, shuffle(shufflingPlayer.discard)), drawCardMove(shufflingPlayer.spirit)]
+    }
+    return []
   }
 
   /**
@@ -143,6 +143,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * @return What a person should know about the move that was played
    */
   getMoveView(move: Move): MoveView {
-    return move
+    if (move.type === MoveType.DrawCard) {
+      return {...move, card: this.getPlayer(move.spirit).deck[0]}
+    } else if (move.type === MoveType.ShuffleDiscard) {
+      return {type: MoveType.ShuffleDiscard, spirit: move.spirit}
+    } else {
+      return move
+    }
   }
 }

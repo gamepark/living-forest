@@ -6,4 +6,5 @@ export default interface PlayerState {
   deck: number[] // Personal Guardian Animal draw stack
   line: number[] // Guardian Animal Help Line
   discard: number[] // Guardian Animal discard
+  shuffle?: boolean
 }

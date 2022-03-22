@@ -1,8 +1,8 @@
 import GameView from '@gamepark/living-forest/GameView'
-import {drawCardInPlayerView, drawCardInView, isDrawCardView} from '@gamepark/living-forest/moves/DrawCard'
+import {drawCardInView} from '@gamepark/living-forest/moves/DrawCard'
 import MoveType from '@gamepark/living-forest/moves/MoveType'
 import MoveView from '@gamepark/living-forest/moves/MoveView'
-import {spendGold} from '@gamepark/living-forest/moves/SpendGold'
+import {shuffleDiscardInView} from '@gamepark/living-forest/moves/ShuffleDiscard'
 import {Game} from '@gamepark/rules-api'
 
 /**
@@ -35,14 +35,10 @@ export default class LivingForestView implements Game<GameView, MoveView> {
    */
   play(move: MoveView): void {
     switch (move.type) {
-      case MoveType.SpendGold:
-        return spendGold(this.state, move)
       case MoveType.DrawCard:
-        if (isDrawCardView(move)) {
-          return drawCardInPlayerView(this.state, move)
-        } else {
-          return drawCardInView(this.state, move)
-        }
+        return drawCardInView(this.state, move)
+      case MoveType.ShuffleDiscard:
+        return shuffleDiscardInView(this.state, move)
     }
   }
 

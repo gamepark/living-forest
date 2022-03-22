@@ -1,10 +1,11 @@
-import {DrawCardView} from './DrawCard'
+import DrawCard, {DrawCardView} from './DrawCard'
 import Move from './Move'
+import ShuffleDiscard, {ShuffleDiscardView} from './ShuffleDiscard'
 
 /**
  * A "MoveView" is the combination of all the types of move views that exists in you game.
  * It usually derives from "Move". You can exclude some Move using: = Exclude<Move, MoveToExclude | OtherMoveToExclude> | MoveToInclude...
  */
-type MoveView = Move | DrawCardView
+type MoveView = Exclude<Move, DrawCard | ShuffleDiscard> | DrawCardView | ShuffleDiscardView
 
 export default MoveView
