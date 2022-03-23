@@ -1,20 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import {css, keyframes} from '@emotion/react'
-import GameView from '@gamepark/living-forest/GameView'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import {usePlay, usePlayerId} from '@gamepark/react-client'
 import {Letterbox} from '@gamepark/react-components'
 import {useState} from 'react'
+import {displayScreenMove} from './DisplayScreen'
+import GameLocalView from './GameLocalView'
 import Card from './material/Card'
+import ScreenDisplay from './ScreenDisplay'
 
 type Props = {
-  game: GameView
+  game: GameLocalView
 }
 
 export default function GameDisplay({game}: Props) {
   const [animal, setAnimal] = useState<GuardianAnimal>()
+  const play = usePlay()
+  const playerId = usePlayerId<SpiritOfNature>()
   return (
     <Letterbox css={letterBoxStyle} width={185} height={100}>
-      <div css={sampleCss}>
+      <ScreenDisplay game={game}/>
+      <div css={sampleCss} onClick={() => playerId && play(displayScreenMove(game.displayedPlayer ? undefined : SpiritOfNature.Autumn), {local: true})}>
         {JSON.stringify(game)}
       </div>
       <Card css={sampleImageCss} guardianAnimal={animal} onClick={() => setAnimal(animal ? undefined : GuardianAnimal.Bee)}/>

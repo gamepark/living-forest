@@ -1,18 +1,19 @@
-import GameView from '@gamepark/living-forest/GameView'
 import {drawCardInView} from '@gamepark/living-forest/moves/DrawCard'
 import MoveType from '@gamepark/living-forest/moves/MoveType'
 import MoveView from '@gamepark/living-forest/moves/MoveView'
 import {shuffleDiscardInView} from '@gamepark/living-forest/moves/ShuffleDiscard'
 import {Game} from '@gamepark/rules-api'
+import DisplayScreen, {DISPLAY_SCREEN} from './DisplayScreen'
+import GameLocalView from './GameLocalView'
 
 /**
  * This class is useful when the game has "IncompleteInformation" (or "SecretInformation").
  * It allows to handle, in a different way than the backend side, the moves that involve hidden information.
  */
-export default class LivingForestView implements Game<GameView, MoveView> {
-  state: GameView
+export default class LivingForestView implements Game<GameLocalView, MoveView | DisplayScreen> {
+  state: GameLocalView
 
-  constructor(state: GameView) {
+  constructor(state: GameLocalView) {
     this.state = state
   }
 
@@ -33,12 +34,14 @@ export default class LivingForestView implements Game<GameView, MoveView> {
    *
    * @param move The move that must be applied in the browser of the player or the spectator
    */
-  play(move: MoveView): void {
+  play(move: MoveView | DisplayScreen): void {
     switch (move.type) {
       case MoveType.DrawCard:
         return drawCardInView(this.state, move)
       case MoveType.ShuffleDiscard:
         return shuffleDiscardInView(this.state, move)
+      case DISPLAY_SCREEN:
+        this.state.displayedPlayer = move.spiritOfNature
     }
   }
 

@@ -1,16 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import GameView from '@gamepark/living-forest/GameView'
 import {FailuresDialog, FullscreenDialog, Menu, useGame} from '@gamepark/react-client'
 import {Header, ImagesLoader, LoadingScreen} from '@gamepark/react-components'
 import {useEffect, useState} from 'react'
 import {DndProvider} from 'react-dnd-multi-backend'
 import HTML5ToTouch from 'react-dnd-multi-backend/dist/cjs/HTML5toTouch'
 import GameDisplay from './GameDisplay'
+import GameLocalView from './GameLocalView'
 import HeaderText from './HeaderText'
 import Images from './images/Images'
 
 export default function App() {
-  const game = useGame<GameView>()
+  const game = useGame<GameLocalView>()
   const [imagesLoading, setImagesLoading] = useState(true)
   const [isJustDisplayed, setJustDisplayed] = useState(true)
   useEffect(() => {
