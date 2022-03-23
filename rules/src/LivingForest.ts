@@ -3,6 +3,7 @@ import shuffle from 'lodash.shuffle'
 import GameState from './GameState'
 import GameView from './GameView'
 import {isGameOptions, LivingForestOptions} from './LivingForestOptions'
+import {startingGuardianAnimals} from './material/GuardianAnimal'
 import {drawCard, drawCardMove} from './moves/DrawCard'
 import Move from './moves/Move'
 import MoveType from './moves/MoveType'
@@ -38,7 +39,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   constructor(arg: GameState | LivingForestOptions) {
     if (isGameOptions(arg)) {
       super({
-        players: arg.players.map(player => ({spirit: player.id, ready: false, deck: [], line: [], discard: []})),
+        players: arg.players.map(player => ({spirit: player.id, ready: false, deck: shuffle(startingGuardianAnimals), line: [], discard: []})),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id
       })

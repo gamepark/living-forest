@@ -1,5 +1,6 @@
 import GameState from '../GameState'
 import GameView from '../GameView'
+import GuardianAnimal from '../material/GuardianAnimal'
 import SpiritOfNature from '../SpiritOfNature'
 import MoveType from './MoveType'
 
@@ -11,7 +12,7 @@ type DrawCard = {
 export default DrawCard
 
 export type DrawCardView = DrawCard & {
-  card: number
+  card: GuardianAnimal
 }
 
 export function isDrawCardView(move: DrawCard | DrawCardView): move is DrawCardView {

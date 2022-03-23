@@ -1,12 +1,13 @@
 import GameState from '../GameState'
 import GameView from '../GameView'
+import GuardianAnimal from '../material/GuardianAnimal'
 import SpiritOfNature from '../SpiritOfNature'
 import MoveType from './MoveType'
 
 type ShuffleDiscard = {
   type: MoveType.ShuffleDiscard
   spirit: SpiritOfNature
-  deck: number[]
+  deck: GuardianAnimal[]
 }
 
 export default ShuffleDiscard
