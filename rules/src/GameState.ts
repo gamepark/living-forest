@@ -1,5 +1,6 @@
 import Phase from './Phase'
 import PlayerState from './PlayerState'
+import Reserve from './Reserve'
 import SpiritOfNature from './SpiritOfNature'
 
 /**
@@ -9,6 +10,7 @@ type GameState = {
   players: PlayerState[]
   phase: Phase
   sacredTreeOwner: SpiritOfNature
+  reserve: Reserve
   currentPlayer?: SpiritOfNature
 }
 

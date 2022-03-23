@@ -41,7 +41,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       super({
         players: arg.players.map(player => ({spirit: player.id, ready: false, deck: shuffle(startingGuardianAnimals), line: [], discard: []})),
         phase: Phase.GuardianAnimals,
-        sacredTreeOwner: arg.players[0].id
+        sacredTreeOwner: arg.players[0].id,
+        reserve: {
+          stacks: [[], [], []],
+          rows: [[null, null, null, null], [null, null, null, null], [null, null, null, null]]
+        }
       })
     } else {
       super(arg)
@@ -132,7 +136,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * @return What a person can see from the game state
    */
   getView(): GameView {
-    return {...this.state, players: this.state.players.map(p => ({...p, deck: p.deck.length}))}
+    return {
+      ...this.state,
+      players: this.state.players.map(p => ({...p, deck: p.deck.length})),
+      reserve: {...this.state.reserve, stacks: this.state.reserve.stacks.map(stack => stack.length)}
+    }
   }
 
   /**
