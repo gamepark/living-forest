@@ -1,20 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import {css, keyframes} from '@emotion/react'
 import GameView from '@gamepark/living-forest/GameView'
-import {Letterbox, Picture} from '@gamepark/react-components'
-import Images from './images/Images'
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
+import {Letterbox} from '@gamepark/react-components'
+import {useState} from 'react'
+import Card from './material/Card'
 
 type Props = {
   game: GameView
 }
 
 export default function GameDisplay({game}: Props) {
+  const [animal, setAnimal] = useState<GuardianAnimal>()
   return (
-    <Letterbox css={letterBoxStyle} top={0}>
+    <Letterbox css={letterBoxStyle} width={185} height={100}>
       <div css={sampleCss}>
         {JSON.stringify(game)}
       </div>
-      <Picture src={Images.sampleImage} css={sampleImageCss}/>
+      <Card css={sampleImageCss} guardianAnimal={animal} onClick={() => setAnimal(animal ? undefined : GuardianAnimal.Bee)}/>
     </Letterbox>
   )
 }
