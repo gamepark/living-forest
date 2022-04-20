@@ -1,23 +1,27 @@
 /** @jsxImportSource @emotion/react */
-import {css} from '@emotion/react'
-import {getPlayerName} from '@gamepark/living-forest/LivingForestOptions'
-import {useTranslation} from 'react-i18next'
+import ForestBoard from './board/ForestBoard'
+import PlayerBoard from './board/PlayerBoard'
 import GameLocalView from './GameLocalView'
+import PlayerView from '@gamepark/living-forest/PlayerView';
 
 type Props = {
   game: GameLocalView
+  player: PlayerView
 }
 
-export default function ScreenDisplay({game}: Props) {
-  const {t} = useTranslation()
+export default function ScreenDisplay({ game, player }: Props) {
   if (game.displayedPlayer) {
-    return <div css={style}>Il faut créer le composant qui affiche le joueur {getPlayerName(game.displayedPlayer, t)}</div>
+
+    return (
+      <>
+        <PlayerBoard game={game} player={player} />
+      </>
+    );
   } else {
-    return <div css={style}>Composant pour afficher la forêt</div>
+    return (
+      <>
+        <ForestBoard />
+      </>
+    );
   }
 }
-
-const style = css`
-  font-size: 4em;
-  top: 2em;
-  position: absolute;`

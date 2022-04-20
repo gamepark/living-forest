@@ -1,30 +1,29 @@
 /** @jsxImportSource @emotion/react */
-import {css, keyframes} from '@emotion/react'
-import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
+import { css, keyframes } from '@emotion/react'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import {usePlay, usePlayerId} from '@gamepark/react-client'
-import {Letterbox} from '@gamepark/react-components'
-import {useState} from 'react'
-import {displayScreenMove} from './DisplayScreen'
+import { Letterbox } from '@gamepark/react-components'
+import Panels from './board/Panels'
+import { usePlayerId } from '@gamepark/react-client'
 import GameLocalView from './GameLocalView'
-import Card from './material/Card'
 import ScreenDisplay from './ScreenDisplay'
 
 type Props = {
   game: GameLocalView
 }
 
-export default function GameDisplay({game}: Props) {
-  const [animal, setAnimal] = useState<GuardianAnimal>()
-  const play = usePlay()
+export default function GameDisplay({ game }: Props) {
   const playerId = usePlayerId<SpiritOfNature>()
+  const player = game.players.find(player => player.spirit === playerId)
+  const displayedPlayerId = game.displayedPlayer ?? playerId ?? game.players[0].spirit
+  const displayedPlayer = game.players.find(player => player.spirit === displayedPlayerId)!
+  console.log(player);
+  console.log(displayedPlayer);
+
+
   return (
     <Letterbox css={letterBoxStyle} width={185} height={100}>
-      <ScreenDisplay game={game}/>
-      <div css={sampleCss} onClick={() => playerId && play(displayScreenMove(game.displayedPlayer ? undefined : SpiritOfNature.Autumn), {local: true})}>
-        {JSON.stringify(game)}
-      </div>
-      <Card css={sampleImageCss} guardianAnimal={animal} onClick={() => setAnimal(animal ? undefined : GuardianAnimal.Bee)}/>
+      <ScreenDisplay game={game} player={displayedPlayer} />
+      <Panels game={game} player={displayedPlayer} />
     </Letterbox>
   )
 }
@@ -40,23 +39,4 @@ const fadeIn = keyframes`
 
 const letterBoxStyle = css`
   animation: ${fadeIn} 3s ease-in forwards;
-`
-
-const sampleCss = css`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  background-color: black;
-  padding: 0.5em;
-  border-radius: 1em;
-`
-
-const sampleImageCss = css`
-  position: absolute;
-  bottom: 5%;
-  left: calc(50% - 6.5em);
-  width: 13em;
-  height: 20em;
 `

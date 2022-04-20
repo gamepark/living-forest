@@ -1,15 +1,15 @@
-import {IncompleteInformation, SimultaneousGame} from '@gamepark/rules-api'
+import { IncompleteInformation, SimultaneousGame } from '@gamepark/rules-api'
 import shuffle from 'lodash.shuffle'
 import GameState from './GameState'
 import GameView from './GameView'
-import {isGameOptions, LivingForestOptions} from './LivingForestOptions'
-import {startingGuardianAnimals} from './material/GuardianAnimal'
-import {drawCard, drawCardMove} from './moves/DrawCard'
+import { isGameOptions, LivingForestOptions } from './LivingForestOptions';
+import { startingGuardianAnimals } from './material/GuardianAnimal'
+import { drawCard, drawCardMove } from './moves/DrawCard'
 import Move from './moves/Move'
 import MoveType from './moves/MoveType'
 import MoveView from './moves/MoveView'
-import {shuffleDiscard, shuffleDiscardMove} from './moves/ShuffleDiscard'
-import {shuffleToDraw, shuffleToDrawMove} from './moves/ShuffleToDraw'
+import { shuffleDiscard, shuffleDiscardMove } from './moves/ShuffleDiscard'
+import { shuffleToDraw, shuffleToDrawMove } from './moves/ShuffleToDraw'
 import Phase from './Phase'
 import SpiritOfNature from './SpiritOfNature'
 
@@ -39,7 +39,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   constructor(arg: GameState | LivingForestOptions) {
     if (isGameOptions(arg)) {
       super({
-        players: arg.players.map(player => ({spirit: player.id, ready: false, deck: shuffle(startingGuardianAnimals), line: [], discard: []})),
+        players: arg.players.map(player => ({ spirit: player.id, ready: false, deck: shuffle(startingGuardianAnimals), line: [], discard: [] })),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id,
         reserve: {
@@ -70,6 +70,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   getPlayer(spirit: SpiritOfNature) {
     return this.state.players.find(p => p.spirit === spirit)!
   }
+
 
   /**
    * Return the exhaustive list of moves that can be played by the active player.
@@ -138,8 +139,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   getView(): GameView {
     return {
       ...this.state,
-      players: this.state.players.map(p => ({...p, deck: p.deck.length})),
-      reserve: {...this.state.reserve, stacks: this.state.reserve.stacks.map(stack => stack.length)}
+      players: this.state.players.map(p => ({ ...p, deck: p.deck.length })),
+      reserve: { ...this.state.reserve, stacks: this.state.reserve.stacks.map(stack => stack.length) }
     }
   }
 
@@ -153,11 +154,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    */
   getMoveView(move: Move): MoveView {
     if (move.type === MoveType.DrawCard) {
-      return {...move, card: this.getPlayer(move.spirit).deck[0]}
+      return { ...move, card: this.getPlayer(move.spirit).deck[0] }
     } else if (move.type === MoveType.ShuffleDiscard) {
-      return {type: MoveType.ShuffleDiscard, spirit: move.spirit}
+      return { type: MoveType.ShuffleDiscard, spirit: move.spirit }
     } else {
       return move
     }
   }
 }
+

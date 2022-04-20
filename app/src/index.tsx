@@ -1,9 +1,9 @@
-import {css, Global} from '@emotion/react'
-import {LivingForestOptionsSpec} from '@gamepark/living-forest/LivingForestOptions'
+import { css, Global } from '@emotion/react'
+import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
 import LivingForest from '@gamepark/living-forest/LivingForest'
-import {GameProvider, setupTranslation} from '@gamepark/react-client'
+import { GameProvider, setupTranslation } from '@gamepark/react-client'
 import normalize from 'emotion-normalize'
-import {StrictMode} from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import LivingForestView from './LivingForestView'
@@ -39,7 +39,6 @@ const style = css`
     width: 100vw;
     user-select: none;
     overflow: hidden;
-    background-image: url(${process.env.PUBLIC_URL + '/cover-1920.jpg'});
     background-color: white;
     background-size: cover;
     background-position: center;
@@ -53,7 +52,7 @@ const style = css`
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.8);
+      //background-color: rgba(255, 255, 255, 0.5);
     }
   }
 `
@@ -61,9 +60,9 @@ const style = css`
 ReactDOM.render(
   <StrictMode>
     <GameProvider game="living-forest" Rules={LivingForest} RulesView={LivingForestView} optionsSpec={LivingForestOptionsSpec}>
-      <App/>
+      <App />
     </GameProvider>
-    <Global styles={[normalize, style]}/>
+    <Global styles={[normalize, style]} />
   </StrictMode>,
   document.getElementById('root')
 )
