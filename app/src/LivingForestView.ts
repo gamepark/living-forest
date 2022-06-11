@@ -5,6 +5,11 @@ import {shuffleDiscardInView} from '@gamepark/living-forest/moves/ShuffleDiscard
 import {Game} from '@gamepark/rules-api'
 import DisplayScreen, {DISPLAY_SCREEN} from './DisplayScreen'
 import GameLocalView from './GameLocalView'
+import { fillReserveInView } from '@gamepark/living-forest/moves/FillReserve';
+import { attractGuardianAnimal } from '@gamepark/living-forest/moves/AttractGuardianAnimal';
+import { takeFragmentTile } from '@gamepark/living-forest/moves/TakeFragmentTile';
+import { tellYouAreReady } from '@gamepark/living-forest/moves/TellYouAreReady';
+import { startPhase } from '@gamepark/living-forest/moves/StartPhase';
 
 /**
  * This class is useful when the game has "IncompleteInformation" (or "SecretInformation").
@@ -40,8 +45,19 @@ export default class LivingForestView implements Game<GameLocalView, MoveView | 
         return drawCardInView(this.state, move)
       case MoveType.ShuffleDiscard:
         return shuffleDiscardInView(this.state, move)
+      case MoveType.FillReserve:
+        return fillReserveInView(this.state, move)
+      case MoveType.TakeFragmentTile:
+        return takeFragmentTile(this.state, move)
+      case MoveType.AttractGuardianAnimal:
+        return attractGuardianAnimal(this.state, move)
+      case MoveType.TellYouAreReady:
+        return tellYouAreReady(this.state, move)
+      case MoveType.StartPhase:
+        return startPhase(this.state, move)
       case DISPLAY_SCREEN:
         this.state.displayedPlayer = move.spiritOfNature
+        break
     }
   }
 

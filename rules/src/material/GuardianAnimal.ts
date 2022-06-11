@@ -15,7 +15,6 @@ enum GuardianAnimal {
   Bee,
   Monkey,
   Owl,
-
   Hedgehog,
   Caterpillar,
   Flamingo,
@@ -68,7 +67,7 @@ enum GuardianAnimal {
   Stag,
   Tapir,
 
-  Varan,
+ // Varan,
 
 
 }

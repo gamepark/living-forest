@@ -16,18 +16,17 @@ type Props = {
     player: PlayerView
 }
 
-function PlayerBoard({ game, player }: Props) {
+function PlayerBoard({ player }: Props) {
     const play = usePlay()
     const draw = () => { play(drawCardMove(player.spirit), { delayed: true }) }
-    console.log(player.line);
 
     return (
         <>
             <PlayerTokens player={player} />
             <PlayerDiscard player={player} discard={player.discard.length} />
-            <PlayerHelpLine />
-            <PlayerDrawStack stack={player.deck} onClick={draw} />
-            <PlayerForest game={game} />
+            <PlayerHelpLine line={player.line} />
+            <PlayerDrawStack spirit={player.spirit} stack={player.deck} onClick={draw} />
+            <PlayerForest player={player} />
         </>
     );
 };

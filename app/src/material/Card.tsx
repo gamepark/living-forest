@@ -6,7 +6,7 @@ import { cardHeight, cardWith } from '../styles'
 import Images from '../images/Images'
 
 type Props = {
-  guardianAnimal?: GuardianAnimal
+  guardianAnimal?: GuardianAnimal | null
 } & HTMLAttributes<HTMLDivElement>
 
 export default function Card({ guardianAnimal, ...props }: Props) {
@@ -116,7 +116,7 @@ const GuardianImage: { [key in GuardianAnimal]: string } = {
   [GuardianAnimal.Panda]: Images.panda,
   [GuardianAnimal.Stag]: Images.stag,
   [GuardianAnimal.Tapir]: Images.tapir,
-  [GuardianAnimal.Varan]: Images.varan
+  // [GuardianAnimal.Varan]: Images.varan
 
 }
 

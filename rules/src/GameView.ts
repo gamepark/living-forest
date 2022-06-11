@@ -1,6 +1,7 @@
 import GameState from './GameState'
 import PlayerView from './PlayerView'
 import {ReserveView} from './Reserve'
+import { isPlayerView } from './PlayerView';
 
 /**
  * In here, you describe what a GameView will look like at any time during a game.
@@ -13,3 +14,7 @@ type GameView = Omit<GameState, 'players' | 'reserve'> & {
 }
 
 export default GameView
+
+export function isGameView(game:GameState|GameView):game is GameView{
+  return isPlayerView(game.players[0])
+}

@@ -6,7 +6,7 @@ const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
 const { Solitary = 1, Gregarious } = CardType
 
 export const Bear: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 1,
         [Seed]: 2
     },
@@ -14,7 +14,7 @@ export const Bear: GuardianAnimalDetails = {
 }
 
 export const Beetle: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 3,
         [Seed]: 1
     },
@@ -22,7 +22,7 @@ export const Beetle: GuardianAnimalDetails = {
 }
 
 export const Lynx: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [Drop]: 1,
         [Seed]: 1
@@ -31,7 +31,7 @@ export const Lynx: GuardianAnimalDetails = {
 }
 
 export const Fox: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 1,
         [Seed]: 1,
         [SacredFlower]: 1
@@ -40,64 +40,64 @@ export const Fox: GuardianAnimalDetails = {
 }
 
 export const GoldFish: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 2,
         [Seed]: -1
     }
 }
 
 export const Tanuki: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 3,
         [SacredFlower]: -1
     }
 }
 
 export const Boar: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: -2,
         [Seed]: 2
     }
 }
 
 export const Weasel: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2
     }
 }
 
 export const Rabbit: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Wind]: 1
     }
 }
 
 export const Doe: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [SacredFlower]: 1
     }
 }
 
 export const HummingBird: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 1
     }
 }
 
 export const Bee: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 1
     }
 }
 
 export const Monkey: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1
     }
 }
 
 export const Owl: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 2,
         [Wind]: 1
     },
@@ -105,49 +105,49 @@ export const Owl: GuardianAnimalDetails = {
 }
 
 export const Hedgehog: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 3
     },
     cost: 3
 }
 
 export const Caterpillar: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 2
     },
     cost: 3
 }
 
 export const Flamingo: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 2
     },
     cost: 3
 }
 
 export const Ram: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [SacredFlower]: 2
     },
     cost: 5
 }
 
 export const Wolf: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Wind]: 2
     },
     cost: 5
 }
 
 export const Lemur: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 4
     },
     cost: 5
 }
 
-export const Squirral: GuardianAnimalDetails = {
-    resource: {
+export const Squirrel: GuardianAnimalDetails = {
+    resources: {
         [Sun]: 1,
         [Seed]: 2
     },
@@ -155,7 +155,7 @@ export const Squirral: GuardianAnimalDetails = {
 }
 
 export const Turtle: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: 2
     },
@@ -163,7 +163,7 @@ export const Turtle: GuardianAnimalDetails = {
 }
 
 export const Coati: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [Seed]: 1
     },
@@ -171,7 +171,7 @@ export const Coati: GuardianAnimalDetails = {
 }
 
 export const Racoon: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [Drop]: 1
     },
@@ -179,7 +179,7 @@ export const Racoon: GuardianAnimalDetails = {
 }
 
 export const Beaver: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 1,
         [Seed]: 1
     },
@@ -187,7 +187,7 @@ export const Beaver: GuardianAnimalDetails = {
 }
 
 export const Raven: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Wind]: 1
     },
@@ -195,7 +195,7 @@ export const Raven: GuardianAnimalDetails = {
 }
 
 export const Bat: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: -1,
         [Seed]: 3
     },
@@ -203,7 +203,7 @@ export const Bat: GuardianAnimalDetails = {
 }
 
 export const Parrot: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 3,
         [Seed]: -1,
         [SacredFlower]: 1
@@ -212,7 +212,7 @@ export const Parrot: GuardianAnimalDetails = {
 
 }
 export const Meerkat: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: -1,
         [Seed]: 2
@@ -222,7 +222,7 @@ export const Meerkat: GuardianAnimalDetails = {
 }
 
 export const Horse: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: -1,
         [Wind]: 2
     },
@@ -231,7 +231,7 @@ export const Horse: GuardianAnimalDetails = {
 }
 
 export const Axolotls: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 1,
         [Seed]: -1,
         [Wind]: 1,
@@ -242,7 +242,7 @@ export const Axolotls: GuardianAnimalDetails = {
 }
 
 export const Chimpanzee: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: -2
     },
     cost: 5,
@@ -251,7 +251,7 @@ export const Chimpanzee: GuardianAnimalDetails = {
 }
 
 export const Toucan: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: -2,
         [Seed]: -1
     },
@@ -261,7 +261,7 @@ export const Toucan: GuardianAnimalDetails = {
 }
 
 export const Butterfly: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: -3
     },
     cost: 5,
@@ -270,7 +270,7 @@ export const Butterfly: GuardianAnimalDetails = {
 }
 
 export const Spider: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [Seed]: 4
     },
@@ -280,7 +280,7 @@ export const Spider: GuardianAnimalDetails = {
 }
 
 export const Hippopotamus: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: 4,
         [Seed]: 1
@@ -291,7 +291,7 @@ export const Hippopotamus: GuardianAnimalDetails = {
 }
 
 export const EagleOwl: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: 1,
         [Wind]: 3
@@ -302,7 +302,7 @@ export const EagleOwl: GuardianAnimalDetails = {
 }
 
 export const Woodpecker: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 2,
         [SacredFlower]: 1
     },
@@ -310,7 +310,7 @@ export const Woodpecker: GuardianAnimalDetails = {
 }
 
 export const Badger: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [Wind]: 2
     },
@@ -318,7 +318,7 @@ export const Badger: GuardianAnimalDetails = {
 }
 
 export const Rooster: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 3,
         [Seed]: 1
     },
@@ -326,14 +326,14 @@ export const Rooster: GuardianAnimalDetails = {
 }
 
 export const Rhinoceros: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 3
     },
     cost: 6
 }
 
 export const Goat: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [SacredFlower]: 2
     },
@@ -341,7 +341,7 @@ export const Goat: GuardianAnimalDetails = {
 }
 
 export const Bull: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 1,
         [Seed]: 1,
         [Wind]: 1
@@ -350,7 +350,7 @@ export const Bull: GuardianAnimalDetails = {
 }
 
 export const Lizard: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 2,
         [Wind]: 1
     },
@@ -358,7 +358,7 @@ export const Lizard: GuardianAnimalDetails = {
 }
 
 export const Frog: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [Drop]: 2
     },
@@ -366,14 +366,14 @@ export const Frog: GuardianAnimalDetails = {
 }
 
 export const Marmot: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 5
     },
     cost: 7
 }
 
 export const Platypus: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 3,
         [SacredFlower]: 1
     },
@@ -381,7 +381,7 @@ export const Platypus: GuardianAnimalDetails = {
 }
 
 export const Crane: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 2,
         [Wind]: 1
     },
@@ -389,7 +389,7 @@ export const Crane: GuardianAnimalDetails = {
 }
 
 export const Sloth: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: -3,
         [Seed]: 2
@@ -400,7 +400,7 @@ export const Sloth: GuardianAnimalDetails = {
 }
 
 export const Koala: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 3,
         [Wind]: -2
     },
@@ -410,7 +410,7 @@ export const Koala: GuardianAnimalDetails = {
 }
 
 export const Leopard: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: -2,
         [SacredFlower]: 1
     },
@@ -420,7 +420,7 @@ export const Leopard: GuardianAnimalDetails = {
 }
 
 export const Eagle: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: 1,
         [Seed]: 2,
@@ -433,7 +433,7 @@ export const Eagle: GuardianAnimalDetails = {
 }
 
 export const Snake: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 4,
         [Drop]: 1,
         [Seed]: 2,
@@ -445,7 +445,7 @@ export const Snake: GuardianAnimalDetails = {
 }
 
 export const Cricket: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 1,
         [Seed]: 4
     },
@@ -453,7 +453,7 @@ export const Cricket: GuardianAnimalDetails = {
 }
 
 export const Panther: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Drop]: 2,
         [Wind]: 2
     },
@@ -461,7 +461,7 @@ export const Panther: GuardianAnimalDetails = {
 }
 
 export const Gorilla: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 1,
         [Wind]: 2,
         [SacredFlower]: 1
@@ -470,7 +470,7 @@ export const Gorilla: GuardianAnimalDetails = {
 }
 
 export const Bison: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 6,
         [Seed]: 1
     },
@@ -478,7 +478,7 @@ export const Bison: GuardianAnimalDetails = {
 }
 
 export const Chameleon: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [Wind]: 1,
         [SacredFlower]: 2
@@ -487,7 +487,7 @@ export const Chameleon: GuardianAnimalDetails = {
 }
 
 export const Crocodile: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: 2,
         [Seed]: 2
@@ -496,7 +496,7 @@ export const Crocodile: GuardianAnimalDetails = {
 }
 
 export const Elephant: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 2,
         [SacredFlower]: 3
     },
@@ -504,7 +504,7 @@ export const Elephant: GuardianAnimalDetails = {
 }
 
 export const Dolphin: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Sun]: 1,
         [Drop]: 4
     },
@@ -512,7 +512,7 @@ export const Dolphin: GuardianAnimalDetails = {
 }
 
 export const Dog: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Wind]: 3,
         [SacredFlower]: 1
     },
@@ -520,7 +520,7 @@ export const Dog: GuardianAnimalDetails = {
 }
 
 export const Panda: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 1,
         [SacredFlower]: 3
     },
@@ -528,7 +528,7 @@ export const Panda: GuardianAnimalDetails = {
 }
 
 export const Stag: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [SacredFlower]: 1
     },
     cost: 13,
@@ -536,7 +536,7 @@ export const Stag: GuardianAnimalDetails = {
 }
 
 export const Tapir: GuardianAnimalDetails = {
-    resource: {
+    resources: {
         [Seed]: 4,
         [Wind]: 2,
         [SacredFlower]: 2
@@ -544,3 +544,4 @@ export const Tapir: GuardianAnimalDetails = {
     cost: 12,
     type: Solitary
 }
+

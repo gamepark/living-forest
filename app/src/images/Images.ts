@@ -121,6 +121,7 @@ import tree10 from './trees/tree10.png'
 import tree11 from './trees/tree11.png'
 import forestBack from './forestBack.jpg'
 import autumnBack from './autumnBack.jpg'
+import autumnBackGreen from './autumnBackGreen.png'
 import autumnVerso from './autumnVerso.jpg'
 import autumnCases from './autumnCases.png'
 import autumnSpirit1 from './autumnSpirit1.png'
@@ -128,6 +129,26 @@ import autumnSpirit2 from './autumnSpirit2.png'
 import autumnToken1 from './autumnToken1.png'
 import autumnToken2 from './autumnToken2.png'
 import autumnToken3 from './autumnToken3.png'
+
+import summerVerso from './summerVerso.jpg'
+
+import winterVerso from './winterVerso.jpg'
+
+import springVerso from './springVerso.jpg'
+import circleOfSpirits from './circleOfSpirits.png'
+import sun from './resources/sun.png'
+import drop from './resources/drop.png'
+import seed from './resources/seed.png'
+import wind from './resources/wind.png'
+import sacredFlower from './resources/sacredFlower.png'
+import gregarious from './resources/gregarious.png'
+import fragment from './fragment.png'
+import fire2 from './fire2.png'
+import fire3 from './fire3.png'
+import fire4 from './fire4.png'
+
+
+
 
 import sampleImage from './cards/verso1.jpg'
 
@@ -142,7 +163,13 @@ const Images = {
   stag, tapir, varan,
   tree3A, tree3B, tree4A, tree4B, tree5A, tree5B, tree6, tree7, tree8, tree9, tree10, tree11,
   forestBack,
-  autumnVerso, autumnBack, autumnCases, autumnSpirit1, autumnSpirit2, autumnToken1, autumnToken2, autumnToken3
+  autumnVerso, autumnBack, autumnBackGreen, autumnCases, autumnSpirit1, autumnSpirit2, autumnToken1, autumnToken2, autumnToken3,
+  summerVerso,
+  winterVerso,
+  springVerso,
+  circleOfSpirits,
+  sun, drop, seed, wind, sacredFlower, gregarious,
+  fragment, fire2, fire3, fire4
 }
 
 export default Images

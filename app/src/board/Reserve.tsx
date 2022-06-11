@@ -1,15 +1,27 @@
+/** @jsxImportSource @emotion/react */
+import GameLocalView from '../GameLocalView';
 import ReserveRows from './ReserveRows';
 import ReserveStacks from './ReserveStacks';
-/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import { reserveLeft, reserveTop } from '../styles';
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 
+type Props = {
+    game: GameLocalView
+    spirit: SpiritOfNature
+}
 
-function Reserve() {
+export default function Reserve({ game, spirit }: Props) {
     return (
-        <div>
-            <ReserveRows />
-            <ReserveStacks />
+        <div css={reserve}>
+            <ReserveRows reserveRows={game.reserve.rows} spirit={spirit} />
+            <ReserveStacks reserveStacks={game.reserve.stacks} />
         </div>
     );
 }
 
-export default Reserve;
+const reserve = css`
+position:absolute;
+top:${reserveTop}em;;
+left:${reserveLeft}em;;
+`

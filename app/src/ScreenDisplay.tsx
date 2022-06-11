@@ -20,7 +20,7 @@ export default function ScreenDisplay({ game, player }: Props) {
   } else {
     return (
       <>
-        <ForestBoard />
+        <ForestBoard game={game} player={player} />
       </>
     );
   }

@@ -17,16 +17,28 @@ export default function GameDisplay({ game }: Props) {
   const displayedPlayerId = game.displayedPlayer ?? playerId ?? game.players[0].spirit
   const displayedPlayer = game.players.find(player => player.spirit === displayedPlayerId)!
   console.log(player);
-  console.log(displayedPlayer);
 
 
   return (
     <Letterbox css={letterBoxStyle} width={185} height={100}>
-      <ScreenDisplay game={game} player={displayedPlayer} />
-      <Panels game={game} player={displayedPlayer} />
+      <div css={perspective}>
+        <ScreenDisplay game={game} player={displayedPlayer} />
+      </div>
+      <Panels game={game} />
     </Letterbox>
   )
 }
+
+const perspective = css`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform: perspective(400em) rotateX(15deg);
+  transform-origin: bottom center;
+`
 
 const fadeIn = keyframes`
   from, 50% {

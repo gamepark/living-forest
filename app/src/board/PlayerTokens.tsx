@@ -46,7 +46,7 @@ function spiritToken1(spirit?: SpiritOfNature) {
         position:absolute;
         width:${spiritTokenWidth}em;
         height:${spiritTokenHeight}em;
-        top:16em;
+        top:12em;
         left:30em;
         background-image:url(${spirit ? spiritTokenBack1[spirit] : Images.autumnToken1});
         background-size:cover;
@@ -58,8 +58,8 @@ function spiritToken2(spirit?: SpiritOfNature) {
         position:absolute;
         width:${spiritTokenWidth}em;
         height:${spiritTokenHeight}em;
-        top:24em;
-        left:30em;
+        top:22em;
+        left:22em;
         background-image:url(${spirit ? spiritTokenBack2[spirit] : Images.autumnToken2});
         background-size:cover;
         background-position:center;

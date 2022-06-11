@@ -1,17 +1,33 @@
-import { IncompleteInformation, SimultaneousGame } from '@gamepark/rules-api'
+import { IncompleteInformation, SimultaneousGame} from '@gamepark/rules-api';
 import shuffle from 'lodash.shuffle'
-import GameState from './GameState'
+import GameState from './GameState';
 import GameView from './GameView'
 import { isGameOptions, LivingForestOptions } from './LivingForestOptions';
 import { startingGuardianAnimals } from './material/GuardianAnimal'
 import { drawCard, drawCardMove } from './moves/DrawCard'
-import Move from './moves/Move'
+import Move from './moves/Move';
 import MoveType from './moves/MoveType'
 import MoveView from './moves/MoveView'
 import { shuffleDiscard, shuffleDiscardMove } from './moves/ShuffleDiscard'
 import { shuffleToDraw, shuffleToDrawMove } from './moves/ShuffleToDraw'
-import Phase from './Phase'
+import Phase from './Phase';
 import SpiritOfNature from './SpiritOfNature'
+import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve';
+import { fillReserve, fillReserveMove } from './moves/FillReserve';
+import { getAnimalsType, getAnimalsResource} from './material/GuardianAnimalDetails';
+import { dispenserTwoPlayers } from './material/ProtectiveTree';
+import { tellYouAreReady, tellYouAreReadyMove } from './moves/TellYouAreReady';
+import { startPhaseMove, startPhase } from './moves/StartPhase';
+import { takeFragmentTile, takeFragmentTileMove } from './moves/TakeFragmentTile';
+import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
+import { extinguishFire } from './moves/ExtinguishFire';
+import { moveCircleOfSpirits, moveCircleOfSpiritsMove } from './moves/MoveCircleOfSpirits';
+import { plantTree } from './moves/PlantTree';
+import ActionMove from './moves/ActionMove';
+import Resource from './material/Resource';
+// import { getGuardianAnimalDetails } from './material/ProtectiveTreeDetails';
+
+
 
 /**
  * Your Board Game rules must extend either "SequentialGame" or "SimultaneousGame".
@@ -38,14 +54,33 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    */
   constructor(arg: GameState | LivingForestOptions) {
     if (isGameOptions(arg)) {
+      const stacks = [shuffle(Array.from(startingReserveStack1)), shuffle(Array.from(startingReserveStack2)), shuffle(Array.from(startingReserveStack3))];
       super({
-        players: arg.players.map(player => ({ spirit: player.id, ready: false, deck: shuffle(startingGuardianAnimals), line: [], discard: [] })),
+        players: arg.players.map(player => ({
+          spirit: player.id,
+          ready: false,
+          deck: shuffle(startingGuardianAnimals),
+          line: [],
+          discard: [],
+          forest: [[null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null]],
+          victory: [1, 1, 1],
+          fragment: 0,
+          attractedGuardianAnimal: 0,
+          fireExtinguished:[],
+          actionMoves:[]
+        })),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id,
         reserve: {
-          stacks: [[], [], []],
-          rows: [[null, null, null, null], [null, null, null, null], [null, null, null, null]]
-        }
+          stacks,
+          rows: [stacks[0].splice(0, 4), stacks[1].splice(0, 4), stacks[2].splice(0, 4)]
+        },
+        dispenser: dispenserTwoPlayers,
+        circle: {
+          rock: [],
+          fire: [1, 0, 0],
+          position: [null, null, null, null]
+        },
       })
     } else {
       super(arg)
@@ -84,15 +119,90 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    */
   getLegalMoves(spirit: SpiritOfNature): Move[] {
     const player = this.getPlayer(spirit)
-    if (this.state.phase === Phase.GuardianAnimals) {
-      if (player.deck.length > 0) {
-        return [drawCardMove(spirit)] // + setReadyMove(spirit)
-      } else if (player.discard.length > 0) {
-        return [shuffleToDrawMove(spirit)] // , setReadyMove(spirit)
+    const moves: Move[] = []
+    switch (this.state.phase) {
+      case Phase.GuardianAnimals: {
+
+        if(player.ready){
+          return []
+        }
+
+        if (player.deck.length > 0) {
+          if (getAnimalsType(player.line) < 3) {
+            moves.push(drawCardMove(spirit))
+
+          }
+        } else if (player.discard.length > 0) {
+          moves.push(shuffleToDrawMove(spirit))
+        }
+
+        if(player.line.length>0){
+          moves.push(tellYouAreReadyMove(spirit))
+        }
+
+        return moves
+      }
+      case Phase.Action: {
+        // TODO: Action phase
+        const numberAction = (getAnimalsType(player.line) == 3) ? 1:2
+        console.log(numberAction);
+        console.log(player.actionMoves.length);
+        if(numberAction > player.actionMoves.length){
+
+          //Take a fragment tile action
+          if(!player.actionMoves.includes(ActionMove.TakeFragmentTile)){
+            moves.push(takeFragmentTileMove(spirit))
+          }
+
+          //Attract one or more Guardian Animals action
+          // if(!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)){
+          //   for(const row of this.state.reserve.rows){
+          //     console.log('row : ' + row);
+              
+          //     for(const card of row){
+          //       console.log('card : '+card);
+                
+          //       // if(card != null)moves.push(attractGuardianAnimalMove(spirit, card))
+          //     }
+          //   }
+          // }
+
+          //Move already played
+          if(!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)){
+
+            this.state.reserve.rows.forEach(function (row, index) {
+              row.forEach(function(card, indexRow){
+                
+                //Card is drawn
+                if(card != null){
+                  //Enough resources ?
+                  if(getAnimalsResource(player.line, Resource.Sun) > player.attractedGuardianAnimal + getAnimalsResource([card], Resource.Sun)){
+                    moves.push(attractGuardianAnimalMove(spirit, card, {x:index,y:indexRow}))
+                  }
+                }
+              })
+            })
+          }
+          //Extinguish the Fire action
+          // this.state.circle.fire.forEach(index => moves.push(extinguishFire(spirit, index)))
+  
+          //Move forward on the Circle of Spirits action
+          this.state.circle.rock.forEach(index => moves.push(moveCircleOfSpiritsMove(spirit, index)))
+  
+          //Plant one and only one Protective Tree action
+  
+          return moves
+        }else{
+          return []
+        }
+
+      }
+      case Phase.EndOfTurn: {
+        // TODO: End of turn phase
+        return []
       }
     }
-    // TODO: Action phase
-    return []
+
   }
 
   /**
@@ -108,6 +218,22 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return shuffleToDraw(this.state, move)
       case MoveType.ShuffleDiscard:
         return shuffleDiscard(this.state, move)
+      case MoveType.FillReserve:
+        return fillReserve(this.state, move)
+      case MoveType.TellYouAreReady:
+        return tellYouAreReady(this.state, move)
+      case MoveType.StartPhase:
+        return startPhase(this.state, move)
+      case MoveType.TakeFragmentTile:
+        return takeFragmentTile(this.state, move)
+      case MoveType.AttractGuardianAnimal:
+        return attractGuardianAnimal(this.state, move)
+      case MoveType.ExtinguishFire:
+        return extinguishFire(this.state, move)
+      case MoveType.MoveCircleOfSpirits:
+        return moveCircleOfSpirits(this.state, move)
+      case MoveType.PlantTree:
+        return plantTree(this.state, move)
     }
   }
 
@@ -125,11 +251,42 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * @return The next automatic consequence that should be played in current game state.
    */
   getAutomaticMove(): Move[] {
-    const shufflingPlayer = this.state.players.find(p => p.shuffle)
-    if (shufflingPlayer) {
-      return [shuffleDiscardMove(shufflingPlayer.spirit, shuffle(shufflingPlayer.discard)), drawCardMove(shufflingPlayer.spirit)]
+    switch (this.state.phase) {
+      case Phase.GuardianAnimals: {
+        
+        const shufflingPlayer = this.state.players.find(p => p.shuffle)
+        if (shufflingPlayer) {
+          return [shuffleDiscardMove(shufflingPlayer.spirit, shuffle(shufflingPlayer.discard)), drawCardMove(shufflingPlayer.spirit)]
+        }
+        if (this.state.players.every(player => player.ready)) {
+          return [startPhaseMove(Phase.Action)]
+        }
+        return []
+      }
+      case Phase.Action: {
+        return []
+      }
+      case Phase.EndOfTurn: {
+
+        return [
+          //TODO : onibi attack
+
+          //TODO : Onibi attack sacred tree
+
+          //TODO : arrival new guardian animal
+          ...this.state.reserve.rows.flatMap((row, indexRow) =>
+            Array.from(row.entries()).filter(entry => entry[1] != null).map(entry => fillReserveMove(indexRow, entry[0]))
+          )
+
+
+          //TODO : player discard animals
+
+          //TODO : change first player
+
+          //TODO : change state phase
+        ]
+      }
     }
-    return []
   }
 
   /**
@@ -157,6 +314,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       return { ...move, card: this.getPlayer(move.spirit).deck[0] }
     } else if (move.type === MoveType.ShuffleDiscard) {
       return { type: MoveType.ShuffleDiscard, spirit: move.spirit }
+    } else if (move.type === MoveType.FillReserve) {
+      return { ...move, card: this.state.reserve.stacks[move.row][0] }
     } else {
       return move
     }

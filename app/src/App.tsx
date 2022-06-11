@@ -21,6 +21,7 @@ export default function App() {
     setTimeout(() => setJustDisplayed(false), 2000)
   }, [])
   const loading = !game || imagesLoading || isJustDisplayed
+console.log(game);
 
   return (
     <DndProvider options={HTML5ToTouch}>
@@ -35,6 +36,13 @@ export default function App() {
     </DndProvider>
   )
 }
+const spiritBack: Record<SpiritOfNature, string> = {
+      [SpiritOfNature.Autumn]: Images.autumnBackGreen,
+      [SpiritOfNature.Summer]: Images.autumnBackGreen,
+      [SpiritOfNature.Spring]: Images.autumnBackGreen,
+      [SpiritOfNature.Winter]: Images.autumnBackGreen,
+  
+  }
 const spiritBackground: Record<SpiritOfNature, string> = {
   [SpiritOfNature.Autumn]: Images.autumnBack,
   [SpiritOfNature.Summer]: Images.autumnBack,
@@ -45,9 +53,10 @@ const spiritBackground: Record<SpiritOfNature, string> = {
 function backgroundImage(spirit?: SpiritOfNature) {
   return css`
   #root{
-    background-image:url(${spirit ? spiritBackground[spirit] : Images.forestBack});
-    background-size:cover;
-    background-position:center;
+    background-image:url(${spirit ? spiritBack[spirit] : ""}), url(${spirit ? spiritBackground[spirit] : Images.forestBack});
+    background-size:contain, cover;
+    background-position:center, center;
+    background-repeat:no-repeat;
     &:before {
       background-color: ${spirit ? '' : 'rgba(255, 255, 255, 0.5)'};
     }

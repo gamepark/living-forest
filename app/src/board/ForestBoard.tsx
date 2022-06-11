@@ -1,17 +1,37 @@
 /** @jsxImportSource @emotion/react */
 
+import GameLocalView from "../GameLocalView";
 import CircleOfSpirits from "./CircleOfSpirits";
 import FragmentTilesStack from "./FragmentTilesStack";
 import ProtectiveTreeDispersers from "./ProtectiveTreeDispersers";
 import Reserve from "./Reserve";
+import { css } from '@emotion/react';
+import PlayerView from "@gamepark/living-forest/PlayerView";
+import { takeFragmentTileMove } from "@gamepark/living-forest/moves/TakeFragmentTile";
+import { usePlay } from "@gamepark/react-client";
 
-export default function ForestBoard() {
+type Props = {
+    game: GameLocalView
+    player: PlayerView
+}
+
+export default function ForestBoard({ game, player }: Props) {
+    const play = usePlay()
+    const takeFragment = () => { play(takeFragmentTileMove(player.spirit)) }
+    console.log(player.actionMoves);
+    
     return (
-        <>
-            <CircleOfSpirits />
-            <Reserve />
-            <ProtectiveTreeDispersers />
-            <FragmentTilesStack />
-        </>
+        <div css={forest}>
+            <Reserve game={game} spirit={player.spirit} />
+            <CircleOfSpirits fire={game.circle.fire} />
+            <ProtectiveTreeDispersers dispenser={game.dispenser} />
+            <FragmentTilesStack onClick={takeFragment}  />
+        </div>
     );
 };
+
+const forest = css`
+position:absolute;
+top:0em;;
+left:0em;;
+`

@@ -4,31 +4,34 @@ import { usePlay, usePlayerId } from '@gamepark/react-client'
 import { displayScreenMove } from '../DisplayScreen'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import GameLocalView from '../GameLocalView'
-import PlayerView from '@gamepark/living-forest/PlayerView'
 import { panelHeight, panelWidth, panelLeft, panelBottom } from '../styles'
 import Images from '../images/Images'
+import Resources from './Resources';
+
 
 
 type Props = {
   game: GameLocalView
-  player: PlayerView
 }
 
-export default function Panels({ game, player }: Props) {
+export default function Panels({ game }: Props) {
   // const [animal, setAnimal] = useState<GuardianAnimal>()
   const play = usePlay()
   const playerId = usePlayerId<SpiritOfNature>()
 
 
-  if (game.displayedPlayer) { }
   return (
     <>
-      <div css={forest} onClick={() => playerId && play(displayScreenMove(), { local: true })}>
-
+      <div css={forest} onClick={() => play(displayScreenMove(), { local: true })}>
       </div>
-      <div css={playerPanel(playerId)} onClick={() => playerId && play(displayScreenMove(player.spirit), { local: true })}>
+      {
+        game.players.map((player, index) =>
+          <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
 
-      </div>
+            <Resources line={player.line} />
+          </div>
+        )
+      }
     </>
   );
 
@@ -40,33 +43,44 @@ const forest = css`
   height:${panelHeight}em;
   width:${panelWidth}em;
   background-image:url(${Images.forestBack});
-  background-color: rgba(255, 255, 255, 0.5);
+  background-size:cover;
+  background-position:center;
+  &:before {
+    background-color: rgba(255, 255, 255, 0.8);
+    }
   padding: 0.5em;
   box-shadow: 0 0 0.3em black;
   border-radius:0.5em;
 `
 const playerPanelBackground: Record<SpiritOfNature, string> = {
   [SpiritOfNature.Autumn]: Images.autumnVerso,
-  [SpiritOfNature.Summer]: Images.autumnVerso,
-  [SpiritOfNature.Spring]: Images.autumnVerso,
-  [SpiritOfNature.Winter]: Images.autumnVerso,
+  [SpiritOfNature.Summer]: Images.summerVerso,
+  [SpiritOfNature.Spring]: Images.springVerso,
+  [SpiritOfNature.Winter]: Images.winterVerso,
 
 }
-function playerPanel(spirit?: SpiritOfNature) {
+function playerPanel(spirit: SpiritOfNature, index: number, playerIndex: number, players: number) {
   return css`
   position: absolute;
   bottom: ${panelBottom}em;
-  left:  ${panelLeft + panelWidth + 0.2}em;
+  left:  ${panelLeft + (panelWidth + 0.2) * ((players + index - playerIndex) % players + 1)}em;
   height:${panelHeight}em;
   width:${panelWidth}em;
   padding: 0.5em;
-  box-shadow: 0 0 0.3em black;
   border-radius:0.5em;
-  background-image:url(${spirit ? playerPanelBackground[spirit] : Images.forestBack});
+  background-image:url(${playerPanelBackground[spirit]});
   background-size:cover;
   background-position:center;
   &:before {
-    background-color: rgba(255, 255, 255, 0.5;
-  }
+    background-color: rgba(255, 255, 255, 0.5);
+    content:"";
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius: inherit;
+    }
+  box-shadow: 0 0 0.3em black;
   `
 }

@@ -2,23 +2,25 @@
 
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
 import Images from "../images/Images";
-import GameLocalView from "../GameLocalView";
 import { css } from '@emotion/react';
 import { casesTop, casesLeft, casesWidth, casesHeight, spiritImage2Height, spiritImage2Width } from "../styles";
 import TilesDropArea from "./TilesDropArea";
+import PlayerView from "@gamepark/living-forest/PlayerView";
 
 
 
 type Props = {
-    game: GameLocalView
+    player: PlayerView
 }
-export default function PlayerForest({ game }: Props) {
+export default function PlayerForest({ player }: Props) {
     return (
         <>
-            <div css={backgroundCases(game?.displayedPlayer)}>
+            <div css={spiritBackgroundImage1(player.spirit)}></div>
+
+            <div css={backgroundCases(player.spirit)}>
                 <TilesDropArea />
             </div>
-            <div css={spiritBackgroundImage2(game?.displayedPlayer)}></div>
+            <div css={spiritBackgroundImage2(player.spirit)}></div>
         </>
     );
 }
@@ -31,7 +33,13 @@ const spiritCases: Record<SpiritOfNature, string> = {
     [SpiritOfNature.Winter]: Images.autumnCases,
 
 }
+const spiritImage1: Record<SpiritOfNature, string> = {
+    [SpiritOfNature.Autumn]: Images.autumnSpirit1,
+    [SpiritOfNature.Summer]: Images.autumnSpirit1,
+    [SpiritOfNature.Spring]: Images.autumnSpirit1,
+    [SpiritOfNature.Winter]: Images.autumnSpirit1,
 
+}
 const spiritImage2: Record<SpiritOfNature, string> = {
     [SpiritOfNature.Autumn]: Images.autumnSpirit2,
     [SpiritOfNature.Summer]: Images.autumnSpirit2,
@@ -51,13 +59,25 @@ function backgroundCases(spirit?: SpiritOfNature) {
         background-position:center;
     `
 }
+function spiritBackgroundImage1(spirit?: SpiritOfNature) {
+    return css`
+        position:absolute;
+        width:${spiritImage2Width}em;
+        height:${spiritImage2Height}em;
+        top:-10em;
+        left:-10em;
+        background-image:url(${spirit ? spiritImage1[spirit] : Images.autumnSpirit1});
+        background-size:cover;
+        background-position:center;
+    `
+}
 function spiritBackgroundImage2(spirit?: SpiritOfNature) {
     return css`
         position:absolute;
         width:${spiritImage2Width}em;
         height:${spiritImage2Height}em;
-        top:18em;
-        left:140em;
+        top:50em;
+        left:170em;
         background-image:url(${spirit ? spiritImage2[spirit] : Images.autumnSpirit2});
         background-size:cover;
         background-position:center;
