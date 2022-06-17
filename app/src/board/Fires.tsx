@@ -2,20 +2,24 @@
 import { css } from '@emotion/react';
 import FireTile from '../material/FireTile';
 import { fireHeight, fireLeft, fireTop, fireWith } from '../styles';
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
+import { usePlay } from '@gamepark/react-client';
+import { extinguishFireMove } from '@gamepark/living-forest/moves/ExtinguishFire';
 
 type Props = {
-    fire: number[]
+    fire: (number | null)[]
+    spirit: SpiritOfNature
 }
 
-export default function Fire({fire}:Props) {
+export default function Fire({ fire, spirit }: Props) {
+    const play = usePlay()
+
     return (
         <>
             {
-            fire.map((fireNum, indexFire) => {
-                return [...Array(fireNum)].map((_, index) => {
-                    return <FireTile key={index}  fire= {fireNum} css={firePosition(index, indexFire)} />
+                fire.map((fire, index) => {
+                    return <FireTile key={index} fire={fire} css={firePosition(index, index)} onClick={() => play(extinguishFireMove(spirit, index))} />
                 })
-            })
             }
         </>
     );

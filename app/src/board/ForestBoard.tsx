@@ -19,13 +19,13 @@ export default function ForestBoard({ game, player }: Props) {
     const play = usePlay()
     const takeFragment = () => { play(takeFragmentTileMove(player.spirit)) }
     console.log(player.actionMoves);
-    
+
     return (
         <div css={forest}>
             <Reserve game={game} spirit={player.spirit} />
-            <CircleOfSpirits fire={game.circle.fire} />
+            <CircleOfSpirits fire={game.circle.fire} spirit={player.spirit} />
             <ProtectiveTreeDispersers dispenser={game.dispenser} />
-            <FragmentTilesStack onClick={takeFragment}  />
+            <FragmentTilesStack onClick={takeFragment} />
         </div>
     );
 };

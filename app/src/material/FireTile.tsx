@@ -6,12 +6,12 @@ import { fireHeight, fireWith } from '../styles'
 import Images from '../images/Images'
 
 type Props = {
-  fire: number
+  fire: (number | null)
 } & HTMLAttributes<HTMLDivElement>
 
 export default function FireTile({ fire, ...props }: Props) {
   return (
-    <div css={[style, fire ? front(fire) : hidden]} {...props} />
+    <div css={[style, fire ? front(fire) : null]} {...props} />
   )
 }
 
@@ -52,7 +52,3 @@ const FireImage: { [key in Fire]: string } = {
   [Fire.Fire3]: Images.fire3,
   [Fire.Fire4]: Images.fire4,
 }
-
-const hidden = css`
-  transform: rotateY(180deg);
-`

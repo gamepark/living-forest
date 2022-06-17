@@ -9,6 +9,7 @@ export default StartPhase
 
 export function startPhase(state: GameState | GameView, move: StartPhase) {
     state.phase = move.phase
+    if (move.phase == Phase.Action) state.currentPlayer = state.sacredTreeOwner
     state.players.forEach(player => player.ready = false)
 }
 

@@ -4,6 +4,7 @@ import shuffle from 'lodash.shuffle';
 import ProtectiveTree from './material/ProtectiveTree';
 // import Move from './moves/Move';
 import ActionMove from './moves/ActionMove';
+import Fire from './material/Fire';
 
 export default interface PlayerState {
   spirit: SpiritOfNature
@@ -16,8 +17,9 @@ export default interface PlayerState {
   shuffle?: boolean
   fragment: number
   attractedGuardianAnimal: number
-  fireExtinguished: number[]
-  actionMoves:ActionMove[]
+  extinguishedFires: (Fire | null)[]
+  extinguishedFiresTotal: number
+  actionMoves: ActionMove[]
 }
 
 export function setupDeck(): number[] {

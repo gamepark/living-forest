@@ -9,7 +9,7 @@ import App from './App'
 import LivingForestView from './LivingForestView'
 import translations from './translations.json'
 
-setupTranslation(translations)
+setupTranslation(translations, { debug: false })
 
 const style = css`
   html {
