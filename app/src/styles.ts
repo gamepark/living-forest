@@ -44,3 +44,7 @@ export const fireTop = 20
 export const fireLeft = 30
 export const fireHeight = 8
 export const fireWith = fireHeight * 74 / 100
+export const rockTop = 8
+export const rockLeft = 33
+export const rockHeight = 6
+export const rockWith = 9

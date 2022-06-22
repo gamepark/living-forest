@@ -1,20 +1,38 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { circleOfSpiritsLeft, circleOfSpiritsTop } from '../styles';
+import { circleOfSpiritsLeft, circleOfSpiritsTop, rockHeight, rockLeft, rockTop, rockWith } from '../styles';
 import Images from '../images/Images';
 import Fires from './Fires';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
+import CircleOfSpirits from '@gamepark/living-forest/material/CircleOfSpirits';
+import { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
 
 type Props = {
-    fire: (number | null)[]
+    circleOfSpirits: CircleOfSpirits
     spirit: SpiritOfNature
 }
 
-export default function CircleOfSpirits({ fire, spirit }: Props) {
+export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props) {
 
     return (
         <div css={circle}>
-            <Fires fire={fire} spirit={spirit} />
+            {circleOfSpiritsRocks.map((_rock, index) => {
+                Object.entries(circleOfSpirits.position).forEach(
+                    ([spirit, _rock]) => {
+                        if (index == circleOfSpirits.position[spirit]) {
+                            // console.log(index + " - " + circleOfSpirits.position[spirit])
+                            return <div key={index} css={rockPosition(index)}></div>
+                        } else {
+                            return <div key={index}  ></div>
+                        }
+                    }
+
+                );
+                return <div key={index} css={rockPosition(index)}></div>
+
+
+            })}
+            <Fires fire={circleOfSpirits.fire} spirit={spirit} />
         </div>
     );
 }
@@ -29,3 +47,18 @@ background-image: url(${Images.circleOfSpirits});
 background-size:cover;
 background-position:center;
 `
+
+function rockPosition(index: number) {
+    return css`
+    position:absolute;
+    width:${rockWith}em;
+    height:${rockHeight}em;
+    top:${rockTop}em;
+    left:${rockLeft}em;
+    transform: translate(${rockTop - 100 * index - 5}em, ${rockLeft - 100 * index - 5}em);
+    transform-origin: 0em 24.5em;
+    background-color: #000;
+    border-radius:2em;
+    transform: rotate(${index * 30 + 5}deg);
+    `
+}

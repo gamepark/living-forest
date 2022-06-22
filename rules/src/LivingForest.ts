@@ -26,6 +26,7 @@ import { plantTree } from './moves/PlantTree';
 import ActionMove from './moves/ActionMove';
 import Resource from './material/Resource';
 // import { getGuardianAnimalDetails } from './material/ProtectiveTreeDetails';
+import { circleOfSpiritsRocks, getTwoPlayersRocks } from './material/CircleOfSpirits';
 
 
 
@@ -78,9 +79,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         },
         dispenser: dispenserTwoPlayers,
         circle: {
-          rock: [],
           fire: [1, null, null, null, null, null, null],
-          position: { [SpiritOfNature.Spring]: 3 }
+          position: getTwoPlayersRocks(arg)
         },
       })
     } else {
@@ -195,7 +195,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           })
 
           //Move forward on the Circle of Spirits action
-          this.state.circle.rock.forEach(index => moves.push(moveCircleOfSpiritsMove(spirit, index)))
+          circleOfSpiritsRocks.forEach(function (_rock, index) { moves.push(moveCircleOfSpiritsMove(spirit, index)) })
 
           //Plant one and only one Protective Tree action
 
