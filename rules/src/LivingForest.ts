@@ -22,7 +22,7 @@ import { takeFragmentTile, takeFragmentTileMove } from './moves/TakeFragmentTile
 import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
 import { extinguishFire, extinguishFireMove } from './moves/ExtinguishFire';
 import { moveCircleOfSpirits, moveCircleOfSpiritsMove } from './moves/MoveCircleOfSpirits';
-import { plantTree } from './moves/PlantTree';
+import { plantTree, plantTreeMove } from './moves/PlantTree';
 import ActionMove from './moves/ActionMove';
 import Resource from './material/Resource';
 // import { getGuardianAnimalDetails } from './material/ProtectiveTreeDetails';
@@ -195,9 +195,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           })
 
           //Move forward on the Circle of Spirits action
-          circleOfSpiritsRocks.forEach(function (_rock, index) { moves.push(moveCircleOfSpiritsMove(spirit, index)) })
+          circleOfSpiritsRocks.forEach(function (_rock, index) { moves.push(moveCircleOfSpiritsMove(index, index)) })
 
           //Plant one and only one Protective Tree action
+          Object.entries(this.state.dispenser).forEach(function (_plant, index) { moves.push(plantTreeMove(index, index, index)) })
+
 
           return moves
         } else {

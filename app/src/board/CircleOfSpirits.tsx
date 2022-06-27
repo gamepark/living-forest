@@ -17,19 +17,17 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props)
     return (
         <div css={circle}>
             {circleOfSpiritsRocks.map((_rock, index) => {
-                Object.entries(circleOfSpirits.position).forEach(
+                return Object.entries(circleOfSpirits.position).forEach(
                     ([spirit, _rock]) => {
                         if (index == circleOfSpirits.position[spirit]) {
-                            // console.log(index + " - " + circleOfSpirits.position[spirit])
+                            console.log(index + " - " + circleOfSpirits.position[spirit])
                             return <div key={index} css={rockPosition(index)}></div>
-                        } else {
-                            return <div key={index}  ></div>
+
                         }
+                        return
                     }
 
                 );
-                return <div key={index} css={rockPosition(index)}></div>
-
 
             })}
             <Fires fire={circleOfSpirits.fire} spirit={spirit} />
