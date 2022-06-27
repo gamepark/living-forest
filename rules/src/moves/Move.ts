@@ -1,6 +1,5 @@
 import DrawCard from './DrawCard'
 import ShuffleDiscard from './ShuffleDiscard'
-import ShuffleToDraw from './ShuffleToDraw'
 import FillReserve from './FillReserve';
 import TellYouAreReady from './TellYouAreReady';
 import StartPhase from './StartPhase';
@@ -13,6 +12,6 @@ import PlantTree from './PlantTree';
 /**
  * A "Move" is the combination of all the types of moves that exists in you game
  */
-type Move = DrawCard | ShuffleToDraw | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree
+type Move = DrawCard | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree
 
 export default Move

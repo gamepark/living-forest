@@ -1,32 +1,33 @@
-import { IncompleteInformation, SimultaneousGame } from '@gamepark/rules-api';
-import shuffle from 'lodash.shuffle'
+import { IncompleteInformation, RandomMove, SimultaneousGame } from '@gamepark/rules-api';
+import shuffle from 'lodash.shuffle';
 import GameState from './GameState';
-import GameView from './GameView'
+import GameView from './GameView';
 import { isGameOptions, LivingForestOptions } from './LivingForestOptions';
-import { startingGuardianAnimals } from './material/GuardianAnimal'
-import { drawCard, drawCardMove } from './moves/DrawCard'
-import Move from './moves/Move';
-import MoveType from './moves/MoveType'
-import MoveView from './moves/MoveView'
-import { shuffleDiscard, shuffleDiscardMove } from './moves/ShuffleDiscard'
-import { shuffleToDraw, shuffleToDrawMove } from './moves/ShuffleToDraw'
-import Phase from './Phase';
-import SpiritOfNature from './SpiritOfNature'
-import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve';
-import { fillReserve, fillReserveMove } from './moves/FillReserve';
-import { getAnimalsType, getAnimalsResource } from './material/GuardianAnimalDetails';
+import { startingGuardianAnimals } from './material/GuardianAnimal';
+import { getAnimalsResource, getAnimalsType } from './material/GuardianAnimalDetails';
 import { dispenserTwoPlayers } from './material/ProtectiveTree';
-import { tellYouAreReady, tellYouAreReadyMove } from './moves/TellYouAreReady';
-import { startPhaseMove, startPhase } from './moves/StartPhase';
-import { takeFragmentTile, takeFragmentTileMove } from './moves/TakeFragmentTile';
-import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
-import { extinguishFire, extinguishFireMove } from './moves/ExtinguishFire';
-import { moveCircleOfSpirits, moveCircleOfSpiritsMove } from './moves/MoveCircleOfSpirits';
-import { plantTree, plantTreeMove } from './moves/PlantTree';
-import ActionMove from './moves/ActionMove';
 import Resource from './material/Resource';
+import ActionMove from './moves/ActionMove';
+import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
+import { drawCard, drawCardMove } from './moves/DrawCard';
+import { extinguishFire, extinguishFireMove } from './moves/ExtinguishFire';
+import { fillReserve, fillReserveMove } from './moves/FillReserve';
+import Move from './moves/Move';
+import { moveCircleOfSpirits, moveCircleOfSpiritsMove } from './moves/MoveCircleOfSpirits';
+import MoveType from './moves/MoveType';
+import MoveView from './moves/MoveView';
+import { plantTree, plantTreeMove } from './moves/PlantTree';
+import { shuffleDiscard, shuffleDiscardMove } from './moves/ShuffleDiscard';
+import { startPhase, startPhaseMove } from './moves/StartPhase';
+import { takeFragmentTile, takeFragmentTileMove } from './moves/TakeFragmentTile';
+import { tellYouAreReady, tellYouAreReadyMove } from './moves/TellYouAreReady';
+import Phase from './Phase';
+import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve';
+import SpiritOfNature from './SpiritOfNature';
 // import { getGuardianAnimalDetails } from './material/ProtectiveTreeDetails';
 import { circleOfSpiritsRocks, getTwoPlayersRocks } from './material/CircleOfSpirits';
+import MoveRandomized from './moves/MoveRandomized';
+import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
 
 
 
@@ -38,7 +39,8 @@ import { circleOfSpiritsRocks, getTwoPlayersRocks } from './material/CircleOfSpi
  * Later on, you can also implement "Competitive", "Undo", "TimeLimit" and "Eliminations" to add further features to the game.
  */
 export default class LivingForest extends SimultaneousGame<GameState, Move, SpiritOfNature>
-  implements IncompleteInformation<GameState, GameView, Move, MoveView, SpiritOfNature> {
+  implements IncompleteInformation<GameState, GameView, Move, MoveView, SpiritOfNature>,
+  RandomMove<GameState, Move, MoveRandomized> {
   /**
    * This constructor is called when the game "restarts" from a previously saved state.
    * @param state The state of the game
@@ -134,7 +136,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
           }
         } else if (player.discard.length > 0) {
-          moves.push(shuffleToDrawMove(spirit))
+          moves.push(shuffleDiscardMove(spirit))
         }
 
         if (player.line.length > 0) {
@@ -215,17 +217,22 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
   }
 
+  randomize(move: Move): MoveRandomized {
+    if (move.type === MoveType.ShuffleDiscard) {
+      return randomizeShuffleDiscardMove(this.state, move)
+    }
+    return move
+  }
+
   /**
    * This is the one and only play where you will update the game's state, depending on the move that has been played.
    *
    * @param move The move that should be applied to current state.
    */
-  play(move: Move): void {
+  play(move: MoveRandomized): void {
     switch (move.type) {
       case MoveType.DrawCard:
         return drawCard(this.state, move)
-      case MoveType.ShuffleToDraw:
-        return shuffleToDraw(this.state, move)
       case MoveType.ShuffleDiscard:
         return shuffleDiscard(this.state, move)
       case MoveType.FillReserve:
@@ -264,9 +271,9 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
     switch (this.state.phase) {
       case Phase.GuardianAnimals: {
 
-        const shufflingPlayer = this.state.players.find(p => p.shuffle)
+        const shufflingPlayer = this.state.players.find(p => p.shuffled)
         if (shufflingPlayer) {
-          return [shuffleDiscardMove(shufflingPlayer.spirit, shuffle(shufflingPlayer.discard)), drawCardMove(shufflingPlayer.spirit)]
+          return [drawCardMove(shufflingPlayer.spirit)]
         }
         if (this.state.players.every(player => player.ready)) {
           return [startPhaseMove(Phase.Action)]
@@ -319,7 +326,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * @param move The move that has been played
    * @return What a person should know about the move that was played
    */
-  getMoveView(move: Move): MoveView {
+  getMoveView(move: MoveRandomized): MoveView {
     if (move.type === MoveType.DrawCard) {
       return { ...move, card: this.getPlayer(move.spirit).deck[0] }
     } else if (move.type === MoveType.ShuffleDiscard) {

@@ -14,7 +14,7 @@ export default interface PlayerState {
   discard: GuardianAnimal[]
   forest: ProtectiveTree | null[][]
   victory: number[]
-  shuffle?: boolean
+  shuffled?: boolean
   fragment: number
   attractedGuardianAnimal: number
   extinguishedFires: (Fire | null)[]

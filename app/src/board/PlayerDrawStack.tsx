@@ -8,30 +8,30 @@ import { playDrawLeft, playDrawTop } from '../styles';;
 import { usePlay } from '@gamepark/react-client';
 
 type Props = {
-    stack: number
-    spirit: SpiritOfNature
-    onClick: () => void
+  stack: number
+  spirit: SpiritOfNature
+  onClick: () => void
 }
 
 export default function PlayerDrawStack({ stack, spirit, onClick }: Props) {
-    const {t} = useTranslation()
-    const play = usePlay()
-    const tell = () => { play(tellYouAreReadyMove(spirit), { delayed: true }) }
-    return (
-        <>
-            <button css={[button]} onClick={tell} >{t("Stop")}</button>
-            {
-                [...Array(stack)].map((_, index) => {
-                    return <Card key={index} css={cardPosition(index)} onClick={onClick} />
-                })
-            }
-        </>
-    );
+  const { t } = useTranslation()
+  const play = usePlay()
+  const tell = () => { play(tellYouAreReadyMove(spirit), { delayed: true }) }
+  return (
+    <>
+      <button css={[button]} onClick={tell} >{t("Stop")}</button>
+      {
+        [...Array(stack)].map((_, index) => {
+          return <Card key={index} css={cardPosition(index)} onClick={onClick} />
+        })
+      }
+    </>
+  );
 }
 
 
 function cardPosition(index: number) {
-    return css`
+  return css`
     top:${playDrawTop - index * 0.1}em;
     left:${playDrawLeft - index * 0.1}em;
     `
