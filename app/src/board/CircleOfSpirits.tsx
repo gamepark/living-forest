@@ -17,7 +17,7 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props)
     return (
         <div css={circle}>
             {circleOfSpiritsRocks.map((_rock, index) => {
-                return Object.entries(circleOfSpirits.position).forEach(
+                return Object.entries(circleOfSpirits.position).map(
                     ([spirit, _rock]) => {
                         if (index == circleOfSpirits.position[spirit]) {
                             console.log(index + " - " + circleOfSpirits.position[spirit])
@@ -53,8 +53,7 @@ function rockPosition(index: number) {
     height:${rockHeight}em;
     top:${rockTop}em;
     left:${rockLeft}em;
-    transform: translate(${rockTop - 100 * index - 5}em, ${rockLeft - 100 * index - 5}em);
-    transform-origin: 0em 24.5em;
+    transform-origin: ${rockWith / 2}em 24.5em;
     background-color: #000;
     border-radius:2em;
     transform: rotate(${index * 30 + 5}deg);
