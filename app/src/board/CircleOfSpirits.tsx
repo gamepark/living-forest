@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { circleOfSpiritsLeft, circleOfSpiritsTop, rockHeight, rockLeft, rockTop, rockWith } from '../styles';
+import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith } from '../styles';
 import Images from '../images/Images';
 import Fires from './Fires';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
@@ -37,13 +37,14 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props)
 
 const circle = css`
 position:absolute;
-width:66em;
-height:66em;
+width:${circleOfSpiritswidth}em;
+height:${circleOfSpiritsHeight}em;
 top:${circleOfSpiritsTop}em;
 left:${circleOfSpiritsLeft}em;
 background-image: url(${Images.circleOfSpirits});
 background-size:cover;
 background-position:center;
+filter: drop-shadow(0 0 0.3em black);
 `
 
 function rockPosition(index: number) {
@@ -53,9 +54,9 @@ function rockPosition(index: number) {
     height:${rockHeight}em;
     top:${rockTop}em;
     left:${rockLeft}em;
-    transform-origin: ${rockWith / 2}em 24.5em;
+    transform-origin: center 24.5em;
     background-color: #000;
     border-radius:2em;
-    transform: rotate(${index * 30 + 5}deg);
+    transform: rotate(${index * 30 + 14}deg);
     `
 }

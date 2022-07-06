@@ -25,5 +25,6 @@ left:${fragmentLeft}em;
 background-image: url(${Images.fragment});
 background-size:cover;
 background-position:center;
+filter: drop-shadow(0 0 0.3em black);
 `
 export default FragmentTilesStack;
