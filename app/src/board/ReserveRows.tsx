@@ -24,8 +24,6 @@ export default function ReserveRows({ reserveRows, spirit }: Props) {
                     return row.map((guardianAnimal, index) => {
                         if(!guardianAnimal)return null
                         return <Card key={guardianAnimal} css={cardPosition(index, indexRow)} guardianAnimal={guardianAnimal} onClick={() => { play(attractGuardianAnimalMove(spirit, guardianAnimal, {x:index,y:indexRow} ))}} />
-                        // return <Card key={guardianAnimal} css={cardPosition(index, indexRow)} guardianAnimal={guardianAnimal} />
-
                     })
                 })
             }

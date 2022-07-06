@@ -18,11 +18,11 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props)
         <div css={circle}>
             {circleOfSpiritsRocks.map((_rock, index) => {
                 return Object.entries(circleOfSpirits.position).map(
-                    ([spirit, _rock]) => {
-                        if (index == circleOfSpirits.position[spirit]) {
-                            console.log(index + " - " + circleOfSpirits.position[spirit])
-                            return <div key={index} css={rockPosition(index)}></div>
-
+                    ([spiritCircle, _position]) => {
+                        if (index == circleOfSpirits.position[spiritCircle]) {
+                            return <div key={index} css={rockPosition(index)}>
+                                {/* <div key={spiritCircle} css={spiritPosition(spiritCircle)}></div> */}
+                            </div>
                         }
                         return
                     }
@@ -60,3 +60,21 @@ function rockPosition(index: number) {
     transform: rotate(${index * 30 + 14}deg);
     `
 }
+
+// const spiritCircle: Record<SpiritOfNature, string> = {
+//     [SpiritOfNature.Autumn]: Images.autumnSpiritCircle,
+//     [SpiritOfNature.Summer]: Images.summerSpiritCircle,
+//     [SpiritOfNature.Spring]: Images.springSpiritCircle,
+//     [SpiritOfNature.Winter]: Images.winterSpiritCircle,
+// }
+
+// function spiritPosition(spirit: SpiritOfNature) {
+//     return css`
+//         position:absolute;
+//         width:${spiritCircleWidth}em;
+//         height:${spiritCircleHeight}em;
+//         background-image:url(${spiritCircle[spirit] });
+//         background-size:cover;
+//         background-position:center;
+//     `
+// }
