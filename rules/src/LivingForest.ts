@@ -29,6 +29,8 @@ import { circleOfSpiritsRocks, getTwoPlayersRocks } from './material/CircleOfSpi
 import MoveRandomized from './moves/MoveRandomized';
 import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
 import { endTurn, endTurnMove } from './moves/EndTurn';
+import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
+// import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 
 
 
@@ -72,7 +74,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           attractedGuardianAnimal: 0,
           extinguishedFires: [],
           extinguishedFiresTotal: 0,
-          actionMoves: []
+          actionMoves: [],
+          tree: null
         })),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id,
@@ -151,25 +154,16 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
         console.log(numberAction);
         console.log(player.actionMoves.length);
+
+        //Check player number of actions
         if (numberAction > player.actionMoves.length) {
 
           //Take a fragment tile action
-          if (!player.actionMoves.includes(ActionMove.TakeFragmentTile)) {
+          if (!player.actionMoves.includes(ActionMove.TakeFragmentTile)) {//Move already played
             moves.push(takeFragmentTileMove(spirit))
           }
 
           //Attract one or more Guardian Animals action
-          // if(!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)){
-          //   for(const row of this.state.reserve.rows){
-          //     console.log('row : ' + row);
-
-          //     for(const card of row){
-          //       console.log('card : '+card);
-
-          //       // if(card != null)moves.push(attractGuardianAnimalMove(spirit, card))
-          //     }
-          //   }
-          // }
 
           //Move already played
           if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)) {
@@ -201,7 +195,27 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           circleOfSpiritsRocks.forEach(function (_rock, index) { moves.push(moveCircleOfSpiritsMove(index, index)) })
 
           //Plant one and only one Protective Tree action
-          Object.entries(this.state.dispenser).forEach(function (_plant, index) { moves.push(plantTreeMove(index, index, index)) })
+          //Move already played
+          if (!player.actionMoves.includes(ActionMove.PlantTree)) {
+            //Take One protective tree  
+            Object.entries(this.state.dispenser).forEach(function (_tree, index) { 
+              
+              //Enough resources ?
+              // if (getAnimalsResource(player.line, Resource.Seed) > getProtectiveTreeDetails(index).cost) {               
+              moves.push(takeProtectiveTreeMove(spirit, index)) 
+              // }
+              })
+            //If player has taken one tree, he can plant it
+            if(player.tree !== null){
+              player.forest.forEach(function (row, indexRow) {
+                row.forEach(function (_, indexCol) {
+                  
+                  moves.push(plantTreeMove(player.spirit, {x: indexRow, y: indexCol}))
+                })
+              })
+            }
+          }
+
 
 
           return moves
@@ -254,6 +268,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return plantTree(this.state, move)
       case MoveType.EndTurn:
         return endTurn(this.state, move)
+      case MoveType.TakeProtectiveTree:
+        return takeProtectiveTree(this.state, move)
     }
   }
 

@@ -12,7 +12,7 @@ export default interface PlayerState {
   deck: GuardianAnimal[]
   line: GuardianAnimal[]
   discard: GuardianAnimal[]
-  forest: ProtectiveTree | null[][]
+  forest: (ProtectiveTree | null)[][]
   victory: number[]
   shuffled?: boolean
   fragment: number
@@ -20,6 +20,7 @@ export default interface PlayerState {
   extinguishedFires: (Fire | null)[]
   extinguishedFiresTotal: number
   actionMoves: ActionMove[]
+  tree: ProtectiveTree | null
 }
 
 export function setupDeck(): number[] {

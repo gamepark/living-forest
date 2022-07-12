@@ -34,7 +34,7 @@ const style = css`
     background-size: cover;
     backface-visibility: hidden;
     border-radius: 1em;
-    box-shadow: 0 0 1em black, 0 0 1em black;
+    box-shadow: 0 0 0.1em black, 0 0 0.1em black;
   }
 
   &:after {

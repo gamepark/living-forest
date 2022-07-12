@@ -3,7 +3,6 @@ import MoveType from "./MoveType"
 import SpiritOfNature from '../SpiritOfNature';
 import GameView from '../GameView';
 import { getPlayer } from '../PlayerView';
-// import FragmentTilesStack from '../../../app/src/board/FragmentTilesStack';
 import ActionMove from './ActionMove';
 
 
