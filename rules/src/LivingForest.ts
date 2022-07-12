@@ -28,6 +28,7 @@ import SpiritOfNature from './SpiritOfNature';
 import { circleOfSpiritsRocks, getTwoPlayersRocks } from './material/CircleOfSpirits';
 import MoveRandomized from './moves/MoveRandomized';
 import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
+import { endTurn, endTurnMove } from './moves/EndTurn';
 
 
 
@@ -251,6 +252,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return moveCircleOfSpirits(this.state, move)
       case MoveType.PlantTree:
         return plantTree(this.state, move)
+      case MoveType.EndTurn:
+        return endTurn(this.state, move)
     }
   }
 
@@ -281,6 +284,19 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return []
       }
       case Phase.Action: {
+        //
+        this.state.players.forEach(function (player, _) { 
+          const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
+          if (numberAction > player.actionMoves.length) {
+            return [endTurnMove(player.spirit)]
+          }else{
+            return []
+          }
+         })
+        if (this.state.players.every(player => player.ready)) {
+          return [startPhaseMove(Phase.Action)]
+        }
+
         return []
       }
       case Phase.EndOfTurn: {
