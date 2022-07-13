@@ -11,16 +11,13 @@ export default NextPlayer
 
 export function nextPlayer(state: GameState | GameView, move: NextPlayer) {
   console.log(move);
-  
-  for (let i = 1; i <= state.players.length; i++) {
+
     const activePlayerIndex = state.players.findIndex(player => player.spirit === state.currentPlayer)
-    const nextPlayerIndex = (activePlayerIndex + i) % state.players.length
+    const nextPlayerIndex = (activePlayerIndex + 1) % state.players.length
 
     const nextPlayer = state.players[nextPlayerIndex];
 
     state.currentPlayer = nextPlayer.spirit;
-    return;
-  }
 
 }
 
