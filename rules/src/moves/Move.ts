@@ -11,10 +11,11 @@ import PlantTree from './PlantTree';
 import EndTurn from './EndTurn';
 import TakeProtectiveTree from './TakeProtectiveTree';
 import NextPlayer from './NextPlayer';
+import ReturnGuardianAnimals from './ReturnGuardianAnimals';
 
 /**
  * A "Move" is the combination of all the types of moves that exists in you game
  */
-type Move = DrawCard | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree | EndTurn | TakeProtectiveTree | NextPlayer
+type Move = DrawCard | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree | EndTurn | TakeProtectiveTree | NextPlayer | ReturnGuardianAnimals
 
 export default Move

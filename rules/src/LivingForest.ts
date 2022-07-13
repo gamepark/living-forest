@@ -31,7 +31,6 @@ import { endTurn, endTurnMove } from './moves/EndTurn';
 import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
 
 
-
 /**
  * Your Board Game rules must extend either "SequentialGame" or "SimultaneousGame".
  * When there is at least on situation during the game where multiple players can act at the same time, it is a "SimultaneousGame"
@@ -269,6 +268,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return takeProtectiveTree(this.state, move)
       // case MoveType.NextPlayer:
       //   return nextPlayer(this.state, move)
+      // case MoveType.ReturnGuardianAnimals:
+      //   return returnGuardianAnimals(this.state, move)
     }
   }
 
@@ -328,6 +329,10 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
 
           //TODO : player discard animals
+          // this.state.players.forEach(function (player, _) {
+          //   returnGuardianAnimalsMove(player.spirit)
+          //  }),
+
 
           //TODO : change first player
           // nextPlayerMove(),

@@ -3,7 +3,7 @@
  * Even though it is not strictly required to use a type like that, it helps a lot in practice!
  */
 enum MoveType {
-  DrawCard, ShuffleToDraw, ShuffleDiscard, FillReserve, PlantTree, TakeFragmentTile, MoveCircleOfSpirits, TellYouAreReady, StartPhase, AttractGuardianAnimal, ExtinguishFire, EndTurn, TakeProtectiveTree, NextPlayer
+  DrawCard, ShuffleToDraw, ShuffleDiscard, FillReserve, PlantTree, TakeFragmentTile, MoveCircleOfSpirits, TellYouAreReady, StartPhase, AttractGuardianAnimal, ExtinguishFire, EndTurn, TakeProtectiveTree, NextPlayer, ReturnGuardianAnimals
 }
 
 export default MoveType
