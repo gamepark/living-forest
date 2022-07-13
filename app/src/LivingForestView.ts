@@ -64,6 +64,8 @@ export default class LivingForestView implements Game<GameLocalView, MoveView | 
         return endTurn(this.state, move)
       case MoveType.TakeProtectiveTree:
         return takeProtectiveTree(this.state, move)
+      // case MoveType.NextPlayer:
+      //   return nextPlayer(this.state, move)
       case DISPLAY_SCREEN:
         this.state.displayedPlayer = move.spiritOfNature
         break

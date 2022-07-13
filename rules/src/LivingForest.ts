@@ -24,13 +24,11 @@ import { tellYouAreReady, tellYouAreReadyMove } from './moves/TellYouAreReady';
 import Phase from './Phase';
 import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve';
 import SpiritOfNature from './SpiritOfNature';
-// import { getGuardianAnimalDetails } from './material/ProtectiveTreeDetails';
 import { circleOfSpiritsRocks, getTwoPlayersRocks } from './material/CircleOfSpirits';
 import MoveRandomized from './moves/MoveRandomized';
 import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
 import { endTurn, endTurnMove } from './moves/EndTurn';
 import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
-// import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 
 
 
@@ -129,28 +127,29 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
     const moves: Move[] = []
     switch (this.state.phase) {
       case Phase.GuardianAnimals: {
-
+        
         if (player.ready) {
           return []
         }
-
+        
         if (player.deck.length > 0) {
           if (getAnimalsType(player.line) < 3) {
             moves.push(drawCardMove(spirit))
-
+            
           }
         } else if (player.discard.length > 0) {
           moves.push(shuffleDiscardMove(spirit))
         }
-
+        
         if (player.line.length > 0) {
           moves.push(tellYouAreReadyMove(spirit))
         }
-
+        
         return moves
       }
       case Phase.Action: {
         // TODO: Action phase
+        console.log(this.state.players);
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
         console.log(numberAction);
         console.log(player.actionMoves.length);
@@ -215,9 +214,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
               })
             }
           }
-
-
-
+          
           return moves
         } else {
           return []
@@ -270,6 +267,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return endTurn(this.state, move)
       case MoveType.TakeProtectiveTree:
         return takeProtectiveTree(this.state, move)
+      // case MoveType.NextPlayer:
+      //   return nextPlayer(this.state, move)
     }
   }
 
@@ -310,7 +309,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           }
          })
         if (this.state.players.every(player => player.ready)) {
-          return [startPhaseMove(Phase.Action)]
+          return [startPhaseMove(Phase.EndOfTurn)]
         }
 
         return []
@@ -325,14 +324,16 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           //TODO : arrival new guardian animal
           ...this.state.reserve.rows.flatMap((row, indexRow) =>
             Array.from(row.entries()).filter(entry => entry[1] != null).map(entry => fillReserveMove(indexRow, entry[0]))
-          )
+          ),
 
 
           //TODO : player discard animals
 
           //TODO : change first player
+          // nextPlayerMove(),
 
           //TODO : change state phase
+          startPhaseMove(Phase.GuardianAnimals)
         ]
       }
     }
