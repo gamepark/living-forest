@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith } from '../styles';
+import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith, spiritCircleHeight, spiritCircleWidth } from '../styles';
 import Images from '../images/Images';
 import Fires from './Fires';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
@@ -21,7 +21,7 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props)
                     ([spiritCircle, _position]) => {
                         if (index == circleOfSpirits.position[spiritCircle]) {
                             return <div key={index} css={rockPosition(index)}>
-                                {/* <div key={spiritCircle} css={spiritPosition(spiritCircle)}></div> */}
+                                <div key={spiritCircle} css={spiritPosition(parseInt(spiritCircle))}></div>
                             </div>
                         }
                         return
@@ -61,20 +61,20 @@ function rockPosition(index: number) {
     `
 }
 
-// const spiritCircle: Record<SpiritOfNature, string> = {
-//     [SpiritOfNature.Autumn]: Images.autumnSpiritCircle,
-//     [SpiritOfNature.Summer]: Images.summerSpiritCircle,
-//     [SpiritOfNature.Spring]: Images.springSpiritCircle,
-//     [SpiritOfNature.Winter]: Images.winterSpiritCircle,
-// }
+const spiritCircle: Record<SpiritOfNature, string> = {
+    [SpiritOfNature.Autumn]: Images.autumnSpiritCircle,
+    [SpiritOfNature.Summer]: Images.summerSpiritCircle,
+    [SpiritOfNature.Spring]: Images.springSpiritCircle,
+    [SpiritOfNature.Winter]: Images.winterSpiritCircle,
+}
 
-// function spiritPosition(spirit: SpiritOfNature) {
-//     return css`
-//         position:absolute;
-//         width:${spiritCircleWidth}em;
-//         height:${spiritCircleHeight}em;
-//         background-image:url(${spiritCircle[spirit] });
-//         background-size:cover;
-//         background-position:center;
-//     `
-// }
+function spiritPosition(spirit: SpiritOfNature) {
+    return css`
+        position:absolute;
+        width:${spiritCircleWidth}em;
+        height:${spiritCircleHeight}em;
+        background-image:url(${spiritCircle[spirit] });
+        background-size:cover;
+        background-position:center;
+    `
+}

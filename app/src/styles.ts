@@ -52,3 +52,7 @@ export const rockTop = 8
 export const rockLeft = 28
 export const rockHeight = 6
 export const rockWith = 9
+export const firstPlayerTop = 8
+export const firstPlayerLeft = 28
+export const firstPlayerHeight = 6
+export const firstPlayerWith = 9

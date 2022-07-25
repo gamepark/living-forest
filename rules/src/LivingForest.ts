@@ -29,6 +29,8 @@ import MoveRandomized from './moves/MoveRandomized';
 import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
 import { endTurn, endTurnMove } from './moves/EndTurn';
 import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
+import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
+import { returnGuardianAnimals } from './moves/ReturnGuardianAnimals';
 
 
 /**
@@ -266,10 +268,10 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return endTurn(this.state, move)
       case MoveType.TakeProtectiveTree:
         return takeProtectiveTree(this.state, move)
-      // case MoveType.NextPlayer:
-      //   return nextPlayer(this.state, move)
-      // case MoveType.ReturnGuardianAnimals:
-      //   return returnGuardianAnimals(this.state, move)
+      case MoveType.NextPlayer:
+        return nextPlayer(this.state, move)
+      case MoveType.ReturnGuardianAnimals:
+        return returnGuardianAnimals(this.state, move)
     }
   }
 
@@ -327,15 +329,13 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
             Array.from(row.entries()).filter(entry => entry[1] != null).map(entry => fillReserveMove(indexRow, entry[0]))
           ),
 
-
           //TODO : player discard animals
           // this.state.players.forEach(function (player, _) {
           //   returnGuardianAnimalsMove(player.spirit)
           //  }),
 
-
           //TODO : change first player
-          // nextPlayerMove(),
+          nextPlayerMove(),
 
           //TODO : change state phase
           startPhaseMove(Phase.GuardianAnimals)

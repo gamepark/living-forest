@@ -15,7 +15,7 @@ export default function PlayerHelpLine({ line }: Props) {
     return (
         <>
             {line.map((guardianAnimal, index) =>
-                <Card key={guardianAnimal} css={cardLinePosition(index)} guardianAnimal={guardianAnimal} />
+                <Card key={index} css={cardLinePosition(index)} guardianAnimal={guardianAnimal} />
             )}
         </>
     );

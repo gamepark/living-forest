@@ -4,7 +4,7 @@ import { usePlay, usePlayerId } from '@gamepark/react-client'
 import { displayScreenMove } from '../DisplayScreen'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import GameLocalView from '../GameLocalView'
-import { panelHeight, panelWidth, panelLeft, panelBottom } from '../styles'
+import { panelHeight, panelWidth, panelLeft, panelBottom, firstPlayerTop, firstPlayerLeft, firstPlayerHeight, firstPlayerWith } from '../styles'
 import Images from '../images/Images'
 import Resources from './Resources';
 
@@ -15,21 +15,25 @@ type Props = {
 }
 
 export default function Panels({ game }: Props) {
-  // const [animal, setAnimal] = useState<GuardianAnimal>()
   const play = usePlay()
   const playerId = usePlayerId<SpiritOfNature>()
-
 
   return (
     <>
       <div css={forest} onClick={() => play(displayScreenMove(), { local: true })}>
       </div>
       {
-        game.players.map((player, index) =>
-          <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
+        game.players.map((player, index) =>{
 
+          if(player.spirit === game.currentPlayer){
+            <div css={firstPlayer}></div>
+          }
+          <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
+            
+            
             <Resources line={player.line} />
           </div>
+          }
         )
       }
     </>
@@ -43,6 +47,22 @@ const forest = css`
   height:${panelHeight}em;
   width:${panelWidth}em;
   background-image:url(${Images.forestBack});
+  background-size:cover;
+  background-position:center;
+  &:before {
+    background-color: rgba(255, 255, 255, 0.8);
+    }
+  padding: 0.5em;
+  box-shadow: 0 0 0.3em black;
+  border-radius:0.5em;
+`
+const firstPlayer = css`
+  position: absolute;
+  top: ${firstPlayerTop}em;
+  left: ${firstPlayerLeft}em;
+  height:${firstPlayerHeight}em;
+  width:${firstPlayerWith}em;
+  background-image:url(${Images.firstPlayer});
   background-size:cover;
   background-position:center;
   &:before {

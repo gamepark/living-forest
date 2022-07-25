@@ -152,6 +152,8 @@ import fragment from './fragment.png'
 import fire2 from './fire2.png'
 import fire3 from './fire3.png'
 import fire4 from './fire4.png'
+import firstPlayer from './firstPlayer.png'
+
 
 
 
@@ -175,7 +177,8 @@ const Images = {
   springVerso, springSpiritCircle, 
   circleOfSpirits,
   sun, drop, seed, wind, sacredFlower, gregarious,
-  fragment, fire2, fire3, fire4
+  fragment, fire2, fire3, fire4,
+  firstPlayer
 }
 
 export default Images
