@@ -158,12 +158,17 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         //Check player number of actions
         if (numberAction > player.actionMoves.length) {
 
-          //Take a fragment tile action
+          /********************************************************
+          *****          Take a fragment tile action          *****
+          *********************************************************/
+
           if (!player.actionMoves.includes(ActionMove.TakeFragmentTile)) {//Move already played
             moves.push(takeFragmentTileMove(spirit))
           }
 
-          //Attract one or more Guardian Animals action
+          /********************************************************
+          *****  Attract one or more Guardian Animals action  *****
+          *********************************************************/
 
           //Move already played
           if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)) {
@@ -182,7 +187,9 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
             })
           }
 
-          //Extinguish the Fire action
+          /********************************************************
+          *****           Extinguish Fire action              *****
+          *********************************************************/
           this.state.circle.fire.forEach(function (fire, index) {
             if (fire != null) {
               if (getAnimalsResource(player.line, Resource.Seed) > player.extinguishedFiresTotal) {
@@ -191,10 +198,25 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
             }
           })
 
-          //Move forward on the Circle of Spirits action
-          circleOfSpiritsRocks.forEach(function (_rock, index) { moves.push(moveCircleOfSpiritsMove(index, index)) })
+          /********************************************************
+          ***** Move forward on the Circle of Spirits action  *****
+          *********************************************************/
+         const playerPosition = this.state.circle.position[player.spirit]
+         const wind = getAnimalsResource(player.line, Resource.Wind)
+         const playerPositionLimit = playerPosition! + wind
+         circleOfSpiritsRocks.forEach(function (_rock, index) { 
+           //Move already played
+           if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits )) {
+             //Rocks available
+              if(index>playerPosition! && index <= playerPositionLimit )
+              moves.push(moveCircleOfSpiritsMove(index, index)) 
+            }
+          })
 
-          //Plant one and only one Protective Tree action
+          /********************************************************
+          ***** Plant one and only one Protective Tree action *****
+          *********************************************************/
+
           //Move already played
           if (!player.actionMoves.includes(ActionMove.PlantTree)) {
             //Take One protective tree  
