@@ -149,9 +149,11 @@ import wind from './resources/wind.png'
 import sacredFlower from './resources/sacredFlower.png'
 import gregarious from './resources/gregarious.png'
 import fragment from './fragment.png'
+import fire from './fire.png'
 import fire2 from './fire2.png'
 import fire3 from './fire3.png'
 import fire4 from './fire4.png'
+import firePanel from './firePanel.png'
 import firstPlayer from './firstPlayer.png'
 
 
@@ -172,12 +174,12 @@ const Images = {
   tree3A, tree3B, tree4A, tree4B, tree5A, tree5B, tree6, tree7, tree8, tree9, tree10, tree11,
   forestBack,
   autumnVerso, autumnBack, autumnBackGreen, autumnCases, autumnSpirit1, autumnSpirit2, autumnToken1, autumnToken2, autumnToken3, autumnSpiritCircle,
-  summerVerso, summerSpiritCircle, 
+  summerVerso, summerSpiritCircle,
   winterVerso, winterSpiritCircle,
-  springVerso, springSpiritCircle, 
+  springVerso, springSpiritCircle,
   circleOfSpirits,
   sun, drop, seed, wind, sacredFlower, gregarious,
-  fragment, fire2, fire3, fire4,
+  fragment, fire, fire2, fire3, fire4, firePanel,
   firstPlayer
 }
 

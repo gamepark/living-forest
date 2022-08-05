@@ -7,6 +7,8 @@ import GameLocalView from '../GameLocalView'
 import { panelHeight, panelWidth, panelLeft, panelBottom, firstPlayerTop, firstPlayerLeft, firstPlayerHeight, firstPlayerWith } from '../styles'
 import Images from '../images/Images'
 import Resources from './Resources';
+import Victories from './Victories'
+import PanelGame from './PanelGame'
 
 
 
@@ -20,42 +22,31 @@ export default function Panels({ game }: Props) {
 
   return (
     <>
-      <div css={forest} onClick={() => play(displayScreenMove(), { local: true })}>
-      </div>
+      <PanelGame game={game}></PanelGame>
       {
-        game.players.map((player, index) =>{
+        game.players.map((player, index) => {
+          if (player.spirit === game.sacredTreeOwner) {
+            return <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
 
-          if(player.spirit === game.currentPlayer){
-            <div css={firstPlayer}></div>
+              <div css={firstPlayer}></div>
+              <Resources line={player.line} />
+              <Victories victory={player.victory} />
+            </div>
+          } else {
+            return <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
+
+              <Resources line={player.line} />
+              <Victories victory={player.victory} />
+            </div>
           }
-          <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
-            
-            
-            <Resources line={player.line} />
-          </div>
-          }
+        }
         )
       }
     </>
   );
 
 }
-const forest = css`
-  position: absolute;
-  bottom: ${panelBottom}em;
-  left: ${panelLeft}em;
-  height:${panelHeight}em;
-  width:${panelWidth}em;
-  background-image:url(${Images.forestBack});
-  background-size:cover;
-  background-position:center;
-  &:before {
-    background-color: rgba(255, 255, 255, 0.8);
-    }
-  padding: 0.5em;
-  box-shadow: 0 0 0.3em black;
-  border-radius:0.5em;
-`
+
 const firstPlayer = css`
   position: absolute;
   top: ${firstPlayerTop}em;
@@ -65,12 +56,8 @@ const firstPlayer = css`
   background-image:url(${Images.firstPlayer});
   background-size:cover;
   background-position:center;
-  &:before {
-    background-color: rgba(255, 255, 255, 0.8);
-    }
-  padding: 0.5em;
-  box-shadow: 0 0 0.3em black;
-  border-radius:0.5em;
+filter: drop-shadow(0 0 0.2em black);
+
 `
 const playerPanelBackground: Record<SpiritOfNature, string> = {
   [SpiritOfNature.Autumn]: Images.autumnVerso,

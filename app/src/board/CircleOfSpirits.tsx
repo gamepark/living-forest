@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith, spiritCircleHeight,  spiritCircleWidth } from '../styles';
+import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith, spiritCircleHeight, spiritCircleWidth } from '../styles';
 import Images from '../images/Images';
 import Fires from './Fires';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
@@ -20,14 +20,14 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props)
         <div css={circle}>
             {circleOfSpiritsRocks.map((_rock, index) => {
                 return Object.entries(circleOfSpirits.position).map(
-                    ([spiritCircle, _position]) => {
+                    ([spiritCircle, position]) => {
                         if (index == circleOfSpirits.position[spiritCircle]) {
-                            return <div key={spiritCircle} css={spiritPosition(index)}>
+                            return <div key={index + position} css={spiritPosition(index)}>
                                 <div css={spiritCss(parseInt(spiritCircle), index)}></div>
                             </div>
-                        }else{
-                            return <div key={index} css={rockPosition(index)} onClick={() => play(moveCircleOfSpiritsMove(spirit, index))}>
-                        </div>
+                        } else {
+                            return <div key={index + position} css={rockPosition(index)} onClick={() => play(moveCircleOfSpiritsMove(spirit, index))}>
+                            </div>
                         }
                         return
                     }
@@ -72,7 +72,7 @@ const spiritCircle: Record<SpiritOfNature, string> = {
     [SpiritOfNature.Winter]: Images.winterSpiritCircle,
 }
 
-function spiritPosition(index:number) {
+function spiritPosition(index: number) {
     return css`
     position:absolute;
     width:${rockWith}em;
@@ -84,12 +84,12 @@ function spiritPosition(index:number) {
     `
 }
 
-function spiritCss(spirit: SpiritOfNature, index:number) {
+function spiritCss(spirit: SpiritOfNature, index: number) {
     return css`
         position:absolute;
         width:${spiritCircleWidth}em;
         height:${spiritCircleHeight}em;
-        background-image:url(${spiritCircle[spirit] });
+        background-image:url(${spiritCircle[spirit]});
         background-size:cover;
         background-position:center;
         transform: rotate(-${index * 30 + 16}deg);

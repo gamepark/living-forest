@@ -39,6 +39,7 @@ top:${resourceTop}em;
 left:${resourceLeft + 6 * 4.2}em;
 background-image: url(${Images.gregarious});
 background-size: cover;
+filter: drop-shadow(0 0 0.9em black);
 `
 const num = css`
 position:absolute;

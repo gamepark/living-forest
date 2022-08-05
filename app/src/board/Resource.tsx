@@ -28,6 +28,7 @@ top:${resourceTop}em;
 left:${resourceLeft + resource * 4.2}em;
 background-image: url(${ResourceImage[resource]});
 background-size: cover;
+filter: drop-shadow(0 0 0.9em black);
 `
 const num = css`
 position:absolute;
@@ -42,5 +43,4 @@ const ResourceImage: { [key in ResourceElement]: string } = {
     [ResourceElement.Seed]: Images.seed,
     [ResourceElement.Wind]: Images.wind,
     [ResourceElement.SacredFlower]: Images.sacredFlower,
-
 }
