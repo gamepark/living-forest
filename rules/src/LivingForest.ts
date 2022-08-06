@@ -74,7 +74,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           extinguishedFires: [],
           extinguishedFiresTotal: 0,
           actionMoves: [],
-          tree: null
+          tree: null,
+          ongoingMove: null,
         })),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id,
@@ -128,35 +129,32 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
     const moves: Move[] = []
     switch (this.state.phase) {
       case Phase.GuardianAnimals: {
-        
+
         if (player.ready) {
           return []
         }
-        
+
         if (player.deck.length > 0) {
           if (getAnimalsType(player.line) < 3) {
             moves.push(drawCardMove(spirit))
-            
+
           }
         } else if (player.discard.length > 0) {
           moves.push(shuffleDiscardMove(spirit))
         }
-        
+
         if (player.line.length > 0) {
           moves.push(tellYouAreReadyMove(spirit))
         }
-        
+
         return moves
       }
       case Phase.Action: {
         // TODO: Action phase
-        console.log(this.state.players);
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
-        console.log(numberAction);
-        console.log(player.actionMoves.length);
 
-        //Check player number of actions
-        if (numberAction > player.actionMoves.length) {
+        //Check player number of actions and not move ongoing
+        if (numberAction > player.actionMoves.length && player.ongoingMove == null) {
 
           /********************************************************
           *****          Take a fragment tile action          *****
@@ -201,15 +199,15 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           /********************************************************
           ***** Move forward on the Circle of Spirits action  *****
           *********************************************************/
-         const playerPosition = this.state.circle.position[player.spirit]
-         const wind = getAnimalsResource(player.line, Resource.Wind)
-         const playerPositionLimit = playerPosition! + wind
-         circleOfSpiritsRocks.forEach(function (_rock, index) { 
-           //Move already played
-           if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits )) {
-             //Rocks available
-              if(index>playerPosition! && index <= playerPositionLimit )
-              moves.push(moveCircleOfSpiritsMove(index, index)) 
+          const playerPosition = this.state.circle.position[player.spirit]
+          const wind = getAnimalsResource(player.line, Resource.Wind)
+          const playerPositionLimit = playerPosition! + wind
+          circleOfSpiritsRocks.forEach(function (_rock, index) {
+            //Move already played
+            if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits)) {
+              //Rocks available
+              if (index > playerPosition! && index <= playerPositionLimit)
+                moves.push(moveCircleOfSpiritsMove(index, index))
             }
           })
 
@@ -220,24 +218,24 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           //Move already played
           if (!player.actionMoves.includes(ActionMove.PlantTree)) {
             //Take One protective tree  
-            Object.entries(this.state.dispenser).forEach(function (_tree, index) { 
-              
+            Object.entries(this.state.dispenser).forEach(function (_tree, index) {
+
               //Enough resources ?
               // if (getAnimalsResource(player.line, Resource.Seed) > getProtectiveTreeDetails(index).cost) {               
-              moves.push(takeProtectiveTreeMove(spirit, index)) 
+              moves.push(takeProtectiveTreeMove(spirit, index))
               // }
-              })
+            })
             //If player has taken one tree, he can plant it
-            if(player.tree !== null){
+            if (player.tree !== null) {
               player.forest.forEach(function (row, indexRow) {
                 row.forEach(function (_, indexCol) {
-                  
-                  moves.push(plantTreeMove(player.spirit, {x: indexRow, y: indexCol}))
+
+                  moves.push(plantTreeMove(player.spirit, { x: indexRow, y: indexCol }))
                 })
               })
             }
           }
-          
+
           return moves
         } else {
           return []
@@ -325,14 +323,14 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       }
       case Phase.Action: {
         //
-        this.state.players.forEach(function (player, _) { 
+        this.state.players.forEach(function (player, _) {
           const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
           if (numberAction > player.actionMoves.length) {
             return [endTurnMove(player.spirit)]
-          }else{
+          } else {
             return []
           }
-         })
+        })
         if (this.state.players.every(player => player.ready)) {
           return [startPhaseMove(Phase.EndOfTurn)]
         }

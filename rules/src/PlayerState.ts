@@ -21,6 +21,7 @@ export default interface PlayerState {
   extinguishedFiresTotal: number
   actionMoves: ActionMove[]
   tree: ProtectiveTree | null
+  ongoingMove: ActionMove | null
 }
 
 export function setupDeck(): number[] {

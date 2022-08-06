@@ -23,7 +23,7 @@ export default function PanelGame({ game }: Props) {
         {
           game.circle.fire.map((fire, index) => {
             if (fire != null) {
-              return <div css={fireCss(index)}></div>
+              return <div key={index} css={fireCss(index)}></div>
             }
             return
           })

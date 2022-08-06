@@ -6,9 +6,9 @@ import GuardianAnimal from '../material/GuardianAnimal';
 import GameView from '../GameView';
 import { getPlayer, isPlayerView } from '../PlayerView';
 import Coordinates from '../material/Coordinates';
-// import ActionMove from './ActionMove';
 import { getAnimalsResource } from '../material/GuardianAnimalDetails';
 import Resource from '../material/Resource';
+import ActionMove from './ActionMove';
 
 
 type AttractGuardianAnimal = {
@@ -31,7 +31,7 @@ export function attractGuardianAnimal(state: GameState | GameView, move: Attract
   } else {
     player.deck.unshift(move.guardianAnimal)
   }
-  // player.actionMoves.push(ActionMove.AttractGuardianAnimal)
+  player.ongoingMove = ActionMove.AttractGuardianAnimal
   state.reserve.rows[move.coordinates.y][move.coordinates.x] = null
 }
 

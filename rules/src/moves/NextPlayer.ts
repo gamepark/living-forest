@@ -12,15 +12,15 @@ export default NextPlayer
 export function nextPlayer(state: GameState | GameView, move: NextPlayer) {
   console.log(move);
 
-    const activePlayerIndex = state.players.findIndex(player => player.spirit === state.currentPlayer)
-    const nextPlayerIndex = (activePlayerIndex + 1) % state.players.length
+  const activePlayerIndex = state.players.findIndex(player => player.spirit === state.currentPlayer)
+  const nextPlayerIndex = (activePlayerIndex + 1) % state.players.length
 
-    const nextPlayer = state.players[nextPlayerIndex];
+  const nextPlayer = state.players[nextPlayerIndex];
 
-    state.currentPlayer = nextPlayer.spirit;
+  state.currentPlayer = nextPlayer.spirit;
 
 }
 
 export function nextPlayerMove(): NextPlayer {
-  return { type: MoveType.NextPlayer}
+  return { type: MoveType.NextPlayer }
 }

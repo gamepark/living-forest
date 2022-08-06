@@ -12,7 +12,6 @@ export default function Victories({ victory }: Props) {
     return (
         <>
             {victory.map((resource, index) => {
-                console.log(index);
 
                 return <div key={index} css={victoryCss(index)}>
                     {resource}
