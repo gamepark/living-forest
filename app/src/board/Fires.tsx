@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import FireTile from '../material/FireTile';
-import { fireHeight, fireLeft, fireTop, fireWith } from '../styles';
+import { fireHeight, fireLeft, fireTop, fireWidth } from '../styles';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import { usePlay } from '@gamepark/react-client';
 import { extinguishFireMove } from '@gamepark/living-forest/moves/ExtinguishFire';
@@ -31,7 +31,7 @@ export default function Fire({ fire, spirit }: Props) {
 function firePosition(index: number, indexStack: number) {
     return css`
     height:${fireHeight}em;
-    width:${fireWith}em;
+    width:${fireWidth}em;
     top:${fireTop - index * 0.1 + indexStack * 23}em;
     left:${fireLeft - index * 0.1}em;
     `

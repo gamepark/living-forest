@@ -153,8 +153,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         // TODO: Action phase
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
 
-        //Check player number of actions and not move ongoing
-        if (numberAction > player.actionMoves.length && player.ongoingMove == null) {
+        //Check player number of actions 
+        if (numberAction > player.actionMoves.length) {
 
           /********************************************************
           *****          Take a fragment tile action          *****
@@ -171,18 +171,21 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           //Move already played
           if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)) {
 
-            this.state.reserve.rows.forEach(function (row, index) {
-              row.forEach(function (card, indexRow) {
+            //Ongoing move
+            if (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal) {
+              this.state.reserve.rows.forEach(function (row, index) {
+                row.forEach(function (card, indexRow) {
 
-                //Card is drawn
-                if (card != null) {
-                  //Enough resources ?
-                  if (getAnimalsResource(player.line, Resource.Sun) > player.attractedGuardianAnimal + getAnimalsResource([card], Resource.Sun)) {
-                    moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
+                  //Card is drawn
+                  if (card != null) {
+                    //Enough resources ?
+                    if (getAnimalsResource(player.line, Resource.Sun) > player.attractedGuardianAnimal + getAnimalsResource([card], Resource.Sun)) {
+                      moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
+                    }
                   }
-                }
+                })
               })
-            })
+            }
           }
 
           /********************************************************

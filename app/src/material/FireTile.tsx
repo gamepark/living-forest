@@ -2,7 +2,7 @@
 import { css } from '@emotion/react'
 import Fire from '@gamepark/living-forest/material/Fire'
 import { HTMLAttributes } from 'react'
-import { fireHeight, fireWith } from '../styles'
+import { fireHeight, fireWidth } from '../styles'
 import Images from '../images/Images'
 
 type Props = {
@@ -17,7 +17,7 @@ export default function FireTile({ fire, ...props }: Props) {
 
 const style = css`
   position: absolute;
-  width:${fireWith}em;
+  width:${fireWidth}em;
   height:${fireHeight}em;
   transform-style: preserve-3d;
   transform: translateZ(0);
