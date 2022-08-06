@@ -3,6 +3,7 @@ import MoveType from "./MoveType"
 import SpiritOfNature from '../SpiritOfNature';
 import GameView from '../GameView';
 import { getPlayer } from '../PlayerView';
+import ActionMove from "./ActionMove";
 // import ActionMove from './ActionMove';
 
 
@@ -20,7 +21,7 @@ export function extinguishFire(state: GameState | GameView, move: ExtinguishFire
 
   if (fire != null) player.extinguishedFiresTotal += fire + 1
   player.extinguishedFires.push(...state.circle.fire.splice(move.fire, 1))
-  // player.actionMoves.push(ActionMove.ExtinguishFire)
+  player.ongoingMove = ActionMove.ExtinguishFire
 }
 
 export function extinguishFireMove(spirit: SpiritOfNature, fire: number): ExtinguishFire {

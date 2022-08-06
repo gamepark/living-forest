@@ -191,14 +191,21 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           /********************************************************
           *****           Extinguish Fire action              *****
           *********************************************************/
-          this.state.circle.fire.forEach(function (fire, index) {
-            if (fire != null) {
-              if (getAnimalsResource(player.line, Resource.Seed) > player.extinguishedFiresTotal) {
-                moves.push(extinguishFireMove(spirit, index))
-              }
-            }
-          })
 
+          //Move already played
+          if (!player.actionMoves.includes(ActionMove.ExtinguishFire)) {
+            //Ongoing move
+            if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire) {
+              this.state.circle.fire.forEach(function (fire, index) {
+                if (fire != null) {
+                  //Enough drops ?
+                  if (getAnimalsResource(player.line, Resource.Drop) > player.extinguishedFiresTotal + fire + 1) {
+                    moves.push(extinguishFireMove(spirit, index))
+                  }
+                }
+              })
+            }
+          }
           /********************************************************
           ***** Move forward on the Circle of Spirits action  *****
           *********************************************************/
