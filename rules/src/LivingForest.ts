@@ -31,6 +31,7 @@ import { endTurn, endTurnMove } from './moves/EndTurn';
 import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
 import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
 import { returnGuardianAnimals } from './moves/ReturnGuardianAnimals';
+import { getSpiritVictoryTiles } from './material/VictoryTile';
 
 
 /**
@@ -76,6 +77,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           actionMoves: [],
           tree: null,
           ongoingMove: null,
+          bonus: null,
+          victoryTiles: getSpiritVictoryTiles(player.id)
         })),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id,

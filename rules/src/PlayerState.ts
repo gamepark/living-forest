@@ -5,6 +5,7 @@ import ProtectiveTree from './material/ProtectiveTree';
 // import Move from './moves/Move';
 import ActionMove from './moves/ActionMove';
 import Fire from './material/Fire';
+import VictoryTile from './material/VictoryTile';
 
 export default interface PlayerState {
   spirit: SpiritOfNature
@@ -22,6 +23,8 @@ export default interface PlayerState {
   actionMoves: ActionMove[]
   tree: ProtectiveTree | null
   ongoingMove: ActionMove | null
+  bonus: ActionMove | null
+  victoryTiles: VictoryTile[]
 }
 
 export function setupDeck(): number[] {

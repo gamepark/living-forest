@@ -15,7 +15,7 @@ type Props = {
 }
 
 
-export default function ProtectiveTreeDispersers({ dispenser, spirit}: Props) {
+export default function ProtectiveTreeDisperser({ dispenser, spirit }: Props) {
     const trees = protectiveTrees;
     const play = usePlay()
 
@@ -24,7 +24,7 @@ export default function ProtectiveTreeDispersers({ dispenser, spirit}: Props) {
             {
                 trees.map((protectiveTree, index) => {
                     return [...Array(dispenser[protectiveTree])].map((_, indexTree) => {
-                        return < Tree key={index+indexTree} css={treeLinePosition(index, indexTree)} protectiveTree={protectiveTree} onClick={() => { play(takeProtectiveTreeMove(spirit, protectiveTree ))}} />
+                        return < Tree key={index + indexTree} css={treeLinePosition(index, indexTree)} protectiveTree={protectiveTree} onClick={() => { play(takeProtectiveTreeMove(spirit, protectiveTree)) }} />
                     })
                 })
             }
@@ -34,7 +34,7 @@ export default function ProtectiveTreeDispersers({ dispenser, spirit}: Props) {
 
 function treeLinePosition(index: number, indexTree: number) {
     return css`
-    top:${disperserTop + indexTree * 0.2 }em;
+    top:${disperserTop + indexTree * 0.2}em;
     left:${disperserLeft + index * 15 + indexTree * 0.2}em;
     `
 }

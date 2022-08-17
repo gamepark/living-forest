@@ -126,19 +126,28 @@ import autumnVerso from './autumnVerso.jpg'
 import autumnCases from './autumnCases.png'
 import autumnSpirit1 from './autumnSpirit1.png'
 import autumnSpirit2 from './autumnSpirit2.png'
-import autumnToken1 from './autumnToken1.png'
-import autumnToken2 from './autumnToken2.png'
-import autumnToken3 from './autumnToken3.png'
+import autumnVictoryFire from './autumnVictoryFire.png'
+import autumnVictorySacredFlower from './autumnVictorySacredFlower.png'
+import autumnVictoryTree from './autumnVictoryTree.png'
 import autumnSpiritCircle from './autumnSpiritCircle.png'
 
 
 import summerVerso from './summerVerso.jpg'
+import summerVictoryFire from './summerVictoryFire.png'
+import summerVictorySacredFlower from './summerVictorySacredFlower.png'
+import summerVictoryTree from './summerVictoryTree.png'
 import summerSpiritCircle from './summerSpiritCircle.png'
 
 import winterVerso from './winterVerso.jpg'
+import winterVictoryFire from './winterVictoryFire.png'
+import winterVictorySacredFlower from './winterVictorySacredFlower.png'
+import winterVictoryTree from './winterVictoryTree.png'
 import winterSpiritCircle from './winterSpiritCircle.png'
 
 import springVerso from './springVerso.jpg'
+import springVictoryFire from './springVictoryFire.png'
+import springVictorySacredFlower from './springVictorySacredFlower.png'
+import springVictoryTree from './springVictoryTree.png'
 import springSpiritCircle from './springSpiritCircle.png'
 
 import circleOfSpirits from './circleOfSpirits.png'
@@ -173,10 +182,10 @@ const Images = {
   stag, tapir, varan,
   tree3A, tree3B, tree4A, tree4B, tree5A, tree5B, tree6, tree7, tree8, tree9, tree10, tree11,
   forestBack,
-  autumnVerso, autumnBack, autumnBackGreen, autumnCases, autumnSpirit1, autumnSpirit2, autumnToken1, autumnToken2, autumnToken3, autumnSpiritCircle,
-  summerVerso, summerSpiritCircle,
-  winterVerso, winterSpiritCircle,
-  springVerso, springSpiritCircle,
+  springVerso, springSpiritCircle, springVictoryFire, springVictorySacredFlower, springVictoryTree,
+  summerVerso, summerSpiritCircle, summerVictoryFire, summerVictorySacredFlower, summerVictoryTree,
+  autumnVerso, autumnBack, autumnBackGreen, autumnCases, autumnSpirit1, autumnSpirit2, autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
+  winterVerso, winterSpiritCircle, winterVictoryFire, winterVictorySacredFlower, winterVictoryTree,
   circleOfSpirits,
   sun, drop, seed, wind, sacredFlower, gregarious,
   fragment, fire, fire2, fire3, fire4, firePanel,

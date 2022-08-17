@@ -27,6 +27,17 @@ export default function HeaderText({ loading, game }: Props) {
         if (player.ongoingMove === ActionMove.AttractGuardianAnimal) {
           return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton />]} />
         }
+        if (player.ongoingMove === ActionMove.MoveCircleOfSpirits) {
+          if (player.bonus === ActionMove.ExtinguishFire) {
+
+          }
+          if (player.bonus === ActionMove.AttractGuardianAnimal) {
+
+          }
+          if (player.bonus === ActionMove.PlantTree) {
+
+          }
+        }
       } else {
         if (getAnimalsType(player.line) > 2) {
           return <>{t('You have 1 action.')}</>

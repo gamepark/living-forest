@@ -3,7 +3,7 @@
 import GameLocalView from "../GameLocalView";
 import CircleOfSpirits from "./CircleOfSpirits";
 import FragmentTilesStack from "./FragmentTilesStack";
-import ProtectiveTreeDispersers from "./ProtectiveTreeDispersers";
+import ProtectiveTreeDisperser from "./ProtectiveTreeDisperser";
 import Reserve from "./Reserve";
 import { css } from '@emotion/react';
 import PlayerView from "@gamepark/living-forest/PlayerView";
@@ -24,7 +24,7 @@ export default function ForestBoard({ game, player }: Props) {
         <div css={forest}>
             <Reserve game={game} spirit={player.spirit} />
             <CircleOfSpirits circleOfSpirits={game.circle} spirit={player.spirit} />
-            <ProtectiveTreeDispersers dispenser={game.dispenser} spirit={player.spirit} />
+            <ProtectiveTreeDisperser dispenser={game.dispenser} spirit={player.spirit} />
             <FragmentTilesStack onClick={takeFragment} />
         </div>
     );
