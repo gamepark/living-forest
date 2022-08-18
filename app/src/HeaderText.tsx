@@ -8,6 +8,7 @@ import { getPlayer } from '@gamepark/living-forest/PlayerView'
 import { usePlayerId } from '@gamepark/react-client'
 import { Trans, useTranslation } from 'react-i18next'
 import ValidateButton from './board/ValidateButton'
+import VictoryTiles from './board/VictoryTiles';
 
 type Props = {
   loading: boolean
@@ -36,6 +37,11 @@ export default function HeaderText({ loading, game }: Props) {
           }
           if (player.bonus === ActionMove.PlantTree) {
 
+          }
+        }
+        if (player.ongoingMove === ActionMove.MoveCircleOfSpirits) {
+          if (player.bonus === ActionMove.TakeVictoryTile) {
+            return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTiles />]} />
           }
         }
       } else {

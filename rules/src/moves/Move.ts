@@ -13,10 +13,11 @@ import TakeProtectiveTree from './TakeProtectiveTree';
 import NextPlayer from './NextPlayer';
 import ReturnGuardianAnimals from './ReturnGuardianAnimals';
 import ValidateMove from './ValidateMove';
+import TakeVictoryTile from './TakeVictoryTile';
 
 /**
  * A "Move" is the combination of all the types of moves that exists in you game
  */
-type Move = DrawCard | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree | EndTurn | TakeProtectiveTree | NextPlayer | ReturnGuardianAnimals | ValidateMove
+type Move = DrawCard | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree | EndTurn | TakeProtectiveTree | NextPlayer | ReturnGuardianAnimals | ValidateMove | TakeVictoryTile
 
 export default Move

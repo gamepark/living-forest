@@ -1,6 +1,7 @@
 import GameState from "../GameState"
 import MoveType from "./MoveType"
 import SpiritOfNature from '../SpiritOfNature';
+import ActionMove from "./ActionMove";
 
 
 type MoveCircleOfSpirits = {
@@ -16,7 +17,7 @@ export function moveCircleOfSpirits(state: GameState, move: MoveCircleOfSpirits)
   const player = state.players.find(p => p.spirit === move.spirit)!
   state.players.forEach(function (player, _index) {
     if (state.circle.position[player.spirit]! > state.circle.position[player.spirit]! && state.circle.position[player.spirit]! < move.coordinate) {
-
+      player.bonus = ActionMove.TakeVictoryTile
     }
   })
   state.circle.position[player.spirit] = move.coordinate
