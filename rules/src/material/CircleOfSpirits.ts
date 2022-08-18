@@ -3,6 +3,7 @@ import Fire from './Fire';
 import GameState from '../GameState';
 import GameView from '../GameView';
 import { LivingForestOptions } from '../LivingForestOptions';
+import ActionMove from '../moves/ActionMove';
 
 type CircleOfSpirits = {
     fire: (Fire | null)[]
@@ -11,7 +12,7 @@ type CircleOfSpirits = {
 
 export default CircleOfSpirits
 
-export const circleOfSpiritsRocks = ['D', 'F', 'S', 'F', 'S', 'F', 'D', 'F', 'S', 'F', 'S', 'F',]
+export const circleOfSpiritsRocks = [ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile, ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile]
 
 export function getTwoPlayersRocks(game: LivingForestOptions): Partial<Record<SpiritOfNature, number>> {
     return {

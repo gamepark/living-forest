@@ -2,6 +2,7 @@ import GameState from "../GameState"
 import MoveType from "./MoveType"
 import SpiritOfNature from '../SpiritOfNature';
 import ActionMove from "./ActionMove";
+import { circleOfSpiritsRocks } from "../material/CircleOfSpirits";
 
 
 type MoveCircleOfSpirits = {
@@ -21,6 +22,11 @@ export function moveCircleOfSpirits(state: GameState, move: MoveCircleOfSpirits)
     }
   })
   state.circle.position[player.spirit] = move.coordinate
+  if (circleOfSpiritsRocks[move.coordinate] === ActionMove.TakeFragmentTile) {
+    player.fragment++
+  } else {
+    player.bonus = circleOfSpiritsRocks[move.coordinate]
+  }
 }
 
 export function moveCircleOfSpiritsMove(spirit: SpiritOfNature, coordinate: number): MoveCircleOfSpirits {

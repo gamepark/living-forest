@@ -33,16 +33,17 @@ export default function HeaderText({ loading, game }: Props) {
 
           }
           if (player.bonus === ActionMove.AttractGuardianAnimal) {
-
+            return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton />]} />
           }
           if (player.bonus === ActionMove.PlantTree) {
 
           }
-        }
-        if (player.ongoingMove === ActionMove.MoveCircleOfSpirits) {
           if (player.bonus === ActionMove.TakeVictoryTile) {
             return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTiles />]} />
           }
+        }
+        if (player.ongoingMove === ActionMove.ExtinguishFire) {
+          return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton />]} />
         }
       } else {
         if (getAnimalsType(player.line) > 2) {
