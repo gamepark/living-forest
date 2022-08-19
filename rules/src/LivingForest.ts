@@ -32,6 +32,7 @@ import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtecti
 import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
 import { returnGuardianAnimals } from './moves/ReturnGuardianAnimals';
 import { getSpiritVictoryTiles } from './material/VictoryTile';
+import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 
 
 /**
@@ -236,12 +237,14 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
             //Ongoing move
             if (player.ongoingMove == null || player.ongoingMove == ActionMove.PlantTree || player.bonus == ActionMove.PlantTree) {
               //Take One protective tree  
-              Object.entries(this.state.dispenser).forEach(function (_tree, index) {
-
-                //Enough resources ?
-                // if (getAnimalsResource(player.line, Resource.Seed) > getProtectiveTreeDetails(index).cost) {               
-                moves.push(takeProtectiveTreeMove(spirit, index))
-                // }
+              Object.entries(this.state.dispenser).forEach(function (tree, index) {
+                //Enough trees ?
+                if (tree != null) {
+                  //Enough resources ?
+                  if (getAnimalsResource(player.line, Resource.Seed) > getProtectiveTreeDetails(index).cost!) {
+                    moves.push(takeProtectiveTreeMove(spirit, index))
+                  }
+                }
               })
               //If player has taken one tree, he can plant it
               if (player.tree !== null) {

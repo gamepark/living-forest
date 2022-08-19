@@ -30,13 +30,13 @@ export default function HeaderText({ loading, game }: Props) {
         }
         if (player.ongoingMove === ActionMove.MoveCircleOfSpirits) {
           if (player.bonus === ActionMove.ExtinguishFire) {
-
+            return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton />]} />
           }
           if (player.bonus === ActionMove.AttractGuardianAnimal) {
             return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton />]} />
           }
           if (player.bonus === ActionMove.PlantTree) {
-
+            return <Trans defaults="You can take a tree and plant it in your forest. <0>Validate<0/>" components={[<ValidateButton />]} />
           }
           if (player.bonus === ActionMove.TakeVictoryTile) {
             return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTiles />]} />
@@ -45,10 +45,14 @@ export default function HeaderText({ loading, game }: Props) {
         if (player.ongoingMove === ActionMove.ExtinguishFire) {
           return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton />]} />
         }
+        if (player.ongoingMove === ActionMove.PlantTree) {
+          return <Trans defaults="You can plant the tree in your forest. <0>Validate<0/>" components={[<ValidateButton />]} />
+        }
       } else {
         if (getAnimalsType(player.line) > 2) {
           return <>{t('You have 1 action.')}</>
         } else {
+          if (player.actionMoves.length == 1) return <>{t('You have 1 action.')}</>
           return <>{t('You have 2 actions.')}</>
         }
       }
