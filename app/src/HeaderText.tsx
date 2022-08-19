@@ -7,8 +7,9 @@ import Phase from '@gamepark/living-forest/Phase'
 import { getPlayer } from '@gamepark/living-forest/PlayerView'
 import { usePlayerId } from '@gamepark/react-client'
 import { Trans, useTranslation } from 'react-i18next'
-import ValidateButton from './board/ValidateButton'
+import ValidateButton from './buttons/ValidateButton'
 import VictoryTiles from './board/VictoryTiles';
+import CancelButton from './buttons/CancelButton'
 
 type Props = {
   loading: boolean
@@ -46,7 +47,7 @@ export default function HeaderText({ loading, game }: Props) {
           return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton />]} />
         }
         if (player.ongoingMove === ActionMove.PlantTree) {
-          return <Trans defaults="You can plant the tree in your forest. <0>Validate<0/>" components={[<ValidateButton />]} />
+          return <Trans defaults="You can plant the tree in your forest. <0>Validate<0/> <0>Cancel<0/>" components={[<ValidateButton />, <CancelButton />]} />
         }
       } else {
         if (getAnimalsType(player.line) > 2) {
