@@ -66,10 +66,7 @@ enum GuardianAnimal {
   Panda,
   Stag,
   Tapir,
-
- // Varan,
-
-
+  Varan,
 }
 
 export const guardianAnimals = Object.values(GuardianAnimal).filter(isEnumValue)

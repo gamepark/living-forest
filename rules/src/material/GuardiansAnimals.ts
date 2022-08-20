@@ -545,3 +545,6 @@ export const Tapir: GuardianAnimalDetails = {
     type: Solitary
 }
 
+export const Varan: GuardianAnimalDetails = {
+    resources: {},
+}

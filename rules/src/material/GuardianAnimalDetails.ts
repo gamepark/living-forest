@@ -1,7 +1,7 @@
 import Resource from "./Resource"
 import CardType from './CardType'
 import GuardianAnimal from "./GuardianAnimal"
-import { Bear, Beetle, Fox, Lynx, GoldFish, Tanuki, Boar, Weasel, Rabbit, Doe, HummingBird, Bee, Monkey, Owl, Hedgehog, Caterpillar, Flamingo, Ram, Wolf, Lemur, Squirrel, Turtle, Coati, Racoon, Beaver, Raven, Bat, Parrot, Meerkat, Horse, Axolotls, Chimpanzee, Toucan, Butterfly, Spider, Hippopotamus, EagleOwl, Woodpecker, Badger, Rooster, Rhinoceros, Goat, Bull, Lizard, Frog, Marmot, Platypus, Crane, Sloth, Koala, Leopard, Eagle, Snake, Cricket, Panther, Gorilla, Bison, Chameleon, Crocodile, Elephant, Dolphin, Dog, Panda, Stag, Tapir } from './GuardiansAnimals';
+import { Bear, Beetle, Fox, Lynx, GoldFish, Tanuki, Boar, Weasel, Rabbit, Doe, HummingBird, Bee, Monkey, Owl, Hedgehog, Caterpillar, Flamingo, Ram, Wolf, Lemur, Squirrel, Turtle, Coati, Racoon, Beaver, Raven, Bat, Parrot, Meerkat, Horse, Axolotls, Chimpanzee, Toucan, Butterfly, Spider, Hippopotamus, EagleOwl, Woodpecker, Badger, Rooster, Rhinoceros, Goat, Bull, Lizard, Frog, Marmot, Platypus, Crane, Sloth, Koala, Leopard, Eagle, Snake, Cricket, Panther, Gorilla, Bison, Chameleon, Crocodile, Elephant, Dolphin, Dog, Panda, Stag, Tapir, Varan } from './GuardiansAnimals';
 
 
 type GuardianAnimalDetails = {
@@ -145,6 +145,8 @@ export function getGuardianAnimalDetails(guardianAnimal: GuardianAnimal): Guardi
             return Stag
         case GuardianAnimal.Tapir:
             return Tapir
+        case GuardianAnimal.Varan:
+            return Varan
     }
 }
 

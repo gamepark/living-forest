@@ -33,6 +33,10 @@ import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
 import { returnGuardianAnimals } from './moves/ReturnGuardianAnimals';
 import { getSpiritVictoryTiles } from './material/VictoryTile';
 import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
+import { takeVictoryTile } from './moves/TakeVictoryTile';
+import { onibiAttackingPlayers, onibiAttackingPlayersMove } from './moves/OnibiAttackingPlayers';
+import { validate } from './moves/ValidateMove';
+import { cancel } from './moves/CancelMove';
 
 
 /**
@@ -314,6 +318,14 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return nextPlayer(this.state, move)
       case MoveType.ReturnGuardianAnimals:
         return returnGuardianAnimals(this.state, move)
+      case MoveType.TakeVictoryTile:
+        return takeVictoryTile(this.state, move)
+      case MoveType.OnibiAttackingPlayers:
+        return onibiAttackingPlayers(this.state, move)
+      case MoveType.ValidateMove:
+        return validate(this.state, move)
+      case MoveType.CancelMove:
+        return cancel(this.state, move)
     }
   }
 
@@ -363,6 +375,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
         return [
           //TODO : onibi attack
+          onibiAttackingPlayersMove(),
 
           //TODO : Onibi attack sacred tree
 

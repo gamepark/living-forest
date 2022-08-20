@@ -116,7 +116,7 @@ const GuardianImage: { [key in GuardianAnimal]: string } = {
   [GuardianAnimal.Panda]: Images.panda,
   [GuardianAnimal.Stag]: Images.stag,
   [GuardianAnimal.Tapir]: Images.tapir,
-  // [GuardianAnimal.Varan]: Images.varan
+  [GuardianAnimal.Varan]: Images.varan
 
 }
 

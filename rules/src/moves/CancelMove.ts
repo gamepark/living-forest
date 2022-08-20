@@ -14,14 +14,14 @@ type CancelMove = {
 export default CancelMove
 
 
-export function validate(state: GameState | GameView, move: CancelMove) {
+export function cancel(state: GameState | GameView, move: CancelMove) {
   const player = getPlayer(state, move.spirit)
   player.ongoingMove = null
   if (player.bonus != null) player.bonus = null
   if (player.tree != null) player.tree = null
 }
 
-export function validateMove(spirit: SpiritOfNature): CancelMove {
+export function cancelMove(spirit: SpiritOfNature): CancelMove {
   return { type: MoveType.CancelMove, spirit }
 }
 
