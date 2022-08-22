@@ -13,12 +13,13 @@ type EndTurn = {
 export default EndTurn
 
 export function endTurnMove(spirit: SpiritOfNature): EndTurn {
-  return {type: MoveType.EndTurn, spirit}
+  return { type: MoveType.EndTurn, spirit }
 }
 
 export function endTurn(state: GameState | GameView, move: EndTurn) {
-const player = getPlayer(state, move.spirit)
+  const player = getPlayer(state, move.spirit)
   player.ready = true
+  player.actionMoves = []
 }
 
 export function isEndTurn(move: Move): move is EndTurn {

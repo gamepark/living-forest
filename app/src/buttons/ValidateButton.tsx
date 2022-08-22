@@ -1,10 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { validateMove } from "@gamepark/living-forest/moves/ValidateMove";
+import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
+import { usePlay } from "@gamepark/react-client";
 import { ButtonHTMLAttributes } from "react";
 
-export default function ValidateButton({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
 
-  return <button css={[button]} {...props} >{children}</button>
+type Props = {
+  spirit: SpiritOfNature
+} & ButtonHTMLAttributes<HTMLButtonElement>
+
+export default function ValidateButton({ children, spirit, ...props }: Props) {
+  const play = usePlay();
+
+
+  return <button css={[button]} {...props} onClick={() => play(validateMove(spirit))}>{children}</button>
 }
 
 const button = css`

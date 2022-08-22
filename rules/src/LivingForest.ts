@@ -32,13 +32,13 @@ import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtecti
 import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
 import { returnGuardianAnimals } from './moves/ReturnGuardianAnimals';
 import { getSpiritVictoryTiles } from './material/VictoryTile';
-import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 import { takeVictoryTile } from './moves/TakeVictoryTile';
 import { onibiAttackingPlayers, onibiAttackingPlayersMove } from './moves/OnibiAttackingPlayers';
-import { validate } from './moves/ValidateMove';
+import { validate, validateMove } from './moves/ValidateMove';
 import { cancel } from './moves/CancelMove';
 import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/OnibiAttackingSacredTree';
 import { discardCard } from './moves/DiscardCard';
+import { getPlayer } from './PlayerView';
 
 
 /**
@@ -191,6 +191,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
                     //Enough resources ?
                     if (getAnimalsResource(player.line, Resource.Sun) > player.attractedGuardianAnimal + getAnimalsResource([card], Resource.Sun)) {
                       moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
+                      moves.push(validateMove(spirit))
                     }
                   }
                 })
@@ -247,9 +248,9 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
                 //Enough trees ?
                 if (tree != null) {
                   //Enough resources ?
-                  if (getAnimalsResource(player.line, Resource.Seed) > getProtectiveTreeDetails(index).cost!) {
-                    moves.push(takeProtectiveTreeMove(spirit, index))
-                  }
+                  // if (getAnimalsResource(player.line, Resource.Seed) > getProtectiveTreeDetails(index).cost!) {
+                  moves.push(takeProtectiveTreeMove(spirit, index))
+                  // }
                 }
               })
               //If player has taken one tree, he can plant it
@@ -351,6 +352,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   getAutomaticMove(): Move[] {
     switch (this.state.phase) {
       case Phase.GuardianAnimals: {
+        console.log("phase 1");
 
         const shufflingPlayer = this.state.players.find(p => p.shuffled)
         if (shufflingPlayer) {
@@ -362,20 +364,25 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return []
       }
       case Phase.Action: {
-        //
-        this.state.players.forEach(function (player, _) {
-          const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
-          if (numberAction > player.actionMoves.length) {
-            return [endTurnMove(player.spirit)]
-          } else {
-            return []
-          }
-        })
+        console.log("phase 2");
+
         if (this.state.players.every(player => player.ready)) {
           return [startPhaseMove(Phase.EndOfTurn)]
         }
 
-        return []
+        const moves: Move[] = []
+
+        // this.state.players.forEach((player, _) => {
+        const player = getPlayer(this.state, this.state.currentPlayer!)
+        const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
+        if (player.ready === false && numberAction === player.actionMoves.length) {
+          console.log("number of actions : " + numberAction);
+          moves.push(endTurnMove(player.spirit))
+          moves.push(nextPlayerMove())
+        }
+        // })
+
+        return moves
       }
       case Phase.EndOfTurn: {
 

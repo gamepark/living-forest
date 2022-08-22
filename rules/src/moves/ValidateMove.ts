@@ -18,12 +18,16 @@ export default ValidateMove
 
 export function validate(state: GameState | GameView, move: ValidateMove) {
   const player = getPlayer(state, move.spirit)
+  if (player.ongoingMove != null) {
+    console.log("in");
+
+    player.actionMoves.push(player.ongoingMove)
+  }
 
   if (player.ongoingMove == ActionMove.ExtinguishFire) {
     player.victory[1] = player.extinguishedFires.length
   }
 
-  player.actionMoves.push(player.ongoingMove!)
   player.ongoingMove = null
   if (player.bonus === ActionMove.AttractGuardianAnimal || player.bonus === ActionMove.ExtinguishFire || player.bonus === ActionMove.PlantTree) player.bonus = null
 

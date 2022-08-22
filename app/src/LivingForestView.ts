@@ -15,6 +15,7 @@ import { endTurn } from '../../rules/src/moves/EndTurn';
 import { takeProtectiveTree } from '@gamepark/living-forest/moves/TakeProtectiveTree'
 import { nextPlayer } from '@gamepark/living-forest/moves/NextPlayer'
 import { returnGuardianAnimals } from '@gamepark/living-forest/moves/ReturnGuardianAnimals'
+import { validate } from '@gamepark/living-forest/moves/ValidateMove'
 
 /**
  * This class is useful when the game has "IncompleteInformation" (or "SecretInformation").
@@ -70,6 +71,8 @@ export default class LivingForestView implements Game<GameLocalView, MoveView | 
         return nextPlayer(this.state, move)
       case MoveType.ReturnGuardianAnimals:
         return returnGuardianAnimals(this.state, move)
+      case MoveType.ValidateMove:
+        return validate(this.state, move)
       case DISPLAY_SCREEN:
         this.state.displayedPlayer = move.spiritOfNature
         break

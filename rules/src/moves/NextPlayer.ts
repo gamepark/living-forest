@@ -9,8 +9,7 @@ type NextPlayer = {
 export default NextPlayer
 
 
-export function nextPlayer(state: GameState | GameView, move: NextPlayer) {
-  console.log(move);
+export function nextPlayer(state: GameState | GameView, _move: NextPlayer) {
 
   const activePlayerIndex = state.players.findIndex(player => player.spirit === state.currentPlayer)
   const nextPlayerIndex = (activePlayerIndex + 1) % state.players.length

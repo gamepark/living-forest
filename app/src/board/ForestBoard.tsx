@@ -18,8 +18,7 @@ type Props = {
 export default function ForestBoard({ game, player }: Props) {
     const play = usePlay()
     const takeFragment = () => { play(takeFragmentTileMove(player.spirit)) }
-    console.log(player.actionMoves);
-
+    console.log(player.actionMoves.length);
     return (
         <div css={forest}>
             <Reserve game={game} spirit={player.spirit} />
