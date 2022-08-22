@@ -1,9 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { ButtonHTMLAttributes } from "react";
 
 export default function ValidateButton({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
 
-    return <button css={[button]} {...props} >{children}</button>
+  return <button css={[button]} {...props} >{children}</button>
 }
 
 const button = css`

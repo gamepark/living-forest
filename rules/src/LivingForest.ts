@@ -38,6 +38,7 @@ import { onibiAttackingPlayers, onibiAttackingPlayersMove } from './moves/OnibiA
 import { validate } from './moves/ValidateMove';
 import { cancel } from './moves/CancelMove';
 import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/OnibiAttackingSacredTree';
+import { discardCard } from './moves/DiscardCard';
 
 
 /**
@@ -329,6 +330,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return cancel(this.state, move)
       case MoveType.OnibiAttackingSacredTree:
         return onibiAttackingSacredTree(this.state, move)
+      case MoveType.DiscardCard:
+        return discardCard(this.state, move)
     }
   }
 

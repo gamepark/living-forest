@@ -16,7 +16,7 @@ type Props = {
     player: PlayerView
 }
 
-function PlayerBoard({ player }: Props) {
+function PlayerBoard({ player, game }: Props) {
     const play = usePlay()
     const draw = () => { play(drawCardMove(player.spirit), { delayed: true }) }
 
@@ -25,7 +25,7 @@ function PlayerBoard({ player }: Props) {
             <PlayerVictories player={player} />
             <PlayerDiscard player={player} discard={player.discard.length} />
             <PlayerHelpLine line={player.line} />
-            <PlayerDrawStack spirit={player.spirit} stack={player.deck} onClick={draw} />
+            <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} />
             <PlayerForest player={player} />
         </>
     );
