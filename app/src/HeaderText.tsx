@@ -54,7 +54,7 @@ export default function HeaderText({ loading, game }: Props) {
           if (getAnimalsType(player.line) > 2) {
             return <>{t('You have 1 action.')}</>
           } else {
-            if (player.actionMoves.length == 1) return <>{t('You have 1 action.')}</>
+            if (player.actionMoves.length == 1) return <>{t('You have 1 action left.')}</>
             return <>{t('You have 2 actions.')}</>
           }
         }

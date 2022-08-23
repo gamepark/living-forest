@@ -16,4 +16,4 @@ export type ReserveView = Omit<Reserve, 'stacks'> & {
 
 export const startingReserveStack1 = guardianAnimals.slice(14, 37)
 export const startingReserveStack2 = guardianAnimals.slice(37, 53)
-export const startingReserveStack3 =  guardianAnimals.slice(53, 70)
+export const startingReserveStack3 = guardianAnimals.slice(53, 65)

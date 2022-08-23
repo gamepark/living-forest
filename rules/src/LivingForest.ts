@@ -183,6 +183,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
             //Ongoing move
             if (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal) {
+              if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
               this.state.reserve.rows.forEach(function (row, index) {
                 row.forEach(function (card, indexRow) {
 
@@ -192,8 +193,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
                     if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
                       moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
-                    } else {
-                      if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
                     }
                   }
                 })
@@ -209,10 +208,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           if (!player.actionMoves.includes(ActionMove.ExtinguishFire)) {
             //Ongoing move
             if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire) {
+              if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal) moves.push(validateMove(player.spirit))
               this.state.circle.fire.forEach(function (fire, index) {
                 if (fire != null) {
                   //Enough drops ?
-                  if (getAnimalsResource(player.line, Resource.Drop) > player.extinguishedFiresTotal + fire + 1) {
+                  if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
                     moves.push(extinguishFireMove(spirit, index))
                   }
                 }
