@@ -4,7 +4,7 @@ import GameState from './GameState';
 import GameView from './GameView';
 import { isGameOptions, LivingForestOptions } from './LivingForestOptions';
 import { startingGuardianAnimals } from './material/GuardianAnimal';
-import { getAnimalsResource, getAnimalsType } from './material/GuardianAnimalDetails';
+import { getAnimalsResource, getAnimalsType, getGuardianAnimalDetails } from './material/GuardianAnimalDetails';
 import { dispenserTwoPlayers } from './material/ProtectiveTree';
 import Resource from './material/Resource';
 import ActionMove from './moves/ActionMove';
@@ -189,9 +189,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
                   //Card is drawn
                   if (card != null) {
                     //Enough resources ?
-                    if (getAnimalsResource(player.line, Resource.Sun) > player.attractedGuardianAnimal + getAnimalsResource([card], Resource.Sun)) {
+
+                    if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
                       moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
-                      moves.push(validateMove(spirit))
+                    } else {
+                      if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
                     }
                   }
                 })

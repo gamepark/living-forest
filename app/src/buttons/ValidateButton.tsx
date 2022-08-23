@@ -13,7 +13,6 @@ type Props = {
 export default function ValidateButton({ children, spirit, ...props }: Props) {
   const play = usePlay();
 
-
   return <button css={[button]} {...props} onClick={() => play(validateMove(spirit))}>{children}</button>
 }
 

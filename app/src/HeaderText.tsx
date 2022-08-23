@@ -35,7 +35,7 @@ export default function HeaderText({ loading, game }: Props) {
               return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
             }
             if (player.bonus === ActionMove.AttractGuardianAnimal) {
-              return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/><0>Cancel<0/>" components={[<ValidateButton spirit={player.spirit} />, <CancelButton />]} />
+              return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
             }
             if (player.bonus === ActionMove.PlantTree) {
               return <Trans defaults="You can take a tree and plant it in your forest. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
@@ -48,7 +48,7 @@ export default function HeaderText({ loading, game }: Props) {
             return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
           }
           if (player.ongoingMove === ActionMove.PlantTree) {
-            return <Trans defaults="You can plant the tree in your forest. <0>Validate<0/> <0>Cancel<0/>" components={[<ValidateButton spirit={player.spirit} />, <CancelButton />]} />
+            return <Trans defaults="You can plant the tree in your forest. <0>Validate<0/> <0>Cancel<0/>" components={[<ValidateButton spirit={player.spirit} />, <CancelButton spirit={player.spirit} />]} />
           }
         } else {
           if (getAnimalsType(player.line) > 2) {

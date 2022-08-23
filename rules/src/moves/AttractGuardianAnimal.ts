@@ -6,8 +6,7 @@ import GuardianAnimal from '../material/GuardianAnimal';
 import GameView from '../GameView';
 import { getPlayer, isPlayerView } from '../PlayerView';
 import Coordinates from '../material/Coordinates';
-import { getAnimalsResource } from '../material/GuardianAnimalDetails';
-import Resource from '../material/Resource';
+import { getGuardianAnimalDetails } from '../material/GuardianAnimalDetails';
 import ActionMove from './ActionMove';
 
 
@@ -24,7 +23,7 @@ export default AttractGuardianAnimal
 export function attractGuardianAnimal(state: GameState | GameView, move: AttractGuardianAnimal) {
   const player = getPlayer(state, move.spirit)
 
-  player.attractedGuardianAnimal += getAnimalsResource([move.guardianAnimal], Resource.Sun)
+  player.attractedGuardianAnimal += getGuardianAnimalDetails(move.guardianAnimal).cost!
 
   if (isPlayerView(player)) {
     player.deck++

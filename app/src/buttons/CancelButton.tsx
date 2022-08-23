@@ -1,10 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { cancelMove } from "@gamepark/living-forest/moves/CancelMove";
+import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
+import { usePlay } from "@gamepark/react-client";
 import { ButtonHTMLAttributes } from "react";
 
-export default function CancelButton({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
+type Props = {
+  spirit: SpiritOfNature
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
-  return <button css={[button]} {...props} >{children}</button>
+
+export default function CancelButton({ children, spirit, ...props }: Props) {
+  const play = usePlay();
+
+  return <button css={[button]} onClick={() => play(cancelMove(spirit))} {...props} >{children}</button>
 }
 
 const button = css`
