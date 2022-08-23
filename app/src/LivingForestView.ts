@@ -16,6 +16,7 @@ import { takeProtectiveTree } from '@gamepark/living-forest/moves/TakeProtective
 import { nextPlayer } from '@gamepark/living-forest/moves/NextPlayer'
 import { returnGuardianAnimals } from '@gamepark/living-forest/moves/ReturnGuardianAnimals'
 import { validate } from '@gamepark/living-forest/moves/ValidateMove'
+import { moveCircleOfSpirits } from '@gamepark/living-forest/moves/MoveCircleOfSpirits'
 
 /**
  * This class is useful when the game has "IncompleteInformation" (or "SecretInformation").
@@ -73,6 +74,8 @@ export default class LivingForestView implements Game<GameLocalView, MoveView | 
         return returnGuardianAnimals(this.state, move)
       case MoveType.ValidateMove:
         return validate(this.state, move)
+      case MoveType.MoveCircleOfSpirits:
+        return moveCircleOfSpirits(this.state, move)
       case DISPLAY_SCREEN:
         this.state.displayedPlayer = move.spiritOfNature
         break

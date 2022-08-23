@@ -232,7 +232,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
               if (player.ongoingMove == null || player.ongoingMove == ActionMove.MoveCircleOfSpirits) {
                 //Rocks available
                 if (index > playerPosition! && index <= playerPositionLimit)
-                  moves.push(moveCircleOfSpiritsMove(index, index))
+                  console.log("inmovecircle");
+                moves.push(moveCircleOfSpiritsMove(player.spirit, index))
               }
             }
           })
@@ -378,7 +379,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         const player = getPlayer(this.state, this.state.currentPlayer!)
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
         if (player.ready === false && numberAction === player.actionMoves.length) {
-          console.log("number of actions : " + numberAction);
           moves.push(endTurnMove(player.spirit))
           moves.push(nextPlayerMove())
         }
@@ -387,7 +387,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return moves
       }
       case Phase.EndOfTurn: {
-
+        console.log("phase 3");
         return [
           //TODO : onibi attack
           onibiAttackingPlayersMove(),
