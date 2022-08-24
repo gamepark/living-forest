@@ -24,6 +24,7 @@ export function plantTree(state: GameState | GameView, move: PlantTree) {
   player.tree = null
   player.actionMoves.push(ActionMove.PlantTree)
   player.ongoingMove = null
+  player.victory[1]++
 }
 
 export function plantTreeMove(spirit: SpiritOfNature, coordinates: Coordinates): PlantTree {

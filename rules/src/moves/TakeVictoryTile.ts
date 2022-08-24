@@ -19,7 +19,7 @@ export function takeVictoryTile(state: GameState, move: TakeVictoryTile) {
   const playerJumped = state.players.find(p => p.spirit === move.spiritJumped)!
   player.victoryTiles.push(...playerJumped.victoryTiles.splice(move.victory, 1))
   player.bonus = null
-
+  playerJumped.victory[move.victory - 1] -= 1
 }
 
 export function takeVictoryTileMove(spirit: SpiritOfNature, spiritJumped: SpiritOfNature, victory: VictoryTile): TakeVictoryTile {

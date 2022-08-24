@@ -3,7 +3,8 @@ import GameView from '../GameView'
 import GuardianAnimal from '../material/GuardianAnimal'
 import SpiritOfNature from '../SpiritOfNature'
 import MoveType from './MoveType'
-import { getAnimalsType } from '../material/GuardianAnimalDetails';
+import { getAnimalsResource, getAnimalsType } from '../material/GuardianAnimalDetails';
+import Resource from '../material/Resource'
 
 type DrawCard = {
   type: MoveType.DrawCard
@@ -22,22 +23,27 @@ export function isDrawCardView(move: DrawCard | DrawCardView): move is DrawCardV
 
 export function drawCard(state: GameState, move: DrawCard) {
   const player = state.players.find(p => p.spirit === move.spirit)!
-  player.line.push(player.deck.shift()!)
-  if(getAnimalsType(player.line)==3){
+  const card = player.deck.shift()!
+  player.line.push(card)
+  if (getAnimalsType(player.line) == 3) {
     player.ready = true
   }
 
+  if (getAnimalsResource([card], Resource.SacredFlower) != null) player.victory[2] += getAnimalsResource([card], Resource.SacredFlower)
 }
 
 export function drawCardMove(spirit: SpiritOfNature): DrawCard {
-  return {type: MoveType.DrawCard, spirit}
+  return { type: MoveType.DrawCard, spirit }
 }
 
 export function drawCardInView(state: GameView, move: DrawCardView) {
   const player = state.players.find(p => p.spirit === move.spirit)!
   player.line.push(move.card)
   player.deck--
-  if(getAnimalsType(player.line)==3){
+  if (getAnimalsType(player.line) == 3) {
     player.ready = true
   }
+
+  if (getAnimalsResource([move.card], Resource.SacredFlower) != null) player.victory[2] += getAnimalsResource([move.card], Resource.SacredFlower)
+
 }

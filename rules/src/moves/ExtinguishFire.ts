@@ -22,6 +22,7 @@ export function extinguishFire(state: GameState | GameView, move: ExtinguishFire
   if (fire != null) player.extinguishedFiresTotal += fire + 1
   player.extinguishedFires.push(...state.circle.fire.splice(move.fire, 1))
   player.ongoingMove = ActionMove.ExtinguishFire
+  player.victory[0]++
 }
 
 export function extinguishFireMove(spirit: SpiritOfNature, fire: number): ExtinguishFire {
