@@ -8,7 +8,7 @@ import { getPlayer } from '@gamepark/living-forest/PlayerView'
 import { usePlayerId } from '@gamepark/react-client'
 import { Trans, useTranslation } from 'react-i18next'
 import ValidateButton from './buttons/ValidateButton'
-import VictoryTiles from './board/VictoryTiles';
+import VictoryTile from './material/VictoryTile';
 
 type Props = {
   loading: boolean
@@ -40,7 +40,7 @@ export default function HeaderText({ loading, game }: Props) {
               return <Trans defaults="You can take a tree and plant it in your forest." />
             }
             if (player.bonus === ActionMove.TakeVictoryTile) {
-              return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTiles />]} />
+              return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTile />]} />
             }
           }
           if (player.ongoingMove === ActionMove.ExtinguishFire) {
@@ -53,7 +53,7 @@ export default function HeaderText({ loading, game }: Props) {
           if (getAnimalsType(player.line) > 2) {
             return <>{t('You have 1 action.')}</>
           } else {
-            if (player.actionMoves.length == 1) return <>{t('You have 1 action left.')}</>
+            if (player.actionMoves.length === 1) return <>{t('You have 1 action left.')}</>
             return <>{t('You have 2 actions.')}</>
           }
         }

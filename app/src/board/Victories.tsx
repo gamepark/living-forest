@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Images from "../images/Images";
 import { victoryLeft, victoryTop } from "../styles";
@@ -13,7 +14,7 @@ export default function Victories({ victory }: Props) {
         <>
             {victory.map((resource, index) => {
 
-                return <div key={index} css={victoryCss(index)}>
+                return <div key={index} css={victoryCss(index + 1)}>
                     {resource}
                 </div>
 
