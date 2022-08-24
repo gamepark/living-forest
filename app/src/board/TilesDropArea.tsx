@@ -23,7 +23,7 @@ export default function TilesDropArea({ forest, spirit }: Props) {
                 forest.map((row, indexRow) => {
 
                     return row.map((protectiveTree, index) => {
-                        if (protectiveTree != null && protectiveTree != 0) return <Tree protectiveTree={protectiveTree} css={treePosition(index, indexRow)} />
+                        if (protectiveTree != null && protectiveTree != 0) return <Tree key={index + indexRow} protectiveTree={protectiveTree} css={treePosition(index, indexRow)} />
                         if (protectiveTree === null) return <div key={index + indexRow} css={tilePosition(index, indexRow)} onClick={() => { play(plantTreeMove(spirit, { x: indexRow, y: index })) }}></div>
                         return
                     })

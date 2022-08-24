@@ -22,7 +22,12 @@ export default function HeaderText({ loading, game }: Props) {
   if (loading) return <>{t('Game loading...')}</>
   if (game != null) {
     const player = getPlayer(game, playerId)
-    if (game?.phase === Phase.GuardianAnimals) return <>{t('Form the Guardian Animal Help Line. Draw a card.')}</>
+    if (game?.phase === Phase.GuardianAnimals)
+      if (player.ready != true) {
+        return <>{t('Form the Guardian Animal Help Line. Draw a card.')}</>
+      } else {
+        return <>{t('Another player is forming his Guardian Animal Help Line.')}</>
+      }
     if (game?.phase === Phase.Action) {
       if (game.currentPlayer === player.spirit) {
         if (player.ongoingMove != null) {
