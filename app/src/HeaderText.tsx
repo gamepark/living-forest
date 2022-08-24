@@ -9,7 +9,6 @@ import { usePlayerId } from '@gamepark/react-client'
 import { Trans, useTranslation } from 'react-i18next'
 import ValidateButton from './buttons/ValidateButton'
 import VictoryTiles from './board/VictoryTiles';
-import CancelButton from './buttons/CancelButton'
 
 type Props = {
   loading: boolean
@@ -38,7 +37,7 @@ export default function HeaderText({ loading, game }: Props) {
               return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
             }
             if (player.bonus === ActionMove.PlantTree) {
-              return <Trans defaults="You can take a tree and plant it in your forest. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
+              return <Trans defaults="You can take a tree and plant it in your forest." />
             }
             if (player.bonus === ActionMove.TakeVictoryTile) {
               return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTiles />]} />
@@ -48,7 +47,7 @@ export default function HeaderText({ loading, game }: Props) {
             return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
           }
           if (player.ongoingMove === ActionMove.PlantTree) {
-            return <Trans defaults="You can plant the tree in your forest. <0>Validate<0/> <0>Cancel<0/>" components={[<ValidateButton spirit={player.spirit} />, <CancelButton spirit={player.spirit} />]} />
+            return <Trans defaults="You can plant the tree in your forest." />
           }
         } else {
           if (getAnimalsType(player.line) > 2) {
@@ -59,7 +58,7 @@ export default function HeaderText({ loading, game }: Props) {
           }
         }
       } else {
-        return <>{t('Other players are playing their turn.')}</>
+        return <>{t('Another player is playing his turn.')}</>
       }
     }
   }

@@ -18,7 +18,7 @@ export default function PlayerForest({ player }: Props) {
             <div css={spiritBackgroundImage1(player.spirit)}></div>
 
             <div css={backgroundCases(player.spirit)}>
-                <TilesDropArea />
+                <TilesDropArea forest={player.forest} spirit={player.spirit} />
             </div>
             <div css={spiritBackgroundImage2(player.spirit)}></div>
         </>

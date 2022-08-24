@@ -13,7 +13,7 @@ export default interface PlayerState {
   deck: GuardianAnimal[]
   line: GuardianAnimal[]
   discard: GuardianAnimal[]
-  forest: (ProtectiveTree | null)[][]
+  forest: (ProtectiveTree | number | null)[][]
   victory: number[]
   shuffled?: boolean
   fragment: number

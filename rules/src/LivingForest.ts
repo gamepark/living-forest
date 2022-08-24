@@ -16,7 +16,7 @@ import Move from './moves/Move';
 import { moveCircleOfSpirits, moveCircleOfSpiritsMove } from './moves/MoveCircleOfSpirits';
 import MoveType from './moves/MoveType';
 import MoveView from './moves/MoveView';
-import { plantTree, plantTreeMove } from './moves/PlantTree';
+import { placementIsValid, plantTree, plantTreeMove } from './moves/PlantTree';
 import { shuffleDiscard, shuffleDiscardMove } from './moves/ShuffleDiscard';
 import { startPhase, startPhaseMove } from './moves/StartPhase';
 import { takeFragmentTile, takeFragmentTileMove } from './moves/TakeFragmentTile';
@@ -39,6 +39,7 @@ import { cancel } from './moves/CancelMove';
 import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/OnibiAttackingSacredTree';
 import { discardCard } from './moves/DiscardCard';
 import { getPlayer } from './PlayerView';
+import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 
 
 /**
@@ -75,7 +76,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           deck: shuffle(startingGuardianAnimals),
           line: [],
           discard: [],
-          forest: [[null, null, null, null, null], [null, null, null, null, null], [null, null, null, null, null]],
+          forest: [[null, null, null, null, null], [null, null, 0, null, null], [null, null, null, null, null]],
           victory: [1, 1, 1],
           fragment: 0,
           attractedGuardianAnimal: 0,
@@ -232,8 +233,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
               if (player.ongoingMove == null || player.ongoingMove == ActionMove.MoveCircleOfSpirits) {
                 //Rocks available
                 if (index > playerPosition! && index <= playerPositionLimit)
-                  console.log("inmovecircle");
-                moves.push(moveCircleOfSpiritsMove(player.spirit, index))
+                  moves.push(moveCircleOfSpiritsMove(player.spirit, index))
               }
             }
           })
@@ -251,17 +251,20 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
                 //Enough trees ?
                 if (tree != null) {
                   //Enough resources ?
-                  // if (getAnimalsResource(player.line, Resource.Seed) > getProtectiveTreeDetails(index).cost!) {
-                  moves.push(takeProtectiveTreeMove(spirit, index))
-                  // }
+                  if (getAnimalsResource(player.line, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost!) {
+                    moves.push(takeProtectiveTreeMove(spirit, index + 1))
+                  }
                 }
               })
               //If player has taken one tree, he can plant it
-              if (player.tree !== null) {
-                player.forest.forEach(function (row, indexRow) {
+              if (player.tree != null) {
+                player.forest.map(function (row, indexRow) {
                   row.forEach(function (_, indexCol) {
-
-                    moves.push(plantTreeMove(player.spirit, { x: indexRow, y: indexCol }))
+                    //Placement is valid ?
+                    if (placementIsValid(player.forest, { x: indexRow, y: indexCol })) {
+                      console.log('inValid');
+                      moves.push(plantTreeMove(player.spirit, { x: indexRow, y: indexCol }))
+                    }
                   })
                 })
               }

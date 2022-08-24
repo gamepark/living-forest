@@ -70,3 +70,7 @@ export const firstPlayerHeight = 5
 export const firstPlayerWith = firstPlayerHeight * 89 / 100
 export const fireTotalTop = 3.2
 export const fireTotalLeft = 49
+export const forestTileHeight = 15
+export const forestTileWidth = forestTileHeight
+export const forestTileTop = 10
+export const forestTileLeft = 14
