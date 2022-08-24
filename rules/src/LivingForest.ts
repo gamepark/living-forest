@@ -30,7 +30,7 @@ import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
 import { endTurn, endTurnMove } from './moves/EndTurn';
 import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
 import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
-import { returnGuardianAnimals } from './moves/ReturnGuardianAnimals';
+import { returnGuardianAnimals, returnGuardianAnimalsMove } from './moves/ReturnGuardianAnimals';
 import { getSpiritVictoryTiles } from './material/VictoryTile';
 import { takeVictoryTile } from './moves/TakeVictoryTile';
 import { onibiAttackingPlayers, onibiAttackingPlayersMove } from './moves/OnibiAttackingPlayers';
@@ -40,6 +40,7 @@ import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/
 import { discardCard } from './moves/DiscardCard';
 import { getPlayer } from './PlayerView';
 import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
+import { givingSacredTreeMove } from './moves/GivingSacredTree';
 
 
 /**
@@ -96,7 +97,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         },
         dispenser: dispenserTwoPlayers,
         circle: {
-          fire: [1, null, null, null, null, null, null],
+          fire: [1],
           position: getTwoPlayersRocks(arg)
         },
       })
@@ -207,17 +208,20 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
           //Move already played
           if (!player.actionMoves.includes(ActionMove.ExtinguishFire)) {
-            //Ongoing move
-            if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire) {
-              if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal) moves.push(validateMove(player.spirit))
-              this.state.circle.fire.forEach(function (fire, index) {
-                if (fire != null) {
-                  //Enough drops ?
-                  if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
-                    moves.push(extinguishFireMove(spirit, index))
+            if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal) moves.push(validateMove(player.spirit))
+            //Still fires ?
+            if (this.state.circle.fire.length > 0) {
+              //Ongoing move
+              if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire) {
+                this.state.circle.fire.forEach(function (fire, index) {
+                  if (fire != null) {
+                    //Enough drops ?
+                    if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
+                      moves.push(extinguishFireMove(spirit, index))
+                    }
                   }
-                }
-              })
+                })
+              }
             }
           }
           /********************************************************
@@ -262,7 +266,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
                   row.forEach(function (_, indexCol) {
                     //Placement is valid ?
                     if (placementIsValid(player.forest, { x: indexRow, y: indexCol })) {
-                      console.log('inValid');
                       moves.push(plantTreeMove(player.spirit, { x: indexRow, y: indexCol }))
                     }
                   })
@@ -392,6 +395,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       case Phase.EndOfTurn: {
         console.log("phase 3");
         return [
+
           //TODO : onibi attack
           onibiAttackingPlayersMove(),
 
@@ -400,16 +404,14 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
           //TODO : arrival new guardian animal
           ...this.state.reserve.rows.flatMap((row, indexRow) =>
-            Array.from(row.entries()).filter(entry => entry[1] != null).map(entry => fillReserveMove(indexRow, entry[0]))
+            Array.from(row.entries()).filter(entry => entry[1] === null).map(entry => fillReserveMove(indexRow, entry[0]))
           ),
 
           //TODO : player discard animals
-          // this.state.players.forEach(function (player, _) {
-          //   returnGuardianAnimalsMove(player.spirit)
-          //  }),
+          returnGuardianAnimalsMove(),
 
           //TODO : change first player
-          nextPlayerMove(),
+          givingSacredTreeMove(),
 
           //TODO : change state phase
           startPhaseMove(Phase.GuardianAnimals)

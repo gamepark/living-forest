@@ -18,6 +18,9 @@ import { returnGuardianAnimals } from '@gamepark/living-forest/moves/ReturnGuard
 import { validate } from '@gamepark/living-forest/moves/ValidateMove'
 import { moveCircleOfSpirits } from '@gamepark/living-forest/moves/MoveCircleOfSpirits'
 import { plantTree } from '../../rules/src/moves/PlantTree';
+import { onibiAttackingPlayers } from '../../rules/src/moves/OnibiAttackingPlayers';
+import { onibiAttackingSacredTree } from '../../rules/src/moves/OnibiAttackingSacredTree';
+import { givingSacredTree } from '@gamepark/living-forest/moves/GivingSacredTree'
 
 /**
  * This class is useful when the game has "IncompleteInformation" (or "SecretInformation").
@@ -79,6 +82,12 @@ export default class LivingForestView implements Game<GameLocalView, MoveView | 
         return moveCircleOfSpirits(this.state, move)
       case MoveType.PlantTree:
         return plantTree(this.state, move)
+      case MoveType.OnibiAttackingPlayers:
+        return onibiAttackingPlayers(this.state, move)
+      case MoveType.OnibiAttackingSacredTree:
+        return onibiAttackingSacredTree(this.state, move)
+      case MoveType.GivingSacredTree:
+        return givingSacredTree(this.state, move)
       case DISPLAY_SCREEN:
         this.state.displayedPlayer = move.spiritOfNature
         break

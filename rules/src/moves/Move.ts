@@ -18,10 +18,11 @@ import CancelMove from './CancelMove';
 import OnibiAttackingPlayers from './OnibiAttackingPlayers';
 import OnibiAttackingSacredTree from './OnibiAttackingSacredTree';
 import DiscardCard from './DiscardCard';
+import GivingSacredTree from './GivingSacredTree';
 
 /**
  * A "Move" is the combination of all the types of moves that exists in you game
  */
-type Move = DrawCard | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree | EndTurn | TakeProtectiveTree | NextPlayer | ReturnGuardianAnimals | ValidateMove | TakeVictoryTile | CancelMove | OnibiAttackingPlayers | OnibiAttackingSacredTree | DiscardCard
+type Move = DrawCard | ShuffleDiscard | FillReserve | TellYouAreReady | StartPhase | TakeFragmentTile | AttractGuardianAnimal | ExtinguishFire | MoveCircleOfSpirits | PlantTree | EndTurn | TakeProtectiveTree | NextPlayer | ReturnGuardianAnimals | ValidateMove | TakeVictoryTile | CancelMove | OnibiAttackingPlayers | OnibiAttackingSacredTree | DiscardCard | GivingSacredTree
 
 export default Move

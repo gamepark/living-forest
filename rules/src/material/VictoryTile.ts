@@ -1,5 +1,6 @@
 
 import SpiritOfNature from "../SpiritOfNature"
+import Victory from './Victory';
 
 enum VictoryTile {
     FireSpring = 1, TreeSpring, SacredFlowerSpring, FireSummer, TreeSummer, SacredFlowerSummer, FireAutumn, TreeAutumn, SacredFlowerAutumn, FireWinter, TreeWinter, SacredFlowerWinter
@@ -21,4 +22,14 @@ export function getSpiritVictoryTiles(spirit: SpiritOfNature): VictoryTile[] {
         return [VictoryTile.FireWinter, VictoryTile.SacredFlowerWinter, VictoryTile.TreeWinter]
     }
     return []
+}
+
+export function getVictoryTilesNumber(victoryTiles: VictoryTile[], victory: Victory) {
+    var number = 0
+    victoryTiles.forEach((victoryTile, _) => {
+        if (victory === Victory.SacredFlower) { if (victoryTile % 3 == 0) number++ }
+        if (victory === Victory.Fire) { if (victoryTile % 3 == 1) number++ }
+        if (victory === Victory.Tree) { if (victoryTile % 3 == 2) number++ }
+    })
+    return number
 }

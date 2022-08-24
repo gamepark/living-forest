@@ -4,7 +4,14 @@ import ProtectiveTreeDetails from './ProtectiveTreeDetails';
 const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
 
 export const Tree3A: ProtectiveTreeDetails = {
-    resource: { [Sun]: 1 },
+    resource: {
+        [Sun]: 1,
+        [Drop]: 0,
+        [Seed]: 0,
+        [Wind]: 0,
+        [SacredFlower]: 0,
+    },
+
     cost: 3
 }
 

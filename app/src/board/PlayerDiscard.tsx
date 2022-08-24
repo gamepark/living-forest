@@ -16,7 +16,7 @@ export default function PlayerDiscard({ discard }: Props) {
         <>
             {
                 [...Array(discard)].map((_, index) => {
-                    return <Card css={cardPosition(index)} />
+                    return <Card key={index} css={cardPosition(index)} />
                 })
             }
         </>

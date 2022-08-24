@@ -37,3 +37,17 @@ export function getProtectiveTreeDetails(protectiveTree: ProtectiveTree): Protec
             return Tree11
     }
 }
+
+export function getTreesResources(forest: (ProtectiveTree | number | null)[][], resource: Resource): number {
+    var total = 0
+    forest.map(function (row, _indexRow) {
+        row.forEach(function (tree, _indexCol) {
+            if (tree !== null && tree !== 0) {
+                if (typeof getProtectiveTreeDetails(tree!).resource[resource] !== 'undefined') {
+                    total += getProtectiveTreeDetails(tree!).resource[resource]!
+                }
+            }
+        })
+    })
+    return total
+}

@@ -14,7 +14,7 @@ export function onibiAttackingSacredTree(state: GameState | GameView, _move: Oni
   state.reserve.rows.forEach(function (row, index) {
     row.forEach(function (card, _indexRow) {
       if (card === null) {
-        state.circle.fire.push(index + 1)
+        if (state.circle.fire.length <= 7) state.circle.fire.push(index + 1)
       }
     })
   })

@@ -27,7 +27,7 @@ export default function DiscardButton({ fragment, spirit, phase, ready }: Props)
 const button = css`
   position: absolute;
   z-index: 100;
-  left: 20em;
+  left: 13em;
   top: 16em;
   font-size: 3.2em;
   font-weight: lighter;

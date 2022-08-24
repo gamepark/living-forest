@@ -1,25 +1,27 @@
 import GameState from '../GameState'
 import GameView from '../GameView'
-import SpiritOfNature from '../SpiritOfNature'
 import MoveType from './MoveType'
-import { getPlayer } from '../PlayerView';
+import { getVictoryTilesNumber } from '../material/VictoryTile';
 
 type ReturnGuardianAnimals = {
   type: MoveType.ReturnGuardianAnimals
-  spirit: SpiritOfNature
 }
 
 export default ReturnGuardianAnimals
 
 
-export function returnGuardianAnimals(state: GameState | GameView, move: ReturnGuardianAnimals) {
-  const player = getPlayer(state, move.spirit)
-    while(player.line != []){
+export function returnGuardianAnimals(state: GameState | GameView, _move: ReturnGuardianAnimals) {
+  state.players.forEach(function (player, _) {
+    while (player.line.length > 0) {
       player.discard.push(player.line.shift()!)
     }
+    player.victory.forEach((victory, index) => {
+      player.victory[index] = getVictoryTilesNumber(player.victoryTiles, victory)
+    })
+  })
 }
 
-export function returnGuardianAnimalsMove(spirit: SpiritOfNature): ReturnGuardianAnimals {
-  return {type: MoveType.ReturnGuardianAnimals, spirit}
+export function returnGuardianAnimalsMove(): ReturnGuardianAnimals {
+  return { type: MoveType.ReturnGuardianAnimals }
 }
 

@@ -23,7 +23,8 @@ enum MoveType {
   CancelMove,
   OnibiAttackingPlayers,
   OnibiAttackingSacredTree,
-  DiscardCard
+  DiscardCard,
+  GivingSacredTree
 }
 
 export default MoveType

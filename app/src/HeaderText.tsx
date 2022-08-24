@@ -23,7 +23,7 @@ export default function HeaderText({ loading, game }: Props) {
   if (game != null) {
     const player = getPlayer(game, playerId)
     if (game?.phase === Phase.GuardianAnimals)
-      if (player.ready != true) {
+      if (player.ready !== true) {
         return <>{t('Form the Guardian Animal Help Line. Draw a card.')}</>
       } else {
         return <>{t('Another player is forming his Guardian Animal Help Line.')}</>

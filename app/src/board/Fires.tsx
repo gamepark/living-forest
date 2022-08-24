@@ -32,7 +32,9 @@ function firePosition(index: number, indexStack: number) {
     return css`
     height:${fireHeight}em;
     width:${fireWidth}em;
-    top:${fireTop - index * 0.1 + indexStack * 23}em;
+    top:${fireTop - index * 0.1 + indexStack * 2}em;
     left:${fireLeft - index * 0.1}em;
+    transform-origin: center 12em;
+    transform: rotate(${index * 30 + 14}deg);
     `
 }

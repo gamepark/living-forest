@@ -9,6 +9,8 @@ import Images from '../images/Images'
 import Resources from './Resources';
 import Victories from './Victories'
 import PanelGame from './PanelGame'
+import { getVictoryTilesNumber } from '@gamepark/living-forest/material/VictoryTile'
+import Victory from '@gamepark/living-forest/material/Victory'
 
 
 
@@ -29,13 +31,13 @@ export default function Panels({ game }: Props) {
             return <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
 
               <div css={firstPlayer}></div>
-              <Resources line={player.line} />
+              <Resources line={player.line} forest={player.forest} flowersTile={getVictoryTilesNumber(player.victoryTiles, Victory.SacredFlower)} />
               <Victories victory={player.victory} />
             </div>
           } else {
             return <div key={player.spirit} css={playerPanel(player.spirit, index, game.players.findIndex(player => player.spirit === playerId), game.players.length)} onClick={() => play(displayScreenMove(player.spirit), { local: true })}>
 
-              <Resources line={player.line} />
+              <Resources line={player.line} forest={player.forest} flowersTile={getVictoryTilesNumber(player.victoryTiles, Victory.SacredFlower)} />
               <Victories victory={player.victory} />
             </div>
           }
