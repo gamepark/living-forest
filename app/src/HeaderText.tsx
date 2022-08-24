@@ -41,9 +41,6 @@ export default function HeaderText({ loading, game }: Props) {
             if (player.bonus === ActionMove.AttractGuardianAnimal) {
               return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
             }
-            if (player.bonus === ActionMove.PlantTree) {
-              return <Trans defaults="You can take a tree and plant it in your forest." />
-            }
             if (player.bonus === ActionMove.TakeVictoryTile) {
               return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTile />]} />
             }

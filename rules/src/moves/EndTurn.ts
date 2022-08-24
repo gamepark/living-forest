@@ -20,6 +20,7 @@ export function endTurn(state: GameState | GameView, move: EndTurn) {
   const player = getPlayer(state, move.spirit)
   player.ready = true
   player.actionMoves = []
+  player.bonus = null
 }
 
 export function isEndTurn(move: Move): move is EndTurn {
