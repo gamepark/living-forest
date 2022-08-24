@@ -1,5 +1,6 @@
 import GameState from '../GameState'
 import GameView from '../GameView'
+import Fire from '../material/Fire'
 import MoveType from './MoveType'
 
 type OnibiAttackingSacredTree = {
@@ -17,7 +18,7 @@ export function onibiAttackingSacredTree(state: GameState | GameView, _move: Oni
       }
     })
   })
-
+  if (state.circle.fire.length === 0) state.circle.fire.push(Fire.Fire2)
 }
 
 export function onibiAttackingSacredTreeMove(): OnibiAttackingSacredTree {
