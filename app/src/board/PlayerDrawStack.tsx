@@ -1,4 +1,6 @@
 /** @jsxImportSource @emotion/react */
+/* eslint-disable import/first */
+
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import Card from '../material/Card';
 import { css } from '@emotion/react';
@@ -13,15 +15,16 @@ type Props = {
   fragment: number
   phase: Phase
   ready: boolean
+  displayed?: SpiritOfNature
   onClick: () => void
 }
 
-export default function PlayerDrawStack({ stack, spirit, fragment, phase, ready, onClick }: Props) {
+export default function PlayerDrawStack({ stack, spirit, fragment, phase, ready, displayed, onClick }: Props) {
 
   return (
     <>
-      <TellYouAreReadyButton spirit={spirit} phase={phase} ready={ready} />
-      <DiscardButton spirit={spirit} fragment={fragment} phase={phase} ready={ready} />
+      <TellYouAreReadyButton spirit={spirit} phase={phase} ready={ready} displayed={displayed} />
+      <DiscardButton spirit={spirit} fragment={fragment} phase={phase} ready={ready} displayed={displayed} />
 
       {
         [...Array(stack)].map((_, index) => {

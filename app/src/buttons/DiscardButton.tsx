@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 import { discardCardMove } from "@gamepark/living-forest/moves/DiscardCard";
 import Phase from "@gamepark/living-forest/Phase";
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
-import { usePlay } from "@gamepark/react-client";
+import { usePlay, usePlayerId } from '@gamepark/react-client';
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -11,13 +11,16 @@ type Props = {
   spirit: SpiritOfNature
   phase: Phase
   ready: boolean
+  displayed?: SpiritOfNature
 }
 
-export default function DiscardButton({ fragment, spirit, phase, ready }: Props) {
+export default function DiscardButton({ fragment, spirit, phase, ready, displayed }: Props) {
   const { t } = useTranslation()
   const play = usePlay()
   const tell = () => { play(discardCardMove(spirit)) }
-  if (phase === Phase.GuardianAnimals && ready === false && fragment > 0) {
+  const playerId = usePlayerId<SpiritOfNature>()
+
+  if (phase === Phase.GuardianAnimals && ready === false && fragment > 0 && playerId === displayed) {
     return <button css={[button]} onClick={tell} >{t("Discard")}</button>
   }
   return null

@@ -25,7 +25,7 @@ function PlayerBoard({ player, game }: Props) {
             <PlayerVictories player={player} />
             <PlayerDiscard player={player} discard={player.discard.length} />
             <PlayerHelpLine line={player.line} />
-            <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} />
+            <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} displayed={game.displayedPlayer!} />
             <PlayerForest player={player} />
         </>
     );

@@ -1,22 +1,25 @@
 /** @jsxImportSource @emotion/react */
+
 import { css } from "@emotion/react";
 import { tellYouAreReadyMove } from "@gamepark/living-forest/moves/TellYouAreReady";
 import Phase from "@gamepark/living-forest/Phase";
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
-import { usePlay } from "@gamepark/react-client";
+import { usePlay, usePlayerId } from "@gamepark/react-client";
 import { useTranslation } from "react-i18next";
 
 type Props = {
   spirit: SpiritOfNature
   phase: Phase
   ready: boolean
+  displayed?: SpiritOfNature
 }
 
-export default function TellButton({ spirit, phase, ready }: Props) {
+export default function TellButton({ spirit, phase, ready, displayed }: Props) {
   const { t } = useTranslation()
   const play = usePlay()
   const tell = () => { play(tellYouAreReadyMove(spirit), { delayed: true }) }
-  if (phase === Phase.GuardianAnimals && ready === false) {
+  const playerId = usePlayerId<SpiritOfNature>()
+  if (phase === Phase.GuardianAnimals && ready === false && playerId === displayed) {
     return <button css={[button]} onClick={tell} >{t("Stop")}</button>
   }
   return null
