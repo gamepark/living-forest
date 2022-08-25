@@ -17,26 +17,28 @@ type Props = {
 export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props) {
     const play = usePlay()
     return (
-        <div css={circle}>
-            {circleOfSpiritsRocks.map((_rock, index) => {
-                return Object.entries(circleOfSpirits.position).map(
-                    ([spiritCircle, position]) => {
-                        if (index == circleOfSpirits.position[spiritCircle]) {
-                            return <div key={index + position} css={spiritPosition(index)}>
-                                <div css={spiritCss(parseInt(spiritCircle), index)}></div>
-                            </div>
-                        } else {
-                            return <div key={index + position} css={rockPosition(index)} onClick={() => play(moveCircleOfSpiritsMove(spirit, index))}>
-                            </div>
+        <>
+            <div css={circle}>
+                {circleOfSpiritsRocks.map((_rock, index) => {
+                    return Object.entries(circleOfSpirits.position).map(
+                        ([spiritCircle, position]) => {
+                            if (index == circleOfSpirits.position[spiritCircle]) {
+                                return <div key={index + position} css={spiritPosition(index)}>
+                                    <div css={spiritCss(parseInt(spiritCircle), index)}></div>
+                                </div>
+                            } else {
+                                return <div key={index + position} css={rockPosition(index)} onClick={() => play(moveCircleOfSpiritsMove(spirit, index))}>
+                                </div>
+                            }
+                            return
                         }
-                        return
-                    }
 
-                );
+                    );
 
-            })}
+                })}
+            </div>
             <Fires fire={circleOfSpirits.fire} spirit={spirit} />
-        </div>
+        </>
     );
 }
 
