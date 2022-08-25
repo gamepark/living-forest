@@ -19,6 +19,7 @@ export default function TellButton({ spirit, phase, ready, displayed }: Props) {
   const play = usePlay()
   const tell = () => { play(tellYouAreReadyMove(spirit), { delayed: true }) }
   const playerId = usePlayerId<SpiritOfNature>()
+
   if (phase === Phase.GuardianAnimals && ready === false && playerId === displayed) {
     return <button css={[button]} onClick={tell} >{t("Stop")}</button>
   }
