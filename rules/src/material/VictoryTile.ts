@@ -24,7 +24,7 @@ export function getSpiritVictoryTiles(spirit: SpiritOfNature): VictoryTile[] {
     return []
 }
 
-export function getVictoryTilesNumber(victoryTiles: VictoryTile[], victory: Victory) {
+export function getVictoryTilesCount(victoryTiles: VictoryTile[], victory: Victory): number {
     var number = 0
     victoryTiles.forEach((victoryTile, _) => {
         if (victory === Victory.SacredFlower) { if (victoryTile % 3 == 0) number++ }

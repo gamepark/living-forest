@@ -38,7 +38,7 @@ export function getProtectiveTreeDetails(protectiveTree: ProtectiveTree): Protec
     }
 }
 
-export function getTreesResources(forest: (ProtectiveTree | number | null)[][], resource: Resource): number {
+export function getTreesResourcesCount(forest: (ProtectiveTree | number | null)[][], resource: Resource) {
     var total = 0
     forest.map(function (row, _indexRow) {
         row.forEach(function (tree, _indexCol) {
@@ -50,4 +50,12 @@ export function getTreesResources(forest: (ProtectiveTree | number | null)[][], 
         })
     })
     return total
+}
+
+export function getForestResourceBonus(forest: (ProtectiveTree | number | null)[][], resource: Resource): number {
+    if (resource === Resource.Wind && forest[0][3] && forest[1][3] && forest[2][3]) return 1
+    if (resource === Resource.Sun && forest[0][2] && forest[2][2]) return 1
+    if (resource === Resource.Drop && forest[0][1] && forest[1][1] && forest[2][1]) return 1
+    if (resource === Resource.SacredFlower && forest[1][0] && forest[1][1] && forest[1][3] && forest[1][4]) return 2
+    return 0
 }

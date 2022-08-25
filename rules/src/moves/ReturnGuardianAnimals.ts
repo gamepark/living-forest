@@ -1,7 +1,7 @@
 import GameState from '../GameState'
 import GameView from '../GameView'
 import MoveType from './MoveType'
-import { getVictoryTilesNumber } from '../material/VictoryTile';
+import { getVictoryTilesCount } from '../material/VictoryTile';
 
 type ReturnGuardianAnimals = {
   type: MoveType.ReturnGuardianAnimals
@@ -16,7 +16,7 @@ export function returnGuardianAnimals(state: GameState | GameView, _move: Return
       player.discard.push(player.line.shift()!)
     }
     player.victory.forEach((victory, index) => {
-      player.victory[index] = getVictoryTilesNumber(player.victoryTiles, victory)
+      player.victory[index] = getVictoryTilesCount(player.victoryTiles, victory)
     })
   })
 }

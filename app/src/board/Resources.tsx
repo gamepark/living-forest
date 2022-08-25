@@ -1,23 +1,26 @@
 /** @jsxImportSource @emotion/react */
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
 import Resource from '@gamepark/living-forest/material/Resource';
-import { getAnimalsResource } from '@gamepark/living-forest/material/GuardianAnimalDetails';
-import ResourceElement from './Resource';
 import { css } from '@emotion/react';
+import { getAnimalsType } from '@gamepark/living-forest/material/GuardianAnimalDetails';
 import Images from '../images/Images';
 import { resourceLeft, resourceTop } from '../styles';
-import { getAnimalsType } from '@gamepark/living-forest/material/GuardianAnimalDetails';
-import { getTreesResources } from '@gamepark/living-forest/material/ProtectiveTreeDetails';
 import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree';
+import ResourceElement from './Resource';
+import VictoryTile from '@gamepark/living-forest/material/VictoryTile';
+import ActionMove from '@gamepark/living-forest/moves/ActionMove';
+import { getResourcesCount } from '@gamepark/living-forest/material/Victory';
+
 
 
 type Props = {
     line: GuardianAnimal[]
     forest: (ProtectiveTree | number | null)[][]
-    flowersTile: number
+    victoryTile: VictoryTile[]
+    bonus: ActionMove | null
 }
 
-export default function Resources({ line, forest, flowersTile }: Props) {
+export default function Resources({ line, victoryTile, bonus, forest }: Props) {
     const resources = Resource
     const res = Object.values(resources).slice(5, 10)
     const type = getAnimalsType(line)
@@ -25,11 +28,7 @@ export default function Resources({ line, forest, flowersTile }: Props) {
     return (
         <>
             {res.map((resource, index) => {
-                if (resource === Resource.SacredFlower) {
-                    return <ResourceElement key={resource} resource={index + 1} number={getAnimalsResource(line, index + 1) + getTreesResources(forest, index + 1) + flowersTile} />
-                } else {
-                    return <ResourceElement key={resource} resource={index + 1} number={getAnimalsResource(line, index + 1) + getTreesResources(forest, index + 1)} />
-                }
+                return <ResourceElement key={resource} resource={index + 1} number={getResourcesCount(victoryTile, line, bonus, forest, index + 1)} />
             })}
             {<div css={element}>
                 <div css={num}>{(type !== 0) ? type : ""}</div>

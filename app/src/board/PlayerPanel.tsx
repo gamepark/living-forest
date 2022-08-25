@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { getPlayerName } from '@gamepark/living-forest/LivingForestOptions'
-import Victory from '@gamepark/living-forest/material/Victory'
-import { getVictoryTilesNumber } from '@gamepark/living-forest/material/VictoryTile'
 import PlayerView from '@gamepark/living-forest/PlayerView'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { Avatar, GamePoints, PlayerTimer, usePlay, usePlayer } from '@gamepark/react-client'
@@ -35,7 +33,7 @@ export default function PlayerPanel({ player, sacredTreeOwner, ...props }: Props
                 <GamePoints playerId={player.spirit} css={css`flex-shrink: 0`} />
             </h3>
             {sacredTreeOwner && <div css={firstPlayer}></div>}
-            <Resources line={player.line} forest={player.forest} flowersTile={getVictoryTilesNumber(player.victoryTiles, Victory.SacredFlower)} />
+            <Resources line={player.line} forest={player.forest} victoryTile={player.victoryTiles} bonus={player.bonus} />
             <Victories victory={player.victory} />
         </div>
     );
