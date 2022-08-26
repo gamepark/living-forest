@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import ResourceElement from '@gamepark/living-forest/material/Resource';
-import { resourceLeft, resourceTop } from '../styles';
+import { resourceheight, resourceWidth } from '../styles';
 import Images from '../images/Images';
 
 
@@ -12,20 +12,14 @@ type Props = {
 
 export default function Resource({ resource, number }: Props) {
     return (
-        <div css={element(resource)}>
-            <div css={num}>
-                {(number != 0) ? number : ""}
-            </div>
-        </div>
+        number > 0 ? <div css={resourceStyle(resource)}><div css={num}>{number}</div></div> : <div></div>
     );
 }
 
-const element = (resource: number) => css`
-position:absolute;
-width:2.5em;
-height:2.5em;
-top:${resourceTop}em;
-left:${resourceLeft + resource * 4.2}em;
+const resourceStyle = (resource: number) => css`
+position:flex;
+width:${resourceWidth}em;
+height:${resourceheight}em;
 background-image: url(${ResourceImage[resource]});
 background-size: cover;
 filter: drop-shadow(0 0 0.9em black);
@@ -33,9 +27,9 @@ filter: drop-shadow(0 0 0.9em black);
 const num = css`
 position:absolute;
 top:0.2em;
-left:1.3em;
+left:1.15em;
 color:black;
-font-size:2em;
+font-size:3em;
 `
 const ResourceImage: { [key in ResourceElement]: string } = {
     [ResourceElement.Sun]: Images.sun,
