@@ -97,7 +97,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         },
         dispenser: dispenserTwoPlayers,
         circle: {
-          fire: [1],
+          fire: [1, null, null, null, null, null, null],
           position: getTwoPlayersRocks(arg)
         },
       })
@@ -213,11 +213,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
             if (this.state.circle.fire.length > 0) {
               //Ongoing move
               if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire) {
-                this.state.circle.fire.forEach(function (fire, index) {
+                this.state.circle.fire.forEach(function (fire, position) {
                   if (fire != null) {
                     //Enough drops ?
                     if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
-                      moves.push(extinguishFireMove(spirit, index))
+                      moves.push(extinguishFireMove(spirit, position))
                     }
                   }
                 })

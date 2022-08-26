@@ -10,21 +10,22 @@ import ActionMove from "./ActionMove";
 type ExtinguishFire = {
   type: MoveType.ExtinguishFire
   spirit: SpiritOfNature
-  fire: number
+  position: number
 }
 
 export default ExtinguishFire
 
 export function extinguishFire(state: GameState | GameView, move: ExtinguishFire) {
   const player = getPlayer(state, move.spirit)
-  const fire = state.circle.fire[move.fire]
+  const fire = state.circle.fire[move.position]
 
   if (fire != null) player.extinguishedFiresTotal += fire + 1
-  player.extinguishedFires.push(...state.circle.fire.splice(move.fire, 1))
+  player.extinguishedFires.push(state.circle.fire[move.position])
+  state.circle.fire[move.position] = null
   player.ongoingMove = ActionMove.ExtinguishFire
   player.victory[0]++
 }
 
-export function extinguishFireMove(spirit: SpiritOfNature, fire: number): ExtinguishFire {
-  return { type: MoveType.ExtinguishFire, spirit, fire }
+export function extinguishFireMove(spirit: SpiritOfNature, position: number): ExtinguishFire {
+  return { type: MoveType.ExtinguishFire, spirit, position }
 }
