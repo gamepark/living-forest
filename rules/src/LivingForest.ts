@@ -40,7 +40,7 @@ import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/
 import { discardCard } from './moves/DiscardCard';
 import { getPlayer } from './PlayerView';
 import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
-import { givingSacredTreeMove } from './moves/GivingSacredTree';
+import { givingSacredTree, givingSacredTreeMove } from './moves/GivingSacredTree';
 
 
 /**
@@ -342,6 +342,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         return onibiAttackingSacredTree(this.state, move)
       case MoveType.DiscardCard:
         return discardCard(this.state, move)
+      case MoveType.GivingSacredTree:
+        return givingSacredTree(this.state, move)
     }
   }
 
