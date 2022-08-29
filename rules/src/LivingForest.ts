@@ -3,44 +3,43 @@ import shuffle from 'lodash.shuffle';
 import GameState from './GameState';
 import GameView from './GameView';
 import { isGameOptions, LivingForestOptions } from './LivingForestOptions';
+import { circleOfSpiritsRocks, getInitializationPlayersRocks } from './material/CircleOfSpirits';
 import { startingGuardianAnimals } from './material/GuardianAnimal';
 import { getAnimalsResource, getAnimalsType, getGuardianAnimalDetails } from './material/GuardianAnimalDetails';
 import { getInitializationDispenser } from './material/ProtectiveTree';
+import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 import Resource from './material/Resource';
+import { getSpiritVictoryTiles } from './material/VictoryTile';
 import ActionMove from './moves/ActionMove';
 import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
+import { cancel } from './moves/CancelMove';
+import { discardCard, discardCardMove } from './moves/DiscardCard';
 import { drawCard, drawCardMove } from './moves/DrawCard';
+import { endTurn, endTurnMove } from './moves/EndTurn';
 import { extinguishFire, extinguishFireMove } from './moves/ExtinguishFire';
 import { fillReserve, fillReserveMove } from './moves/FillReserve';
-import Move from './moves/Move';
+import { givingSacredTree, givingSacredTreeMove } from './moves/GivingSacredTree';
+import Move, { getAvailableMoves } from './moves/Move';
 import { moveCircleOfSpirits, moveCircleOfSpiritsMove } from './moves/MoveCircleOfSpirits';
+import MoveRandomized from './moves/MoveRandomized';
 import MoveType from './moves/MoveType';
 import MoveView from './moves/MoveView';
+import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
+import { onibiAttackingPlayers, onibiAttackingPlayersMove } from './moves/OnibiAttackingPlayers';
+import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/OnibiAttackingSacredTree';
 import { placementIsValid, plantTree, plantTreeMove } from './moves/PlantTree';
-import { shuffleDiscard, shuffleDiscardMove } from './moves/ShuffleDiscard';
+import { returnGuardianAnimals, returnGuardianAnimalsMove } from './moves/ReturnGuardianAnimals';
+import { randomizeShuffleDiscardMove, shuffleDiscard, shuffleDiscardMove } from './moves/ShuffleDiscard';
 import { startPhase, startPhaseMove } from './moves/StartPhase';
 import { takeFragmentTile, takeFragmentTileMove } from './moves/TakeFragmentTile';
+import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
+import { takeVictoryTile } from './moves/TakeVictoryTile';
 import { tellYouAreReady, tellYouAreReadyMove } from './moves/TellYouAreReady';
+import { validate, validateMove } from './moves/ValidateMove';
 import Phase from './Phase';
+import { getPlayer } from './PlayerView';
 import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve';
 import SpiritOfNature from './SpiritOfNature';
-import { circleOfSpiritsRocks, getInitializationPlayersRocks } from './material/CircleOfSpirits';
-import MoveRandomized from './moves/MoveRandomized';
-import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
-import { endTurn, endTurnMove } from './moves/EndTurn';
-import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
-import { nextPlayer, nextPlayerMove } from './moves/NextPlayer';
-import { returnGuardianAnimals, returnGuardianAnimalsMove } from './moves/ReturnGuardianAnimals';
-import { getSpiritVictoryTiles } from './material/VictoryTile';
-import { takeVictoryTile } from './moves/TakeVictoryTile';
-import { onibiAttackingPlayers, onibiAttackingPlayersMove } from './moves/OnibiAttackingPlayers';
-import { validate, validateMove } from './moves/ValidateMove';
-import { cancel } from './moves/CancelMove';
-import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/OnibiAttackingSacredTree';
-import { discardCard, discardCardMove } from './moves/DiscardCard';
-import { getPlayer } from './PlayerView';
-import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
-import { givingSacredTree, givingSacredTreeMove } from './moves/GivingSacredTree';
 
 
 /**
@@ -182,7 +181,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           *********************************************************/
 
           //Move already played
-          if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)) {
+          if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3)) {
 
             //Ongoing move
             if (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) {
@@ -231,17 +230,17 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           const playerPosition = this.state.circle.position[player.spirit]
           const wind = getAnimalsResource(player.line, Resource.Wind)
           const playerPositionLimit = playerPosition! + wind
-          circleOfSpiritsRocks.forEach(function (_rock, index) {
-            //Move already played
-            if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits)) {
+          //Move already played
+          if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits)) {
+            circleOfSpiritsRocks.forEach(function (_rock, index) {
               //Ongoing move
               if (player.ongoingMove == null || player.ongoingMove == ActionMove.MoveCircleOfSpirits) {
                 //Rocks available
                 if (index > playerPosition! && index <= playerPositionLimit)
                   moves.push(moveCircleOfSpiritsMove(player.spirit, index))
               }
-            }
-          })
+            })
+          }
 
           /********************************************************
           ***** Plant one and only one Protective Tree action *****
@@ -377,21 +376,22 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       }
       case Phase.Action: {
         console.log("phase 2");
+        const player = getPlayer(this.state, this.state.currentPlayer!)
 
+        if (getAvailableMoves(player.actionMoves, player.bonus, player.line, this.state.reserve.rows, this.state.circle.fire, this.state.dispenser).length < 1) {
+          return [nextPlayerMove()]
+        }
         if (this.state.players.every(player => player.ready)) {
           return [startPhaseMove(Phase.EndOfTurn)]
         }
 
         const moves: Move[] = []
 
-        // this.state.players.forEach((player, _) => {
-        const player = getPlayer(this.state, this.state.currentPlayer!)
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
         if (player.ready === false && numberAction === player.actionMoves.length) {
           moves.push(endTurnMove(player.spirit))
           moves.push(nextPlayerMove())
         }
-        // })
 
         return moves
       }
