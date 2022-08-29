@@ -64,9 +64,9 @@ function fireCss(index: number) {
   return css`
   position: absolute;
   top: ${firePanelTop}em;
-  left: ${firePanelLeft}em;
+  left: ${firePanelLeft + index * 3.5}em;
   height:${firePanelHeight}em;
-  width:${firePanelWidth + index * 2}em;
+  width:${firePanelWidth}em;
   background-image:url(${Images.firePanel});
   background-size:cover;
   background-position:center;
