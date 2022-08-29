@@ -1,7 +1,5 @@
 import SpiritOfNature from '../SpiritOfNature';
 import Fire from './Fire';
-import GameState from '../GameState';
-import GameView from '../GameView';
 import { LivingForestOptions } from '../LivingForestOptions';
 import ActionMove from '../moves/ActionMove';
 
@@ -21,26 +19,27 @@ export function getTwoPlayersRocks(game: LivingForestOptions): Partial<Record<Sp
     }
 }
 
-export function getThreePlayersRocks(game: GameState | GameView): Partial<Record<SpiritOfNature, number>> {
+export function getThreePlayersRocks(game: LivingForestOptions): Partial<Record<SpiritOfNature, number>> {
     return {
-        [game.players[0].spirit]: 4,
-        [game.players[1].spirit]: 8,
-        [game.players[2].spirit]: 0
+        [game.players[0].id]: 4,
+        [game.players[1].id]: 8,
+        [game.players[2].id]: 0
 
     }
 }
 
-export function getFourPlayersRocks(game: GameState | GameView): Partial<Record<SpiritOfNature, number>> {
+export function getFourPlayersRocks(game: LivingForestOptions): Partial<Record<SpiritOfNature, number>> {
     return {
-        [game.players[0].spirit]: 2,
-        [game.players[1].spirit]: 8,
-        [game.players[2].spirit]: 11,
-        [game.players[2].spirit]: 5
+        [game.players[0].id]: 2,
+        [game.players[1].id]: 8,
+        [game.players[2].id]: 11,
+        [game.players[2].id]: 5
     }
 }
 
-// export function isPlace(game: GameState | GameView){
-//     for(const spirit in game.circle.position) {
-//         if(game.circle.position.spirit == )return
-//     }
-// }
+export function getInitializationPlayersRocks(game: LivingForestOptions) {
+    if (game.players.length === 2) return getTwoPlayersRocks(game)
+    if (game.players.length === 3) return getThreePlayersRocks(game)
+    if (game.players.length === 4) return getFourPlayersRocks(game)
+    return
+}

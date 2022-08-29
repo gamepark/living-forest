@@ -5,7 +5,7 @@ import GameView from './GameView';
 import { isGameOptions, LivingForestOptions } from './LivingForestOptions';
 import { startingGuardianAnimals } from './material/GuardianAnimal';
 import { getAnimalsResource, getAnimalsType, getGuardianAnimalDetails } from './material/GuardianAnimalDetails';
-import { dispenserTwoPlayers } from './material/ProtectiveTree';
+import { getInitializationDispenser } from './material/ProtectiveTree';
 import Resource from './material/Resource';
 import ActionMove from './moves/ActionMove';
 import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
@@ -24,7 +24,7 @@ import { tellYouAreReady, tellYouAreReadyMove } from './moves/TellYouAreReady';
 import Phase from './Phase';
 import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve';
 import SpiritOfNature from './SpiritOfNature';
-import { circleOfSpiritsRocks, getTwoPlayersRocks } from './material/CircleOfSpirits';
+import { circleOfSpiritsRocks, getInitializationPlayersRocks } from './material/CircleOfSpirits';
 import MoveRandomized from './moves/MoveRandomized';
 import { randomizeShuffleDiscardMove } from './moves/ShuffleDiscard';
 import { endTurn, endTurnMove } from './moves/EndTurn';
@@ -95,10 +95,10 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           stacks,
           rows: [stacks[0].splice(0, 4), stacks[1].splice(0, 4), stacks[2].splice(0, 4)]
         },
-        dispenser: dispenserTwoPlayers,
+        dispenser: getInitializationDispenser(arg.players.length)!,
         circle: {
           fire: [1, null, null, null, null, null, null],
-          position: getTwoPlayersRocks(arg)
+          position: getInitializationPlayersRocks(arg)!
         },
       })
     } else {
