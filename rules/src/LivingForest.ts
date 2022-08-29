@@ -37,7 +37,7 @@ import { onibiAttackingPlayers, onibiAttackingPlayersMove } from './moves/OnibiA
 import { validate, validateMove } from './moves/ValidateMove';
 import { cancel } from './moves/CancelMove';
 import { onibiAttackingSacredTree, onibiAttackingSacredTreeMove } from './moves/OnibiAttackingSacredTree';
-import { discardCard } from './moves/DiscardCard';
+import { discardCard, discardCardMove } from './moves/DiscardCard';
 import { getPlayer } from './PlayerView';
 import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 import { givingSacredTree, givingSacredTreeMove } from './moves/GivingSacredTree';
@@ -157,6 +157,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
         if (player.line.length > 0) {
           moves.push(tellYouAreReadyMove(spirit))
+          moves.push(discardCardMove(spirit))
         }
 
         return moves

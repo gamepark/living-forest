@@ -2,6 +2,8 @@ import GameState from "../GameState"
 import MoveType from "./MoveType"
 import SpiritOfNature from '../SpiritOfNature';
 import GuardianAnimal from '../material/GuardianAnimal';
+import GameView from "../GameView";
+import { getPlayer } from "../PlayerView";
 
 
 type DiscardCard = {
@@ -12,8 +14,8 @@ type DiscardCard = {
 export default DiscardCard
 
 
-export function discardCard(state: GameState, move: DiscardCard) {
-  const player = state.players.find(p => p.spirit === move.spirit)!
+export function discardCard(state: GameState | GameView, move: DiscardCard) {
+  const player = getPlayer(state, move.spirit)
   const card = player.line[-1]
   if (card === GuardianAnimal.Varan) {
     player.line.pop()
