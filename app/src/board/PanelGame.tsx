@@ -44,7 +44,14 @@ const forest = css`
   background-size:cover;
   background-position:center;
   &:before {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.5);
+    content:"";
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    border-radius: inherit;
     }
   padding: 0.5em;
   box-shadow: 0 0 0.3em black;
