@@ -22,7 +22,7 @@ width:${resourceWidth}em;
 height:${resourceheight}em;
 background-image: url(${ResourceImage[resource]});
 background-size: cover;
-filter: drop-shadow(0 0 0.9em black);
+filter: drop-shadow(0 0 0.9em white);
 `
 const num = css`
 position:absolute;

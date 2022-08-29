@@ -33,7 +33,7 @@ width:${resourceWidth}em;
 height:${resourceheight}em;
 background-image: url(${VictoryImage[victory]});
 background-size: cover;
-filter: drop-shadow(0 0 0.9em black);
+filter: drop-shadow(0 0 0.9em white);
 `
 const VictoryImage: { [key in Victory]: string } = {
     [Victory.Fire]: Images.fire,
@@ -54,5 +54,5 @@ width:${resourceWidth}em;
 height:${resourceheight}em;
 background-image: url(${Images.gregarious});
 background-size: cover;
-filter: drop-shadow(0 0 0.9em black);
+filter: drop-shadow(0 0 0.9em white);
 `
