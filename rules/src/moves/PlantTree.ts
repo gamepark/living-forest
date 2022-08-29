@@ -27,6 +27,9 @@ export function plantTree(state: GameState | GameView, move: PlantTree) {
   player.victory[1]++
   if (player.bonus === ActionMove.PlantTree) player.bonus = null
   if (player.tree === ProtectiveTree.Tree11) player.bonus = ActionMove.PlantTree
+  if (move.coordinates.x === 0 && move.coordinates.y === 0) player.bonus = ActionMove.AttractGuardianAnimal3
+  if ((move.coordinates.x === 0 && move.coordinates.y === 4) || (move.coordinates.x === 2 && move.coordinates.y === 0)) player.fragment++
+  if (move.coordinates.x === 2 && move.coordinates.y === 4) player.bonus = ActionMove.ExtinguishFire2
 }
 
 export function plantTreeMove(spirit: SpiritOfNature, coordinates: Coordinates): PlantTree {

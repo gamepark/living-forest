@@ -185,7 +185,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal)) {
 
             //Ongoing move
-            if (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal) {
+            if (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) {
               if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
               this.state.reserve.rows.forEach(function (row, index) {
                 row.forEach(function (card, indexRow) {
@@ -213,7 +213,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
             //Still fires ?
             if (this.state.circle.fire.length > 0) {
               //Ongoing move
-              if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire) {
+              if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire2) {
                 this.state.circle.fire.forEach(function (fire, position) {
                   if (fire != null) {
                     //Enough drops ?
