@@ -1,3 +1,5 @@
+import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature"
+
 export const cardHeight = 22
 export const cardWith = cardHeight * 65 / 100
 export const treeHeight = 14
@@ -74,3 +76,15 @@ export const forestTileHeight = 15
 export const forestTileWidth = forestTileHeight
 export const forestTileTop = 10
 export const forestTileLeft = 14
+export function getSpiritColor(color: SpiritOfNature): string {
+    switch (color) {
+        case SpiritOfNature.Spring:
+            return '#36ab7a'
+        case SpiritOfNature.Summer:
+            return '#d9dd57'
+        case SpiritOfNature.Autumn:
+            return '#662e1e'
+        case SpiritOfNature.Winter:
+            return '#9681a4'
+    }
+}

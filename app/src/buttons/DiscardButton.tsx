@@ -5,6 +5,7 @@ import Phase from "@gamepark/living-forest/Phase";
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
 import { usePlay, usePlayerId } from '@gamepark/react-client';
 import { useTranslation } from "react-i18next";
+import { Button } from "./Button";
 
 type Props = {
   fragment: number
@@ -21,36 +22,15 @@ export default function DiscardButton({ fragment, spirit, phase, ready, displaye
   const playerId = usePlayerId<SpiritOfNature>()
 
   if (phase === Phase.GuardianAnimals && ready === false && fragment > 0 && playerId === displayed) {
-    return <button css={[button]} onClick={tell} >{t("Discard")}</button>
+    return <Button spirit={spirit} css={[button]} onClick={tell} >{t("Discard")}</Button>
   }
   return null
 }
 
-
 const button = css`
   position: absolute;
   z-index: 100;
-  left: 13em;
-  top: 16em;
-  font-size: 3.2em;
-  font-weight: lighter;
-  color: white;
-  background: rgba(0, 0, 0, 0.7);
-  border-radius: 1em;
-  padding: 0.3em 0.6em;
-  transform:translateX(-50%);
-
-  & svg {
-    margin-right: 0.3em;
-  }
-
-  &:hover, &:focus {
-    transform: translateX(-50%) translateY(1px) scale(1.05);
-    cursor: pointer;
-  }
-
-  &:active {
-    border-style: inset;
-    transform: translateX(-50%) translateY(1px);
-  }
+  left: 10em;
+  top: 14.5em;
+  font-size:3.5em;
 `
