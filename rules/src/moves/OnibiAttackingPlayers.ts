@@ -13,10 +13,12 @@ export default OnibiAttackingPlayers
 
 
 export function onibiAttackingPlayers(state: GameState | GameView, _move: OnibiAttackingPlayers) {
-  state.players.forEach(function (player, _index) {
-    if (state.circle.fire.length === getAnimalsResource(player.line, Resource.Drop)) {
+  const fires = state.circle.fire
+  const firesTotal = fires.reduce((sum, fire) => sum + (fire! + 1 ?? 0), 0)
+  state.players.forEach(function (player) {
+    if (firesTotal >= getAnimalsResource(player.line, Resource.Drop)) {
       for (var i = 0; i < state.circle.fire.length; i++) {
-        player.discard.push(GuardianAnimal.Varan)
+        if (state.circle.fire[i] != null) player.discard.push(GuardianAnimal.Varan)
       }
     }
   })
