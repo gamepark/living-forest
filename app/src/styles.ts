@@ -88,3 +88,7 @@ export function getSpiritColor(color: SpiritOfNature): string {
             return '#9681a4'
     }
 }
+export const fragmentPlayerTop = 5
+export const fragmentPlayerLeft = 15
+export const fragmentPlayerHeight = 8
+export const fragmentPlayerWidth = fragmentPlayerHeight

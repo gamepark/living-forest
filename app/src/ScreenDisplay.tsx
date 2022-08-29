@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import ForestBoard from './board/ForestBoard'
-import PlayerBoard from './board/PlayerBoard'
-import GameLocalView from './GameLocalView'
+import ForestBoard from './board/ForestBoard';
 import PlayerView from '@gamepark/living-forest/PlayerView';
+import { PlayerBoard } from './board/PlayerBoard';
+import GameLocalView from './GameLocalView';
 
 type Props = {
   game: GameLocalView

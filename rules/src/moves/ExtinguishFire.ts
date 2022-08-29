@@ -20,7 +20,7 @@ export function extinguishFire(state: GameState | GameView, move: ExtinguishFire
   const fire = state.circle.fire[move.position]
 
   if (fire != null) player.extinguishedFiresTotal += fire + 1
-  player.extinguishedFires.push(state.circle.fire[move.position])
+  player.extinguishedFires.push(state.circle.fire[move.position]!)
   state.circle.fire[move.position] = null
   player.ongoingMove = ActionMove.ExtinguishFire
   player.victory[0]++

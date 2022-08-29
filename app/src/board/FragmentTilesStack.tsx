@@ -6,10 +6,10 @@ import { HTMLAttributes } from 'react';
 
 type Props = {
     onClick: () => void
-}& HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>
 
-function FragmentTilesStack( {onClick, ...props}:Props) {
-    
+export function FragmentTilesStack({ onClick, ...props }: Props) {
+
     return (
         <div css={fragment} onClick={onClick} {...props}>
         </div>
@@ -27,4 +27,3 @@ background-size:cover;
 background-position:center;
 filter: drop-shadow(0 0 0.3em black);
 `
-export default FragmentTilesStack;

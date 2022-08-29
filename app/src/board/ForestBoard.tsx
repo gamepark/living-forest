@@ -1,14 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
+import { css } from '@emotion/react';
+import { takeFragmentTileMove } from "@gamepark/living-forest/moves/TakeFragmentTile";
+import PlayerView from "@gamepark/living-forest/PlayerView";
+import { usePlay } from "@gamepark/react-client";
 import GameLocalView from "../GameLocalView";
 import CircleOfSpirits from "./CircleOfSpirits";
-import FragmentTilesStack from "./FragmentTilesStack";
+import { FragmentTilesStack } from "./FragmentTilesStack";
 import ProtectiveTreeDisperser from "./ProtectiveTreeDisperser";
 import Reserve from "./Reserve";
-import { css } from '@emotion/react';
-import PlayerView from "@gamepark/living-forest/PlayerView";
-import { takeFragmentTileMove } from "@gamepark/living-forest/moves/TakeFragmentTile";
-import { usePlay } from "@gamepark/react-client";
 
 type Props = {
     game: GameLocalView

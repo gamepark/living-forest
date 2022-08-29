@@ -2,7 +2,6 @@ import GuardianAnimal, { startingGuardianAnimals } from './material/GuardianAnim
 import SpiritOfNature from './SpiritOfNature'
 import shuffle from 'lodash.shuffle';
 import ProtectiveTree from './material/ProtectiveTree';
-// import Move from './moves/Move';
 import ActionMove from './moves/ActionMove';
 import Fire from './material/Fire';
 import VictoryTile from './material/VictoryTile';
@@ -18,7 +17,7 @@ export default interface PlayerState {
   shuffled?: boolean
   fragment: number
   attractedGuardianAnimal: number
-  extinguishedFires: (Fire | null)[]
+  extinguishedFires: Fire[]
   extinguishedFiresTotal: number
   actionMoves: ActionMove[]
   tree: ProtectiveTree | null
