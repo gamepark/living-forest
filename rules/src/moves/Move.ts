@@ -43,12 +43,10 @@ export function getAvailableMoves(actionMoves: ActionMove[], bonus: ActionMove |
     //Attract one or more Guardian Animals action  
     if (!actionMoves.includes(ActionMove.AttractGuardianAnimal)) {
         var takeCard = false
-        reserveRows.forEach(function (row) {
-            row.forEach(function (card) {
-                if (getAnimalsResource(line, Resource.Sun) >= getGuardianAnimalDetails(card!).cost!) {
-                    takeCard = true
-                }
-            })
+        reserveRows[0].forEach(function (card) {
+            if (getAnimalsResource(line, Resource.Sun) >= getGuardianAnimalDetails(card!).cost!) {
+                takeCard = true
+            }
         })
         if (takeCard) availableMoves.push(ActionMove.AttractGuardianAnimal)
     }

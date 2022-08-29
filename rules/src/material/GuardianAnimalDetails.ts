@@ -5,7 +5,7 @@ import { Bear, Beetle, Fox, Lynx, GoldFish, Tanuki, Boar, Weasel, Rabbit, Doe, H
 
 
 type GuardianAnimalDetails = {
-    resources: { [key in Resource]?: number }
+    resources?: { [key in Resource]?: number }
     cost?: number
     type?: CardType
 }
@@ -151,7 +151,7 @@ export function getGuardianAnimalDetails(guardianAnimal: GuardianAnimal): Guardi
 }
 
 export function getAnimalsResource(animals: GuardianAnimal[], resource: Resource): number {
-    return animals.reduce((sum, animal) => sum + (getGuardianAnimalDetails(animal).resources[resource] ?? 0), 0)
+    return animals.reduce((sum, animal) => sum + (getGuardianAnimalDetails(animal).resources![resource] ?? 0), 0)
 }
 export function getAnimalsSolitary(animals: GuardianAnimal[]): number {
     return animals.reduce((sum, animal) => sum + ((getGuardianAnimalDetails(animal).type == 0) ? 1 : 0), 0)

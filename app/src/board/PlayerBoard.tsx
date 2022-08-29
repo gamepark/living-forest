@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
+import { css } from '@emotion/react';
 import { drawCardMove } from '@gamepark/living-forest/moves/DrawCard';
 import PlayerView from '@gamepark/living-forest/PlayerView';
 import { usePlay } from '@gamepark/react-client';
+import Images from '../images/Images';
+import { fragmentPlayerHeight, fragmentPlayerLeft, fragmentPlayerTop, fragmentPlayerWidth } from '../styles';
 import GameLocalView from "../GameLocalView";
-import Images from "../images/Images";
-import { fragmentPlayerHeight, fragmentPlayerLeft, fragmentPlayerTop, fragmentPlayerWidth } from "../styles";
 import PlayerDiscard from "./PlayerDiscard";
 import PlayerDrawStack from "./PlayerDrawStack";
 import PlayerForest from "./PlayerForest";
@@ -23,7 +23,7 @@ export function PlayerBoard({ player, game }: Props) {
 
     return (
         <>
-            {[...Array(player.fragment)].map((_, index) => {
+            {player.fragment > 0 && [...Array(player.fragment)].map((_, index) => {
                 return <div key={index} css={fragment(index)}></div>
             })}
             <PlayerVictories player={player} />

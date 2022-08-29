@@ -274,7 +274,7 @@ export const Spider: GuardianAnimalDetails = {
         [Sun]: 2,
         [Seed]: 4
     },
-    cost: 5,
+    cost: 1,
     type: Solitary,
 
 }
@@ -546,5 +546,5 @@ export const Tapir: GuardianAnimalDetails = {
 }
 
 export const Varan: GuardianAnimalDetails = {
-    resources: {},
+    type: Solitary
 }
