@@ -109,9 +109,17 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    * @return True when game is over
    */
   isOver(): boolean {
-    return false
+    return this.state.phase === Phase.EndOfTurn && this.endOfGame()
   }
-
+  endOfGame() {
+    var end = false
+    this.state.players.forEach((player) => {
+      player.victory.forEach((victory) => {
+        if (victory >= 12) end = true
+      })
+    })
+    return end
+  }
   isTurnToPlay(spirit: SpiritOfNature): boolean {
     if (this.state.phase === Phase.GuardianAnimals) {
       return !this.getPlayer(spirit).ready
@@ -123,7 +131,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   getPlayer(spirit: SpiritOfNature) {
     return this.state.players.find(p => p.spirit === spirit)!
   }
-
 
   /**
    * Return the exhaustive list of moves that can be played by the active player.
