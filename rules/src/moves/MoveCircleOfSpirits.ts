@@ -37,3 +37,9 @@ export function moveCircleOfSpirits(state: GameState | GameView, move: MoveCircl
 export function moveCircleOfSpiritsMove(spirit: SpiritOfNature, coordinate: number): MoveCircleOfSpirits {
   return { type: MoveType.MoveCircleOfSpirits, spirit, coordinate }
 }
+
+export function getMoveCircleOfSpiritsDistance(move: MoveCircleOfSpirits, origin: number, winds: number, players: number) {
+  const distance = (circleOfSpiritsRocks.length - origin + move.coordinate) % circleOfSpiritsRocks.length
+  if (circleOfSpiritsRocks.length - players - 1 + distance <= winds) return distance + circleOfSpiritsRocks.length
+  return distance
+}

@@ -8,7 +8,7 @@ import { useState } from 'react'
 import Scrollbars from 'react-custom-scrollbars-2'
 import { useTranslation } from 'react-i18next'
 import Card from '../material/Card'
-import { cardHeight, cardWidth, dialogCloseIcon, largeDialogCss } from '../styles'
+import { cardHeight, cardWidth, dialogCloseIcon, discardLeft, discardTop, largeDialogCss } from '../styles'
 
 type Props = {
     size: number
@@ -37,8 +37,8 @@ export default function DiscardDisplay({ size, discard }: Props) {
 
 const style = (index: number) => css`
     position: absolute;
-    top: ${60 + index * 0.1}em;
-    left: ${125 + index * 0.1}em;
+    top:${discardTop + index * 0.1}em;
+    left:${discardLeft + index * 0.1}em;
     &:after {
         box-shadow: 0 0 0.2em black, 0 0 0.2em black, 0 0 0.2em black;
     }

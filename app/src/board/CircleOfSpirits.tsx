@@ -1,40 +1,55 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CircleOfSpirits, { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
-import { moveCircleOfSpiritsMove } from '@gamepark/living-forest/moves/MoveCircleOfSpirits';
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
-import { usePlay } from '@gamepark/react-client';
+import MoveCircleOfSpirits, { getMoveCircleOfSpiritsDistance, moveCircleOfSpiritsMove } from '@gamepark/living-forest/moves/MoveCircleOfSpirits';
+import MoveType from '@gamepark/living-forest/moves/MoveType';
+import SpiritOfNature, { spirits } from '@gamepark/living-forest/SpiritOfNature';
+import { useAnimation, usePlay, usePlayerId } from '@gamepark/react-client';
 import Images from '../images/Images';
 import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith, spiritCircleHeight, spiritCircleWidth } from '../styles';
 import Fires from './Fires';
 
 type Props = {
     circleOfSpirits: CircleOfSpirits
-    spirit: SpiritOfNature
 }
 
-export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props) {
+export default function CircleOfSpiritsBoard({ circleOfSpirits }: Props) {
+    const animation = useAnimation<MoveCircleOfSpirits>(animation => animation.move.type === MoveType.MoveCircleOfSpirits)
     const play = usePlay()
+    const playerId = usePlayerId()
 
     return (
         <>
             <div css={circle}>
                 {circleOfSpiritsRocks.map((_, index) => {
-                    return Object.entries(circleOfSpirits.position).map(
-                        ([spiritCircle, position]) => {
-                            if (index == circleOfSpirits.position[spiritCircle]) {
-                                return <div key={position} css={spiritPosition(index)}>
-                                    <div css={spiritCss(parseInt(spiritCircle), index)}></div>
-                                </div>
-                            } else {
-                                return <div key={position} css={rockPosition(index)} onClick={() => play(moveCircleOfSpiritsMove(spirit, index))}>
-                                </div>
-                            }
-                        }
-                    );
+                    const spirit = spirits.find(spirit => {
+                        const position = animation?.move.spirit === spirit ? animation.move.coordinate : index
+                        return circleOfSpirits.position[spirit] === position
+                    })
+
+                    if (spirit) {
+                        return null
+                    } else {
+                        return <div key={index} onClick={() => play(moveCircleOfSpiritsMove(playerId, index))}
+                            css={rockPosition(index)} >
+                        </div>
+                    }
+                })}
+                {spirits.map(spirit => {
+                    var position = circleOfSpirits.position[spirit]!
+                    if (animation?.move.spirit === spirit) {
+                        const distance = getMoveCircleOfSpiritsDistance(animation.move, position, 0, Object.keys(circleOfSpirits.position).length)
+                        console.log(distance);
+
+                        position = position + distance
+                    }
+                    if (position === undefined) return null
+                    return <div key={spirit} css={[spiritPosition(position), animation && moveCircleOfSpiritCss(animation.duration)]}>
+                        <div css={[spiritCss(spirit, position), animation && moveCircleOfSpiritCss(animation.duration)]}></div>
+                    </div>
                 })}
             </div>
-            <Fires fire={circleOfSpirits.fire} spirit={spirit} />
+            <Fires fire={circleOfSpirits.fire} spirit={playerId} />
         </>
     );
 }
@@ -93,5 +108,11 @@ function spiritCss(spirit: SpiritOfNature, index: number) {
         background-position:center;
         transform: rotate(-${index * 30 + 16}deg);
         filter: drop-shadow(0 0 0.1em black);
+    `
+}
+
+function moveCircleOfSpiritCss(duration: number) {
+    return css`
+        transition:transform ${duration}s ease-in-out;
     `
 }

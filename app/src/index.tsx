@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import LivingForestView from './LivingForestView'
 import translations from './translations.json'
+import LivingForestAnimations from './LivingForestAnimations'
 
 setupTranslation(translations, { debug: false })
 
@@ -59,7 +60,7 @@ const style = css`
 
 ReactDOM.render(
   <StrictMode>
-    <GameProvider game="living-forest" Rules={LivingForest} RulesView={LivingForestView} optionsSpec={LivingForestOptionsSpec}>
+    <GameProvider game="living-forest" Rules={LivingForest} RulesView={LivingForestView} optionsSpec={LivingForestOptionsSpec} animations={LivingForestAnimations}>
       <App />
     </GameProvider>
     <Global styles={[normalize, style]} />

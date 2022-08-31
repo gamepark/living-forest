@@ -10,7 +10,8 @@ export const Bear: GuardianAnimalDetails = {
         [Drop]: 1,
         [Seed]: 2
     },
-    type: Solitary
+    type: Solitary,
+    cost: 0
 }
 
 export const Beetle: GuardianAnimalDetails = {
@@ -18,7 +19,8 @@ export const Beetle: GuardianAnimalDetails = {
         [Sun]: 3,
         [Seed]: 1
     },
-    type: Solitary
+    type: Solitary,
+    cost: 0
 }
 
 export const Lynx: GuardianAnimalDetails = {
@@ -27,7 +29,8 @@ export const Lynx: GuardianAnimalDetails = {
         [Drop]: 1,
         [Seed]: 1
     },
-    type: Solitary
+    type: Solitary,
+    cost: 0
 }
 
 export const Fox: GuardianAnimalDetails = {
@@ -36,64 +39,74 @@ export const Fox: GuardianAnimalDetails = {
         [Seed]: 1,
         [SacredFlower]: 1
     },
-    type: Solitary
+    type: Solitary,
+    cost: 0
 }
 
 export const GoldFish: GuardianAnimalDetails = {
     resources: {
         [Drop]: 2,
         [Seed]: -1
-    }
+    },
+    cost: 0
 }
 
 export const Tanuki: GuardianAnimalDetails = {
     resources: {
         [Sun]: 3,
         [SacredFlower]: -1
-    }
+    },
+    cost: 0
 }
 
 export const Boar: GuardianAnimalDetails = {
     resources: {
         [Sun]: -2,
         [Seed]: 2
-    }
+    },
+    cost: 0
 }
 
 export const Weasel: GuardianAnimalDetails = {
     resources: {
         [Sun]: 2
-    }
+    },
+    cost: 0
 }
 
 export const Rabbit: GuardianAnimalDetails = {
     resources: {
         [Wind]: 1
-    }
+    },
+    cost: 0
 }
 
 export const Doe: GuardianAnimalDetails = {
     resources: {
         [SacredFlower]: 1
-    }
+    },
+    cost: 0
 }
 
 export const HummingBird: GuardianAnimalDetails = {
     resources: {
         [Drop]: 1
-    }
+    },
+    cost: 0
 }
 
 export const Bee: GuardianAnimalDetails = {
     resources: {
         [Seed]: 1
-    }
+    },
+    cost: 0
 }
 
 export const Monkey: GuardianAnimalDetails = {
     resources: {
         [Sun]: 1
-    }
+    },
+    cost: 0
 }
 
 export const Owl: GuardianAnimalDetails = {
@@ -101,7 +114,8 @@ export const Owl: GuardianAnimalDetails = {
         [Seed]: 2,
         [Wind]: 1
     },
-    type: Solitary
+    type: Solitary,
+    cost: 0
 }
 
 export const Hedgehog: GuardianAnimalDetails = {
@@ -546,5 +560,7 @@ export const Tapir: GuardianAnimalDetails = {
 }
 
 export const Varan: GuardianAnimalDetails = {
-    type: Solitary
+    resources: {},
+    cost: 0,
+    type: Solitary,
 }

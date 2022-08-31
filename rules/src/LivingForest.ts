@@ -19,7 +19,7 @@ import { endTurn, endTurnMove } from './moves/EndTurn';
 import { extinguishFire, extinguishFireMove } from './moves/ExtinguishFire';
 import { fillReserve, fillReserveMove } from './moves/FillReserve';
 import { givingSacredTree, givingSacredTreeMove } from './moves/GivingSacredTree';
-import Move from './moves/Move';
+import Move, { getAvailableMoves } from './moves/Move';
 import { moveCircleOfSpirits, moveCircleOfSpiritsMove } from './moves/MoveCircleOfSpirits';
 import MoveRandomized from './moves/MoveRandomized';
 import MoveType from './moves/MoveType';
@@ -384,11 +384,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       case Phase.Action: {
         console.log("phase 2");
         const player = getPlayer(this.state, this.state.currentPlayer!)
-        // if (player.ongoingMove == null) {
-        //   if (getAvailableMoves(player.actionMoves, player.bonus, player.line, this.state.reserve.rows, this.state.circle.fire, this.state.dispenser).length < 1) {
-        //     return [nextPlayerMove()]
-        //   }
-        // }
+        if (player.ongoingMove == null) {
+          if (getAvailableMoves(player.actionMoves, player.bonus, player.line, this.state.reserve.rows, this.state.circle.fire, this.state.dispenser).length === 0) {
+            return [nextPlayerMove()]
+          }
+        }
         if (this.state.players.every(player => player.ready)) {
           return [startPhaseMove(Phase.EndOfTurn)]
         }

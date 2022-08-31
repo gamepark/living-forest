@@ -5,8 +5,8 @@ import { Bear, Beetle, Fox, Lynx, GoldFish, Tanuki, Boar, Weasel, Rabbit, Doe, H
 
 
 type GuardianAnimalDetails = {
-    resources?: { [key in Resource]?: number }
-    cost?: number
+    resources: { [key in Resource]?: number }
+    cost: number
     type?: CardType
 }
 

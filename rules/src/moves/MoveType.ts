@@ -4,7 +4,6 @@
  */
 enum MoveType {
   DrawCard,
-  ShuffleToDraw,
   ShuffleDiscard,
   FillReserve,
   PlantTree,

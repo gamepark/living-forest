@@ -7,7 +7,6 @@ import GameLocalView from "../GameLocalView";
 import Images from '../images/Images';
 import { fragmentPlayerHeight, fragmentPlayerLeft, fragmentPlayerTop, fragmentPlayerWidth } from '../styles';
 import DiscardDisplay from './DiscardDisplay';
-import PlayerDiscard from "./PlayerDiscard";
 import PlayerDrawStack from "./PlayerDrawStack";
 import PlayerForest from "./PlayerForest";
 import PlayerHelpLine from "./PlayerHelpLine";
@@ -28,11 +27,10 @@ export function PlayerBoard({ player, game }: Props) {
                 return <div key={index} css={fragment(index)}></div>
             })}
             <PlayerVictories victoryTiles={player.victoryTiles} />
-            <PlayerDiscard player={player} discard={player.discard.length} />
-            <PlayerHelpLine line={player.line} />
+            <DiscardDisplay discard={player.discard} size={player.discard.length} />
+            <PlayerHelpLine line={player.line} spirit={player.spirit} />
             <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} displayed={game.displayedPlayer!} />
             <PlayerForest player={player} />
-            <DiscardDisplay discard={player.discard} size={player.discard.length} />
         </>
     );
 };

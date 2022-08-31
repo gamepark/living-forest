@@ -1,7 +1,7 @@
 import { OptionsSpec } from '@gamepark/rules-api'
 import { TFunction } from 'i18next'
 import GameState from './GameState'
-import SpiritOfNature, { playerColors } from './SpiritOfNature'
+import SpiritOfNature, { spirits } from './SpiritOfNature'
 
 /**
  * This is the options for each players in the game.
@@ -33,7 +33,7 @@ export const LivingForestOptionsSpec: OptionsSpec<LivingForestOptions> = {
   players: {
     id: {
       label: (t: TFunction) => t('Color'),
-      values: playerColors,
+      values: spirits,
       valueSpec: color => ({ label: t => getPlayerName(color, t) })
     }
   }
