@@ -1,3 +1,4 @@
+import { css } from "@emotion/react"
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature"
 
 export const cardHeight = 22
@@ -92,3 +93,35 @@ export const fragmentPlayerTop = 5
 export const fragmentPlayerLeft = 15
 export const fragmentPlayerHeight = 8
 export const fragmentPlayerWidth = fragmentPlayerHeight
+export const lightBackground = '#F4D6A2'
+export const dialogCss = css`
+    position: relative;
+    padding: 1em;
+    color: black;
+    background-color: ${lightBackground};
+    border-radius: 2em;
+    text-align: center;
+
+    h2 {
+        margin: 0.2em 5em;
+        font-size: 4em;
+        text-align: center;
+    }
+
+    p, button {
+        font-size: 3.5em;
+    }
+`
+
+export const largeDialogCss = css`
+    ${dialogCss};
+    width: 180em;
+`
+export const dialogCloseIcon = css`
+    position: absolute;
+    right: 0.8em;
+    top: 0.6em;
+    font-size: 4em;
+    cursor: pointer;
+`
+export const cardWidth = 10
