@@ -13,7 +13,6 @@ export default OnibiAttackingPlayers
 
 
 export function onibiAttackingPlayers(state: GameState | GameView, _move: OnibiAttackingPlayers) {
-  // const fires = state.circle.fire
   const firesTotal = state.circle.fire.reduce((sum, fire) => sum + (fire! + 1 ?? 0), 0)
   state.players.forEach(function (player) {
     if (firesTotal >= getAnimalsResource(player.line, Resource.Drop)) {
