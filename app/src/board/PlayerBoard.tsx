@@ -27,7 +27,7 @@ export function PlayerBoard({ player, game }: Props) {
             {player.fragment > 0 && [...Array(player.fragment)].map((_, index) => {
                 return <div key={index} css={fragment(index)}></div>
             })}
-            <PlayerVictories player={player} />
+            <PlayerVictories victoryTiles={player.victoryTiles} />
             <PlayerDiscard player={player} discard={player.discard.length} />
             <PlayerHelpLine line={player.line} />
             <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} displayed={game.displayedPlayer!} />

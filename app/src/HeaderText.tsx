@@ -8,7 +8,6 @@ import { getPlayer } from '@gamepark/living-forest/PlayerView'
 import { usePlayerId } from '@gamepark/react-client'
 import { Trans, useTranslation } from 'react-i18next'
 import ValidateButton from './buttons/ValidateButton'
-import VictoryTile from './material/VictoryTile';
 
 type Props = {
   loading: boolean
@@ -42,7 +41,7 @@ export default function HeaderText({ loading, game }: Props) {
               return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
             }
             if (player.bonus === ActionMove.TakeVictoryTile) {
-              return <Trans defaults="Select a victory tile. <0>Validate<0/>" components={[<VictoryTile />]} />
+              return <>{t('Select a victory tile.')}</>
             }
           }
           if (player.ongoingMove === ActionMove.ExtinguishFire) {
