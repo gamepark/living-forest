@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from '@emotion/react';
 import { takeFragmentTileMove } from "@gamepark/living-forest/moves/TakeFragmentTile";
 import PlayerView from "@gamepark/living-forest/PlayerView";
@@ -18,6 +17,7 @@ type Props = {
 export default function ForestBoard({ game, player }: Props) {
     const play = usePlay()
     const takeFragment = () => { play(takeFragmentTileMove(player.spirit)) }
+
     return (
         <div css={forest}>
             <Reserve game={game} spirit={player.spirit} />

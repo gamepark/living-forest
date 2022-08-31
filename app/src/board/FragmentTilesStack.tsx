@@ -9,11 +9,7 @@ type Props = {
 } & HTMLAttributes<HTMLDivElement>
 
 export function FragmentTilesStack({ onClick, ...props }: Props) {
-
-    return (
-        <div css={fragment} onClick={onClick} {...props}>
-        </div>
-    );
+    return <div css={fragment} onClick={onClick} {...props}></div>
 }
 
 const fragment = css`

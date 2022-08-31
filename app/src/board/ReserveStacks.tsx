@@ -1,15 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import { css } from "@emotion/react";
-import { reserveCardHeight, reserveCardWith, reserveStacksLeft, reserveStacksTop } from "../styles";
 import Card from '../material/Card';
+import { reserveCardHeight, reserveCardWith, reserveStacksLeft, reserveStacksTop } from "../styles";
 
 type Props = {
     reserveStacks: number[]
 }
 
 export default function ReserveStacks({ reserveStacks }: Props) {
-
     return (
         <>
             {
@@ -23,7 +22,6 @@ export default function ReserveStacks({ reserveStacks }: Props) {
     );
 
 }
-
 
 function cardPosition(index: number, indexStack: number) {
     return css`

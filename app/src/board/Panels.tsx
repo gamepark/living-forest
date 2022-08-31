@@ -1,12 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { usePlayerId } from '@gamepark/react-client'
 import GameLocalView from '../GameLocalView'
 import { panelBottom, panelLeft, panelWidth } from '../styles'
 import PanelGame from './PanelGame'
 import PlayerPanel from './PlayerPanel'
-import { usePlayerId } from '@gamepark/react-client';
-
-
 
 type Props = {
   game: GameLocalView
@@ -14,6 +12,7 @@ type Props = {
 
 export default function Panels({ game }: Props) {
   const playerId = usePlayerId()
+
   return (
     <>
       <PanelGame game={game}></PanelGame>
@@ -23,7 +22,6 @@ export default function Panels({ game }: Props) {
         )}
     </>
   );
-
 }
 
 function playerPanelPosition(index: number, playerIndex: number, players: number) {

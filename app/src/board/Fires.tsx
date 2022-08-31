@@ -18,10 +18,7 @@ export default function Fire({ fire, spirit }: Props) {
         <>
             {
                 fire.map((fire, index) => {
-                    if (fire != null) {
-                        return <FireTile key={index} fire={fire} css={firePosition(index)} onClick={() => play(extinguishFireMove(spirit, index))} />
-                    }
-                    return
+                    return fire != null && <FireTile key={index} fire={fire} css={firePosition(index)} onClick={() => play(extinguishFireMove(spirit, index))} />
                 })
             }
         </>

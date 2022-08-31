@@ -1,13 +1,11 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from "@emotion/react";
 import ProtectiveTree from "@gamepark/living-forest/material/ProtectiveTree";
-import { usePlay } from "@gamepark/react-client";
-import { forestTileHeight, forestTileLeft, forestTileTop, forestTileWidth } from "../styles";
 import { plantTreeMove } from '@gamepark/living-forest/moves/PlantTree';
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
+import { usePlay } from "@gamepark/react-client";
 import Tree from "../material/Tree";
-
+import { forestTileHeight, forestTileLeft, forestTileTop, forestTileWidth } from "../styles";
 
 type Props = {
     forest: (ProtectiveTree | number | null)[][]
@@ -21,7 +19,6 @@ export default function TilesDropArea({ forest, spirit }: Props) {
         <>
             {
                 forest.map((row, indexRow) => {
-
                     return row.map((protectiveTree, index) => {
                         if (protectiveTree !== null && protectiveTree != 0) return <Tree key={index + indexRow} protectiveTree={protectiveTree} css={treePosition(index, indexRow)} />
                         if (protectiveTree === null) return <div key={index + indexRow} css={tilePosition(index, indexRow)} onClick={() => { play(plantTreeMove(spirit, { x: indexRow, y: index })) }}></div>

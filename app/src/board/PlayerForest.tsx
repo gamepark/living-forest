@@ -1,13 +1,10 @@
 /** @jsxImportSource @emotion/react */
-
+import { css } from '@emotion/react';
+import PlayerView from "@gamepark/living-forest/PlayerView";
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
 import Images from "../images/Images";
-import { css } from '@emotion/react';
-import { casesTop, casesLeft, casesWidth, casesHeight, spiritImage2Height, spiritImage2Width } from "../styles";
+import { casesHeight, casesLeft, casesTop, casesWidth, spiritImage2Height, spiritImage2Width } from "../styles";
 import TilesDropArea from "./TilesDropArea";
-import PlayerView from "@gamepark/living-forest/PlayerView";
-
-
 
 type Props = {
     player: PlayerView
@@ -16,7 +13,6 @@ export default function PlayerForest({ player }: Props) {
     return (
         <>
             <div css={spiritBackgroundImage1(player.spirit)}></div>
-
             <div css={backgroundCases(player.spirit)}>
                 <TilesDropArea forest={player.forest} spirit={player.spirit} />
             </div>
@@ -24,7 +20,6 @@ export default function PlayerForest({ player }: Props) {
         </>
     );
 }
-
 
 const spiritCases: Record<SpiritOfNature, string> = {
     [SpiritOfNature.Autumn]: Images.autumnCases,

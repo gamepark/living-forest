@@ -2,8 +2,8 @@
 import { css } from '@emotion/react'
 import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
 import { HTMLAttributes } from 'react'
-import { treeHeight, treeWith } from '../styles'
 import Images from '../images/Images'
+import { treeHeight, treeWith } from '../styles'
 
 type Props = {
   protectiveTree?: ProtectiveTree

@@ -9,11 +9,8 @@ type Props = {
 }
 
 export const Button: FC<ButtonHTMLAttributes<HTMLButtonElement> & Props> = ({ children, spirit, ...props }) => {
-
     return <button css={[button(getSpiritColor(spirit))]} {...props}> <span css={spanBorder(spirit)}> {children}</span> </button>
-
 }
-
 
 const button = (color: string) => css`
 cursor:pointer;

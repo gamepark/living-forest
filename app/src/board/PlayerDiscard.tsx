@@ -1,15 +1,13 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import Card from '../material/Card';
 import { discardLeft, discardTop } from '../styles';
-import { css } from '@emotion/react';
-
 import PlayerView from "@gamepark/living-forest/PlayerView";
 
 type Props = {
     discard: number
     player: PlayerView
 }
-
 
 export default function PlayerDiscard({ discard }: Props) {
     return (

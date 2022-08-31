@@ -1,8 +1,8 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { ButtonHTMLAttributes } from "react";
 
 export default function VictoryTiles({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) {
-
   return <button css={[button]} {...props} >{children}</button>
 }
 

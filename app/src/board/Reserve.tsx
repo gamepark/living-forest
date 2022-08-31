@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import GameLocalView from '../GameLocalView';
+import { reserveLeft, reserveTop } from '../styles';
 import ReserveRows from './ReserveRows';
 import ReserveStacks from './ReserveStacks';
-import { css } from '@emotion/react';
-import { reserveLeft, reserveTop } from '../styles';
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 
 type Props = {
     game: GameLocalView

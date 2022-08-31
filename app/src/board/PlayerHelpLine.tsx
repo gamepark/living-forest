@@ -1,21 +1,18 @@
 /** @jsxImportSource @emotion/react */
-import Card from '../material/Card';
 import { css } from '@emotion/react';
-import { helpLineLeft, helpLineTop } from '../styles';
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
-// import { getAnimalsType } from '../../../rules/src/material/GuardianAnimalDetails';
-
+import Card from '../material/Card';
+import { helpLineLeft, helpLineTop } from '../styles';
 
 type Props = {
     line: GuardianAnimal[]
 }
 
 export default function PlayerHelpLine({ line }: Props) {
-
     return (
         <>
             {line.map((guardianAnimal, index) =>
-                <Card key={index} css={cardLinePosition(index)} guardianAnimal={guardianAnimal} />
+                <Card key={guardianAnimal} css={cardLinePosition(index)} guardianAnimal={guardianAnimal} />
             )}
         </>
     );

@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
-import Images from "../images/Images";
-import { victoryTokenWidth, victoryTokenHeight, victoryTokenTop, victoryTokenLeft } from "../styles";
+import { css } from '@emotion/react';
 import VictoryTile from '@gamepark/living-forest/material/VictoryTile';
-
+import Images from "../images/Images";
+import { victoryTokenHeight, victoryTokenLeft, victoryTokenTop, victoryTokenWidth } from "../styles";
 
 type Props = {
     victoryTiles: VictoryTile[]

@@ -1,14 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { getTotalFires } from '@gamepark/living-forest/material/Fire'
 import { usePlay } from '@gamepark/react-client'
 import { displayScreenMove } from '../DisplayScreen'
 import GameLocalView from '../GameLocalView'
-import { panelHeight, panelWidth, panelLeft, panelBottom, firePanelTop, firePanelLeft, firePanelHeight, firePanelWidth, fireTotalTop, fireTotalLeft } from '../styles'
 import Images from '../images/Images'
-import { getTotalFires } from '@gamepark/living-forest/material/Fire'
-
-
-
+import { firePanelHeight, firePanelLeft, firePanelTop, firePanelWidth, fireTotalLeft, fireTotalTop, panelBottom, panelHeight, panelLeft, panelWidth } from '../styles'
 
 type Props = {
   game: GameLocalView
@@ -22,10 +19,7 @@ export default function PanelGame({ game }: Props) {
       <div css={forest} onClick={() => play(displayScreenMove(), { local: true })}>
         {
           game.circle.fire.map((fire, index) => {
-            if (fire != null) {
-              return <div key={index} css={fireCss(index)}></div>
-            }
-            return
+            return fire != null && <div key={index} css={fireCss(index)}></div>
           })
         }
         <div css={fireTotal}>{getTotalFires(game.circle.fire)}</div>

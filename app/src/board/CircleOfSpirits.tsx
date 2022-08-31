@@ -1,13 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith, spiritCircleHeight, spiritCircleWidth } from '../styles';
-import Images from '../images/Images';
-import Fires from './Fires';
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
-import CircleOfSpirits from '@gamepark/living-forest/material/CircleOfSpirits';
-import { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
-import { usePlay } from '@gamepark/react-client';
+import CircleOfSpirits, { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
 import { moveCircleOfSpiritsMove } from '@gamepark/living-forest/moves/MoveCircleOfSpirits';
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
+import { usePlay } from '@gamepark/react-client';
+import Images from '../images/Images';
+import { circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritsTop, circleOfSpiritswidth, rockHeight, rockLeft, rockTop, rockWith, spiritCircleHeight, spiritCircleWidth } from '../styles';
+import Fires from './Fires';
 
 type Props = {
     circleOfSpirits: CircleOfSpirits
@@ -16,25 +15,23 @@ type Props = {
 
 export default function CircleOfSpiritsBoard({ circleOfSpirits, spirit }: Props) {
     const play = usePlay()
+
     return (
         <>
             <div css={circle}>
-                {circleOfSpiritsRocks.map((_rock, index) => {
+                {circleOfSpiritsRocks.map((_, index) => {
                     return Object.entries(circleOfSpirits.position).map(
                         ([spiritCircle, position]) => {
                             if (index == circleOfSpirits.position[spiritCircle]) {
-                                return <div key={index + position} css={spiritPosition(index)}>
+                                return <div key={position} css={spiritPosition(index)}>
                                     <div css={spiritCss(parseInt(spiritCircle), index)}></div>
                                 </div>
                             } else {
-                                return <div key={index + position} css={rockPosition(index)} onClick={() => play(moveCircleOfSpiritsMove(spirit, index))}>
+                                return <div key={position} css={rockPosition(index)} onClick={() => play(moveCircleOfSpiritsMove(spirit, index))}>
                                 </div>
                             }
-                            return
                         }
-
                     );
-
                 })}
             </div>
             <Fires fire={circleOfSpirits.fire} spirit={spirit} />

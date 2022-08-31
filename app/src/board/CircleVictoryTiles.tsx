@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import Images from "../images/Images";
-import { victoryTokenCircleHeight, victoryTokenCircleLeft, victoryTokenCircleTop, victoryTokenCircleWidth } from "../styles";
 import VictoryTile from "@gamepark/living-forest/material/VictoryTile";
-import { usePlay } from "@gamepark/react-client";
 import { takeVictoryTileMove } from "@gamepark/living-forest/moves/TakeVictoryTile";
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
+import { usePlay } from "@gamepark/react-client";
+import Images from "../images/Images";
+import { victoryTokenCircleHeight, victoryTokenCircleLeft, victoryTokenCircleTop, victoryTokenCircleWidth } from "../styles";
 
 
 type Props = {
@@ -21,10 +21,7 @@ export default function CircleVictoryTiles({ victoryTiles, spirit, spiritJumped,
     return (
         <>
             {victoryTiles.map((victoryTile) => {
-
-                return <div key={victoryTile} css={victoryTileStyle(victoryTile)} onClick={() => { play(takeVictoryTileMove(spirit, spiritJumped, victory)) }}>
-                </div>
-
+                return <div key={victoryTile} css={victoryTileStyle(victoryTile)} onClick={() => { play(takeVictoryTileMove(spirit, spiritJumped, victory)) }}></div>
             })}
         </>
     );

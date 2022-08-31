@@ -1,9 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import ResourceElement from '@gamepark/living-forest/material/Resource';
-import { resourceheight, resourceWidth } from '../styles';
 import Images from '../images/Images';
-
+import { resourceheight, resourceWidth } from '../styles';
 
 type Props = {
     resource: number

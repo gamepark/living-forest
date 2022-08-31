@@ -2,8 +2,8 @@
 import { css } from '@emotion/react'
 import Fire from '@gamepark/living-forest/material/Fire'
 import { HTMLAttributes } from 'react'
-import { fireHeight, fireWidth } from '../styles'
 import Images from '../images/Images'
+import { fireHeight, fireWidth } from '../styles'
 
 type Props = {
   fire: (number | null)

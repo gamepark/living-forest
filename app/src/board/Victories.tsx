@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import Images from "../images/Images";
-import Victory from '@gamepark/living-forest/material/Victory';
-import { resourceheight, resourceWidth } from "../styles";
-import { getAnimalsType } from "@gamepark/living-forest/material/GuardianAnimalDetails";
 import GuardianAnimal from "@gamepark/living-forest/material/GuardianAnimal";
+import { getAnimalsType } from "@gamepark/living-forest/material/GuardianAnimalDetails";
+import Victory from '@gamepark/living-forest/material/Victory';
+import Images from "../images/Images";
+import { resourceheight, resourceWidth } from "../styles";
 
 type Props = {
     victory: number[]
@@ -17,11 +17,7 @@ export default function Victories({ victory, line }: Props) {
     return (
         <>
             {victory.map((victory, index) => {
-
-                return <div key={index} css={victoryStyle(index + 1)}>
-                    <div css={num}>{victory}</div>
-                </div>
-
+                return <div key={index} css={victoryStyle(index + 1)}><div css={num}>{victory}</div></div>
             })}
             {type > 0 ? <div css={element}><div css={num}>{type}</div></div> : <div></div>}
         </>

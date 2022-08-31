@@ -2,8 +2,8 @@
 import { css } from '@emotion/react'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { HTMLAttributes } from 'react'
-import { cardHeight, cardWith } from '../styles'
 import Images from '../images/Images'
+import { cardHeight, cardWith } from '../styles'
 
 type Props = {
   guardianAnimal?: GuardianAnimal | null

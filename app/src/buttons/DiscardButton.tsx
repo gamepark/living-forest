@@ -21,9 +21,7 @@ export default function DiscardButton({ fragment, spirit, phase, ready, displaye
   const tell = () => { play(discardCardMove(spirit)) }
   const playerId = usePlayerId<SpiritOfNature>()
 
-  if (phase === Phase.GuardianAnimals && ready === false && fragment > 0 && playerId === displayed) {
-    return <Button spirit={spirit} css={[button]} onClick={tell} >{t("Discard")}</Button>
-  }
+  if (phase === Phase.GuardianAnimals && ready === false && fragment > 0 && playerId === displayed) return <Button spirit={spirit} css={[button]} onClick={tell} >{t("Discard")}</Button>
   return null
 }
 

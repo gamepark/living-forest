@@ -1,19 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import TreeDispenser from '@gamepark/living-forest/material/TreeDispenser';
-import { disperserLeft, disperserTop } from '../styles';
-import Tree from '../material/Tree';
 import { css } from '@emotion/react';
-// import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree';
+import TreeDispenser from '@gamepark/living-forest/material/TreeDispenser';
+import Tree from '../material/Tree';
+import { disperserLeft, disperserTop } from '../styles';
 import { protectiveTrees } from '@gamepark/living-forest/material/ProtectiveTree';
-import { usePlay } from '@gamepark/react-client';
 import { takeProtectiveTreeMove } from '@gamepark/living-forest/moves/TakeProtectiveTree';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
+import { usePlay } from '@gamepark/react-client';
 
 type Props = {
     dispenser: TreeDispenser
     spirit: SpiritOfNature
 }
-
 
 export default function ProtectiveTreeDisperser({ dispenser, spirit }: Props) {
     const trees = protectiveTrees;
@@ -24,7 +22,7 @@ export default function ProtectiveTreeDisperser({ dispenser, spirit }: Props) {
             {
                 trees.map((protectiveTree, index) => {
                     return [...Array(dispenser[protectiveTree])].map((_, indexTree) => {
-                        return < Tree key={index + indexTree} css={treeLinePosition(index, indexTree)} protectiveTree={protectiveTree} onClick={() => { play(takeProtectiveTreeMove(spirit, protectiveTree)) }} />
+                        return < Tree key={protectiveTree + indexTree} css={treeLinePosition(index, indexTree)} protectiveTree={protectiveTree} onClick={() => { play(takeProtectiveTreeMove(spirit, protectiveTree)) }} />
                     })
                 })
             }

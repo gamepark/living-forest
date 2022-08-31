@@ -6,7 +6,6 @@ import { usePlay } from "@gamepark/react-client";
 import { ButtonHTMLAttributes } from "react";
 import { Button } from "./Button";
 
-
 type Props = {
   spirit: SpiritOfNature
 } & ButtonHTMLAttributes<HTMLButtonElement>

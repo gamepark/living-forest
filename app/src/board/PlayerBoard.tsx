@@ -3,15 +3,15 @@ import { css } from '@emotion/react';
 import { drawCardMove } from '@gamepark/living-forest/moves/DrawCard';
 import PlayerView from '@gamepark/living-forest/PlayerView';
 import { usePlay } from '@gamepark/react-client';
+import GameLocalView from "../GameLocalView";
 import Images from '../images/Images';
 import { fragmentPlayerHeight, fragmentPlayerLeft, fragmentPlayerTop, fragmentPlayerWidth } from '../styles';
-import GameLocalView from "../GameLocalView";
+import DiscardDisplay from './DiscardDisplay';
 import PlayerDiscard from "./PlayerDiscard";
 import PlayerDrawStack from "./PlayerDrawStack";
 import PlayerForest from "./PlayerForest";
 import PlayerHelpLine from "./PlayerHelpLine";
 import PlayerVictories from "./PlayerVictories";
-import DiscardDisplay from './DiscardDisplay';
 
 type Props = {
     game: GameLocalView

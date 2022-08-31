@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-
 import { css } from "@emotion/react";
 import { tellYouAreReadyMove } from "@gamepark/living-forest/moves/TellYouAreReady";
 import Phase from "@gamepark/living-forest/Phase";
@@ -21,13 +20,9 @@ export default function TellButton({ spirit, phase, ready, displayed }: Props) {
   const tell = () => { play(tellYouAreReadyMove(spirit), { delayed: true }) }
   const playerId = usePlayerId<SpiritOfNature>()
 
-  if (phase === Phase.GuardianAnimals && ready === false && playerId === displayed) {
-
-    return <Button spirit={spirit} css={[button]} onClick={tell}>{t("Stop")}</Button>
-  }
+  if (phase === Phase.GuardianAnimals && ready === false && playerId === displayed) return <Button spirit={spirit} css={[button]} onClick={tell}>{t("Stop")}</Button>
   return null
 }
-
 
 const button = css`
   position: absolute;
