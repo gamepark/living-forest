@@ -29,7 +29,7 @@ export function PlayerBoard({ player, game }: Props) {
             <PlayerVictories victoryTiles={player.victoryTiles} />
             <DiscardDisplay discard={player.discard} size={player.discard.length} />
             <PlayerHelpLine line={player.line} spirit={player.spirit} />
-            <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} displayed={game.displayedPlayer!} />
+            <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} displayed={game.displayedPlayer!} lineNumber={player.line.length} />
             <PlayerForest player={player} />
         </>
     );

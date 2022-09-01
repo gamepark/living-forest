@@ -12,15 +12,16 @@ type Props = {
   phase: Phase
   ready: boolean
   displayed?: SpiritOfNature
+  lineNumber: number
 }
 
-export default function TellButton({ spirit, phase, ready, displayed }: Props) {
+export default function TellButton({ spirit, phase, ready, displayed, lineNumber }: Props) {
   const { t } = useTranslation()
   const play = usePlay()
   const tell = () => { play(tellYouAreReadyMove(spirit), { delayed: true }) }
   const playerId = usePlayerId<SpiritOfNature>()
 
-  if (phase === Phase.GuardianAnimals && ready === false && playerId === displayed) return <Button spirit={spirit} css={[button]} onClick={tell}>{t("Stop")}</Button>
+  if (lineNumber > 0 && phase === Phase.GuardianAnimals && !ready && playerId === displayed) return <Button spirit={spirit} css={[button]} onClick={tell}>{t("Stop")}</Button>
   return null
 }
 

@@ -13,15 +13,16 @@ type Props = {
   phase: Phase
   ready: boolean
   displayed?: SpiritOfNature
+  lineNumber: number
 }
 
-export default function DiscardButton({ fragment, spirit, phase, ready, displayed }: Props) {
+export default function DiscardButton({ fragment, spirit, phase, ready, displayed, lineNumber }: Props) {
   const { t } = useTranslation()
   const play = usePlay()
   const tell = () => { play(discardCardMove(spirit)) }
   const playerId = usePlayerId<SpiritOfNature>()
 
-  if (phase === Phase.GuardianAnimals && ready === false && fragment > 0 && playerId === displayed) return <Button spirit={spirit} css={[button]} onClick={tell} >{t("Discard")}</Button>
+  if (lineNumber > 0 && phase === Phase.GuardianAnimals && !ready && fragment > 0 && playerId === displayed) return <Button spirit={spirit} css={[button]} onClick={tell} >{t("Discard")}</Button>
   return null
 }
 

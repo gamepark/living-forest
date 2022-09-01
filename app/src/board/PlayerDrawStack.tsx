@@ -3,6 +3,7 @@
 import { css } from '@emotion/react';
 import Phase from '@gamepark/living-forest/Phase';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
+import { usePlayerId } from '@gamepark/react-client';
 import DiscardButton from '../buttons/DiscardButton';
 import TellYouAreReadyButton from '../buttons/TellYouAreReadyButton';
 import Card from '../material/Card';
@@ -15,17 +16,21 @@ type Props = {
   phase: Phase
   ready: boolean
   displayed?: SpiritOfNature
+  lineNumber: number
   onClick: () => void
 }
 
-export default function PlayerDrawStack({ stack, spirit, fragment, phase, ready, displayed, onClick }: Props) {
+export default function PlayerDrawStack({ stack, spirit, fragment, phase, ready, displayed, lineNumber, onClick }: Props) {
+  const playerId = usePlayerId()
+
   return (
+
     <>
-      <TellYouAreReadyButton spirit={spirit} phase={phase} ready={ready} displayed={displayed} />
-      <DiscardButton spirit={spirit} fragment={fragment} phase={phase} ready={ready} displayed={displayed} />
+      <TellYouAreReadyButton spirit={spirit} phase={phase} ready={ready} displayed={displayed} lineNumber={lineNumber} />
+      <DiscardButton spirit={spirit} fragment={fragment} phase={phase} ready={ready} displayed={displayed} lineNumber={lineNumber} />
       {
         [...Array(stack)].map((_, index) => {
-          return <Card key={index} css={cardPosition(index)} onClick={onClick} />
+          return (displayed === playerId && phase === Phase.GuardianAnimals && !ready) ? <Card key={index} css={cardPosition(index)} onClick={onClick} /> : <Card key={index} css={cardPosition(index)} />
         })
       }
     </>

@@ -161,15 +161,19 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           moves.push(shuffleDiscardMove(spirit))
         }
 
-        if (player.line.length > 0) {
+        if (player.line.length > 1) {
+          if (player.fragment > 0) moves.push(discardCardMove(spirit))
           moves.push(tellYouAreReadyMove(spirit))
-          moves.push(discardCardMove(spirit))
         }
 
         return moves
       }
       case Phase.Action: {
         // TODO: Action phase
+        if (player.ready) {
+          return []
+        }
+
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
 
         //Check player number of actions 
