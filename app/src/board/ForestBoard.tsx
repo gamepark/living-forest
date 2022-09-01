@@ -23,7 +23,7 @@ export default function ForestBoard({ game, player }: Props) {
             <Reserve game={game} spirit={player.spirit} />
             <CircleOfSpirits circleOfSpirits={game.circle} />
             <ProtectiveTreeDisperser dispenser={game.dispenser} spirit={player.spirit} />
-            <FragmentTilesStack onClick={takeFragment} />
+            <FragmentTilesStack onClick={takeFragment} actionMoves={player.actionMoves} />
         </div>
     );
 };

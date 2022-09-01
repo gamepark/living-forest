@@ -3,13 +3,16 @@ import { css } from '@emotion/react';
 import { fragmentLeft, fragmentTop } from '../styles';
 import Images from '../images/Images';
 import { HTMLAttributes } from 'react';
+import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 
 type Props = {
+    actionMoves: ActionMove[]
     onClick: () => void
 } & HTMLAttributes<HTMLDivElement>
 
-export function FragmentTilesStack({ onClick, ...props }: Props) {
-    return <div css={fragment} onClick={onClick} {...props}></div>
+export function FragmentTilesStack({ onClick, actionMoves, ...props }: Props) {
+    if (!actionMoves.includes(ActionMove.TakeFragmentTile)) return <div css={fragment} onClick={onClick} {...props}></div>
+    return null
 }
 
 const fragment = css`
