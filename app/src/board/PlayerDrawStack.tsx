@@ -1,9 +1,10 @@
 /** @jsxImportSource @emotion/react */
 /* eslint-disable import/first */
 import { css } from '@emotion/react';
+import { drawCardMove } from '@gamepark/living-forest/moves/DrawCard';
 import Phase from '@gamepark/living-forest/Phase';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
-import { usePlayerId } from '@gamepark/react-client';
+import { usePlay, usePlayerId } from '@gamepark/react-client';
 import DiscardButton from '../buttons/DiscardButton';
 import TellYouAreReadyButton from '../buttons/TellYouAreReadyButton';
 import Card from '../material/Card';
@@ -17,20 +18,20 @@ type Props = {
   ready: boolean
   displayed?: SpiritOfNature
   lineNumber: number
-  onClick: () => void
 }
 
-export default function PlayerDrawStack({ stack, spirit, fragment, phase, ready, displayed, lineNumber, onClick }: Props) {
-  const playerId = usePlayerId()
+export default function PlayerDrawStack({ stack, spirit, fragment, phase, ready, displayed, lineNumber }: Props) {
+  const playerdId = usePlayerId()
+  const play = usePlay()
+  const draw = () => { displayed === playerdId && phase === Phase.GuardianAnimals && !ready && play(drawCardMove(playerdId), { delayed: true }) }
 
   return (
-
     <>
       <TellYouAreReadyButton spirit={spirit} phase={phase} ready={ready} displayed={displayed} lineNumber={lineNumber} />
       <DiscardButton spirit={spirit} fragment={fragment} phase={phase} ready={ready} displayed={displayed} lineNumber={lineNumber} />
       {
         [...Array(stack)].map((_, index) => {
-          return (displayed === playerId && phase === Phase.GuardianAnimals && !ready) ? <Card key={index} css={cardPosition(index)} onClick={onClick} /> : <Card key={index} css={cardPosition(index)} />
+          return <Card key={index} css={cardPosition(index)} onClick={draw} />
         })
       }
     </>

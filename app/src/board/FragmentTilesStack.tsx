@@ -4,15 +4,21 @@ import { fragmentLeft, fragmentTop } from '../styles';
 import Images from '../images/Images';
 import { HTMLAttributes } from 'react';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
+import Phase from '@gamepark/living-forest/Phase';
+import { usePlay, usePlayerId } from '@gamepark/react-client';
+import { takeFragmentTileMove } from '@gamepark/living-forest/moves/TakeFragmentTile';
 
 type Props = {
     actionMoves: ActionMove[]
-    onClick: () => void
+    phase: Phase
 } & HTMLAttributes<HTMLDivElement>
 
-export function FragmentTilesStack({ onClick, actionMoves, ...props }: Props) {
-    if (!actionMoves.includes(ActionMove.TakeFragmentTile)) return <div css={fragment} onClick={onClick} {...props}></div>
-    return null
+export function FragmentTilesStack({ actionMoves, phase, ...props }: Props) {
+    const playerId = usePlayerId()
+    const play = usePlay()
+    const takeFragment = () => { phase === Phase.Action && !actionMoves.includes(ActionMove.TakeFragmentTile) && play(takeFragmentTileMove(playerId)) }
+
+    return <div css={fragment} onClick={takeFragment} {...props}></div>
 }
 
 const fragment = css`

@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { drawCardMove } from '@gamepark/living-forest/moves/DrawCard';
 import PlayerView from '@gamepark/living-forest/PlayerView';
-import { usePlay } from '@gamepark/react-client';
 import GameLocalView from "../GameLocalView";
 import Images from '../images/Images';
 import { fragmentPlayerHeight, fragmentPlayerLeft, fragmentPlayerTop, fragmentPlayerWidth } from '../styles';
@@ -18,8 +16,6 @@ type Props = {
 }
 
 export function PlayerBoard({ player, game }: Props) {
-    const play = usePlay()
-    const draw = () => { play(drawCardMove(player.spirit), { delayed: true }) }
 
     return (
         <>
@@ -29,7 +25,7 @@ export function PlayerBoard({ player, game }: Props) {
             <PlayerVictories victoryTiles={player.victoryTiles} />
             <DiscardDisplay discard={player.discard} size={player.discard.length} />
             <PlayerHelpLine line={player.line} spirit={player.spirit} />
-            <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} onClick={draw} displayed={game.displayedPlayer!} lineNumber={player.line.length} />
+            <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} displayed={game.displayedPlayer!} lineNumber={player.line.length} />
             <PlayerForest player={player} />
         </>
     );
