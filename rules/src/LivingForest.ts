@@ -191,26 +191,25 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           *****  Attract one or more Guardian Animals action  *****
           *********************************************************/
 
-          //Move already played
-          if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3)) {
+          //Move already played, bonus and ongoing move
+          if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) && (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal)) {
 
-            //Ongoing move
-            if (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) {
-              if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
-              this.state.reserve.rows.forEach(function (row, index) {
-                row.forEach(function (card, indexRow) {
+            //Move validation
+            if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
 
-                  //Card is drawn
-                  if (card != null) {
-                    //Enough resources ?
+            this.state.reserve.rows.forEach(function (row, index) {
+              row.forEach(function (card, indexRow) {
 
-                    if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
-                      moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
-                    }
+                //Card is drawn
+                if (card != null) {
+
+                  //Enough resources ?
+                  if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
+                    moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
                   }
-                })
+                }
               })
-            }
+            })
           }
 
           /********************************************************
