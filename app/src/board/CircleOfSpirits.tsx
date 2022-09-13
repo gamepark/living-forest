@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CircleOfSpirits, { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
+import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import MoveCircleOfSpirits, { getMoveCircleOfSpiritsDistance, moveCircleOfSpiritsMove } from '@gamepark/living-forest/moves/MoveCircleOfSpirits';
 import MoveType from '@gamepark/living-forest/moves/MoveType';
 import SpiritOfNature, { spirits } from '@gamepark/living-forest/SpiritOfNature';
@@ -11,9 +12,13 @@ import Fires from './Fires';
 
 type Props = {
     circleOfSpirits: CircleOfSpirits
+    actionMoves: ActionMove[]
+    ongoingMove: ActionMove | null
+    bonus: ActionMove | null
+    ready: boolean
 }
 
-export default function CircleOfSpiritsBoard({ circleOfSpirits }: Props) {
+export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready }: Props) {
     const animation = useAnimation<MoveCircleOfSpirits>(animation => animation.move.type === MoveType.MoveCircleOfSpirits)
     const play = usePlay()
     const playerId = usePlayerId()
@@ -49,7 +54,7 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits }: Props) {
                     </div>
                 })}
             </div>
-            <Fires fire={circleOfSpirits.fire} spirit={playerId} />
+            <Fires fire={circleOfSpirits.fire} spirit={playerId} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} />
         </>
     );
 }

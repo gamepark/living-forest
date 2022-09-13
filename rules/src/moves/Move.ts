@@ -87,5 +87,9 @@ export function getAvailableMoves(actionMoves: ActionMove[], bonus: ActionMove |
 }
 
 export function isAvailableMove(move: ActionMove, ongoingMove: ActionMove | null, bonus: ActionMove | null, actionMoves: ActionMove[], ready: boolean): boolean {
+    if (!ready) {
+        return true
+    }
+    return false
     return (!ready && ((!actionMoves.includes(move) || bonus == move || bonus == ActionMove.AttractGuardianAnimal3) && (ongoingMove == null || ongoingMove == move))) ? true : false
 }

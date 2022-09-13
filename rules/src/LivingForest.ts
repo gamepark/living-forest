@@ -161,7 +161,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           moves.push(shuffleDiscardMove(spirit))
         }
 
-        if (player.line.length > 1) {
+        if (player.line.length > 0) {
           if (player.fragment > 0) moves.push(discardCardMove(spirit))
           moves.push(tellYouAreReadyMove(spirit))
         }
@@ -175,6 +175,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         }
 
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
+        console.log(numberAction);
+
 
         //Check player number of actions 
         if (numberAction > player.actionMoves.length) {
@@ -216,22 +218,20 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           *****           Extinguish Fire action              *****
           *********************************************************/
 
-          //Move already played
-          if (!player.actionMoves.includes(ActionMove.ExtinguishFire)) {
+          //Move already played, bonus and ongoing move
+          if (!player.actionMoves.includes(ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire2) && (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire)) {
+            //Move validation
             if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal) moves.push(validateMove(player.spirit))
             //Still fires ?
             if (this.state.circle.fire.length > 0) {
-              //Ongoing move
-              if (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire2) {
-                this.state.circle.fire.forEach(function (fire, position) {
-                  if (fire != null) {
-                    //Enough drops ?
-                    if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
-                      moves.push(extinguishFireMove(spirit, position))
-                    }
+              this.state.circle.fire.forEach(function (fire, position) {
+                if (fire != null) {
+                  //Enough drops ?
+                  if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
+                    moves.push(extinguishFireMove(spirit, position))
                   }
-                })
-              }
+                }
+              })
             }
           }
           /********************************************************
@@ -387,11 +387,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
       case Phase.Action: {
         console.log("phase 2");
         const player = getPlayer(this.state, this.state.currentPlayer!)
-        if (player.ongoingMove == null) {
-          if (getAvailableMoves(player.actionMoves, player.bonus, player.line, this.state.reserve.rows, this.state.circle.fire, this.state.dispenser).length === 0) {
-            return [nextPlayerMove()]
-          }
-        }
+
         if (this.state.players.every(player => player.ready)) {
           return [startPhaseMove(Phase.EndOfTurn)]
         }
@@ -399,9 +395,11 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         const moves: Move[] = []
 
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
-        if (player.ready === false && numberAction === player.actionMoves.length) {
-          moves.push(endTurnMove(player.spirit))
-          moves.push(nextPlayerMove())
+        if (player.ongoingMove == null) {
+          if (player.ready === false && (numberAction === player.actionMoves.length || getAvailableMoves(player.actionMoves, player.bonus, player.line, this.state.reserve.rows, this.state.circle.fire, this.state.dispenser).length === 0)) {
+            moves.push(endTurnMove(player.spirit))
+            moves.push(nextPlayerMove())
+          }
         }
 
         return moves

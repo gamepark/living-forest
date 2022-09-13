@@ -5,20 +5,27 @@ import { fireHeight, fireWidth, circleOfSpiritsTop, circleOfSpiritsHeight, circl
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import { usePlay } from '@gamepark/react-client';
 import { extinguishFireMove } from '@gamepark/living-forest/moves/ExtinguishFire';
+import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
+import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 
 type Props = {
     fire: (number | null)[]
     spirit: SpiritOfNature
+    actionMoves: ActionMove[]
+    ongoingMove: ActionMove | null
+    bonus: ActionMove | null
+    ready: boolean
 }
 
-export default function Fire({ fire, spirit }: Props) {
+export default function Fire({ fire, spirit, actionMoves, ongoingMove, bonus, ready }: Props) {
     const play = usePlay()
+    const extinguish = (index: number) => { isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) && isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready) && play(extinguishFireMove(spirit, index)) }
 
     return (
         <>
             {
                 fire.map((fire, index) => {
-                    return fire != null && <FireTile key={index} fire={fire} css={firePosition(index)} onClick={() => play(extinguishFireMove(spirit, index))} />
+                    return fire != null && <FireTile key={index} fire={fire} css={firePosition(index)} onClick={() => extinguish(index)} />
                 })
             }
         </>
