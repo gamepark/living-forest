@@ -5,6 +5,7 @@ import { drawCardMove } from '@gamepark/living-forest/moves/DrawCard';
 import Phase from '@gamepark/living-forest/Phase';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import { usePlay, usePlayerId } from '@gamepark/react-client';
+import ShuffleButton from '../buttons/ShuffleButton';
 import DiscardButton from '../buttons/DiscardButton';
 import TellYouAreReadyButton from '../buttons/TellYouAreReadyButton';
 import Card from '../material/Card';
@@ -30,9 +31,7 @@ export default function PlayerDrawStack({ stack, spirit, fragment, phase, ready,
       <TellYouAreReadyButton spirit={spirit} phase={phase} ready={ready} displayed={displayed} lineNumber={lineNumber} />
       <DiscardButton spirit={spirit} fragment={fragment} phase={phase} ready={ready} displayed={displayed} lineNumber={lineNumber} />
       {
-        [...Array(stack)].map((_, index) => {
-          return <Card key={index} css={cardPosition(index)} onClick={draw} />
-        })
+        (stack > 0) ? [...Array(stack)].map((_, index) => { return <Card key={index} css={cardPosition(index)} onClick={draw} /> }) : <ShuffleButton spirit={spirit} ready={ready} />
       }
     </>
   );

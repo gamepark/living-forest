@@ -1,33 +1,29 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-
 import Phase from "@gamepark/living-forest/Phase";
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
 import { usePlay } from '@gamepark/react-client';
 import { useTranslation } from "react-i18next";
-import { Button } from "./Button";
 import { shuffleDiscardMove } from '../../../rules/src/moves/ShuffleDiscard';
+import { Button } from "./Button";
 
 type Props = {
-  fragment: number
   spirit: SpiritOfNature
-  phase: Phase
   ready: boolean
-  displayed?: SpiritOfNature
 }
 
-export default function ShuffleButton({ spirit, }: Props) {
+export default function ShuffleButton({ spirit, ready }: Props) {
   const { t } = useTranslation()
   const play = usePlay()
-  const shuffle = () => { play(shuffleDiscardMove(spirit)) }
+  const shuffle = () => { !ready && play(shuffleDiscardMove(spirit)) }
 
-  return <Button spirit={spirit} css={[button]} onClick={shuffle} >{t("Discard")}</Button>
+  return Phase.GuardianAnimals && <Button spirit={spirit} css={[button]} onClick={shuffle} >{t("Shuffle draft")}</Button>
 }
 
 const button = css`
   position: absolute;
   z-index: 100;
-  left: 10em;
-  top: 14.5em;
+  left: 4.7em;
+  top: 19em;
   font-size:3.5em;
 `
