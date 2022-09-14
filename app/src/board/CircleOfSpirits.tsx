@@ -1,7 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import CircleOfSpirits, { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
+import { getAnimalsResource } from '@gamepark/living-forest/material/GuardianAnimalDetails';
+import Resource from '@gamepark/living-forest/material/Resource';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
+import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
 import MoveCircleOfSpirits, { getMoveCircleOfSpiritsDistance, moveCircleOfSpiritsMove } from '@gamepark/living-forest/moves/MoveCircleOfSpirits';
 import MoveType from '@gamepark/living-forest/moves/MoveType';
 import SpiritOfNature, { spirits } from '@gamepark/living-forest/SpiritOfNature';
@@ -16,12 +20,19 @@ type Props = {
     ongoingMove: ActionMove | null
     bonus: ActionMove | null
     ready: boolean
+    line: GuardianAnimal[]
+    position: Partial<Record<SpiritOfNature, number>>
 }
 
-export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready }: Props) {
+export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready, line, position }: Props) {
     const animation = useAnimation<MoveCircleOfSpirits>(animation => animation.move.type === MoveType.MoveCircleOfSpirits)
     const play = usePlay()
     const playerId = usePlayerId()
+    const playerPosition = position[playerId]
+    const wind = getAnimalsResource(line, Resource.Wind)
+    const playerPositionLimit = playerPosition! + wind
+    const move = (index: number) => { index > playerPosition! && index <= playerPositionLimit && isAvailableMove(ActionMove.MoveCircleOfSpirits, ongoingMove, bonus, actionMoves, ready) && play(moveCircleOfSpiritsMove(playerId, index)) }
+
 
     return (
         <>
@@ -35,7 +46,7 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ong
                     if (spirit) {
                         return null
                     } else {
-                        return <div key={index} onClick={() => play(moveCircleOfSpiritsMove(playerId, index))}
+                        return <div key={index} onClick={() => move(index)}
                             css={rockPosition(index)} >
                         </div>
                     }

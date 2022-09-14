@@ -16,7 +16,7 @@ export default function ForestBoard({ game, player }: Props) {
     return (
         <div css={forest}>
             <Reserve game={game} spirit={player.spirit} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} />
-            <CircleOfSpirits circleOfSpirits={game.circle} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} />
+            <CircleOfSpirits circleOfSpirits={game.circle} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} line={player.line} position={game.circle.position} />
             <ProtectiveTreeDisperser dispenser={game.dispenser} spirit={player.spirit} />
             <FragmentTilesStack actionMoves={player.actionMoves} phase={game.phase} />
         </div>

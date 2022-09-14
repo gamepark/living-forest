@@ -240,15 +240,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           const playerPosition = this.state.circle.position[player.spirit]
           const wind = getAnimalsResource(player.line, Resource.Wind)
           const playerPositionLimit = playerPosition! + wind
-          //Move already played
-          if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits)) {
+
+          //Move already played, bonus and ongoing move
+          if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits) && (player.ongoingMove == null || player.ongoingMove == ActionMove.MoveCircleOfSpirits)) {
             circleOfSpiritsRocks.forEach(function (_rock, index) {
-              //Ongoing move
-              if (player.ongoingMove == null || player.ongoingMove == ActionMove.MoveCircleOfSpirits) {
-                //Rocks available
-                if (index > playerPosition! && index <= playerPositionLimit)
-                  moves.push(moveCircleOfSpiritsMove(player.spirit, index))
-              }
+              //Rocks available
+              if (index > playerPosition! && index <= playerPositionLimit) moves.push(moveCircleOfSpiritsMove(player.spirit, index))
             })
           }
 
