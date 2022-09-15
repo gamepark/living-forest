@@ -253,31 +253,28 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           ***** Plant one and only one Protective Tree action *****
           *********************************************************/
 
-          //Move already played
-          if (!player.actionMoves.includes(ActionMove.PlantTree)) {
-            //Ongoing move
-            if (player.ongoingMove == null || player.ongoingMove == ActionMove.PlantTree || player.bonus == ActionMove.PlantTree) {
-              //Take One protective tree  
-              Object.entries(this.state.dispenser).forEach(function (tree, index) {
-                //Enough trees ?
-                if (tree != null) {
-                  //Enough resources ?
-                  if (getAnimalsResource(player.line, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost!) {
-                    moves.push(takeProtectiveTreeMove(spirit, index + 1))
-                  }
+          //Move already played, bonus and ongoing move
+          if ((!player.actionMoves.includes(ActionMove.PlantTree) || player.bonus == ActionMove.PlantTree) && (player.ongoingMove == null || player.ongoingMove == ActionMove.PlantTree)) {
+            //Take One protective tree  
+            Object.entries(this.state.dispenser).forEach(function (tree, index) {
+              //Enough trees ?
+              if (tree != null) {
+                //Enough resources ?
+                if (getAnimalsResource(player.line, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost!) {
+                  moves.push(takeProtectiveTreeMove(spirit, index + 1))
                 }
-              })
-              //If player has taken one tree, he can plant it
-              if (player.tree != null) {
-                player.forest.map(function (row, indexRow) {
-                  row.forEach(function (_, indexCol) {
-                    //Placement is valid ?
-                    if (placementIsValid(player.forest, { x: indexRow, y: indexCol })) {
-                      moves.push(plantTreeMove(player.spirit, { x: indexRow, y: indexCol }))
-                    }
-                  })
-                })
               }
+            })
+            //If player has taken one tree, he can plant it
+            if (player.tree != null) {
+              player.forest.map(function (row, indexRow) {
+                row.forEach(function (_, indexCol) {
+                  //Placement is valid ?
+                  if (placementIsValid(player.forest, { x: indexRow, y: indexCol })) {
+                    moves.push(plantTreeMove(player.spirit, { x: indexRow, y: indexCol }))
+                  }
+                })
+              })
             }
           }
 
