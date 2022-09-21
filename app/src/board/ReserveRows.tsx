@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
-import { attractGuardianAnimalMove } from '@gamepark/living-forest/moves/AttractGuardianAnimal';
+import AttractGuardianAnimal, { attractGuardianAnimalMove } from '@gamepark/living-forest/moves/AttractGuardianAnimal';
 import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
+import MoveType from '@gamepark/living-forest/moves/MoveType';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
-import { usePlay } from '@gamepark/react-client';
+import { useAnimation, usePlay } from '@gamepark/react-client';
 import Card from '../material/Card';
 import FireTile from '../material/FireTile';
 import { fireHeight, fireWidth, reserveFireLeft, reserveFireTop, reserveRowCardHeight, reserveRowCardWith, reserveRowDrawLeft, reserveRowDrawTop } from '../styles';
@@ -17,11 +18,13 @@ type Props = {
     ongoingMove: ActionMove | null
     bonus: ActionMove | null
     ready: boolean
+    players: number
 }
 
-export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingMove, bonus, ready }: Props) {
+export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingMove, bonus, ready, players }: Props) {
     const play = usePlay()
     const attract = (guardianAnimal: GuardianAnimal, index: number, indexRow: number) => { isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) && isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready) && play(attractGuardianAnimalMove(spirit, guardianAnimal, { x: index, y: indexRow })) }
+    const animation = useAnimation<AttractGuardianAnimal>(animation => animation.move.type === MoveType.AttractGuardianAnimal)
 
     return (
         <>
@@ -29,7 +32,7 @@ export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingM
                 reserveRows.map((row, indexRow) => {
                     return row.map((guardianAnimal, index) => {
                         if (!guardianAnimal) return <FireTile key={index + indexRow} fire={indexRow + 1} css={fire(index, indexRow)} />
-                        return <Card key={guardianAnimal} css={cardPosition(index, indexRow)} guardianAnimal={guardianAnimal} onClick={() => { attract(guardianAnimal, index, indexRow) }} />
+                        return <Card key={guardianAnimal} css={[cardPosition(index, indexRow), animation && attractGuardianAnimalAnimation(animation.duration, players)]} guardianAnimal={guardianAnimal} onClick={() => { attract(guardianAnimal, index, indexRow) }} />
                     })
                 })
             }
@@ -52,5 +55,26 @@ function fire(index: number, indexStack: number) {
     width:${fireWidth}em;
     top:${reserveFireTop + indexStack * 22}em;
     left:${reserveFireLeft + index * 16}em;
+    `
+}
+
+function attractGuardianAnimalAnimation(duration: number, players: number) {
+    const down = 100
+    const left = 15 * players
+
+    const frames = keyframes`
+    from{
+        transform:translateY(0em) 
+        translateX(0rem) 
+    }
+    100%{
+        transform:translateY(${(down)}em) 
+        translateX(${0 - left}rem)
+
+        
+    }
+    `
+    return css`
+        animation: ${frames} ${duration}s ease-in-out;
     `
 }
