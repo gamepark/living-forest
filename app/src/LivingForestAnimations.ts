@@ -18,6 +18,8 @@ const LivingForestAnimations: Animations<GameLocalView, MoveView, SpiritOfNature
         const player = state.players.find(player => player.spirit === move.spirit)!
         const distance = getMoveCircleOfSpiritsDistance(move, state.circle.position[move.spirit]!, getAnimalsResource(player.line, Resource.Wind), state.players.length)
         return !state.displayedPlayer ? 0.2 + distance * 0.05 : 0
+      case MoveType.TakeFragmentTile:
+        return 0.9
       default:
         return 0
     }
