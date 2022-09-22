@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
+import { getAnimalsResource, getGuardianAnimalDetails } from '@gamepark/living-forest/material/GuardianAnimalDetails';
+import Resource from '@gamepark/living-forest/material/Resource';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import AttractGuardianAnimal, { attractGuardianAnimalMove } from '@gamepark/living-forest/moves/AttractGuardianAnimal';
 import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
@@ -19,12 +21,16 @@ type Props = {
     bonus: ActionMove | null
     ready: boolean
     players: number
+    line: GuardianAnimal[]
+    attractedGuardianAnimal: GuardianAnimal
 }
 
-export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingMove, bonus, ready, players }: Props) {
+export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingMove, bonus, ready, players, line, attractedGuardianAnimal }: Props) {
     const play = usePlay()
-    const attract = (guardianAnimal: GuardianAnimal, index: number, indexRow: number) => { isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) && isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready) && play(attractGuardianAnimalMove(spirit, guardianAnimal, { x: index, y: indexRow })) }
+
+    const attract = (guardianAnimal: GuardianAnimal, index: number, indexRow: number) => { (getAnimalsResource(line, Resource.Sun) >= attractedGuardianAnimal + getGuardianAnimalDetails(guardianAnimal).cost) && (!isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) || isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready)) && play(attractGuardianAnimalMove(spirit, guardianAnimal, { x: index, y: indexRow })) }
     const animation = useAnimation<AttractGuardianAnimal>(animation => animation.move.type === MoveType.AttractGuardianAnimal)
+    console.log(animation);
 
     return (
         <>
@@ -32,6 +38,7 @@ export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingM
                 reserveRows.map((row, indexRow) => {
                     return row.map((guardianAnimal, index) => {
                         if (!guardianAnimal) return <FireTile key={index + indexRow} fire={indexRow + 1} css={fire(index, indexRow)} />
+                        console.log(getAnimalsResource(line, Resource.Sun) >= attractedGuardianAnimal + getGuardianAnimalDetails(guardianAnimal).cost);
                         return <Card key={guardianAnimal} css={[cardPosition(index, indexRow), animation && attractGuardianAnimalAnimation(animation.duration, players)]} guardianAnimal={guardianAnimal} onClick={() => { attract(guardianAnimal, index, indexRow) }} />
                     })
                 })

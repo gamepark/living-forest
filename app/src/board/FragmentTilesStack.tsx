@@ -46,15 +46,9 @@ function takeFragmentTileAnimation(duration: number, players: number) {
     const left = 15 * players
 
     const frames = keyframes`
-    from{
-        transform:translateY(0em) 
-        translateX(0rem) 
-    }
-    100%{
+    to{
         transform:translateY(${(down)}em) 
         translateX(${0 - left}rem)
-
-        
     }
     `
     return css`

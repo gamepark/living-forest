@@ -22,6 +22,8 @@ const LivingForestAnimations: Animations<GameLocalView, MoveView, SpiritOfNature
         return !state.displayedPlayer ? 0.9 : 0
       case MoveType.AttractGuardianAnimal:
         return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.TakeProtectiveTree:
+        return !state.displayedPlayer ? 0.9 : 0
       default:
         return 0
     }
