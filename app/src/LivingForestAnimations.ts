@@ -6,11 +6,12 @@ import MoveType from "@gamepark/living-forest/moves/MoveType";
 import MoveView from "@gamepark/living-forest/moves/MoveView";
 import SpiritOfNature from "@gamepark/living-forest/SpiritOfNature";
 import { Animations } from "@gamepark/react-client";
+import AnimationContext from "@gamepark/react-client/dist/animations/AnimationContext";
 
 import GameLocalView from "./GameLocalView";
 
-const LivingForestAnimations: Animations<GameLocalView, MoveView, SpiritOfNature> = {
-  getAnimationDuration(move: MoveView, { state }) {
+export default class LivingForestAnimations extends Animations<GameLocalView, MoveView, SpiritOfNature> {
+  getPreDuration(move: MoveView, { state }: AnimationContext<GameLocalView, MoveView, SpiritOfNature>) {
     switch (move.type) {
       case MoveType.DrawCard:
         return state.displayedPlayer === move.spirit ? 0.5 : 0
@@ -24,11 +25,11 @@ const LivingForestAnimations: Animations<GameLocalView, MoveView, SpiritOfNature
         return !state.displayedPlayer ? 0.9 : 0
       case MoveType.TakeProtectiveTree:
         return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.ExtinguishFire:
+        return !state.displayedPlayer ? 0.9 : 0
       default:
         return 0
     }
 
   }
 }
-
-export default LivingForestAnimations

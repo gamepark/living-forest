@@ -60,7 +60,7 @@ const style = css`
 
 ReactDOM.render(
   <StrictMode>
-    <GameProvider game="living-forest" Rules={LivingForest} RulesView={LivingForestView} optionsSpec={LivingForestOptionsSpec} animations={LivingForestAnimations}>
+    <GameProvider game="living-forest" Rules={LivingForest} RulesView={LivingForestView} optionsSpec={LivingForestOptionsSpec} animations={new LivingForestAnimations()}>
       <App />
     </GameProvider>
     <Global styles={[normalize, style]} />
