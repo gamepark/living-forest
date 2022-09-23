@@ -9,6 +9,7 @@ import { getAnimalsResource, getAnimalsType, getGuardianAnimalDetails } from './
 import { getInitializationDispenser } from './material/ProtectiveTree';
 import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 import Resource from './material/Resource';
+import { getResourcesCount } from './material/Victory';
 import { getSpiritVictoryTiles } from './material/VictoryTile';
 import ActionMove from './moves/ActionMove';
 import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
@@ -175,8 +176,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
         }
 
         const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
-        console.log(numberAction);
-
 
         //Check player number of actions 
         if (numberAction > player.actionMoves.length) {
@@ -206,7 +205,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
                 if (card != null) {
 
                   //Enough resources ?
-                  if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
+                  if (getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Sun) >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
                     moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
                   }
                 }
@@ -227,7 +226,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
               this.state.circle.fire.forEach(function (fire, position) {
                 if (fire != null) {
                   //Enough drops ?
-                  if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
+                  if (getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Drop) >= player.extinguishedFiresTotal + fire + 1) {
                     moves.push(extinguishFireMove(spirit, position))
                   }
                 }
@@ -364,7 +363,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
    *
    * @return The next automatic consequence that should be played in current game state.
    */
-  getAutomaticMove(): Move[] {
+  getAutomaticMoves(): Move[] {
     switch (this.state.phase) {
       case Phase.GuardianAnimals: {
         console.log("phase 1");

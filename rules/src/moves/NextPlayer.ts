@@ -19,9 +19,6 @@ export function nextPlayer(state: GameState | GameView, _move: NextPlayer) {
 
   const nextPlayer = state.players[nextPlayerIndex];
 
-  console.log(nextPlayer);
-
-
   state.currentPlayer = nextPlayer.spirit;
 
 }

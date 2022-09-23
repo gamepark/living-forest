@@ -3,7 +3,9 @@ import { css } from '@emotion/react';
 import CircleOfSpirits, { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
 import { getAnimalsResource } from '@gamepark/living-forest/material/GuardianAnimalDetails';
+import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree';
 import Resource from '@gamepark/living-forest/material/Resource';
+import VictoryTile from '@gamepark/living-forest/material/VictoryTile';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
 import MoveCircleOfSpirits, { getMoveCircleOfSpiritsDistance, moveCircleOfSpiritsMove } from '@gamepark/living-forest/moves/MoveCircleOfSpirits';
@@ -22,9 +24,12 @@ type Props = {
     ready: boolean
     line: GuardianAnimal[]
     position: Partial<Record<SpiritOfNature, number>>
+    players: number
+    victoryTiles: VictoryTile[]
+    forest: (ProtectiveTree | number | null)[][]
 }
 
-export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready, line, position }: Props) {
+export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready, line, position, players, victoryTiles, forest }: Props) {
     const animation = useAnimation<MoveCircleOfSpirits>(animation => animation.move.type === MoveType.MoveCircleOfSpirits)
     const play = usePlay()
     const playerId = usePlayerId()
@@ -55,7 +60,6 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ong
                     var position = circleOfSpirits.position[spirit]!
                     if (animation?.move.spirit === spirit) {
                         const distance = getMoveCircleOfSpiritsDistance(animation.move, position, 0, Object.keys(circleOfSpirits.position).length)
-                        console.log(distance);
 
                         position = position + distance
                     }
@@ -65,7 +69,7 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ong
                     </div>
                 })}
             </div>
-            <Fires fire={circleOfSpirits.fire} spirit={playerId} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} />
+            <Fires fire={circleOfSpirits.fire} spirit={playerId} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={players} line={line} victoryTiles={victoryTiles} forest={forest} />
         </>
     );
 }
