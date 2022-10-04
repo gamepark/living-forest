@@ -36,9 +36,7 @@ export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingM
     const play = usePlay()
     const attract = (guardianAnimal: GuardianAnimal, index: number, indexRow: number) => { (getResourcesCount(victoryTiles, line, bonus, forest, Resource.Sun) >= attractedGuardianAnimal + getGuardianAnimalDetails(guardianAnimal).cost) && (!isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) || isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready)) && play(attractGuardianAnimalMove(spirit, guardianAnimal, { x: index, y: indexRow })) }
     const animation = useAnimation<AttractGuardianAnimal>(animation => animation.move.type === MoveType.AttractGuardianAnimal)
-    const spiritIndex = players.findIndex(player => player.spirit === spirit)
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
-    console.log(spiritIndex + " - " + playerIndex);
 
     return (
         <>
@@ -74,8 +72,6 @@ function fire(index: number, indexStack: number) {
 }
 
 function attractGuardianAnimalAnimation(index: number, indexStack: number, duration: number, players: number, spiritPosition: number) {
-    console.log(spiritPosition);
-
     const leftPanel = ((5 * panelWidth - ((players + 1) * panelWidth)) / 2) + (panelWidth * (spiritPosition + 1)) + 15
     const down = 100 - (reserveRowDrawTop - index * 0.1 + indexStack * 23) - 18
     const leftCard = reserveRowDrawLeft + index * 16
