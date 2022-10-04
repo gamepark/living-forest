@@ -1,6 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
+import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree';
+import VictoryTile from '@gamepark/living-forest/material/VictoryTile';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import GameLocalView from '../GameLocalView';
@@ -17,13 +19,14 @@ type Props = {
     ready: boolean
     line: GuardianAnimal[]
     attractedGuardianAnimal: GuardianAnimal
-
+    victoryTiles: VictoryTile[]
+    forest: (ProtectiveTree | number | null)[][]
 }
 
-export default function Reserve({ game, spirit, actionMoves, ongoingMove, bonus, ready, line, attractedGuardianAnimal }: Props) {
+export default function Reserve({ game, spirit, actionMoves, ongoingMove, bonus, ready, line, attractedGuardianAnimal, victoryTiles, forest }: Props) {
     return (
         <div css={reserve}>
-            <ReserveRows reserveRows={game.reserve.rows} spirit={spirit} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={game.players.length} line={line} attractedGuardianAnimal={attractedGuardianAnimal} />
+            <ReserveRows reserveRows={game.reserve.rows} spirit={spirit} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={game.players} line={line} attractedGuardianAnimal={attractedGuardianAnimal} victoryTiles={victoryTiles} forest={forest} currentPlayer={game.currentPlayer} />
             <ReserveStacks reserveStacks={game.reserve.stacks} />
         </div>
     );

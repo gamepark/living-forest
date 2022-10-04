@@ -40,3 +40,11 @@ function panelsPosition(players: number) {
   left: 50%;
   `
 }
+
+export function getSpiritPanelPosition(spirit: number, playerIndex: number | null, players: number) {
+  if (playerIndex) {
+    return (players + spirit - playerIndex) % players + 1
+  } else {
+    return spirit
+  }
+}
