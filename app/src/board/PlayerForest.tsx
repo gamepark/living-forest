@@ -8,13 +8,15 @@ import TilesDropArea from "./TilesDropArea";
 
 type Props = {
     player: PlayerView
+    players: PlayerView[]
+    currentPlayer?: SpiritOfNature
 }
-export default function PlayerForest({ player }: Props) {
+export default function PlayerForest({ player, players, currentPlayer }: Props) {
     return (
         <>
             <div css={spiritBackgroundImage1(player.spirit)}></div>
             <div css={backgroundCases(player.spirit)}>
-                <TilesDropArea forest={player.forest} spirit={player.spirit} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} playerTree={player.tree} />
+                <TilesDropArea forest={player.forest} spirit={player.spirit} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} playerTree={player.tree} players={players} currentPlayer={currentPlayer} />
             </div>
             <div css={spiritBackgroundImage2(player.spirit)}></div>
         </>

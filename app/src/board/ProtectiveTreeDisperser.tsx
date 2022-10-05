@@ -64,10 +64,6 @@ function takeProtectiveTreeAnimation(index: number, indexTree: number, duration:
 
     const left = leftPanel - leftTree
 
-    console.log(panelWidth + " - " + spiritPosition + " - " + leftTree + " - " + leftPanel);
-
-
-
     const frames = keyframes`
     80%{
         transform:translateY(${down / 2}em) 

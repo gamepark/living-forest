@@ -26,7 +26,7 @@ export function PlayerBoard({ player, game }: Props) {
             <DiscardDisplay discard={player.discard} size={player.discard.length} />
             <PlayerHelpLine line={player.line} spirit={player.spirit} />
             <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} displayed={game.displayedPlayer!} lineNumber={player.line.length} />
-            <PlayerForest player={player} />
+            <PlayerForest player={player} players={game.players} currentPlayer={game.currentPlayer} />
         </>
     );
 };
