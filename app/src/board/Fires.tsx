@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
 import FireTile from '../material/FireTile';
-import { fireHeight, fireWidth, circleOfSpiritsTop, circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritswidth } from '../styles';
+import { fireHeight, fireWidth, circleOfSpiritsTop, circleOfSpiritsHeight, circleOfSpiritsLeft, circleOfSpiritswidth, panelWidth } from '../styles';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import { useAnimation, usePlay } from '@gamepark/react-client';
 import ExtinguishFire, { extinguishFireMove } from '@gamepark/living-forest/moves/ExtinguishFire';
@@ -13,6 +13,7 @@ import Resource from '@gamepark/living-forest/material/Resource';
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
 import VictoryTile from '@gamepark/living-forest/material/VictoryTile';
 import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree';
+import PlayerView from '@gamepark/living-forest/PlayerView';
 
 type Props = {
     fire: (number | null)[]
@@ -21,22 +22,25 @@ type Props = {
     ongoingMove: ActionMove | null
     bonus: ActionMove | null
     ready: boolean
-    players: number
+    players: PlayerView[]
     line: GuardianAnimal[]
     victoryTiles: VictoryTile[]
     forest: (ProtectiveTree | number | null)[][]
+    currentPlayer?: SpiritOfNature
 }
 
-export default function Fire({ fire, spirit, actionMoves, ongoingMove, bonus, ready, players, line, victoryTiles, forest }: Props) {
+export default function Fire({ fire, spirit, actionMoves, ongoingMove, bonus, ready, players, line, victoryTiles, forest, currentPlayer }: Props) {
     const play = usePlay()
     const extinguish = (index: number) => { getResourcesCount(victoryTiles, line, bonus, forest, Resource.Drop) && (isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) || isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready)) && play(extinguishFireMove(spirit, index)) }
     const animation = useAnimation<ExtinguishFire>(animation => animation.move.type === MoveType.ExtinguishFire)
+    const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
 
     return (
         <>
             {
                 fire.map((fire, index) => {
-                    return fire != null && <FireTile key={index} fire={fire} css={[firePosition(index), animation && extinguishFireAnimation(animation.duration, players)]} onClick={() => extinguish(index)} />
+
+                    return fire != null && <FireTile key={index} fire={fire} css={[firePosition(index), animation && animation.move.position === index && extinguishFireAnimation(index, animation.duration, players.length, playerIndex)]} onClick={() => extinguish(index)} />
                 })
             }
         </>
@@ -57,16 +61,25 @@ function firePosition(index: number) {
     `
 }
 
-function extinguishFireAnimation(duration: number, _players: number) {
-    const down = 100
-    // const left = 15 * players
+function extinguishFireAnimation(index: number, duration: number, players: number, spiritPosition: number) {
+    const angle = (150 - 60 * index) * Math.PI / 180
+    const leftPanel = ((5 * panelWidth - ((players + 1) * panelWidth)) / 2) + (panelWidth * (spiritPosition + 1)) + 15
+    const top = index === 0 ? middleFireTop : middleFireTop - Math.sin(angle) * radius
+    const leftFire = index === 0 ? middleFireLeft : middleFireLeft - Math.cos(angle) * radius
+
+    const down = 100 - top
+
+    const left = leftPanel - leftFire
 
     const frames = keyframes`
-    from{
-        transform:translateY(0em) 
+    80%{
+        transform:translateY(${down / 2}em) 
+        translateX(${left}em)
+        translateZ(10em)
     }
-    100%{
+    to{
         transform:translateY(${(down)}em) 
+        translateX(${left}em)
     }
     `
     return css`

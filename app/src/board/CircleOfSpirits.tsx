@@ -10,6 +10,7 @@ import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
 import MoveCircleOfSpirits, { getMoveCircleOfSpiritsDistance, moveCircleOfSpiritsMove } from '@gamepark/living-forest/moves/MoveCircleOfSpirits';
 import MoveType from '@gamepark/living-forest/moves/MoveType';
+import PlayerView from '@gamepark/living-forest/PlayerView';
 import SpiritOfNature, { spirits } from '@gamepark/living-forest/SpiritOfNature';
 import { useAnimation, usePlay, usePlayerId } from '@gamepark/react-client';
 import Images from '../images/Images';
@@ -24,12 +25,13 @@ type Props = {
     ready: boolean
     line: GuardianAnimal[]
     position: Partial<Record<SpiritOfNature, number>>
-    players: number
+    players: PlayerView[]
     victoryTiles: VictoryTile[]
     forest: (ProtectiveTree | number | null)[][]
+    currentPlayer?: SpiritOfNature
 }
 
-export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready, line, position, players, victoryTiles, forest }: Props) {
+export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready, line, position, players, victoryTiles, forest, currentPlayer }: Props) {
     const animation = useAnimation<MoveCircleOfSpirits>(animation => animation.move.type === MoveType.MoveCircleOfSpirits)
     const play = usePlay()
     const playerId = usePlayerId()
@@ -69,7 +71,7 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ong
                     </div>
                 })}
             </div>
-            <Fires fire={circleOfSpirits.fire} spirit={playerId} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={players} line={line} victoryTiles={victoryTiles} forest={forest} />
+            <Fires fire={circleOfSpirits.fire} spirit={playerId} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={players} line={line} victoryTiles={victoryTiles} forest={forest} currentPlayer={currentPlayer} />
         </>
     );
 }

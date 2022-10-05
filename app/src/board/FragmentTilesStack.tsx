@@ -50,7 +50,6 @@ function takeFragmentTileAnimation(duration: number, players: number, spiritPosi
     const leftFragment = fragmentLeft
 
     const left = leftPanel - leftFragment
-    // const left = 15 * players
 
     const frames = keyframes`
     80%{
