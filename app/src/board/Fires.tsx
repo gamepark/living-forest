@@ -66,6 +66,7 @@ function extinguishFireAnimation(index: number, duration: number, players: numbe
     const leftPanel = ((5 * panelWidth - ((players + 1) * panelWidth)) / 2) + (panelWidth * (spiritPosition + 1)) + 15
     const top = index === 0 ? middleFireTop : middleFireTop - Math.sin(angle) * radius
     const leftFire = index === 0 ? middleFireLeft : middleFireLeft - Math.cos(angle) * radius
+    console.log(panelWidth + " - " + spiritPosition + " - " + leftFire + " - fire " + leftPanel);
 
     const down = 100 - top
 
