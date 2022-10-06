@@ -29,6 +29,18 @@ export default class LivingForestAnimations extends Animations<GameLocalView, Mo
         return !state.displayedPlayer ? 0.9 : 0
       case MoveType.ExtinguishFire:
         return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.FillReserve:
+        return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.OnibiAttackingPlayers:
+        return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.OnibiAttackingSacredTree:
+        return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.ReturnGuardianAnimals:
+        return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.ShuffleDiscard:
+        return !state.displayedPlayer ? 0.9 : 0
+      case MoveType.DiscardCard:
+        return !state.displayedPlayer ? 0.9 : 0
       default:
         return 0
     }

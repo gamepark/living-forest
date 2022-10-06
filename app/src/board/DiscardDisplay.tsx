@@ -15,13 +15,13 @@ type Props = {
     discard: GuardianAnimal[]
 }
 
-export default function DiscardDisplay({ size, discard }: Props) {
+export default function DiscardDisplay({ discard }: Props) {
     const [catalogOpen, setCatalogOpen] = useState(false)
     const { t } = useTranslation()
 
     return (
         <>
-            {[...Array(Math.min(size, 8))].map((_, index) => <Card key={index} css={style(index)} onClick={() => setCatalogOpen(true)} />)}
+            {discard.map((guardianAnimal, index) => <Card key={index} css={style(index)} guardianAnimal={guardianAnimal} onClick={() => setCatalogOpen(true)} />)}
             <Dialog open={catalogOpen} onBackdropClick={() => setCatalogOpen(false)} css={largeDialogCss}>
                 <h2>{t('Discard cards')}</h2>
                 <FontAwesomeIcon icon={faXmark} css={dialogCloseIcon} onClick={() => setCatalogOpen(false)} />
