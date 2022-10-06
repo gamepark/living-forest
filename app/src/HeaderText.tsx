@@ -62,6 +62,9 @@ export default function HeaderText({ loading, game }: Props) {
         return <>{t('Another player is playing his turn.')}</>
       }
     }
+    if (game?.phase === Phase.EndOfTurn) {
+      return <>{t('End of the Game turn.')}</>
+    }
   }
 
   return <>Loaded! Now what? Your player id is {getPlayerName(playerId, t)}</>

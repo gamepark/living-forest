@@ -2,9 +2,9 @@
 import { css } from '@emotion/react';
 import CircleOfSpirits, { circleOfSpiritsRocks } from '@gamepark/living-forest/material/CircleOfSpirits';
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
-import { getAnimalsResource } from '@gamepark/living-forest/material/GuardianAnimalDetails';
 import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree';
 import Resource from '@gamepark/living-forest/material/Resource';
+import { getResourcesCount } from '@gamepark/living-forest/material/Victory';
 import VictoryTile from '@gamepark/living-forest/material/VictoryTile';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
@@ -29,14 +29,15 @@ type Props = {
     victoryTiles: VictoryTile[]
     forest: (ProtectiveTree | number | null)[][]
     currentPlayer?: SpiritOfNature
+    extinguishedFiresTotal: number
 }
 
-export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready, line, position, players, victoryTiles, forest, currentPlayer }: Props) {
+export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ongoingMove, bonus, ready, line, position, players, victoryTiles, forest, currentPlayer, extinguishedFiresTotal }: Props) {
     const animation = useAnimation<MoveCircleOfSpirits>(animation => animation.move.type === MoveType.MoveCircleOfSpirits)
     const play = usePlay()
     const playerId = usePlayerId()
     const playerPosition = position[playerId]
-    const wind = getAnimalsResource(line, Resource.Wind)
+    const wind = getResourcesCount(victoryTiles, line, bonus, forest, Resource.Wind)
     const playerPositionLimit = playerPosition! + wind
     const move = (index: number) => { index > playerPosition! && index <= playerPositionLimit && isAvailableMove(ActionMove.MoveCircleOfSpirits, ongoingMove, bonus, actionMoves, ready) && play(moveCircleOfSpiritsMove(playerId, index)) }
 
@@ -71,7 +72,7 @@ export default function CircleOfSpiritsBoard({ circleOfSpirits, actionMoves, ong
                     </div>
                 })}
             </div>
-            <Fires fire={circleOfSpirits.fire} spirit={playerId} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={players} line={line} victoryTiles={victoryTiles} forest={forest} currentPlayer={currentPlayer} />
+            <Fires fire={circleOfSpirits.fire} spirit={playerId} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={players} line={line} victoryTiles={victoryTiles} forest={forest} currentPlayer={currentPlayer} extinguishedFiresTotal={extinguishedFiresTotal} />
         </>
     );
 }

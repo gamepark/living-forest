@@ -34,8 +34,9 @@ type Props = {
 
 export default function ReserveRows({ reserveRows, spirit, actionMoves, ongoingMove, bonus, ready, players, line, attractedGuardianAnimal, victoryTiles, forest, currentPlayer }: Props) {
     const play = usePlay()
-    const attract = (guardianAnimal: GuardianAnimal, index: number, indexRow: number) => { (getResourcesCount(victoryTiles, line, bonus, forest, Resource.Sun) >= attractedGuardianAnimal + getGuardianAnimalDetails(guardianAnimal).cost) && (!isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) || isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready)) && play(attractGuardianAnimalMove(spirit, guardianAnimal, { x: index, y: indexRow })) }
+    const attract = (guardianAnimal: GuardianAnimal, index: number, indexRow: number) => { (getResourcesCount(victoryTiles, line, bonus, forest, Resource.Sun) >= attractedGuardianAnimal + getGuardianAnimalDetails(guardianAnimal).cost) && (isAvailableMove(ActionMove.AttractGuardianAnimal, ongoingMove, bonus, actionMoves, ready) || isAvailableMove(ActionMove.AttractGuardianAnimal3, ongoingMove, bonus, actionMoves, ready)) && play(attractGuardianAnimalMove(spirit, guardianAnimal, { x: index, y: indexRow })) }
     const animation = useAnimation<AttractGuardianAnimal>(animation => animation.move.type === MoveType.AttractGuardianAnimal)
+
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
 
     return (

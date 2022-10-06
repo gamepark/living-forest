@@ -17,7 +17,7 @@ export default function ForestBoard({ game, player }: Props) {
   return (
     <div css={forest}>
       <Reserve game={game} spirit={player.spirit} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} line={player.line} attractedGuardianAnimal={player.attractedGuardianAnimal} victoryTiles={player.victoryTiles} forest={player.forest} />
-      <CircleOfSpirits circleOfSpirits={game.circle} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} line={player.line} position={game.circle.position} players={game.players} victoryTiles={player.victoryTiles} forest={player.forest} currentPlayer={game.currentPlayer} />
+      <CircleOfSpirits circleOfSpirits={game.circle} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} line={player.line} position={game.circle.position} players={game.players} victoryTiles={player.victoryTiles} forest={player.forest} currentPlayer={game.currentPlayer} extinguishedFiresTotal={player.extinguishedFiresTotal} />
       <ProtectiveTreeDisperser dispenser={game.dispenser} spirit={player.spirit} actionMoves={player.actionMoves} ongoingMove={player.ongoingMove} bonus={player.bonus} ready={player.ready} line={player.line} players={game.players} currentPlayer={game.currentPlayer} />
       <FragmentTilesStack actionMoves={player.actionMoves} phase={game.phase} players={game.players} currentPlayer={game.currentPlayer} />
     </div>

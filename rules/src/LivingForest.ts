@@ -193,10 +193,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           *********************************************************/
 
           //Move already played, bonus and ongoing move
-          if (!player.actionMoves.includes(ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) && (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal)) {
+          if ((!player.actionMoves.includes(ActionMove.AttractGuardianAnimal) && (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal) || ((player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) && player.ongoingMove === ActionMove.MoveCircleOfSpirits))) {
+            const suns = getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Sun)
+            console.log('in');
 
             //Move validation
-            if (getAnimalsResource(player.line, Resource.Sun) >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
+            if (suns >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
 
             this.state.reserve.rows.forEach(function (row, index) {
               row.forEach(function (card, indexRow) {
@@ -205,7 +207,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
                 if (card != null) {
 
                   //Enough resources ?
-                  if (getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Sun) >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
+                  if (suns >= player.attractedGuardianAnimal + getGuardianAnimalDetails(card).cost!) {
                     moves.push(attractGuardianAnimalMove(spirit, card, { x: indexRow, y: index }))
                   }
                 }
@@ -218,9 +220,9 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           *********************************************************/
 
           //Move already played, bonus and ongoing move
-          if (!player.actionMoves.includes(ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire2) && (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire)) {
+          if ((!player.actionMoves.includes(ActionMove.ExtinguishFire) && (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire) || ((player.bonus == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire2) && player.ongoingMove === ActionMove.MoveCircleOfSpirits))) {
             //Move validation
-            if (getAnimalsResource(player.line, Resource.Drop) >= player.extinguishedFiresTotal) moves.push(validateMove(player.spirit))
+            if (getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Drop) >= player.extinguishedFiresTotal) moves.push(validateMove(player.spirit))
             //Still fires ?
             if (this.state.circle.fire.length > 0) {
               this.state.circle.fire.forEach(function (fire, position) {
@@ -237,7 +239,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           ***** Move forward on the Circle of Spirits action  *****
           *********************************************************/
           const playerPosition = this.state.circle.position[player.spirit]
-          const wind = getAnimalsResource(player.line, Resource.Wind)
+          const wind = getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Wind)
           const playerPositionLimit = playerPosition! + wind
 
           //Move already played, bonus and ongoing move

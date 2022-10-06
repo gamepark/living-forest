@@ -30,7 +30,7 @@ export function attractGuardianAnimal(state: GameState | GameView, move: Attract
   } else {
     player.deck.unshift(move.guardianAnimal)
   }
-  player.ongoingMove = ActionMove.AttractGuardianAnimal
+  if (player.ongoingMove != ActionMove.MoveCircleOfSpirits) player.ongoingMove = ActionMove.AttractGuardianAnimal
   state.reserve.rows[move.coordinates.y][move.coordinates.x] = null
 }
 

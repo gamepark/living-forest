@@ -87,5 +87,13 @@ export function getAvailableMoves(actionMoves: ActionMove[], bonus: ActionMove |
 }
 
 export function isAvailableMove(move: ActionMove, ongoingMove: ActionMove | null, bonus: ActionMove | null, actionMoves: ActionMove[], ready: boolean): boolean {
-    return (!ready && ((!actionMoves.includes(move) || bonus == move || bonus == ActionMove.AttractGuardianAnimal3) && (ongoingMove == null || ongoingMove == move))) ? true : false
+    let isAvailable = false
+    isAvailable = ((!ready && ((!actionMoves.includes(move) && (ongoingMove == null || ongoingMove == move)) || ((bonus == move) && ongoingMove === ActionMove.MoveCircleOfSpirits)))) ? true : false
+    if (bonus == ActionMove.AttractGuardianAnimal3 && ongoingMove === ActionMove.MoveCircleOfSpirits) {
+        isAvailable = true
+    }
+    if (bonus == ActionMove.ExtinguishFire2 && ongoingMove === ActionMove.MoveCircleOfSpirits) {
+        isAvailable = true
+    }
+    return isAvailable
 }
