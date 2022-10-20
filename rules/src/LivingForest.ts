@@ -5,7 +5,7 @@ import GameView from './GameView';
 import { isGameOptions, LivingForestOptions } from './LivingForestOptions';
 import { circleOfSpiritsRocks, getInitializationPlayersRocks } from './material/CircleOfSpirits';
 import { startingGuardianAnimals } from './material/GuardianAnimal';
-import { getAnimalsResource, getAnimalsType, getGuardianAnimalDetails } from './material/GuardianAnimalDetails';
+import { getAnimalsType, getGuardianAnimalDetails } from './material/GuardianAnimalDetails';
 import { getInitializationDispenser } from './material/ProtectiveTree';
 import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 import Resource from './material/Resource';
@@ -195,7 +195,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           //Move already played, bonus and ongoing move
           if ((!player.actionMoves.includes(ActionMove.AttractGuardianAnimal) && (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal) || ((player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) && player.ongoingMove === ActionMove.MoveCircleOfSpirits))) {
             const suns = getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Sun)
-            console.log('in');
 
             //Move validation
             if (suns >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
@@ -261,7 +260,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
               //Enough trees ?
               if (tree != null) {
                 //Enough resources ?
-                if (getAnimalsResource(player.line, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost!) {
+                if (getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost!) {
                   moves.push(takeProtectiveTreeMove(spirit, index + 1))
                 }
               }

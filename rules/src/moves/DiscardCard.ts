@@ -16,7 +16,8 @@ export default DiscardCard
 
 export function discardCard(state: GameState | GameView, move: DiscardCard) {
   const player = getPlayer(state, move.spirit)
-  const card = player.line[-1]
+  const card = player.line[player.line.length - 1]
+
   if (card === GuardianAnimal.Varan) {
     player.line.pop()
   } else {

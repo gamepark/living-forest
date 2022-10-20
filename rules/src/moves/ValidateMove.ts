@@ -22,6 +22,7 @@ export function validate(state: GameState | GameView, move: ValidateMove) {
   if (player.ongoingMove === ActionMove.AttractGuardianAnimal || player.bonus === ActionMove.AttractGuardianAnimal) player.attractedGuardianAnimal = 0
   if (player.ongoingMove === ActionMove.ExtinguishFire) player.victory[1] = player.extinguishedFires.length
   player.extinguishedFires = []
+  player.extinguishedFiresTotal = 0
 
   player.ongoingMove = null
   if (player.bonus === ActionMove.AttractGuardianAnimal || player.bonus === ActionMove.ExtinguishFire || player.bonus === ActionMove.PlantTree) player.bonus = null

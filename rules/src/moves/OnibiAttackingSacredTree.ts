@@ -11,6 +11,7 @@ export default OnibiAttackingSacredTree
 
 
 export function onibiAttackingSacredTree(state: GameState | GameView, _move: OnibiAttackingSacredTree) {
+  let fires = 0
   state.reserve.rows.forEach(function (row, index) {
     row.forEach(function (card, _indexRow) {
       if (card === null) {
@@ -24,7 +25,13 @@ export function onibiAttackingSacredTree(state: GameState | GameView, _move: Oni
       }
     })
   })
-  if (state.circle.fire.length === 0) state.circle.fire.push(Fire.Fire2)
+  for (var i = 0; i < 7; i++) {
+    if (state.circle.fire[i] !== null) {
+      fires++
+      break
+    }
+  }
+  if (fires === 0) state.circle.fire[0] = Fire.Fire2
 }
 
 export function onibiAttackingSacredTreeMove(): OnibiAttackingSacredTree {

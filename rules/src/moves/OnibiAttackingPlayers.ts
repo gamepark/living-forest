@@ -1,9 +1,10 @@
-import GameState from '../GameState'
-import GameView from '../GameView'
-import MoveType from './MoveType'
-import { getAnimalsResource } from '../material/GuardianAnimalDetails';
-import Resource from '../material/Resource';
+import GameState from '../GameState';
+import GameView from '../GameView';
+import { getTotalFires } from '../material/Fire';
 import GuardianAnimal from '../material/GuardianAnimal';
+import Resource from '../material/Resource';
+import { getResourcesCount } from '../material/Victory';
+import MoveType from './MoveType';
 
 type OnibiAttackingPlayers = {
   type: MoveType.OnibiAttackingPlayers
@@ -11,11 +12,12 @@ type OnibiAttackingPlayers = {
 
 export default OnibiAttackingPlayers
 
-
 export function onibiAttackingPlayers(state: GameState | GameView, _move: OnibiAttackingPlayers) {
-  const firesTotal = state.circle.fire.reduce((sum, fire) => sum + (fire! + 1 ?? 0), 0)
+  const firesTotal = getTotalFires(state.circle.fire)
+  console.log(firesTotal);
+
   state.players.forEach(function (player) {
-    if (firesTotal >= getAnimalsResource(player.line, Resource.Drop)) {
+    if (firesTotal >= getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Drop)) {
       for (var i = 0; i < state.circle.fire.length; i++) {
         if (state.circle.fire[i] != null) player.discard.push(GuardianAnimal.Varan)
       }

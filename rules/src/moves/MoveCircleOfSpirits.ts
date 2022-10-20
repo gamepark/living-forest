@@ -25,9 +25,10 @@ export function moveCircleOfSpirits(state: GameState | GameView, move: MoveCircl
     }
   })
   state.circle.position[player.spirit] = move.coordinate
+
   if (circleOfSpiritsRocks[move.coordinate] === ActionMove.TakeFragmentTile) {
     player.fragment++
-    player.actionMoves = [ActionMove.MoveCircleOfSpirits]
+    player.actionMoves.push(ActionMove.MoveCircleOfSpirits)
     player.ongoingMove = null
   } else {
     player.bonus = circleOfSpiritsRocks[move.coordinate]
