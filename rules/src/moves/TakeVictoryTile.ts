@@ -1,7 +1,10 @@
-import GameState from "../GameState"
-import MoveType from "./MoveType"
-import SpiritOfNature from '../SpiritOfNature';
+import GameState from "../GameState";
+import GameView from '../GameView';
 import VictoryTile from "../material/VictoryTile";
+import { getPlayer } from "../PlayerView";
+import SpiritOfNature from '../SpiritOfNature';
+import ActionMove from "./ActionMove";
+import MoveType from "./MoveType";
 
 
 type TakeVictoryTile = {
@@ -14,12 +17,16 @@ type TakeVictoryTile = {
 export default TakeVictoryTile
 
 
-export function takeVictoryTile(state: GameState, move: TakeVictoryTile) {
-  const player = state.players.find(p => p.spirit === move.spirit)!
-  const playerJumped = state.players.find(p => p.spirit === move.spiritJumped)!
-  player.victoryTiles.push(...playerJumped.victoryTiles.splice(move.victory, 1))
+export function takeVictoryTile(state: GameState | GameView, move: TakeVictoryTile) {
+  const player = getPlayer(state, move.spirit)
+  const playerJumped = getPlayer(state, move.spiritJumped)
+  const victoryIndex = playerJumped.victoryTiles.findIndex(vt => vt === move.victory)
+
+  player.victoryTiles.push(...playerJumped.victoryTiles.splice(victoryIndex, 1))
   player.bonus = null
-  playerJumped.victory[move.victory - 1] -= 1
+  player.actionMoves.push(ActionMove.MoveCircleOfSpirits)
+  player.ongoingMove = null
+  playerJumped.victory[move.victory + 1] -= 1
 }
 
 export function takeVictoryTileMove(spirit: SpiritOfNature, spiritJumped: SpiritOfNature, victory: VictoryTile): TakeVictoryTile {

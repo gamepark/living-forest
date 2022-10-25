@@ -19,19 +19,21 @@ export default MoveCircleOfSpirits
 export function moveCircleOfSpirits(state: GameState | GameView, move: MoveCircleOfSpirits) {
   const player = getPlayer(state, move.spirit)
   player.ongoingMove = ActionMove.MoveCircleOfSpirits
-  state.players.forEach(function (player, _index) {
-    if (state.circle.position[player.spirit]! > state.circle.position[player.spirit]! && state.circle.position[player.spirit]! < move.coordinate) {
+  state.players.forEach(function (circlePlayer, _index) {
+    if (state.circle.position[move.spirit]! < state.circle.position[circlePlayer.spirit]! && state.circle.position[circlePlayer.spirit]! < move.coordinate) {
       player.bonus = ActionMove.TakeVictoryTile
+      player.playerJumped.push(circlePlayer.spirit)
     }
   })
   state.circle.position[player.spirit] = move.coordinate
-
-  if (circleOfSpiritsRocks[move.coordinate] === ActionMove.TakeFragmentTile) {
-    player.fragment++
-    player.actionMoves.push(ActionMove.MoveCircleOfSpirits)
-    player.ongoingMove = null
-  } else {
-    player.bonus = circleOfSpiritsRocks[move.coordinate]
+  if (player.bonus != ActionMove.TakeVictoryTile) {
+    if (circleOfSpiritsRocks[move.coordinate] === ActionMove.TakeFragmentTile) {
+      player.fragment++
+      player.actionMoves.push(ActionMove.MoveCircleOfSpirits)
+      player.ongoingMove = null
+    } else {
+      player.bonus = circleOfSpiritsRocks[move.coordinate]
+    }
   }
 }
 

@@ -34,7 +34,7 @@ import { randomizeShuffleDiscardMove, shuffleDiscard, shuffleDiscardMove } from 
 import { startPhase, startPhaseMove } from './moves/StartPhase';
 import { takeFragmentTile, takeFragmentTileMove } from './moves/TakeFragmentTile';
 import { takeProtectiveTree, takeProtectiveTreeMove } from './moves/TakeProtectiveTree';
-import { takeVictoryTile } from './moves/TakeVictoryTile';
+import { takeVictoryTile, takeVictoryTileMove } from './moves/TakeVictoryTile';
 import { tellYouAreReady, tellYouAreReadyMove } from './moves/TellYouAreReady';
 import { validate, validateMove } from './moves/ValidateMove';
 import Phase from './Phase';
@@ -87,7 +87,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           tree: null,
           ongoingMove: null,
           bonus: null,
-          victoryTiles: getSpiritVictoryTiles(player.id)
+          victoryTiles: getSpiritVictoryTiles(player.id),
+          playerJumped: []
         })),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id,
@@ -240,13 +241,30 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           const playerPosition = this.state.circle.position[player.spirit]
           const wind = getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Wind)
           const playerPositionLimit = playerPosition! + wind
+          const playingPlayer = getPlayer(this.state, this.state.currentPlayer!)
+          const displayedPlayer = getPlayer(this.state, playingPlayer.playerJumped[0])
+          console.log("Joueur displayed : " + playingPlayer.playerJumped[0]);
 
-          //Move already played, bonus and ongoing move
-          if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits) && (player.ongoingMove == null || player.ongoingMove == ActionMove.MoveCircleOfSpirits)) {
-            circleOfSpiritsRocks.forEach(function (_rock, index) {
-              //Rocks available
-              if (index > playerPosition! && index <= playerPositionLimit) moves.push(moveCircleOfSpiritsMove(player.spirit, index))
-            })
+
+          //Take a victory tile move
+          if (playingPlayer.bonus === ActionMove.TakeVictoryTile) {
+            if (playingPlayer.playerJumped.find(spirit => spirit === playingPlayer.playerJumped[0]) != undefined) {
+
+              console.log("Joueur played : " + playingPlayer.spirit);
+              displayedPlayer.victoryTiles.forEach(function (tile, index) {
+                console.log(tile + " " + index);
+
+                moves.push(takeVictoryTileMove(playingPlayer.spirit, playingPlayer.playerJumped[0], tile))
+              })
+            }
+          } else {
+            //Move already played, bonus and ongoing move
+            if (!player.actionMoves.includes(ActionMove.MoveCircleOfSpirits) && (player.ongoingMove == null || player.ongoingMove == ActionMove.MoveCircleOfSpirits)) {
+              circleOfSpiritsRocks.forEach(function (_rock, index) {
+                //Rocks available
+                if (index > playerPosition! && index <= playerPositionLimit) moves.push(moveCircleOfSpiritsMove(player.spirit, index))
+              })
+            }
           }
 
           /********************************************************
@@ -388,8 +406,8 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
 
         const moves: Move[] = []
 
-        const numberAction = (getAnimalsType(player.line) == 3) ? 1 : 2
-        if (player.ongoingMove == null) {
+        const numberAction = (getAnimalsType(player.line) === 3) ? 1 : 2
+        if (player.ongoingMove === null && player.bonus === null) {
           if (player.ready === false && (numberAction === player.actionMoves.length || getAvailableMoves(player.actionMoves, player.bonus, player.line, this.state.reserve.rows, this.state.circle.fire, this.state.dispenser).length === 0)) {
             moves.push(endTurnMove(player.spirit))
             moves.push(nextPlayerMove())

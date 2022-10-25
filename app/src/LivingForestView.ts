@@ -22,6 +22,7 @@ import { onibiAttackingPlayers } from '../../rules/src/moves/OnibiAttackingPlaye
 import { onibiAttackingSacredTree } from '../../rules/src/moves/OnibiAttackingSacredTree';
 import { givingSacredTree } from '@gamepark/living-forest/moves/GivingSacredTree'
 import { discardCard } from '../../rules/src/moves/DiscardCard';
+import { takeVictoryTile } from '@gamepark/living-forest/moves/TakeVictoryTile'
 
 /**
  * This class is useful when the game has "IncompleteInformation" (or "SecretInformation").
@@ -80,6 +81,8 @@ export default class LivingForestView implements Game<GameLocalView, MoveView | 
         return givingSacredTree(this.state, move)
       case MoveType.DiscardCard:
         return discardCard(this.state, move)
+      case MoveType.TakeVictoryTile:
+        return takeVictoryTile(this.state, move)
       case DISPLAY_SCREEN:
         this.state.displayedPlayer = move.spiritOfNature
         break

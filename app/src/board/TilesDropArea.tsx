@@ -25,7 +25,7 @@ type Props = {
 
 export default function TilesDropArea({ forest, spirit, actionMoves, ongoingMove, bonus, ready, playerTree, players, currentPlayer }: Props) {
     const play = usePlay()
-    const plant = (indexRow: number, index: number) => { placementIsValid(forest, { x: indexRow, y: index }) && playerTree != null && isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) && play(plantTreeMove(spirit, { x: indexRow, y: index })) }
+    const plant = (indexRow: number, index: number) => { placementIsValid(forest, { x: indexRow, y: index }) && playerTree != null && (isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.PlantTree) && play(plantTreeMove(spirit, { x: indexRow, y: index })) }
     const animation = useAnimation<PlantTree>(animation => animation.move.type === MoveType.PlantTree)
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
 

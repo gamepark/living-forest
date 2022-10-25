@@ -24,6 +24,7 @@ export default interface PlayerState {
   ongoingMove: ActionMove | null
   bonus: ActionMove | null
   victoryTiles: VictoryTile[]
+  playerJumped: SpiritOfNature[]
 }
 
 export function setupDeck(): number[] {

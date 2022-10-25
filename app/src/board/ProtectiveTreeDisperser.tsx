@@ -31,7 +31,7 @@ type Props = {
 export default function ProtectiveTreeDisperser({ dispenser, spirit, actionMoves, ongoingMove, bonus, ready, line, players, currentPlayer }: Props) {
     const trees = protectiveTrees;
     const play = usePlay()
-    const take = (protectiveTree: ProtectiveTree, index: number) => { getAnimalsResource(line, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost! && isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) && play(takeProtectiveTreeMove(spirit, protectiveTree)) }
+    const take = (protectiveTree: ProtectiveTree, index: number) => { getAnimalsResource(line, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost! && (isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.PlantTree) && play(takeProtectiveTreeMove(spirit, protectiveTree)) }
     const animation = useAnimation<TakeProtectiveTree>(animation => animation.move.type === MoveType.TakeProtectiveTree)
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
 

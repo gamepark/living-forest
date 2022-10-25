@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import PlayerView from '@gamepark/living-forest/PlayerView';
+import PlayerView, { getPlayer } from '@gamepark/living-forest/PlayerView';
 import GameLocalView from "../GameLocalView";
 import Images from '../images/Images';
 import { fragmentPlayerHeight, fragmentPlayerLeft, fragmentPlayerTop, fragmentPlayerWidth } from '../styles';
@@ -16,13 +16,14 @@ type Props = {
 }
 
 export function PlayerBoard({ player, game }: Props) {
+    const playingPlayer = getPlayer(game, game.currentPlayer!)
 
     return (
         <>
             {player.fragment > 0 && [...Array(player.fragment)].map((_, index) => {
                 return <div key={index} css={fragment(index)}></div>
             })}
-            <PlayerVictories victoryTiles={player.victoryTiles} />
+            <PlayerVictories victoryTiles={player.victoryTiles} bonus={playingPlayer.bonus} playersJumped={playingPlayer.playerJumped} spirit={game.currentPlayer} spiritDisplayed={player.spirit} />
             <DiscardDisplay discard={player.discard} size={player.discard.length} />
             <PlayerHelpLine line={player.line} spirit={player.spirit} />
             <PlayerDrawStack phase={game.phase} ready={player.ready} fragment={player.fragment} spirit={player.spirit} stack={player.deck} displayed={game.displayedPlayer!} lineNumber={player.line.length} />

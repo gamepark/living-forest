@@ -14,7 +14,6 @@ export default OnibiAttackingPlayers
 
 export function onibiAttackingPlayers(state: GameState | GameView, _move: OnibiAttackingPlayers) {
   const firesTotal = getTotalFires(state.circle.fire)
-  console.log(firesTotal);
 
   state.players.forEach(function (player) {
     if (firesTotal >= getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Drop)) {

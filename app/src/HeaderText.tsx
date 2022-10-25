@@ -41,7 +41,7 @@ export default function HeaderText({ loading, game }: Props) {
               return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
             }
             if (player.bonus === ActionMove.TakeVictoryTile) {
-              return <>{t('Select a victory tile.')}</>
+              return <>{t('Select a victory tile from ')}{getPlayerName(player.playerJumped[0], t)}.</>
             }
           }
           if (player.ongoingMove === ActionMove.ExtinguishFire) {
