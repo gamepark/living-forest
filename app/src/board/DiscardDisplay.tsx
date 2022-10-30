@@ -8,7 +8,7 @@ import { useState } from 'react'
 import Scrollbars from 'react-custom-scrollbars-2'
 import { useTranslation } from 'react-i18next'
 import Card from '../material/Card'
-import { cardHeight, cardWidth, dialogCloseIcon, discardLeft, discardTop, largeDialogCss } from '../styles'
+import { cardHeight, dialogCloseIcon, discardLeft, discardTop, largeDialogCss } from '../styles'
 
 type Props = {
     size: number
@@ -25,7 +25,7 @@ export default function DiscardDisplay({ discard }: Props) {
             <Dialog open={catalogOpen} onBackdropClick={() => setCatalogOpen(false)} css={largeDialogCss}>
                 <h2>{t('Discard cards')}</h2>
                 <FontAwesomeIcon icon={faXmark} css={dialogCloseIcon} onClick={() => setCatalogOpen(false)} />
-                <Scrollbars style={{ width: `${(cardWidth + 1) * 10 + 2}em`, height: `80em` }}
+                <Scrollbars style={{ width: `180em`, height: `80em` }}
                     css={scrollableContainer}>
                     <div css={catalogCss}>
                         {discard.map(card => <Card key={card} guardianAnimal={card} css={cardCss} />)}
