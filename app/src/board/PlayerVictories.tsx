@@ -17,16 +17,8 @@ type Props = {
 }
 
 export default function PlayerVictories({ victoryTiles, bonus, playersJumped, spirit, spiritDisplayed }: Props) {
-
-    // Récupérer playersJumped du joueur qui joue et non qui est affiché -> idem pour spirit et spiritDisplayed
-
     const play = usePlay()
     const takeVictory = (tile: number) => { typeof spirit != "undefined" && bonus === ActionMove.TakeVictoryTile && playersJumped.find(spirit => spirit === spiritDisplayed) != undefined && play(takeVictoryTileMove(spirit, spiritDisplayed, tile)) }
-    console.log(playersJumped);
-
-    console.log(bonus === ActionMove.TakeVictoryTile)
-    console.log(typeof spirit != "undefined");
-    console.log(playersJumped.find(spirit => spirit === spiritDisplayed) != undefined);
 
     return (
         <>
