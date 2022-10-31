@@ -1,20 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from '@emotion/react';
-import TreeDispenser from '@gamepark/living-forest/material/TreeDispenser';
-import Tree from '../material/Tree';
-import { disperserLeft, disperserTop, panelWidth } from '../styles';
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
 import ProtectiveTree, { protectiveTrees } from '@gamepark/living-forest/material/ProtectiveTree';
-import TakeProtectiveTree, { takeProtectiveTreeMove } from '@gamepark/living-forest/moves/TakeProtectiveTree';
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
-import { useAnimation, usePlay } from '@gamepark/react-client';
+import { getProtectiveTreeDetails } from '@gamepark/living-forest/material/ProtectiveTreeDetails';
+import Resource from '@gamepark/living-forest/material/Resource';
+import TreeDispenser from '@gamepark/living-forest/material/TreeDispenser';
+import { getResourcesCount } from '@gamepark/living-forest/material/Victory';
+import VictoryTile from '@gamepark/living-forest/material/VictoryTile';
 import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
-import { getAnimalsResource } from '@gamepark/living-forest/material/GuardianAnimalDetails';
-import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
-import Resource from '@gamepark/living-forest/material/Resource';
-import { getProtectiveTreeDetails } from '@gamepark/living-forest/material/ProtectiveTreeDetails';
 import MoveType from '@gamepark/living-forest/moves/MoveType';
+import TakeProtectiveTree, { takeProtectiveTreeMove } from '@gamepark/living-forest/moves/TakeProtectiveTree';
 import PlayerView from '@gamepark/living-forest/PlayerView';
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
+import { useAnimation, usePlay } from '@gamepark/react-client';
+import Tree from '../material/Tree';
+import { disperserLeft, disperserTop, panelWidth } from '../styles';
 
 type Props = {
     dispenser: TreeDispenser
@@ -26,12 +27,14 @@ type Props = {
     line: GuardianAnimal[]
     players: PlayerView[]
     currentPlayer?: SpiritOfNature
+    victoryTiles: VictoryTile[]
+    forest: (ProtectiveTree | number | null)[][]
 }
 
-export default function ProtectiveTreeDisperser({ dispenser, spirit, actionMoves, ongoingMove, bonus, ready, line, players, currentPlayer }: Props) {
+export default function ProtectiveTreeDisperser({ dispenser, spirit, actionMoves, ongoingMove, bonus, ready, line, players, currentPlayer, victoryTiles, forest }: Props) {
     const trees = protectiveTrees;
     const play = usePlay()
-    const take = (protectiveTree: ProtectiveTree, index: number) => { getAnimalsResource(line, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost! && (isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.PlantTree) && play(takeProtectiveTreeMove(spirit, protectiveTree)) }
+    const take = (protectiveTree: ProtectiveTree, index: number) => { getResourcesCount(victoryTiles, line, bonus, forest, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost! && (isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.PlantTree) && play(takeProtectiveTreeMove(spirit, protectiveTree)) }
     const animation = useAnimation<TakeProtectiveTree>(animation => animation.move.type === MoveType.TakeProtectiveTree)
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
 

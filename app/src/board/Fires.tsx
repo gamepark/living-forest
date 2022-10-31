@@ -32,7 +32,7 @@ type Props = {
 
 export default function Fire({ fire, spirit, actionMoves, ongoingMove, bonus, ready, players, line, victoryTiles, forest, currentPlayer, extinguishedFiresTotal }: Props) {
     const play = usePlay()
-    const extinguish = (index: number) => { getResourcesCount(victoryTiles, line, bonus, forest, Resource.Drop) >= extinguishedFiresTotal + fire[index]! && (isAvailableMove(ActionMove.ExtinguishFire, ongoingMove, bonus, actionMoves, ready) || isAvailableMove(ActionMove.ExtinguishFire2, ongoingMove, bonus, actionMoves, ready)) && play(extinguishFireMove(spirit, index)) }
+    const extinguish = (index: number) => { getResourcesCount(victoryTiles, line, bonus, forest, Resource.Drop) >= extinguishedFiresTotal + fire[index]! + 1 && (isAvailableMove(ActionMove.ExtinguishFire, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.ExtinguishFire2) && play(extinguishFireMove(spirit, index)) }
 
     const animation = useAnimation<ExtinguishFire>(animation => animation.move.type === MoveType.ExtinguishFire)
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)

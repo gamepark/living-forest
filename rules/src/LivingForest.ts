@@ -220,7 +220,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           *********************************************************/
 
           //Move already played, bonus and ongoing move
-          if ((!player.actionMoves.includes(ActionMove.ExtinguishFire) && (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire) || ((player.bonus == ActionMove.ExtinguishFire || player.bonus == ActionMove.ExtinguishFire2) && player.ongoingMove === ActionMove.MoveCircleOfSpirits))) {
+          if ((!player.actionMoves.includes(ActionMove.ExtinguishFire) && (player.ongoingMove == null || player.ongoingMove == ActionMove.ExtinguishFire) || ((player.bonus == ActionMove.ExtinguishFire) && player.ongoingMove === ActionMove.MoveCircleOfSpirits) || (player.bonus === ActionMove.ExtinguishFire2 && player.ongoingMove === ActionMove.PlantTree))) {
             //Move validation
             if (getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Drop) >= player.extinguishedFiresTotal) moves.push(validateMove(player.spirit))
             //Still fires ?

@@ -40,6 +40,9 @@ export default function HeaderText({ loading, game }: Props) {
             if (player.bonus === ActionMove.AttractGuardianAnimal) {
               return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
             }
+            if (player.bonus === ActionMove.PlantTree) {
+              return <Trans defaults="You can take a tree from the dispenser." />
+            }
             if (player.bonus === ActionMove.TakeVictoryTile) {
               return <>{t('Select a victory tile from ')}{getPlayerName(player.playerJumped[0], t)}.</>
             }
@@ -48,7 +51,13 @@ export default function HeaderText({ loading, game }: Props) {
             return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
           }
           if (player.ongoingMove === ActionMove.PlantTree) {
-            return <Trans defaults="You can plant the tree in your forest." />
+            if (player.bonus === ActionMove.ExtinguishFire2) {
+              return <Trans defaults="You can choose fires to extinguish. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
+            }
+            if (player.bonus === ActionMove.AttractGuardianAnimal3) {
+              return <Trans defaults="You can choose Guardian Animals from the reserve. <0>Validate<0/>" components={[<ValidateButton spirit={player.spirit} />]} />
+            }
+            if (player.bonus === null) return <Trans defaults="You can plant the tree in your forest." />
           }
         } else {
           if (getAnimalsType(player.line) > 2) {
