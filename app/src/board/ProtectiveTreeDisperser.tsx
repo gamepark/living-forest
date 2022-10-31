@@ -11,6 +11,7 @@ import ActionMove from '@gamepark/living-forest/moves/ActionMove';
 import { isAvailableMove } from '@gamepark/living-forest/moves/Move';
 import MoveType from '@gamepark/living-forest/moves/MoveType';
 import TakeProtectiveTree, { takeProtectiveTreeMove } from '@gamepark/living-forest/moves/TakeProtectiveTree';
+import Phase from '@gamepark/living-forest/Phase';
 import PlayerView from '@gamepark/living-forest/PlayerView';
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
 import { useAnimation, usePlay } from '@gamepark/react-client';
@@ -29,12 +30,13 @@ type Props = {
     currentPlayer?: SpiritOfNature
     victoryTiles: VictoryTile[]
     forest: (ProtectiveTree | number | null)[][]
+    phase: Phase
 }
 
-export default function ProtectiveTreeDisperser({ dispenser, spirit, actionMoves, ongoingMove, bonus, ready, line, players, currentPlayer, victoryTiles, forest }: Props) {
+export default function ProtectiveTreeDisperser({ dispenser, spirit, actionMoves, ongoingMove, bonus, ready, line, players, currentPlayer, victoryTiles, forest, phase }: Props) {
     const trees = protectiveTrees;
     const play = usePlay()
-    const take = (protectiveTree: ProtectiveTree, index: number) => { getResourcesCount(victoryTiles, line, bonus, forest, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost! && (isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.PlantTree) && play(takeProtectiveTreeMove(spirit, protectiveTree)) }
+    const take = (protectiveTree: ProtectiveTree, index: number) => { phase === Phase.Action && getResourcesCount(victoryTiles, line, bonus, forest, Resource.Seed) >= getProtectiveTreeDetails(index + 1).cost! && (isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.PlantTree) && play(takeProtectiveTreeMove(spirit, protectiveTree)) }
     const animation = useAnimation<TakeProtectiveTree>(animation => animation.move.type === MoveType.TakeProtectiveTree)
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
 

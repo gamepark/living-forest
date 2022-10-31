@@ -21,8 +21,6 @@ export default PlantTree
 export function plantTree(state: GameState | GameView, move: PlantTree) {
   const player = getPlayer(state, move.spirit)
   player.forest[move.coordinates.x][move.coordinates.y] = player.tree
-  player.actionMoves.push(ActionMove.PlantTree)
-  player.victory[1]++
   if (player.bonus === ActionMove.PlantTree) player.bonus = null
   if (player.tree === ProtectiveTree.Tree11) player.bonus = ActionMove.PlantTree
   if ((move.coordinates.x === 0 && move.coordinates.y === 4) || (move.coordinates.x === 2 && move.coordinates.y === 0)) player.fragment += 2
@@ -31,6 +29,8 @@ export function plantTree(state: GameState | GameView, move: PlantTree) {
   if (player.bonus === null) {
     player.ongoingMove = null
     player.tree = null
+    player.actionMoves.push(ActionMove.PlantTree)
+    player.victory[1]++
   }
 }
 

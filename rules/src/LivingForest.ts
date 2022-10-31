@@ -194,8 +194,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           *********************************************************/
 
           //Move already played, bonus and ongoing move
-          if ((!player.actionMoves.includes(ActionMove.AttractGuardianAnimal) && (player.ongoingMove == null || player.ongoingMove == ActionMove.AttractGuardianAnimal) || ((player.bonus == ActionMove.AttractGuardianAnimal || player.bonus == ActionMove.AttractGuardianAnimal3) && player.ongoingMove === ActionMove.MoveCircleOfSpirits))) {
+          console.log((player.ongoingMove));
+
+          if ((!player.actionMoves.includes(ActionMove.AttractGuardianAnimal) && (player.ongoingMove === null || player.ongoingMove === ActionMove.AttractGuardianAnimal)) || (player.bonus == ActionMove.AttractGuardianAnimal && player.ongoingMove === ActionMove.MoveCircleOfSpirits) || (player.bonus === ActionMove.AttractGuardianAnimal3 && player.ongoingMove === ActionMove.PlantTree)) {
             const suns = getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Sun)
+
+            console.log("legal move");
 
             //Move validation
             if (suns >= player.attractedGuardianAnimal) moves.push(validateMove(spirit))
@@ -243,16 +247,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           const playerPositionLimit = playerPosition! + wind
           const playingPlayer = getPlayer(this.state, this.state.currentPlayer!)
           const displayedPlayer = getPlayer(this.state, playingPlayer.playerJumped[0])
-          console.log("Joueur displayed : " + playingPlayer.playerJumped[0]);
-
 
           //Take a victory tile move
           if (playingPlayer.bonus === ActionMove.TakeVictoryTile) {
             if (playingPlayer.playerJumped.find(spirit => spirit === playingPlayer.playerJumped[0]) != undefined) {
 
-              console.log("Joueur played : " + playingPlayer.spirit);
-              displayedPlayer.victoryTiles.forEach(function (tile, index) {
-                console.log(tile + " " + index);
+              displayedPlayer.victoryTiles.forEach(function (tile, _index) {
 
                 moves.push(takeVictoryTileMove(playingPlayer.spirit, playingPlayer.playerJumped[0], tile))
               })

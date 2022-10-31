@@ -25,7 +25,7 @@ export function validate(state: GameState | GameView, move: ValidateMove) {
   player.extinguishedFiresTotal = 0
 
   player.ongoingMove = null
-  if (player.bonus === ActionMove.AttractGuardianAnimal || player.bonus === ActionMove.ExtinguishFire || player.bonus === ActionMove.PlantTree) player.bonus = null
+  if (player.bonus === ActionMove.AttractGuardianAnimal || player.bonus === ActionMove.ExtinguishFire || player.bonus === ActionMove.PlantTree || player.bonus === ActionMove.ExtinguishFire2 || player.bonus === ActionMove.AttractGuardianAnimal3) player.bonus = null
 
 }
 
