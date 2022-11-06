@@ -19,7 +19,7 @@ type Props = {
 export function PlayerBoard({ player, game }: Props) {
     const playingPlayer = getPlayer(game, game.currentPlayer!)
     const playingPlayerBonus = game.phase === Phase.Action ? playingPlayer.bonus : null
-    const playingPlayerJumped = game.phase === Phase.Action ? playingPlayer.playerJumped : []
+    const playingPlayerJumped = game.phase === Phase.Action ? playingPlayer.playersJumped : []
 
     return (
         <>

@@ -1,8 +1,7 @@
-import GameState from '../GameState'
-import GameView from '../GameView'
-import MoveType from './MoveType'
-import { getVictoryTilesCount } from '../material/VictoryTile';
-import Victory from '../material/Victory';
+import GameState from '../GameState';
+import GameView from '../GameView';
+import Victory, { getvictoryCount } from '../material/Victory';
+import MoveType from './MoveType';
 
 type ReturnGuardianAnimals = {
   type: MoveType.ReturnGuardianAnimals
@@ -16,7 +15,7 @@ export function returnGuardianAnimals(state: GameState | GameView, _move: Return
     while (player.line.length > 0) {
       player.discard.push(player.line.shift()!)
     }
-    player.victory[2] = getVictoryTilesCount(player.victoryTiles, Victory.SacredFlower)
+    player.victory[2] = getvictoryCount(player.victoryTiles, player.line, player.forest, Victory.Tree, player.extinguishedFires.length)
   })
 }
 

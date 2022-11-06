@@ -22,7 +22,7 @@ export function moveCircleOfSpirits(state: GameState | GameView, move: MoveCircl
   state.players.forEach(function (circlePlayer, _index) {
     if (state.circle.position[move.spirit]! < state.circle.position[circlePlayer.spirit]! && state.circle.position[circlePlayer.spirit]! < move.coordinate) {
       player.bonus = ActionMove.TakeVictoryTile
-      player.playerJumped.push(circlePlayer.spirit)
+      player.playersJumped.push(circlePlayer.spirit)
     }
   })
   state.circle.position[player.spirit] = move.coordinate

@@ -7,6 +7,7 @@ import GameView from '../GameView';
 import { getPlayer } from '../PlayerView';
 import ProtectiveTree from '../material/ProtectiveTree';
 import ActionMove from './ActionMove';
+import Victory, { getvictoryCount } from '../material/Victory';
 
 
 type PlantTree = {
@@ -30,7 +31,9 @@ export function plantTree(state: GameState | GameView, move: PlantTree) {
     player.ongoingMove = null
     player.tree = null
     player.actionMoves.push(ActionMove.PlantTree)
-    player.victory[1]++
+    player.victory[1] = getvictoryCount(player.victoryTiles, player.line, player.forest, Victory.Tree, player.extinguishedFires.length)
+    player.victory[2] = getvictoryCount(player.victoryTiles, player.line, player.forest, Victory.SacredFlower, player.extinguishedFires.length)
+
   }
 }
 

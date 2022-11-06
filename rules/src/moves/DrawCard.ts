@@ -5,6 +5,7 @@ import SpiritOfNature from '../SpiritOfNature'
 import MoveType from './MoveType'
 import { getAnimalsResource, getAnimalsType } from '../material/GuardianAnimalDetails';
 import Resource from '../material/Resource'
+import Victory, { getvictoryCount } from '../material/Victory'
 
 type DrawCard = {
   type: MoveType.DrawCard
@@ -29,7 +30,7 @@ export function drawCard(state: GameState, move: DrawCard) {
     player.ready = true
   }
 
-  if (getAnimalsResource([card], Resource.SacredFlower) != null) player.victory[2] += getAnimalsResource([card], Resource.SacredFlower)
+  if (getAnimalsResource([card], Resource.SacredFlower) != null) player.victory[2] = getvictoryCount(player.victoryTiles, player.line, player.forest, Victory.SacredFlower, player.extinguishedFires.length)
 }
 
 export function drawCardMove(spirit: SpiritOfNature): DrawCard {

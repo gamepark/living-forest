@@ -44,7 +44,7 @@ export default function HeaderText({ loading, game }: Props) {
               return <Trans defaults="You can take a tree from the dispenser." />
             }
             if (player.bonus === ActionMove.TakeVictoryTile) {
-              return <>{t('Select a victory tile from ')}{getPlayerName(player.playerJumped[0], t)}.</>
+              return <>{t('Select a victory tile from ')}{getPlayerName(player.playersJumped[0], t)}.</>
             }
           }
           if (player.ongoingMove === ActionMove.ExtinguishFire) {

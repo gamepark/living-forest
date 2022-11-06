@@ -88,7 +88,7 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           ongoingMove: null,
           bonus: null,
           victoryTiles: getSpiritVictoryTiles(player.id),
-          playerJumped: []
+          playersJumped: []
         })),
         phase: Phase.GuardianAnimals,
         sacredTreeOwner: arg.players[0].id,
@@ -246,15 +246,15 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           const wind = getResourcesCount(player.victoryTiles, player.line, player.bonus, player.forest, Resource.Wind)
           const playerPositionLimit = playerPosition! + wind
           const playingPlayer = getPlayer(this.state, this.state.currentPlayer!)
-          const displayedPlayer = getPlayer(this.state, playingPlayer.playerJumped[0])
+          const displayedPlayer = getPlayer(this.state, playingPlayer.playersJumped[0])
 
           //Take a victory tile move
           if (playingPlayer.bonus === ActionMove.TakeVictoryTile) {
-            if (playingPlayer.playerJumped.find(spirit => spirit === playingPlayer.playerJumped[0]) != undefined) {
+            if (playingPlayer.playersJumped.find(spirit => spirit === playingPlayer.playersJumped[0]) != undefined) {
 
               displayedPlayer.victoryTiles.forEach(function (tile, _index) {
 
-                moves.push(takeVictoryTileMove(playingPlayer.spirit, playingPlayer.playerJumped[0], tile))
+                moves.push(takeVictoryTileMove(playingPlayer.spirit, playingPlayer.playersJumped[0], tile))
               })
             }
           } else {

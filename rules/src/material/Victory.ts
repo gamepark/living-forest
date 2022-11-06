@@ -22,3 +22,21 @@ export function getResourcesCount(victoryTiles: VictoryTile[], line: GuardianAni
 
     return helpLineCount + victoryTilesCount + forestCount + bonusForestCount + tempBonusSun + tempBonusDrop
 }
+
+export function getvictoryCount(victoryTiles: VictoryTile[], line: GuardianAnimal[], forest: (ProtectiveTree | number | null)[][], victory: Victory, fires: number): number {
+    if (victory === Victory.Fire) {
+        return fires + getVictoryTilesCount(victoryTiles, Victory.Fire)
+    } else if (victory === Victory.Tree) {
+        let uniqueTree: (number | null)[] = []
+        forest.forEach((row, _) => {
+            row.forEach((tree, _) => {
+                if (!uniqueTree.includes(tree)) {
+                    uniqueTree.push(tree)
+                }
+            })
+        })
+        return getVictoryTilesCount(victoryTiles, victory) + uniqueTree.length
+    } else {
+        return getVictoryTilesCount(victoryTiles, victory) + getForestResourceBonus(forest, Resource.SacredFlower) + getAnimalsResource(line, Resource.SacredFlower) + getTreesResourcesCount(forest, Resource.SacredFlower)
+    }
+}
