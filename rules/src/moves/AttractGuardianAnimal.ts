@@ -6,6 +6,7 @@ import GuardianAnimal from '../material/GuardianAnimal';
 import { getGuardianAnimalDetails } from '../material/GuardianAnimalDetails';
 import { getPlayer, isPlayerView } from '../PlayerView';
 import SpiritOfNature from '../SpiritOfNature';
+import ActionMove from './ActionMove';
 import MoveType from './MoveType';
 
 
@@ -29,7 +30,7 @@ export function attractGuardianAnimal(state: GameState | GameView, move: Attract
   } else {
     player.deck.unshift(move.guardianAnimal)
   }
-  // if (player.ongoingMove != ActionMove.MoveCircleOfSpirits) player.ongoingMove = ActionMove.AttractGuardianAnimal
+  if (player.ongoingMove != ActionMove.MoveCircleOfSpirits && player.ongoingMove != ActionMove.PlantTree) player.ongoingMove = ActionMove.AttractGuardianAnimal
   state.reserve.rows[move.coordinates.y][move.coordinates.x] = null
 }
 
