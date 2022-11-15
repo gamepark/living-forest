@@ -26,7 +26,6 @@ export function takeVictoryTile(state: GameState | GameView, move: TakeVictoryTi
   player.bonus = null
   player.actionMoves.push(ActionMove.MoveCircleOfSpirits)
   player.ongoingMove = null
-  playerJumped.victory[move.victory + 1] -= 1
 }
 
 export function takeVictoryTileMove(spirit: SpiritOfNature, spiritJumped: SpiritOfNature, victory: VictoryTile): TakeVictoryTile {

@@ -27,7 +27,7 @@ export function getvictoryCount(victoryTiles: VictoryTile[], line: GuardianAnima
     if (victory === Victory.Fire) {
         return fires + getVictoryTilesCount(victoryTiles, Victory.Fire)
     } else if (victory === Victory.Tree) {
-        let uniqueTree: (number | null)[] = []
+        var uniqueTree: (number | null)[] = []
         forest.forEach((row, _) => {
             row.forEach((tree, _) => {
                 if (!uniqueTree.includes(tree)) {
@@ -35,7 +35,7 @@ export function getvictoryCount(victoryTiles: VictoryTile[], line: GuardianAnima
                 }
             })
         })
-        return getVictoryTilesCount(victoryTiles, victory) + uniqueTree.length
+        return getVictoryTilesCount(victoryTiles, victory) + uniqueTree.length - 1
     } else {
         return getVictoryTilesCount(victoryTiles, victory) + getForestResourceBonus(forest, Resource.SacredFlower) + getAnimalsResource(line, Resource.SacredFlower) + getTreesResourcesCount(forest, Resource.SacredFlower)
     }

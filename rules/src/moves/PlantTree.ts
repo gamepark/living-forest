@@ -1,13 +1,12 @@
 
 import GameState from '../GameState';
-import SpiritOfNature from '../SpiritOfNature';
-import MoveType from './MoveType';
-import Coordinates from '../material/Coordinates';
 import GameView from '../GameView';
-import { getPlayer } from '../PlayerView';
+import Coordinates from '../material/Coordinates';
 import ProtectiveTree from '../material/ProtectiveTree';
+import { getPlayer } from '../PlayerView';
+import SpiritOfNature from '../SpiritOfNature';
 import ActionMove from './ActionMove';
-import Victory, { getvictoryCount } from '../material/Victory';
+import MoveType from './MoveType';
 
 
 type PlantTree = {
@@ -31,9 +30,6 @@ export function plantTree(state: GameState | GameView, move: PlantTree) {
     player.ongoingMove = null
     player.tree = null
     player.actionMoves.push(ActionMove.PlantTree)
-    player.victory[1] = getvictoryCount(player.victoryTiles, player.line, player.forest, Victory.Tree, player.extinguishedFires.length)
-    player.victory[2] = getvictoryCount(player.victoryTiles, player.line, player.forest, Victory.SacredFlower, player.extinguishedFires.length)
-
   }
 }
 

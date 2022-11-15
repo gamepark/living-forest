@@ -32,7 +32,7 @@ export default function PlayerPanel({ player, sacredTreeOwner, ...props }: Props
             </h3>
             {sacredTreeOwner && <div css={firstPlayer}></div>}
             <div css={gridContainer}>
-                <Victories victory={player.victory} line={player.line} />
+                <Victories victoryTiles={player.victoryTiles} line={player.line} forest={player.forest} extinguishedFires={player.extinguishedFires.length} />
                 <Resources line={player.line} forest={player.forest} victoryTile={player.victoryTiles} bonus={player.bonus} />
             </div>
         </div>

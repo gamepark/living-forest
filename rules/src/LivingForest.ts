@@ -9,7 +9,7 @@ import { getAnimalsType, getGuardianAnimalDetails } from './material/GuardianAni
 import { getInitializationDispenser } from './material/ProtectiveTree';
 import { getProtectiveTreeDetails } from './material/ProtectiveTreeDetails';
 import Resource from './material/Resource';
-import { getResourcesCount } from './material/Victory';
+import Victory, { getResourcesCount, getvictoryCount } from './material/Victory';
 import { getSpiritVictoryTiles } from './material/VictoryTile';
 import ActionMove from './moves/ActionMove';
 import { attractGuardianAnimal, attractGuardianAnimalMove } from './moves/AttractGuardianAnimal';
@@ -78,7 +78,6 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
           line: [],
           discard: [],
           forest: [[null, null, null, null, null], [null, null, 0, null, null], [null, null, null, null, null]],
-          victory: [1, 1, 1],
           fragment: 0,
           attractedGuardianAnimal: 0,
           extinguishedFires: [],
@@ -116,9 +115,12 @@ export default class LivingForest extends SimultaneousGame<GameState, Move, Spir
   endOfGame() {
     var end = false
     this.state.players.forEach((player) => {
-      player.victory.forEach((victory) => {
-        if (victory >= 12) end = true
-      })
+      {
+        Object.entries(Victory).splice(3, 3).map((_, index) => {
+          const number = getvictoryCount(player.victoryTiles, player.line, player.forest, index + 1, player.extinguishedFires.length)
+          if (number >= 12) end = true
+        })
+      }
     })
     return end
   }

@@ -2,22 +2,28 @@
 import { css } from "@emotion/react";
 import GuardianAnimal from "@gamepark/living-forest/material/GuardianAnimal";
 import { getAnimalsType } from "@gamepark/living-forest/material/GuardianAnimalDetails";
-import Victory from '@gamepark/living-forest/material/Victory';
+import ProtectiveTree from "@gamepark/living-forest/material/ProtectiveTree";
+import Victory, { getvictoryCount } from '@gamepark/living-forest/material/Victory';
+import VictoryTile from "@gamepark/living-forest/material/VictoryTile";
 import Images from "../images/Images";
 import { resourceheight, resourceWidth } from "../styles";
 
 type Props = {
-    victory: number[]
+    victoryTiles: VictoryTile[]
     line: GuardianAnimal[]
+    forest: (ProtectiveTree | number | null)[][]
+    extinguishedFires: number
 }
 
-export default function Victories({ victory, line }: Props) {
+export default function Victories({ victoryTiles, line, forest, extinguishedFires }: Props) {
     const type = getAnimalsType(line)
 
     return (
         <>
-            {victory.map((victory, index) => {
-                return <div key={index} css={victoryStyle(index + 1)}><div css={num}>{victory}</div></div>
+            {Object.entries(Victory).splice(3, 3).map((_, index) => {
+
+                const number = getvictoryCount(victoryTiles, line, forest, index + 1, extinguishedFires)
+                return <div key={index} css={victoryStyle(index + 1)}><div css={num}>{number}</div></div>
             })}
             {type > 0 ? <div css={element}><div css={num}>{type}</div></div> : <div></div>}
         </>
