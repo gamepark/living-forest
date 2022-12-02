@@ -72,3 +72,17 @@ const cardCss = css`
         box-shadow: 0 0 0.1em black, 0 0 0.1em black, 0 0 0.1em black;
     }
 `
+
+// function returnGuardianAnimalAnimation(index: number, duration: number) {
+//     const frames = keyframes`
+//     from{
+//         transform:translateX(${helpLineTop}em) translateY(${helpLineLeft}em) rotateY(-180deg)
+//     }
+//     50%{
+//         transform:translateX(${(discardTop + index * 0.1) / 2}em) translateY(${(discardLeft + index * 0.1) / 2}em) rotateY(-90deg)
+//     }
+//     `
+//     return css`
+//         animation: ${frames} ${duration}s ease-in-out;
+//     `
+// }

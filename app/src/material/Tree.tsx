@@ -6,12 +6,12 @@ import Images from '../images/Images'
 import { treeHeight, treeWith } from '../styles'
 
 type Props = {
-  protectiveTree?: ProtectiveTree
+  protectiveTree: ProtectiveTree
 } & HTMLAttributes<HTMLDivElement>
 
 export default function Tree({ protectiveTree, ...props }: Props) {
   return (
-    <div css={[style, protectiveTree ? front(protectiveTree) : hidden]} {...props} />
+    <div css={[style, front(protectiveTree)]} {...props} />
   );
 }
 
@@ -23,30 +23,13 @@ const style = css`
   transform: translateZ(0);
   -webkit-font-smoothing: subpixel-antialiased;
   transition: transform 1s ease-in-out;
-
-  &:before, &:after {
-    position: absolute;
-    content: '';
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-size: cover;
-    backface-visibility: hidden;
-    border-radius: 1em;
-    box-shadow: 0 0 0.1em black, 0 0 0.1em black;
-  }
-
-  &:after {
-    background-image: url(${Images.sampleImage});
-    transform: rotateY(-180deg);
-  }
+  background-size: cover;
+  box-shadow: 0 0 0.1em black, 0 0 0.1em black;
+  border-radius: 1em;
 `
 
 const front = (protectiveTree: ProtectiveTree) => css`
-  &:before {
-    background-image: url(${ProtectiveImage[protectiveTree]});
-  }
+background-image: url(${ProtectiveImage[protectiveTree]});
 `
 
 const ProtectiveImage: { [key in ProtectiveTree]: string } = {
@@ -64,7 +47,3 @@ const ProtectiveImage: { [key in ProtectiveTree]: string } = {
   [ProtectiveTree.Tree11]: Images.tree11
 
 }
-
-const hidden = css`
-  transform: rotateY(180deg);
-`

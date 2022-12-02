@@ -26,6 +26,7 @@ export default function ForestBoard({ game, player }: Props) {
 
 const forest = css`
 position:absolute;
-top:0em;;
-left:0em;;
+top:0em;
+left:0em;
+transform-style:preserve-3d;
 `

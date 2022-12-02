@@ -26,7 +26,7 @@ type Props = {
 export default function Reserve({ game, spirit, actionMoves, ongoingMove, bonus, ready, line, attractedGuardianAnimal, victoryTiles, forest }: Props) {
     return (
         <div css={reserve}>
-            <ReserveRows reserveRows={game.reserve.rows} spirit={spirit} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={game.players} line={line} attractedGuardianAnimal={attractedGuardianAnimal} victoryTiles={victoryTiles} forest={forest} currentPlayer={game.currentPlayer} />
+            <ReserveRows reserveRows={game.reserve.rows} spirit={spirit} actionMoves={actionMoves} ongoingMove={ongoingMove} bonus={bonus} ready={ready} players={game.players} line={line} attractedGuardianAnimal={attractedGuardianAnimal} victoryTiles={victoryTiles} forest={forest} currentPlayer={game.currentPlayer} phase={game.phase} fires={game.circle.fire} />
             <ReserveStacks reserveStacks={game.reserve.stacks} />
         </div>
     );

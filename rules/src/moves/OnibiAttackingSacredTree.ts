@@ -38,3 +38,10 @@ export function onibiAttackingSacredTreeMove(): OnibiAttackingSacredTree {
   return { type: MoveType.OnibiAttackingSacredTree }
 }
 
+export function nextFireEmpty(fires: (Fire | null)[]) {
+  let place = 8
+  for (let i = 0; i < 7; i++) {
+    if (fires[i] === null && place == 8) place = i
+  }
+  return place
+}

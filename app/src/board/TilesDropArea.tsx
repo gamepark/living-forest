@@ -26,7 +26,7 @@ type Props = {
 export default function TilesDropArea({ forest, spirit, actionMoves, ongoingMove, bonus, ready, playerTree, players, currentPlayer }: Props) {
     const play = usePlay()
     const plant = (indexRow: number, index: number) => { placementIsValid(forest, { x: indexRow, y: index }) && playerTree != null && (isAvailableMove(ActionMove.PlantTree, ongoingMove, bonus, actionMoves, ready) || bonus === ActionMove.PlantTree) && play(plantTreeMove(spirit, { x: indexRow, y: index })) }
-    const animation = useAnimation<PlantTree>(animation => animation.move.type === MoveType.PlantTree)
+    const animation = useAnimation<PlantTree>(animation => animation.move.type === MoveType.PlantTree && animation.move.spirit === spirit)
     const playerIndex = players.findIndex(player => player.spirit === currentPlayer)
 
     return (
@@ -34,7 +34,7 @@ export default function TilesDropArea({ forest, spirit, actionMoves, ongoingMove
             {
                 forest.map((row, indexRow) => {
                     return row.map((protectiveTree, index) => {
-                        if (protectiveTree !== null && protectiveTree != 0) return <Tree key={index + indexRow} protectiveTree={protectiveTree} css={[treePosition(index, indexRow), animation && plantProtectiveTreeAnimation(animation.duration, players.length, playerIndex)]} />
+                        if (protectiveTree !== null && protectiveTree != 0) return <Tree key={index + indexRow} protectiveTree={protectiveTree} css={[treePosition(index, indexRow), animation && animation.move.coordinates.x && plantProtectiveTreeAnimation(animation.duration, players.length, playerIndex)]} />
                         if (protectiveTree === null) return <div key={index + indexRow} css={tilePosition(index, indexRow)} onClick={() => { plant(indexRow, index) }}></div>
                         return
                     })
@@ -70,13 +70,10 @@ function plantProtectiveTreeAnimation(duration: number, players: number, spiritP
 
     const frames = keyframes`
     from{
-        transform:translateY(${(100)}em) 
-        translateX(${leftPanel}em)
+        transform:translateY(${(100)}em) translateX(${leftPanel}em);
     }
     80%{
-        transform:translateY(${100 / 2}em) 
-        translateX(${leftPanel}em)
-        translateZ(10em)
+        transform:translateY(${100 / 2}em) translateX(${leftPanel}em) translateZ(10em);
     }
     `
     return css`

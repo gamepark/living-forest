@@ -20,7 +20,6 @@ export function validate(state: GameState | GameView, move: ValidateMove) {
   const player = getPlayer(state, move.spirit)
   if (player.ongoingMove != null) player.actionMoves.push(player.ongoingMove)
   if (player.ongoingMove === ActionMove.AttractGuardianAnimal || player.bonus === ActionMove.AttractGuardianAnimal) player.attractedGuardianAnimal = 0
-  player.extinguishedFires = []
   player.extinguishedFiresTotal = 0
 
   player.ongoingMove = null

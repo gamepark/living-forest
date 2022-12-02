@@ -26,7 +26,7 @@ export default class LivingForestAnimations extends Animations<GameLocalView, Mo
       case MoveType.TakeProtectiveTree:
         return !state.displayedPlayer ? 0.9 : 0
       case MoveType.PlantTree:
-        return !state.displayedPlayer ? 0.9 : 0
+        return state.displayedPlayer == move.spirit ? 0.9 : 0
       case MoveType.ExtinguishFire:
         return !state.displayedPlayer ? 0.9 : 0
       case MoveType.FillReserve:

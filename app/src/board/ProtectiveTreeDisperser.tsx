@@ -45,7 +45,7 @@ export default function ProtectiveTreeDisperser({ dispenser, spirit, actionMoves
             {
                 trees.map((protectiveTree, index) => {
                     return [...Array(dispenser[protectiveTree])].map((_, indexTree) => {
-                        return < Tree key={protectiveTree + indexTree} css={[treeLinePosition(index, indexTree), animation && animation.move.tree === protectiveTree && takeProtectiveTreeAnimation(index, indexTree, animation.duration, players.length, playerIndex)]} protectiveTree={protectiveTree} onClick={() => { take(protectiveTree, index) }} />
+                        return < Tree key={protectiveTree + indexTree} css={[treeLinePosition(index, indexTree), animation && animation.move.tree === protectiveTree && indexTree === dispenser[protectiveTree] - 1 && takeProtectiveTreeAnimation(index, indexTree, animation.duration, players.length, playerIndex)]} protectiveTree={protectiveTree} onClick={() => { take(protectiveTree, index) }} />
                     })
                 })
             }
@@ -71,13 +71,10 @@ function takeProtectiveTreeAnimation(index: number, indexTree: number, duration:
 
     const frames = keyframes`
     80%{
-        transform:translateY(${down / 2}em) 
-        translateX(${left}em)
-        translateZ(10em)
+        transform:translateY(${down / 2}em) translateX(${left}em) translateZ(10em);
     }
     to{
-        transform:translateY(${(down)}em) 
-        translateX(${left}em)
+        transform:translateY(${(down)}em) translateX(${left}em);
     }
     `
     return css`
