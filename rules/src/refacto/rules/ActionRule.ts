@@ -9,6 +9,7 @@ import { ExtinguishFireRule } from './actions/ExtinguishFireRule'
 import { TakeFragmentRule } from './actions/TakeFragmentRule'
 import { MoveOnCircleOfSpiritRule } from './actions/MoveOnCircleOfSpiritRule'
 import { PlantProtectiveTreeRule } from './actions/PlantProtectiveTreeRule'
+import { TurnOrder } from './helper/TurnOrder'
 
 
 export class ActionRule extends PlayerTurnRule {
@@ -88,32 +89,12 @@ export class ActionRule extends PlayerTurnRule {
 
   get mayGoToEndOfTurn() {
     if (this.actionCount === undefined || this.actionCount > 0) return []
-    const turnOrder = this.turnOrder
-    if (turnOrder[this.game.players.length - 1] === this.player) {
+    const turnOrder = new TurnOrder(this.game)
+    if (turnOrder.isLastPlayer(this.player)) {
       return [this.rules().startRule(RuleId.EndOfTurn)]
     }
 
-    const nextPlayer = turnOrder[(turnOrder.indexOf(this.player) + 1) % turnOrder.length]
-    return [this.rules().startPlayerTurn(RuleId.Action, nextPlayer)]
-  }
-
-  get turnOrder() {
-    const players = this.game.players
-    const playerCount = players.length
-    const firstPlayer = players.find((p) => this.material(MaterialType.SacredTree).getItem()!.location.player === p)!
-    const firstIndex = players.indexOf(firstPlayer)
-    const order = [firstPlayer]
-    for (let i = 1; i < playerCount; i++) {
-      const current = firstIndex + i
-
-      if (current >= playerCount) {
-        order.push(players[current % playerCount])
-      } else {
-        order.push(players[current])
-      }
-    }
-
-    return order;
+    return [this.rules().startPlayerTurn(RuleId.Action, turnOrder.getNextPlayer(this.player))]
   }
 
   get actionCount() {

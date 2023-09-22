@@ -1,5 +1,6 @@
 import { MaterialRulesPart } from '@gamepark/rules-api/dist/material/rules/MaterialRulesPart'
 import { MaterialType } from '../../material/MaterialType'
+import SpiritOfNature from '../../../SpiritOfNature'
 
 export class TurnOrder extends MaterialRulesPart {
   get turnOrder() {
@@ -19,5 +20,18 @@ export class TurnOrder extends MaterialRulesPart {
     }
 
     return order;
+  }
+
+  get nextFirstPlayer() {
+    return this.turnOrder[1]
+  }
+
+  isLastPlayer(playerId: SpiritOfNature) {
+    return this.turnOrder[this.game.players.length - 1] === playerId
+  }
+
+  getNextPlayer(playerId: SpiritOfNature) {
+    const turnOrder = this.turnOrder
+    return turnOrder[(turnOrder.indexOf(playerId) + 1) % turnOrder.length]
   }
 }
