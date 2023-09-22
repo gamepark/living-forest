@@ -65,7 +65,7 @@ export class ActionRule extends PlayerTurnRule {
     }
 
     // Move spirit of nature (may trigger a new rule change)
-    if (this.isMoveMaterialOnLocation(MaterialType.SpiritOfNatureStandee, LocationType.ForestBoard)(move)) {
+    if (this.isMoveMaterialOnLocation(MaterialType.SpiritOfNatureStandee, LocationType.CircleOfSpiritBoardSpace)(move)) {
       const moves = new MoveOnCircleOfSpiritRule(this.game).afterItemMove(move)
       if (moves) {
         return moves;

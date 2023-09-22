@@ -13,7 +13,7 @@ export class StandeeOnCircleOfSpiritBoardLocatorDescription extends LocationDesc
   coordinates = { x: -0.2, y: 0.2, z: 0}
 
   getRotation(location: Location<SpiritOfNature, LocationType>): number {
-    return ((location.x! + 7.5) * 360 / 12)
+    return ((location.x! + 8.5) * 360 / 12)
   }
 
 }

@@ -17,7 +17,6 @@ export const locationsStrategies = {
     [LocationType.ProtectiveTreeDeck]: new FillGapStrategy(),
   },
   [MaterialType.FireTile]: {
-    [LocationType.FireStack]: new PositiveSequenceStrategy(),
     [LocationType.CircleOfSpiritBoardFire]: new PositiveSequenceStrategy(),
   }
 }
