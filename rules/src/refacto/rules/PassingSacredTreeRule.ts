@@ -1,15 +1,16 @@
 import { MaterialRulesPart } from '@gamepark/rules-api/dist/material/rules/MaterialRulesPart'
 import { RuleId } from './RuleId'
+import { MaterialType } from '../material/MaterialType'
+import { LocationType } from '../material/LocationType'
+import { TurnOrder } from './helper/TurnOrder'
 
 export class PassingSacredTreeRule extends MaterialRulesPart {
 
   onRuleStart() {
-    // TODO: Get the player after the actual player, then change the sacred tree (move)
-    // Perform rule
-    return [this.rules().startPlayerTurn(RuleId.Action, this.game.players[0])]
+    const nextFirstPlayer = new TurnOrder(this.game).nextFirstPlayer
+    return [
+      this.material(MaterialType.SacredTree).moveItem({ location: { type: LocationType.ForestBoard, player: nextFirstPlayer  }}),
+      this.rules().startPlayerTurn(RuleId.Action, nextFirstPlayer)
+    ]
   }
-
-  // TODO: Move the sacred tree, then, call
-  // return [this.rules().startPlayerTurn(RuleId.Action, this.sacredTreePlayer)]
-
 }
