@@ -1,23 +1,17 @@
-import { LineLocator } from '@gamepark/react-game'
+import { ItemLocator } from '@gamepark/react-game'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
-import { Location } from '@gamepark/rules-api'
-import { Fire } from '@gamepark/living-forest/material/Fire'
+import { MaterialItem } from '@gamepark/rules-api'
+import { circleOfSpiritBoardDescription } from '../material/description/CircleOfSpiritBoardDescription'
 
-export class FireOnCircleOfSpiritBoardLocator extends LineLocator {
-  limit = 10
+export class FireOnCircleOfSpiritBoardLocator extends ItemLocator {
   parentItemType = MaterialType.CircleOfSpiritBoard
 
-  delta = { x: -0.05, y: -0.05, z: 0}
-
-  getPositionOnParent(location: Location) {
-    switch (location.id) {
-      case Fire.Fire2:
-        return { x: 50, y: 35, z: 0}
-      case Fire.Fire3:
-        return { x: 40, y: 55, z: 0}
-      case Fire.Fire4:
-      default:
-        return { x: 60, y: 55, z: 0}
-    }
+  getPosition(item: MaterialItem) {
+    const angle = (item.location.x ?? 0) * 360 / 6
+    console.log(item.location.x, angle)
+    const radius = !item.location.x? 0:  4
+    const x = circleOfSpiritBoardDescription.width * 0.5 + radius * Math.sin(angle * Math.PI / 180) - 0.3
+    const y = circleOfSpiritBoardDescription.width * 0.5 + radius * Math.cos(angle * Math.PI / 180) + 0.5
+    return { x, y: y - 1, z: 1}
   }
 }

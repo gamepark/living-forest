@@ -1,5 +1,5 @@
 import { ItemContext, LineLocator } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api/dist/material/items/MaterialItem'
+import { MaterialItem } from '@gamepark/rules-api'
 import { reserveStackLocator } from './ReserveStackLocator'
 
 export class FireStockLocation extends LineLocator {

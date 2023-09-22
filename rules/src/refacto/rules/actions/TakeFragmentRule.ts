@@ -21,4 +21,9 @@ export class TakeFragmentRule extends PlayerTurnRule {
       .location(LocationType.FragmentStack)
       .moveItem({ location: { type: LocationType.ForestBoard, player: this.player }})]
   }
+
+  onRuleEnd() {
+    this.forget(Memory.BonusAction)
+    return []
+  }
 }

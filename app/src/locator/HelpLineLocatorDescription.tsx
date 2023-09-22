@@ -4,7 +4,7 @@ import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { css } from '@emotion/react'
-import { Location } from '@gamepark/rules-api/dist/material/location/Location'
+import { Location } from '@gamepark/rules-api'
 import { playerDeckLocator } from './PlayerDeckLocator'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
 

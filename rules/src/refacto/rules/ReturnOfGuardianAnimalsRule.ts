@@ -1,10 +1,23 @@
-import { MaterialRulesPart } from '@gamepark/rules-api/dist/material/rules/MaterialRulesPart'
+import { MaterialRulesPart } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
+import { MaterialType } from '../material/MaterialType'
+import { LocationType } from '../material/LocationType'
 
 export class ReturnOfGuardianAnimalsRule extends MaterialRulesPart {
 
   onRuleStart() {
-    // Perform rule
-    return [this.rules().startRule(RuleId.PassingSacredTree)]
+    const moves = []
+    for (const player of this.game.players) {
+      moves.push(
+        ...this.material(MaterialType.GuardianAnimalCard)
+          .location(LocationType.HelpLine)
+          .player(player)
+          .sort((item) => -item.location.x!)
+          .moveItems({ location: { type: LocationType.PlayerDiscardStack, player }})
+      )
+    }
+
+    moves.push(this.rules().startRule(RuleId.PassingSacredTree))
+    return moves
   }
 }

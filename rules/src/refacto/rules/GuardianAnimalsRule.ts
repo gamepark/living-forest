@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, isMoveItemType, ItemMove, MaterialMove, SimultaneousRule } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItemType, isShuffleItemType, ItemMove, MaterialMove, SimultaneousRule } from '@gamepark/rules-api'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
 import { CustomMoveType } from './CustomMoveType'
@@ -18,12 +18,12 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     const deck = playerCards.location(LocationType.PlayerDeckStack)
     const helpLine = playerCards.location(LocationType.HelpLine)
 
-    if (!deck.length) {
-      return [this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId)]
-    }
-
     const moves = []
-    moves.push(this.drawACard(playerId))
+    if (!deck.length) {
+      moves.push(this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId))
+    } else {
+      moves.push(this.drawACard(playerId))
+    }
 
     if (helpLine.length) {
       const fragments = this
@@ -51,8 +51,14 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
+    if (isShuffleItemType(MaterialType.GuardianAnimalCard)(move)) {
+      // FIXME: beurk not sure it works well with shuffle juste before
+      const player = this.material(MaterialType.GuardianAnimalCard).getItem(move.indexes[0])!.location.player!
+      return [this.drawACard(player)]
+    }
+
+
     if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move) || move.position.location?.type !== LocationType.HelpLine) return []
-    
     const playerId = move.position.location.player!
     const playerCards = this.getPlayerCards(playerId)
     const helpLine = playerCards.location(LocationType.HelpLine)
@@ -63,14 +69,15 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     return []
   }
 
+
+
   onCustomMove(move: CustomMove): MaterialMove[] {
     if (!isCustomMoveType(CustomMoveType.ShuffleAndDraw)(move)) return []
 
-    const playerCards = this.getPlayerCards(move.data)
+    const discard = this.getPlayerCards(move.data).location(LocationType.PlayerDiscardStack)
     return [
-      ...playerCards.location(LocationType.PlayerDiscardStack).moveItems({ location: { type: LocationType.PlayerDeckStack }}),
-      playerCards.location(LocationType.PlayerDiscardStack).shuffle(),
-      this.drawACard(move.data)
+      ...discard.sort((item) => -item.location.x!).moveItems({ location: { type: LocationType.PlayerDeckStack, player: move.data }}),
+      discard.shuffle(),
     ]
   }
 

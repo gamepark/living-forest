@@ -11,4 +11,11 @@ export class LivingForestRules extends SecretMaterialRules<SpiritOfNature, Mater
   rules = rules
   locationsStrategies = locationsStrategies
   hidingStrategies = hidingStrategies
+
+
+  /*play(move: MaterialMoveRandomized<SpiritOfNature, MaterialType, LocationType> | MaterialMoveView<SpiritOfNature, MaterialType, LocationType>): MaterialMove<SpiritOfNature, MaterialType, LocationType>[] {
+    const consequences = super.play(move)
+    console.log(move, consequences)
+    return consequences
+  }*/
 }

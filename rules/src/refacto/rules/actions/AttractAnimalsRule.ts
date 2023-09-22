@@ -45,8 +45,12 @@ export class AttractAnimalsRule extends PlayerTurnRule {
     return this.helpLine.sunResources - (this.remind(Memory.SpentPoints) ?? 0)
   }
 
+  get isBonusAction() {
+    return this.remind<boolean>(Memory.BonusAction)
+  }
+
   onRuleEnd() {
-    this.memorize(Memory.Actions, (action) => action - 1)
+    this.forget(Memory.BonusAction)
     this.forget(Memory.SpentPoints)
     return []
   }

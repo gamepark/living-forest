@@ -1,6 +1,6 @@
 import { GridLocator } from '@gamepark/living-forest/configuration/GridLocator'
 import { MaterialItem } from '@gamepark/rules-api'
-import { ItemContext } from '@gamepark/react-game/dist/locators/ItemLocator'
+import { ItemContext } from '@gamepark/react-game'
 
 export class ProtectiveTreeDeckLocator extends GridLocator {
   columns = 4

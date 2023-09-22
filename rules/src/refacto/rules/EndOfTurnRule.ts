@@ -1,6 +1,4 @@
-import { MaterialRulesPart } from '@gamepark/rules-api/dist/material/rules/MaterialRulesPart'
-import { RuleMove } from '@gamepark/rules-api/dist/material/moves/rules/RuleMove'
-import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
+import { MaterialRulesPart, RuleMove, MaterialMove } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
 
 export class EndOfTurnRule extends MaterialRulesPart {

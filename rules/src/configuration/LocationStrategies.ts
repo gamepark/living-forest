@@ -1,12 +1,11 @@
 import { MaterialType } from '../refacto/material/MaterialType'
 import { LocationType } from '../refacto/material/LocationType'
-import { PositiveSequenceStrategy } from '@gamepark/rules-api'
-import { OnlyAddPositiveStrategy } from './OnlyAddPositiveStrategy'
+import { FillGapStrategy, PositiveSequenceStrategy } from '@gamepark/rules-api'
 
 export const locationsStrategies = {
   [MaterialType.GuardianAnimalCard]: {
     [LocationType.ReserveStack]: new PositiveSequenceStrategy(),
-    [LocationType.ReserveRow]: new OnlyAddPositiveStrategy(),
+    [LocationType.ReserveRow]: new FillGapStrategy(),
     [LocationType.PlayerDeckStack]: new PositiveSequenceStrategy(),
     [LocationType.PlayerDiscardStack]: new PositiveSequenceStrategy(),
     [LocationType.HelpLine]: new PositiveSequenceStrategy()
@@ -15,6 +14,10 @@ export const locationsStrategies = {
     [LocationType.VictoryTileArea]: new PositiveSequenceStrategy()
   },
   [MaterialType.ProtectiveTreeTiles]: {
-    [LocationType.ProtectiveTreeDeck]: new OnlyAddPositiveStrategy(),
+    [LocationType.ProtectiveTreeDeck]: new FillGapStrategy(),
+  },
+  [MaterialType.FireTile]: {
+    [LocationType.FireStack]: new PositiveSequenceStrategy(),
+    [LocationType.CircleOfSpiritBoardFire]: new PositiveSequenceStrategy(),
   }
 }

@@ -1,4 +1,4 @@
-import { MaterialRulesPart } from '@gamepark/rules-api/dist/material/rules/MaterialRulesPart'
+import { MaterialRulesPart } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
@@ -10,7 +10,7 @@ export class PassingSacredTreeRule extends MaterialRulesPart {
     const nextFirstPlayer = new TurnOrder(this.game).nextFirstPlayer
     return [
       this.material(MaterialType.SacredTree).moveItem({ location: { type: LocationType.ForestBoard, player: nextFirstPlayer  }}),
-      this.rules().startPlayerTurn(RuleId.Action, nextFirstPlayer)
+      this.rules().startSimultaneousRule(RuleId.GuardianAnimals, this.game.players)
     ]
   }
 }

@@ -85,6 +85,7 @@ export function getAnimalsResource(animals: GuardianAnimal[], resource: Resource
     return animals.reduce((sum, animal) => sum + (GuardianAnimalDescriptions[animal].resources![resource] ?? 0), 0)
 }
 export function countSolitary(animals: GuardianAnimal[]): number {
+    console.log(animals)
     return animals.reduce((sum, animal) => sum + ((GuardianAnimalDescriptions[animal].type == 0) ? 1 : 0), 0)
 }
 export function countGregarious(animals: GuardianAnimal[]): number {

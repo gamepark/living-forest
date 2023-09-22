@@ -4,7 +4,6 @@ import { tableLocator } from './TableLocator'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 
 export class PlayerDiscardLocator extends DeckLocator {
-
   delta = { x: -0.05, y: -0.05, z: 0.1 }
 
   getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
@@ -14,8 +13,8 @@ export class PlayerDiscardLocator extends DeckLocator {
     )
 
     return {
-      x: parentPosition.x + 5,
-      y: parentPosition.y - 13.5,
+      x: parentPosition.x + 15.5,
+      y: parentPosition.y -1,
       z: 0
     }
   }

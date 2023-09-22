@@ -14,4 +14,9 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     this.memorize(Memory.Actions, (action) => action - 1)
     return []
   }
+
+  onRuleEnd() {
+    this.forget(Memory.BonusAction)
+    return []
+  }
 }

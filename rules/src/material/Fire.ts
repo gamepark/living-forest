@@ -1,3 +1,4 @@
+import { isEnumValue } from '@gamepark/rules-api'
 
 
 export enum Fire {
@@ -6,3 +7,5 @@ export enum Fire {
   Fire3,
   Fire4
 }
+
+export const fires = Object.values(Fire).filter<Fire>(isEnumValue)

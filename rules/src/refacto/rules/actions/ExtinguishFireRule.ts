@@ -44,4 +44,9 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     return this.helpLine.waterResources - (this.remind(Memory.SpentPoints) ?? 0)
   }
 
+  onRuleEnd() {
+    this.forget(Memory.BonusAction)
+    return []
+  }
+
 }

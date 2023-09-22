@@ -1,4 +1,4 @@
-import { GameProvider, MaterialAnimations, setupTranslation } from '@gamepark/react-game'
+import { GameProvider, MaterialGameAnimations, setupTranslation } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -20,7 +20,7 @@ ReactDOM.render(
                   optionsSpec={LivingForestOptionsSpec}
                   material={material}
                   locators={locators}
-                  animations={new MaterialAnimations()}
+                  animations={new MaterialGameAnimations()}
                   theme={{
                     root: {
                       background: {

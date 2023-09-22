@@ -5,7 +5,7 @@ import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialT
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { css } from '@emotion/react'
 import Images from '../images/Images'
-import { Location } from '@gamepark/rules-api/dist/material/location/Location'
+import { Location } from '@gamepark/rules-api'
 
 export class VaranDeckLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true

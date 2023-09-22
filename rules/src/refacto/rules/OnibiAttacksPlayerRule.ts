@@ -1,4 +1,4 @@
-import { MaterialRulesPart } from '@gamepark/rules-api/dist/material/rules/MaterialRulesPart'
+import { MaterialRulesPart, MoveItem, MaterialMove } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
@@ -6,8 +6,6 @@ import { HelpLine } from './helper/HelpLine'
 import sumBy from 'lodash/sumBy'
 import orderBy from 'lodash/orderBy'
 import { TurnOrder } from './helper/TurnOrder'
-import { MoveItem } from '@gamepark/rules-api/dist/material/moves/items/MoveItem'
-import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
 
 export class OnibiAttacksPlayerRule extends MaterialRulesPart {
 

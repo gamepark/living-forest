@@ -6,7 +6,7 @@ import { LocationType } from '@gamepark/living-forest/refacto/material/LocationT
 import { css } from '@emotion/react'
 import Images from '../images/Images'
 import { reserveStackLocator } from './ReserveStackLocator'
-import { Location } from '@gamepark/rules-api/dist/material/location/Location'
+import { Location } from '@gamepark/rules-api'
 
 export class ReserveStackLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import GameDisplay from './GameDisplay'
 import { MaterialGame } from '@gamepark/rules-api'
 import { RuleId } from '@gamepark/living-forest/refacto/rules/RuleId'
+import { GuardianAnimalsHeader } from './header/GuardianAnimalsHeader'
 
 export default function App() {
   const game = useGame<MaterialGame>()
@@ -27,7 +28,7 @@ export default function App() {
 }
 
 const headers: Record<RuleId, () => any> = {
-  [RuleId.GuardianAnimals]: () => <>Header</>,
+  [RuleId.GuardianAnimals]: GuardianAnimalsHeader,
   [RuleId.Action]: () => <>Header</>,
   [RuleId.AttractAnimals]: () => <>Header</>,
   [RuleId.ExtinguishFire]: () => <>Header</>,

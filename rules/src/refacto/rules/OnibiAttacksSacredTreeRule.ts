@@ -1,4 +1,4 @@
-import { MaterialRulesPart } from '@gamepark/rules-api/dist/material/rules/MaterialRulesPart'
+import { MaterialRulesPart } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
@@ -24,7 +24,7 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
         moves.push(
           ...fireStack
             .locationId(Fire.Fire2)
-            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire, id: Fire.Fire2 }}, tokens)
+            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire }}, tokens)
         )
         max -= tokens
       }
@@ -34,7 +34,7 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
         moves.push(
           ...fireStack
             .locationId(Fire.Fire3)
-            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire, id: Fire.Fire3 }}, tokens)
+            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire }}, tokens)
         )
         max -= tokens
       }
@@ -44,7 +44,7 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
         moves.push(
           ...fireStack
             .locationId(Fire.Fire4)
-            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire, id: Fire.Fire4 }}, tokens)
+            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire }}, tokens)
         )
       }
 
