@@ -12,6 +12,7 @@ import { getInitializationPlayersRocks } from './material/CircleOfSpirits'
 import { locationsStrategies } from './configuration/LocationStrategies'
 import { Fire } from './material/Fire'
 
+export const CARDS_PER_ROW = 4
 export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, MaterialType, LocationType, LivingForestOptions> {
   locationsStrategies = locationsStrategies
   setupMaterial(options: LivingForestOptions) {
@@ -47,7 +48,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
       this.material(MaterialType.GuardianAnimalCard)
         .location(LocationType.ReserveStack)
         .locationId(level)
-        .sort((item) => -item.location.x!).limit(4)
+        .sort((item) => -item.location.x!).limit(CARDS_PER_ROW)
         .moveItems({ location: { type: LocationType.ReserveRow, id: level }})
     })
   }
