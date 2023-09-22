@@ -11,6 +11,7 @@ import { OnibiAttacksPlayerRule } from '../refacto/rules/OnibiAttacksPlayerRule'
 import { OnibiAttacksSacredTreeRule } from '../refacto/rules/OnibiAttacksSacredTreeRule'
 import { GuardianAnimalsArrivalRule } from '../refacto/rules/GuardianAnimalsArrivalRule'
 import { ReturnOfGuardianAnimalsRule } from '../refacto/rules/ReturnOfGuardianAnimalsRule'
+import { PassingSacredTreeRule } from '../refacto/rules/PassingSacredTreeRule'
 
 
 export const rules: Record<RuleId, MaterialRulesPartCreator> = {
@@ -25,5 +26,5 @@ export const rules: Record<RuleId, MaterialRulesPartCreator> = {
     [RuleId.OnibiAttacksSacredTree]: OnibiAttacksSacredTreeRule,
     [RuleId.GuardianAnimalsArrival]: GuardianAnimalsArrivalRule,
     [RuleId.ReturnOfGuardianAnimals]: ReturnOfGuardianAnimalsRule,
-    [RuleId.PassingSacredTree]: ReturnOfGuardianAnimalsRule,
+    [RuleId.PassingSacredTree]: PassingSacredTreeRule,
 }
