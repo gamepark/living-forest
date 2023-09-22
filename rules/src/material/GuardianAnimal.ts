@@ -72,4 +72,6 @@ enum GuardianAnimal {
 export const guardianAnimals = Object.values(GuardianAnimal).filter(isEnumValue)
 export const startingGuardianAnimals = guardianAnimals.slice(0, 14)
 
+export const isVaran = (guardianAnimal: GuardianAnimal) => GuardianAnimal.Varan === guardianAnimal
+
 export default GuardianAnimal

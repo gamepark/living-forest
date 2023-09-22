@@ -56,8 +56,12 @@ export const dispenserFourPlayers: Record<ProtectiveTree, number> = {
 export const protectiveTrees = Object.values(ProtectiveTree).filter(isEnumValue)
 
 export function getInitializationDispenser(length: number) {
-    if (length === 2) return dispenserTwoPlayers
-    if (length === 3) return dispenserThreePlayers
-    if (length === 4) return dispenserFourPlayers
-    return
+    switch (length) {
+        case 3:
+            return dispenserThreePlayers;
+        case 4:
+            return dispenserFourPlayers;
+        default:
+            return dispenserTwoPlayers
+    }
 }

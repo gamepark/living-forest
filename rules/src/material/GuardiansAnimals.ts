@@ -1,5 +1,5 @@
 import Resource from './Resource';
-import GuardianAnimalDetails from './GuardianAnimalDetails';
+import GuardianAnimalDetails from './GuardianAnimalDescriptions';
 import CardType from './CardType';
 
 const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource

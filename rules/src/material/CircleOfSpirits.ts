@@ -1,7 +1,6 @@
-import SpiritOfNature from '../SpiritOfNature';
-import Fire from './Fire';
-import { LivingForestOptions } from '../LivingForestOptions';
-import ActionMove from '../moves/ActionMove';
+import SpiritOfNature from '../SpiritOfNature'
+import { Fire } from './Fire'
+import ActionMove from '../moves/ActionMove'
 
 type CircleOfSpirits = {
     fire: (Fire | null)[]
@@ -11,35 +10,34 @@ type CircleOfSpirits = {
 export default CircleOfSpirits
 
 export const circleOfSpiritsRocks = [ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile, ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile]
-
-export function getTwoPlayersRocks(game: LivingForestOptions): Partial<Record<SpiritOfNature, number>> {
+export function getTwoPlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
-        [game.players[0].id]: 2,
-        [game.players[1].id]: 8
+        [players[0]]: 2,
+        [players[1]]: 8
     }
 }
 
-export function getThreePlayersRocks(game: LivingForestOptions): Partial<Record<SpiritOfNature, number>> {
+export function getThreePlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
-        [game.players[0].id]: 4,
-        [game.players[1].id]: 8,
-        [game.players[2].id]: 0
+        [players[0]]: 4,
+        [players[1]]: 8,
+        [players[2]]: 0
 
     }
 }
 
-export function getFourPlayersRocks(game: LivingForestOptions): Partial<Record<SpiritOfNature, number>> {
+export function getFourPlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
-        [game.players[0].id]: 2,
-        [game.players[1].id]: 8,
-        [game.players[2].id]: 11,
-        [game.players[2].id]: 5
+        [players[0]]: 2,
+        [players[1]]: 8,
+        [players[2]]: 11,
+        [players[3]]: 5
     }
 }
 
-export function getInitializationPlayersRocks(game: LivingForestOptions) {
-    if (game.players.length === 2) return getTwoPlayersRocks(game)
-    if (game.players.length === 3) return getThreePlayersRocks(game)
-    if (game.players.length === 4) return getFourPlayersRocks(game)
+export function getInitializationPlayersRocks(players: SpiritOfNature[]) {
+    if (players.length === 2) return getTwoPlayersRocks(players )
+    if (players.length === 3) return getThreePlayersRocks(players)
+    if (players.length === 4) return getFourPlayersRocks(players)
     return
 }

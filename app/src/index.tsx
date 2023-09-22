@@ -1,69 +1,42 @@
-import { css, Global } from '@emotion/react'
-import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
-import LivingForest from '@gamepark/living-forest/LivingForest'
-import { GameProvider, setupTranslation } from '@gamepark/react-client'
-import normalize from 'emotion-normalize'
+import { GameProvider, MaterialAnimations, setupTranslation } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import LivingForestView from './LivingForestView'
 import translations from './translations.json'
-import LivingForestAnimations from './LivingForestAnimations'
+import { LivingForestSetup } from '@gamepark/living-forest/LivingForestSetup'
+import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
+import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
+import { material } from './material/Material'
+import { locators } from './locator/Locator'
+import Images from './images/Images'
 
 setupTranslation(translations, { debug: false })
 
-const style = css`
-  html {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  *, *::before, *::after {
-    -webkit-box-sizing: inherit;
-    -moz-box-sizing: inherit;
-    box-sizing: inherit;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Oswald', "Roboto Light", serif;
-    font-size: 1vh;
-    @media (max-aspect-ratio: 185/100) {
-      font-size: calc(100vw / 185);
-    }
-  }
-
-  #root {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    user-select: none;
-    overflow: hidden;
-    background-color: white;
-    background-size: cover;
-    background-position: center;
-    color: #eee;
-
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      //background-color: rgba(255, 255, 255, 0.5);
-    }
-  }
-`
-
 ReactDOM.render(
   <StrictMode>
-    <GameProvider game="living-forest" Rules={LivingForest} RulesView={LivingForestView} optionsSpec={LivingForestOptionsSpec} animations={new LivingForestAnimations()}>
-      <App />
+    <GameProvider game="living-forest"
+                  GameSetup={LivingForestSetup}
+                  Rules={LivingForestRules}
+                  optionsSpec={LivingForestOptionsSpec}
+                  material={material}
+                  locators={locators}
+                  animations={new MaterialAnimations()}
+                  theme={{
+                    root: {
+                      background: {
+                        image: Images.forestBack,
+                        overlay: 'rgba(0, 0, 0, 0.7)'
+                      }
+                    },
+                    dialog: {
+                      color: '#6B4135',
+                      backgroundColor: '#FEF9F5'
+                    }
+                  }}
+    >
+      <App/>
     </GameProvider>
-    <Global styles={[normalize, style]} />
   </StrictMode>,
   document.getElementById('root')
 )
+

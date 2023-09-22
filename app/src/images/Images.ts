@@ -163,9 +163,15 @@ import fire2 from './fire2.png'
 import fire3 from './fire3.png'
 import fire4 from './fire4.png'
 import firePanel from './firePanel.png'
-import firstPlayer from './firstPlayer.png'
+import SacredTree from './sacred-tree.png'
 
+import SpringPlayerBoard from './spring-player-board.png'
+import SummerPlayerBoard from './summer-player-board.png'
+import WinterPlayerBoard from './winter-player-board.png'
+import AutumnPlayerBoard from './autumn-player-board.png'
 
+import ReserveHolder from './reserve-holder.png'
+import VaranHolder from './varan-holder.png'
 
 
 
@@ -189,7 +195,13 @@ const Images = {
   circleOfSpirits,
   sun, drop, seed, wind, sacredFlower, gregarious,
   fragment, fire, fire2, fire3, fire4, firePanel,
-  firstPlayer
+  SacredTree,
+  SpringPlayerBoard,
+  SummerPlayerBoard,
+  WinterPlayerBoard,
+  AutumnPlayerBoard,
+  ReserveHolder,
+  VaranHolder
 }
 
 export default Images

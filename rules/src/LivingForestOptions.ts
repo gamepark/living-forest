@@ -1,6 +1,5 @@
 import { OptionsSpec } from '@gamepark/rules-api'
 import { TFunction } from 'i18next'
-import GameState from './GameState'
 import SpiritOfNature, { spirits } from './SpiritOfNature'
 
 /**
@@ -14,15 +13,6 @@ type LivingForestPlayerOptions = { id: SpiritOfNature }
  */
 export type LivingForestOptions = {
   players: LivingForestPlayerOptions[]
-}
-
-/**
- * Typeguard to help Typescript distinguish between a GameState and new game's options, for you main class constructor.
- * @param arg GameState or Game options
- * @return true if arg is a Game options
- */
-export function isGameOptions(arg: GameState | LivingForestOptions): arg is LivingForestOptions {
-  return (arg as GameState).phase === undefined
 }
 
 /**

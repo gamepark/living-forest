@@ -1,6 +1,6 @@
 import ActionMove from "../moves/ActionMove"
 import GuardianAnimal from "./GuardianAnimal"
-import { getAnimalsResource } from "./GuardianAnimalDetails"
+import { getAnimalsResource } from "./GuardianAnimalDescriptions"
 import ProtectiveTree from "./ProtectiveTree"
 import { getForestResourceBonus, getTreesResourcesCount } from "./ProtectiveTreeDetails"
 import Resource from "./Resource"

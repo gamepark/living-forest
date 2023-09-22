@@ -1,65 +1,42 @@
 /** @jsxImportSource @emotion/react */
-import { Global, css } from '@emotion/react';
-import { FailuresDialog, FullscreenDialog, Menu, useGame } from '@gamepark/react-client'
-import { Header, ImagesLoader, LoadingScreen } from '@gamepark/react-components'
+import { FailuresDialog, FullscreenDialog, LoadingScreen, MaterialHeader, MaterialImageLoader, Menu, useGame } from '@gamepark/react-game'
 import { useEffect, useState } from 'react'
-import { DndProvider } from 'react-dnd-multi-backend'
-import HTML5ToTouch from 'react-dnd-multi-backend/dist/cjs/HTML5toTouch'
 import GameDisplay from './GameDisplay'
-import GameLocalView from './GameLocalView'
-import HeaderText from './HeaderText'
-import Images from './images/Images'
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature';
+import { MaterialGame } from '@gamepark/rules-api'
+import { RuleId } from '@gamepark/living-forest/refacto/rules/RuleId'
 
 export default function App() {
-
-  const game = useGame<GameLocalView>()
-
-  const [imagesLoading, setImagesLoading] = useState(true)
+  const game = useGame<MaterialGame>()
   const [isJustDisplayed, setJustDisplayed] = useState(true)
+  const [isImagesLoading, setImagesLoading] = useState(true)
   useEffect(() => {
     setTimeout(() => setJustDisplayed(false), 2000)
   }, [])
-  const loading = !game || imagesLoading || isJustDisplayed
-console.log(game);
-
+  const loading = !game || isJustDisplayed || isImagesLoading
   return (
-    <DndProvider options={HTML5ToTouch}>
-      {!loading && <GameDisplay game={game} />}
-      <LoadingScreen display={loading} author="Aske Christiansen" artist="Apolline Etienne" publisher="Ludonaute" developer="Laetitia Decoudu" />
-      <Header><HeaderText loading={loading} game={game} /></Header>
-      <Menu />
-      <FailuresDialog />
-      <FullscreenDialog />
-      <ImagesLoader images={Object.values(Images)} onImagesLoad={() => setImagesLoading(false)} />
-      <Global styles={backgroundImage(game?.displayedPlayer)} />
-    </DndProvider>
+    <>
+      <GameDisplay/>
+      <LoadingScreen  display={loading} author="Aske Christiansen" artist="Apolline Etienne" publisher="Ludonaute" developer="Laetitia Decoudu" />
+      <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)}/>
+      <MaterialHeader rulesStepsHeaders={headers} GameOver={() => <p>GameOver</p>} />
+      <Menu/>
+      <FailuresDialog/>
+      <FullscreenDialog/>
+    </>
   )
 }
-const spiritBack: Record<SpiritOfNature, string> = {
-      [SpiritOfNature.Autumn]: Images.autumnBackGreen,
-      [SpiritOfNature.Summer]: Images.autumnBackGreen,
-      [SpiritOfNature.Spring]: Images.autumnBackGreen,
-      [SpiritOfNature.Winter]: Images.autumnBackGreen,
-  
-  }
-const spiritBackground: Record<SpiritOfNature, string> = {
-  [SpiritOfNature.Autumn]: Images.autumnBack,
-  [SpiritOfNature.Summer]: Images.autumnBack,
-  [SpiritOfNature.Spring]: Images.autumnBack,
-  [SpiritOfNature.Winter]: Images.autumnBack,
 
-}
-function backgroundImage(spirit?: SpiritOfNature) {
-  return css`
-  #root{
-    background-image:url(${spirit ? spiritBack[spirit] : ""}), url(${spirit ? spiritBackground[spirit] : Images.forestBack});
-    background-size:contain, cover;
-    background-position:center, center;
-    background-repeat:no-repeat;
-    &:before {
-      background-color: ${spirit ? '' : 'rgba(255, 255, 255, 0.5)'};
-    }
-  }
-  `
+const headers: Record<RuleId, () => any> = {
+  [RuleId.GuardianAnimals]: () => <>Header</>,
+  [RuleId.Action]: () => <>Header</>,
+  [RuleId.AttractAnimals]: () => <>Header</>,
+  [RuleId.ExtinguishFire]: () => <>Header</>,
+  [RuleId.TakeFragment]: () => <>Header</>,
+  [RuleId.PlantTree]: () => <>Header</>,
+  [RuleId.EndOfTurn]: () => <>Header</>,
+  [RuleId.OnibiAttacksPlayer]: () => <>Header</>,
+  [RuleId.OnibiAttacksSacredTree]: () => <>Header</>,
+  [RuleId.GuardianAnimalsArrival]: () => <>Header</>,
+  [RuleId.ReturnOfGuardianAnimals]: () => <>Header</>,
+  [RuleId.PassingSacredTree]: () => <>Header</>,
 }

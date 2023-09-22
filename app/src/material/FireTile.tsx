@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import Fire from '@gamepark/living-forest/material/Fire'
+import { Fire } from '@gamepark/living-forest/material/Fire'
 import { HTMLAttributes } from 'react'
 import Images from '../images/Images'
 import { fireHeight, fireWidth } from '../styles'
