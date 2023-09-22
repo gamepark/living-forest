@@ -5,7 +5,6 @@ import { LocationType } from '../material/LocationType'
 import { HelpLine } from './helper/HelpLine'
 import sumBy from 'lodash/sumBy'
 import orderBy from 'lodash/orderBy'
-import SpiritOfNature from '../../SpiritOfNature'
 import { TurnOrder } from './helper/TurnOrder'
 import { MoveItem } from '@gamepark/rules-api/dist/material/moves/items/MoveItem'
 import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
@@ -13,30 +12,28 @@ import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMo
 export class OnibiAttacksPlayerRule extends MaterialRulesPart {
 
   onRuleStart() {
-    const fireTotal = this.fireTotal
+    const fire = this.fireOnCicleOfSpirit
 
     const moves: MaterialMove[] = []
-    if (fireTotal) {
-      let varanByPlayer: Partial<Record<SpiritOfNature, number>> = {}
+    if (fire.length) {
+      const fireTotal = sumBy(fire.getItems(), (item) => item.id)
+      const targetedPlayers = []
       for (const player of this.game.players) {
         const helpLine = new HelpLine(this.game, player)
         const water = helpLine.waterResources
         if (water < fireTotal) {
-          varanByPlayer[player] = fireTotal - water
+          targetedPlayers.push(player)
         }
       }
 
       const varanDeck = this.varanDeck
-      const varanCount = sumBy(Object.entries(varanByPlayer), (entry) => entry[1])
       const turnOrder = new TurnOrder(this.game).turnOrder
-
+      const varanCount = Math.min(varanDeck.length, fire.length)
       const varanMoves: MoveItem[] = []
-      for (let i = 0; i < Math.min(varanCount, varanDeck.length); i++) {
-        for (const player of turnOrder) {
-          if (!varanByPlayer[player]) continue
 
+      for (let i = 0; i < varanCount; i++) {
+        for (const player of targetedPlayers) {
           varanMoves.push(varanDeck.moveItem({ location: { type: LocationType.PlayerDiscardStack, player: player }}))
-          varanByPlayer[player]--
         }
       }
 
@@ -49,12 +46,10 @@ export class OnibiAttacksPlayerRule extends MaterialRulesPart {
     return moves;
   }
 
-  get fireTotal() {
-    const items = this.material(MaterialType.FireTile)
-    .location(LocationType.CircleOfSpiritBoardFire)
-    .getItems()
-      return sumBy(items, (item) => item.id)
-    }
+  get fireOnCicleOfSpirit() {
+    return this.material(MaterialType.FireTile)
+      .location(LocationType.CircleOfSpiritBoardFire)
+  }
 
   get varanDeck() {
     return this.material(MaterialType.GuardianAnimalCard).location(LocationType.VaranDeck)
