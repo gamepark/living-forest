@@ -19,16 +19,18 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     const helpLine = playerCards.location(LocationType.HelpLine)
 
     const moves = []
-    if (!deck.length) {
-      moves.push(this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId))
-    } else {
-      moves.push(this.drawACard(playerId))
+    if (getSolitaryGregariousDifference(helpLine.getItems().map((item) => item.id)) < 3) {
+      if (!deck.length) {
+        moves.push(this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId))
+      } else {
+        moves.push(this.drawACard(playerId))
+      }
     }
 
     if (helpLine.length) {
       const fragments = this
         .material(MaterialType.FragmentTile)
-        .location(LocationType.ForestBoard)
+        .location(LocationType.PlayerArea)
         .player(playerId);
       if (fragments.length) {
         moves.push(fragments.moveItem({ location: { type: LocationType.FragmentStack }}))
@@ -62,7 +64,8 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     const playerId = move.position.location.player!
     const playerCards = this.getPlayerCards(playerId)
     const helpLine = playerCards.location(LocationType.HelpLine)
-    if (getSolitaryGregariousDifference(helpLine.getItems().map((item) => item.id)) >= 3) {
+    const fragments = this.material(MaterialType.FragmentTile).location(LocationType.PlayerArea).player(playerId)
+    if (getSolitaryGregariousDifference(helpLine.getItems().map((item) => item.id)) >= 3 && !fragments.length) {
       return [this.rules().endPlayerTurn(playerId)]
     }
 

@@ -16,8 +16,8 @@ export class ActionRule extends PlayerTurnRule {
 
   onRuleStart() {
     const end = this.mayGoToEndOfTurn
-    if (end.length) return end
 
+    if (end.length) return end
     if (this.actionCount !== undefined) return []
 
     const helpLine = new HelpLine(this.game, this.player)
@@ -29,23 +29,26 @@ export class ActionRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves = []
 
-    moves.push(...new TakeFragmentRule(this.game).getPlayerMoves())
-    moves.push(...new AttractAnimalsRule(this.game).getPlayerMoves())
-    moves.push(...new ExtinguishFireRule(this.game).getPlayerMoves())
-    moves.push(...new MoveOnCircleOfSpiritRule(this.game).getPlayerMoves())
-    moves.push(...new PlantProtectiveTreeRule(this.game).getPlayerMoves())
+    const lastAction = this.lastAction
+    if (lastAction !== RuleId.TakeFragment) moves.push(...new TakeFragmentRule(this.game).getPlayerMoves())
+    if (lastAction !== RuleId.AttractAnimals) moves.push(...new AttractAnimalsRule(this.game).getPlayerMoves())
+    if (lastAction !== RuleId.ExtinguishFire) moves.push(...new ExtinguishFireRule(this.game).getPlayerMoves())
+    if (lastAction !== RuleId.MoveOnCircleOfSpirit) moves.push(...new MoveOnCircleOfSpiritRule(this.game).getPlayerMoves())
+    if (lastAction !== RuleId.PlantTree) moves.push(...new PlantProtectiveTreeRule(this.game).getPlayerMoves())
     return moves;
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     // Take fragment: nothing happen here, only forgot later
-    if (this.isMoveMaterialOnLocation(MaterialType.FragmentTile, LocationType.ForestBoard)(move)) {
+    if (this.isMoveMaterialOnLocation(MaterialType.FragmentTile, LocationType.PlayerArea)(move)) {
+      this.memorizeLastAction(RuleId.TakeFragment)
       // Here, we don't care about consequences
       new TakeFragmentRule(this.game).afterItemMove(move)
     }
 
     // Attract animals
     if (this.isMoveMaterialOnLocation(MaterialType.GuardianAnimalCard, LocationType.PlayerDeckStack)(move)) {
+      this.memorizeLastAction(RuleId.AttractAnimals)
       const attractRule = new AttractAnimalsRule(this.game)
       // Here, we don't care about consequences
       attractRule.afterItemMove(move)
@@ -55,7 +58,8 @@ export class ActionRule extends PlayerTurnRule {
     }
 
     // Stop fire
-    if (isMoveItemType(MaterialType.FireTile, LocationType.ForestBoard)(move)) {
+    if (isMoveItemType(MaterialType.FireTile, LocationType.PlayerArea)(move)) {
+      this.memorizeLastAction(RuleId.ExtinguishFire)
       const estinguishFire = new ExtinguishFireRule(this.game)
       // Here, we don't care about consequences
       estinguishFire.afterItemMove(move)
@@ -66,6 +70,8 @@ export class ActionRule extends PlayerTurnRule {
 
     // Move spirit of nature (may trigger a new rule change)
     if (this.isMoveMaterialOnLocation(MaterialType.SpiritOfNatureStandee, LocationType.CircleOfSpiritBoardSpace)(move)) {
+      console.log(this.actionCount)
+      this.memorizeLastAction(RuleId.MoveOnCircleOfSpirit)
       const moves = new MoveOnCircleOfSpiritRule(this.game).afterItemMove(move)
       if (moves) {
         return moves;
@@ -74,6 +80,7 @@ export class ActionRule extends PlayerTurnRule {
 
     // Plant tree
     if (this.isMoveMaterialOnLocation(MaterialType.ProtectiveTreeTiles, LocationType.ForestBoard)(move)) {
+      this.memorizeLastAction(RuleId.PlantTree)
       const moves = new PlantProtectiveTreeRule(this.game).afterItemMove(move)
       if (moves) {
         return moves;
@@ -88,22 +95,25 @@ export class ActionRule extends PlayerTurnRule {
   }
 
   get mayGoToEndOfTurn() {
-    if (this.actionCount === undefined || this.actionCount > 0) return []
+    if (this.getPlayerMoves().length && (this.actionCount === undefined || this.actionCount > 0)) return []
+    this.forget(Memory.Actions)
+    this.forget(Memory.SpentPoints)
     const turnOrder = new TurnOrder(this.game)
     if (turnOrder.isLastPlayer(this.player)) {
       return [this.rules().startRule(RuleId.EndOfTurn)]
     }
-
     return [this.rules().startPlayerTurn(RuleId.Action, turnOrder.getNextPlayer(this.player))]
+  }
+
+  memorizeLastAction(ruleId: RuleId) {
+    this.memorize(Memory.LastAction, ruleId)
+  }
+
+  get lastAction() {
+    return this.remind<RuleId>(Memory.LastAction)
   }
 
   get actionCount() {
     return this.remind(Memory.Actions)
-  }
-
-  onRuleEnd() {
-    this.forget(Memory.Actions)
-    this.forget(Memory.SpentPoints)
-    return []
   }
 }

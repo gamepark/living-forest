@@ -25,7 +25,6 @@ export function getResourcesCount(victoryTiles: VictoryTile[], line: GuardianAni
 
 export function getvictoryCount(victoryTiles: VictoryTile[], line: GuardianAnimal[], forest: (ProtectiveTree | number | null)[][], victory: Victory, fires: number): number {
     if (victory === Victory.Fire) {
-        console.log(fires);
 
         return fires + getVictoryTilesCount(victoryTiles, Victory.Fire)
     } else if (victory === Victory.Tree) {

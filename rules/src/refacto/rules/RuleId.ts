@@ -10,5 +10,6 @@ export enum RuleId {
   OnibiAttacksSacredTree,
   GuardianAnimalsArrival,
   ReturnOfGuardianAnimals,
-  PassingSacredTree
+  PassingSacredTree,
+  MoveOnCircleOfSpirit
 }

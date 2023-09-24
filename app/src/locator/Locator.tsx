@@ -14,10 +14,11 @@ import { StandeeOnCircleOfSpiritBoardLocator } from './StandeeOnCircleOfSpiritBo
 import { FireOnCircleOfSpiritBoardLocator } from './FireOnCircleOfSpiritBoardLocator'
 import { FireStockLocation } from './FireStockLocation'
 import { playerDiscardLocator } from './PlayerDiscardLocator'
+import { playerAreaLocation } from './PlayerAreaLocation'
 
 export const locators: Record<LocationType, ItemLocator<SpiritOfNature, MaterialType, LocationType>> = {
   [LocationType.Table]: tableLocator,
-  [LocationType.ForestBoard]: new TableLocator(),
+  [LocationType.ForestBoard]: tableLocator,
   [LocationType.CircleOfSpiritBoardSpace]: new StandeeOnCircleOfSpiritBoardLocator(),
   [LocationType.CircleOfSpiritBoardFire]: new FireOnCircleOfSpiritBoardLocator(),
   [LocationType.PlayerDeckStack]: playerDeckLocator,
@@ -29,5 +30,6 @@ export const locators: Record<LocationType, ItemLocator<SpiritOfNature, Material
   [LocationType.VaranDeck]: new VaranDeckLocator(),
   [LocationType.FragmentStack]: new FragmentStockLocator(),
   [LocationType.HelpLine]: new HelpLineLocator(),
-  [LocationType.FireStack]: new FireStockLocation()
+  [LocationType.FireStack]: new FireStockLocation(),
+  [LocationType.PlayerArea]: playerAreaLocation
 }

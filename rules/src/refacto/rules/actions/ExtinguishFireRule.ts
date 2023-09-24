@@ -37,7 +37,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     const fire = this.material(MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardSpace)
     return fire
       .filter((item) => item.id <= this.resources)
-      .moveItems({ location: { type: LocationType.ForestBoard, player: this.player }})
+      .moveItems({ location: { type: LocationType.PlayerArea, player: this.player }})
   }
 
   get resources() {
@@ -45,8 +45,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   }
 
   onRuleEnd() {
-    this.forget(Memory.BonusAction)
+    this.forget(Memory.SpentPoints)
     return []
   }
-
 }

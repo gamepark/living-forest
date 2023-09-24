@@ -18,7 +18,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
     if (this.possible) return []
 
     this.memorize<number>(Memory.Actions, (action) => action - 1)
-    return [this.rules().startPlayerTurn(RuleId.Action, this.player)]
+    return [this.rules().startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {
@@ -45,12 +45,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
     return this.helpLine.sunResources - (this.remind(Memory.SpentPoints) ?? 0)
   }
 
-  get isBonusAction() {
-    return this.remind<boolean>(Memory.BonusAction)
-  }
-
   onRuleEnd() {
-    this.forget(Memory.BonusAction)
     this.forget(Memory.SpentPoints)
     return []
   }

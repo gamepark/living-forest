@@ -1,6 +1,7 @@
 import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { Memory } from '../Memory'
+import { RuleId } from '../RuleId'
 
 export class PlantProtectiveTreeRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
@@ -12,11 +13,6 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
 
     // TODO: if there is an effect, don't decrease and go to action
     this.memorize(Memory.Actions, (action) => action - 1)
-    return []
-  }
-
-  onRuleEnd() {
-    this.forget(Memory.BonusAction)
-    return []
+    return [this.rules().startRule(RuleId.Action)]
   }
 }

@@ -3,7 +3,6 @@ import { MaterialType } from '../../material/MaterialType'
 import { HelpLine } from '../helper/HelpLine'
 import { LocationType } from '../../material/LocationType'
 import { RuleId } from '../RuleId'
-import { Memory } from '../Memory'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
@@ -31,10 +30,6 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
     const space = move.position.location?.x!
     const ruleId = this.rockRules[space]
-    this.memorize(Memory.BonusAction, true)
-    console.log("B",this.remind(Memory.Actions))
-    this.memorize(Memory.Actions, (action) => action - 1)
-    console.log("A",this.remind(Memory.Actions))
     return [this.rules().startRule(ruleId)]
   }
 
