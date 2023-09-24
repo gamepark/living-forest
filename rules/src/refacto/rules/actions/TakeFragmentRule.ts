@@ -23,6 +23,6 @@ export class TakeFragmentRule extends PlayerTurnRule {
     return [this
       .material(MaterialType.FragmentTile)
       .location(LocationType.FragmentStack)
-      .moveItem({ location: { type: LocationType.PlayerArea, player: this.player }})]
+      .moveItem({ location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FragmentTile }})]
   }
 }

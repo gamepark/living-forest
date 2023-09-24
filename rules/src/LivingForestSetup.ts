@@ -23,7 +23,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.setupFireTile()
     this.setupFragmentTile()
     this.setupPlayers(options)
-    this.material(MaterialType.SacredTree).createItem({ location: { type: LocationType.PlayerArea, player: options.players[0].id }})
+    this.material(MaterialType.SacredTree).createItem({ location: { type: LocationType.PlayerArea, player: options.players[0].id, id: MaterialType.SacredTree }})
   }
 
   setupReserveStack() {
