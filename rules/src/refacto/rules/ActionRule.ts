@@ -42,8 +42,10 @@ export class ActionRule extends PlayerTurnRule {
     // Take fragment: nothing happen here, only forgot later
     if (this.isMoveMaterialOnLocation(MaterialType.FragmentTile, LocationType.PlayerArea)(move)) {
       this.memorizeLastAction(RuleId.TakeFragment)
+      const takeFragment = new TakeFragmentRule(this.game)
       // Here, we don't care about consequences
-      new TakeFragmentRule(this.game).afterItemMove(move)
+      takeFragment.afterItemMove(move)
+      takeFragment.onRuleEnd()
     }
 
     // Attract animals
@@ -54,17 +56,21 @@ export class ActionRule extends PlayerTurnRule {
       attractRule.afterItemMove(move)
       if (attractRule.possible) {
         return [this.rules().startRule(RuleId.AttractAnimals)]
+      } else {
+        attractRule.onRuleEnd()
       }
     }
 
     // Stop fire
-    if (isMoveItemType(MaterialType.FireTile, LocationType.PlayerArea)(move)) {
+    if (this.isMoveMaterialOnLocation(MaterialType.FireTile, LocationType.PlayerArea)(move)) {
       this.memorizeLastAction(RuleId.ExtinguishFire)
       const estinguishFire = new ExtinguishFireRule(this.game)
       // Here, we don't care about consequences
       estinguishFire.afterItemMove(move)
       if (estinguishFire.possible) {
         return [this.rules().startRule(RuleId.ExtinguishFire)]
+      } else {
+        estinguishFire.onRuleEnd()
       }
     }
 

@@ -1,4 +1,4 @@
-import { MaterialRulesPart } from '@gamepark/rules-api'
+import { Material, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
@@ -22,42 +22,33 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
 
       if (takenLevel1Cards) {
         const tokens = Math.min(takenLevel1Cards, max)
-        times(tokens, () => {
-          moves.push(
-            fireStack
-              .locationId(Fire.Fire2)
-              .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
-          )
-        })
+        moves.push(...this.addFireTokenMoves(fireStack, Fire.Fire2, tokens))
         max -= tokens
       }
 
       if (max && takenLevel2Cards) {
         const tokens = Math.min(takenLevel2Cards, max)
-        times(tokens, () => {
-          moves.push(
-            fireStack
-              .locationId(Fire.Fire3)
-              .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
-          )
-        })
+        moves.push(...this.addFireTokenMoves(fireStack, Fire.Fire3, tokens))
         max -= tokens
       }
 
       if (max && takenLevel3Cards) {
         const tokens = Math.min(takenLevel3Cards, max)
-        times(tokens, () => {
-          moves.push(
-            fireStack
-              .locationId(Fire.Fire4)
-              .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
-          )
-        })
+        moves.push(...this.addFireTokenMoves(fireStack, Fire.Fire4, tokens))
       }
     }
 
     moves.push(this.rules().startRule(RuleId.GuardianAnimalsArrival))
     return moves
+  }
+
+  addFireTokenMoves(fireStack: Material, fire: Fire, tokens: number): MaterialMove[] {
+    return times(
+      tokens,
+      () => fireStack
+        .locationId(fire)
+        .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
+    )
   }
 
   get fireOnCircle() {

@@ -1,4 +1,4 @@
-import { isMoveItemType, ItemMove, MaterialItem, MaterialMove, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
+import { isMoveItemType, ItemMove, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
@@ -42,12 +42,15 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return []
 
-    // Only decrease action count if there is no bonus action
-    // TODO: implement
-    const hasAction = false
+    const actions = this.onPlantTree(move)
 
-    if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
-    return [this.rules().startRule(RuleId.Action)]
+    // Only decrease action count if there is no bonus action
+    if (!actions.length) {
+      this.memorize(Memory.Actions, (action) => action - 1)
+      return [this.rules().startRule(RuleId.Action)]
+    }
+
+    return actions
   }
 
   get availableTrees() {
@@ -67,7 +70,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
   }
 
   get resources() {
-    return this.playerState.waterResources
+    return this.playerState.seedResources
   }
 
   get playerState() {
@@ -89,5 +92,27 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
       [ProtectiveTree.Tree10]: Tree10,
       [ProtectiveTree.Tree11]: Tree11,
     }
+  }
+
+  onPlantTree(move: MoveItem) {
+    const attrackAnimal = move.position.location?.x === 0 && move.position.location?.y === 0
+    if (attrackAnimal) {
+      this.memorize(Memory.Bonus, 3)
+      return [this.rules().startRule(RuleId.AttractAnimals)]
+    }
+
+    const triggerFragment = (move.position.location?.x === 4 && move.position.location?.y === 0) || (move.position.location?.x === 0 && move.position.location?.y === 2)
+    if (triggerFragment) {
+      this.memorize(Memory.Bonus, 1)
+      return [this.rules().startRule(RuleId.TakeFragment)]
+    }
+
+    const extinguishFire = move.position.location?.x === 4 && move.position.location?.y === 2
+    if (extinguishFire) {
+      this.memorize(Memory.Bonus, 2)
+      return [this.rules().startRule(RuleId.ExtinguishFire)]
+    }
+
+    return []
   }
 }

@@ -29,7 +29,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
   }
 
   updateSpent(move: MoveItem) {
-    const item = this.material(move.itemType).index(move.itemIndex).getItem()!
+    const item = this.material(move.itemType).getItem(move.itemIndex)!
     this.memorize<number>(Memory.SpentPoints, (points) => (points ?? 0) + GuardianAnimalDescriptions[item.id].cost!)
   }
 

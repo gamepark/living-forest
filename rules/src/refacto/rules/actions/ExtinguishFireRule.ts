@@ -16,15 +16,30 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     return moves
   }
 
+  beforeItemMove(move: ItemMove) {
+    if (isMoveItemType(MaterialType.FireTile)(move)) {
+    console.log(move.itemIndex)
+    console.log(JSON.parse(JSON.stringify(this.material(move.itemType))))
+    console.log(JSON.parse(JSON.stringify(this.material(move.itemType).entries)))
+    console.log(JSON.parse(JSON.stringify(this.material(move.itemType).entries.find(entry => entry[0] === move.itemIndex))))
+    }
+    return super.beforeItemMove(move)
+  }
+
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (!isMoveItemType(MaterialType.FireTile)(move)) return []
     this.updateSpent(move)
+    console.log(this.remind(Memory.SpentPoints))
     if (this.possible) return []
     return [this.rules().startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {
-    const item = this.material(move.itemType).index(move.itemIndex).getItem()!
+    console.log(move.itemIndex)
+    console.log(JSON.parse(JSON.stringify(this.material(move.itemType))))
+    console.log(JSON.parse(JSON.stringify(this.material(move.itemType).entries)))
+    console.log(JSON.parse(JSON.stringify(this.material(move.itemType).entries.find(entry => entry[0] === move.itemIndex))))
+    const item = this.material(move.itemType).getItem(move.itemIndex)!
     this.memorize(Memory.SpentPoints, (points) => (points ?? 0) + item.id)
   }
 
