@@ -1,6 +1,6 @@
 import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
-import { HelpLine } from '../helper/HelpLine'
+import { PlayerState } from '../helper/PlayerState'
 import { LocationType } from '../../material/LocationType'
 import { RuleId } from '../RuleId'
 import { PlantProtectiveTreeRule } from './PlantProtectiveTreeRule'
@@ -10,7 +10,7 @@ import { AttractAnimalsRule } from './AttractAnimalsRule'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
-    const resources = this.helpLine.windResources
+    const resources = this.playerState.windResources
     const standee = this.standee
     const position = standee.getItem()!.location.x!
     const moves: MaterialMove[] = []
@@ -56,8 +56,8 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     return this.material(MaterialType.SpiritOfNatureStandee).id(this.player)
   }
 
-  get helpLine() {
-    return new HelpLine(this.game, this.player)
+  get playerState() {
+    return new PlayerState(this.game, this.player)
   }
 
   get rockRules() {

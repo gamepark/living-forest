@@ -6,12 +6,13 @@ export enum LocationType {
   PlayerDiscardStack,
   ReserveStack,
   ReserveRow,
-  ProtectiveTreeDeck,
+  TreeDispenser,
   VictoryTileArea,
   VaranDeck,
   FragmentStack,
   HelpLine,
   FireStack,
   CircleOfSpiritBoardFire,
-  PlayerArea
+  PlayerArea,
+  TreeSpace
 }

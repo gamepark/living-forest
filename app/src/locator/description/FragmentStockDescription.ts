@@ -1,11 +1,10 @@
-import { LocationDescription } from '@gamepark/react-game/dist/components/material/locations/LocationDescription'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
-import { Location } from '@gamepark/rules-api/dist/material/location/Location'
-import { MaterialContext } from '@gamepark/react-game/dist/locators/ItemLocator'
-import { fragmentStockCoordinate } from './FragmentStockLocation'
-import { fragmentTileDescription } from '../material/description/FragmentTileDescription'
+import { fragmentStockCoordinate } from '../FragmentStockLocation'
+import { fragmentTileDescription } from '../../material/description/FragmentTileDescription'
+import { LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 
 
 export class FragmentStockDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {

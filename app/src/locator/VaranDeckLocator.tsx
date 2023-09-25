@@ -1,6 +1,6 @@
 import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
-import { VaranDeckDescription } from './VaranDeckDescription'
+import { VaranDeckDescription } from './description/VaranDeckDescription'
 
 export class VaranDeckLocator extends DeckLocator {
   limit = 10

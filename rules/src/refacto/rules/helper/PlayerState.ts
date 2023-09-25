@@ -8,7 +8,7 @@ import SpiritOfNature from '../../../SpiritOfNature'
 import { RuleId } from '../RuleId'
 import { Memory } from '../Memory'
 
-export class HelpLine extends MaterialRulesPart {
+export class PlayerState extends MaterialRulesPart {
   private helpLine: Material;
 
   constructor(game: MaterialGame, readonly player: SpiritOfNature) {
@@ -32,6 +32,10 @@ export class HelpLine extends MaterialRulesPart {
     return this.getResources(Resource.Sun) + this.modifier(RuleId.AttractAnimals)
   }
 
+  get seedResources() {
+    return this.getResources(Resource.Seed) + this.modifier(RuleId.PlantTree)
+  }
+
   modifier(ruleId: RuleId) {
     if (ruleId === this.game.rule?.id) {
       return this.bonus - this.spent
@@ -46,6 +50,10 @@ export class HelpLine extends MaterialRulesPart {
 
   get spent() {
     return this.remind(Memory.SpentPoints) ?? 0
+  }
+
+  get isEmptyHelpLine() {
+    return !this.helpLine.length
   }
 
   getResources(type: Resource) {

@@ -74,7 +74,7 @@ export class GuardianAnimalCardDescription extends CardDescription {
     [GuardianAnimal.Tapir]: Images.tapir,
     [GuardianAnimal.Varan]: Images.varan
   }
-  
+
   rules = () => <p></p>
 }
 

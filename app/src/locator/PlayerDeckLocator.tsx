@@ -2,7 +2,7 @@ import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import { tableLocator } from './TableLocator'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
-import { PlayerDeckDescription } from './PlayerDeckDescription'
+import { PlayerDeckDescription } from './description/PlayerDeckDescription'
 
 export class PlayerDeckLocator extends DeckLocator {
 

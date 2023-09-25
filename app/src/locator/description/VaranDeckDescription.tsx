@@ -4,7 +4,7 @@ import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { css } from '@emotion/react'
-import Images from '../images/Images'
+import Images from '../../images/Images'
 import { Location } from '@gamepark/rules-api'
 
 export class VaranDeckDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {

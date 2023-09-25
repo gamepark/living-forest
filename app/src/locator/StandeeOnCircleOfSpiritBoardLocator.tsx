@@ -1,7 +1,7 @@
 import { ItemLocator } from '@gamepark/react-game'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { Location, XYCoordinates } from '@gamepark/rules-api'
-import { StandeeOnCircleOfSpiritBoardDescription } from './StandeeOnCircleOfSpiritBoardDescription'
+import { StandeeOnCircleOfSpiritBoardDescription } from './description/StandeeOnCircleOfSpiritBoardDescription'
 
 export class StandeeOnCircleOfSpiritBoardLocator extends ItemLocator {
   locationDescription = new StandeeOnCircleOfSpiritBoardDescription()

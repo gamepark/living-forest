@@ -2,7 +2,7 @@ import { ItemContext, LineLocator } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
 import { playerDeckLocator } from './PlayerDeckLocator'
-import { HelpLineLocatorDescription } from './HelpLineLocatorDescription'
+import { HelpLineLocatorDescription } from './description/HelpLineLocatorDescription'
 
 export class HelpLineLocator extends LineLocator {
   locationDescription = new HelpLineLocatorDescription()

@@ -1,5 +1,5 @@
 import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
-import { HelpLine } from '../helper/HelpLine'
+import { PlayerState } from '../helper/PlayerState'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
 import { Memory } from '../Memory'
@@ -9,7 +9,7 @@ import { GuardianAnimalDescriptions } from '../../../material/GuardianAnimalDesc
 export class AttractAnimalsRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {
-    return this.attractAnimal
+    return this.attractAnimalMoves
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
@@ -27,22 +27,23 @@ export class AttractAnimalsRule extends PlayerTurnRule {
   }
 
   get possible() {
-    return this.attractAnimal.length
+    return this.attractAnimalMoves.length
   }
 
-  get helpLine() {
-    return new HelpLine(this.game, this.player)
+  get playerState() {
+    return new PlayerState(this.game, this.player)
   }
 
-  get attractAnimal() {
+  get attractAnimalMoves() {
+    const resources = this.resources
     const reserve = this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)
     return reserve
-      .filter((item) => GuardianAnimalDescriptions[item.id]!.cost <= this.resources)
+      .filter((item) => GuardianAnimalDescriptions[item.id]!.cost <= resources)
       .moveItems({ location: { type: LocationType.PlayerDeckStack, player: this.player}})
   }
 
   get resources() {
-    return this.helpLine.sunResources
+    return this.playerState.sunResources
   }
 
   onRuleEnd() {

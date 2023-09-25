@@ -23,7 +23,7 @@ export const GuardianAnimalsHeader = () => {
       <PlayMoveButton move={pass}/>
     </Trans>
   } else if (pass && spendFragment) {
-    return <Trans defaults="<0>Use a fragment</0>> or <1>Pass</1>">
+    return <Trans defaults="<0>Use a fragment</0> or <1>Pass</1>">
       <PlayMoveButton move={spendFragment}/>
       <PlayMoveButton move={pass}/>
     </Trans>

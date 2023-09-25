@@ -1,7 +1,7 @@
 import { ItemContext, LineLocator } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { FragmentStockDescription } from './FragmentStockDescription'
+import { FragmentStockDescription } from './description/FragmentStockDescription'
 
 export class FragmentStockLocator extends LineLocator {
   locationDescription = new FragmentStockDescription()

@@ -1,5 +1,5 @@
 import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
-import { HelpLine } from '../helper/HelpLine'
+import { PlayerState } from '../helper/PlayerState'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
 import { Memory } from '../Memory'
@@ -29,19 +29,20 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     return this.extinguishFire.length
   }
 
-  get helpLine() {
-    return new HelpLine(this.game, this.player)
+  get playerState() {
+    return new PlayerState(this.game, this.player)
   }
 
   get extinguishFire() {
+    const resources = this.resources
     const fire = this.material(MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardSpace)
     return fire
-      .filter((item) => item.id <= this.resources)
+      .filter((item) => item.id <= resources)
       .moveItems({ location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FireTile }})
   }
 
   get resources() {
-    return this.helpLine.waterResources
+    return this.playerState.waterResources
   }
 
   onRuleEnd() {

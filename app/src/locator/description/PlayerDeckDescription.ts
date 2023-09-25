@@ -3,9 +3,9 @@ import { LocationDescription, MaterialContext } from '@gamepark/react-game'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
-import { Location } from '@gamepark/rules-api/dist/material/location/Location'
-import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
-import { playerDeckLocator } from './PlayerDeckLocator'
+import { Location } from '@gamepark/rules-api'
+import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
+import { playerDeckLocator } from '../PlayerDeckLocator'
 
 export class PlayerDeckDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   getLocations({ rules: { players } }: MaterialContext): Location[] {

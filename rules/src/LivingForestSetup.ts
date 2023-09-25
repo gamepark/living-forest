@@ -81,7 +81,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     Object.entries(protectiveTreeCounts)
       .map(([id, quantity]) => this
         .material(MaterialType.ProtectiveTreeTiles)
-        .createItem({ id: +id, quantity, location: { type: LocationType.ProtectiveTreeDeck } }),
+        .createItem({ id: +id, quantity, location: { type: LocationType.TreeDispenser } }),
       )
   }
 

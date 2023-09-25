@@ -1,7 +1,7 @@
 import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
-import { ReserveStackLocatorDescription } from './ReserveStackLocatorDescription'
+import { ReserveStackLocatorDescription } from './description/ReserveStackLocatorDescription'
 
 export class ReserveStackLocator extends DeckLocator {
   locationDescription = new ReserveStackLocatorDescription()

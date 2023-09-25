@@ -2,7 +2,7 @@ import { MaterialRulesPart, MoveItem, MaterialMove } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
-import { HelpLine } from './helper/HelpLine'
+import { PlayerState } from './helper/PlayerState'
 import sumBy from 'lodash/sumBy'
 import orderBy from 'lodash/orderBy'
 import { TurnOrder } from './helper/TurnOrder'
@@ -17,8 +17,8 @@ export class OnibiAttacksPlayerRule extends MaterialRulesPart {
       const fireTotal = sumBy(fire.getItems(), (item) => item.id)
       const targetedPlayers = []
       for (const player of this.game.players) {
-        const helpLine = new HelpLine(this.game, player)
-        const water = helpLine.waterResources
+        const playerState = new PlayerState(this.game, player)
+        const water = playerState.waterResources
         if (water < fireTotal) {
           targetedPlayers.push(player)
         }

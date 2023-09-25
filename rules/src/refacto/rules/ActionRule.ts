@@ -2,7 +2,7 @@ import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepar
 import { Memory } from './Memory'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
-import { HelpLine } from './helper/HelpLine'
+import { PlayerState } from './helper/PlayerState'
 import { RuleId } from './RuleId'
 import { AttractAnimalsRule } from './actions/AttractAnimalsRule'
 import { ExtinguishFireRule } from './actions/ExtinguishFireRule'
@@ -20,8 +20,8 @@ export class ActionRule extends PlayerTurnRule {
     if (end.length) return end
     if (this.actionCount !== undefined) return []
 
-    const helpLine = new HelpLine(this.game, this.player)
-    const actionCount = helpLine.solidarityGregariousDifference === 3? 1: 2
+    const playerState = new PlayerState(this.game, this.player)
+    const actionCount = playerState.solidarityGregariousDifference === 3? 1: 2
     this.memorize(Memory.Actions, actionCount)
     return []
   }
@@ -78,7 +78,7 @@ export class ActionRule extends PlayerTurnRule {
     }
 
     // Plant tree
-    if (this.isMoveMaterialOnLocation(MaterialType.ProtectiveTreeTiles, LocationType.ForestBoard)(move)) {
+    if (this.isMoveMaterialOnLocation(MaterialType.ProtectiveTreeTiles, LocationType.TreeSpace)(move)) {
       this.memorizeLastAction(RuleId.PlantTree)
       const moves = new PlantProtectiveTreeRule(this.game).afterItemMove(move)
       if (moves) {
@@ -97,6 +97,7 @@ export class ActionRule extends PlayerTurnRule {
     if (this.getPlayerMoves().length && (this.actionCount === undefined || this.actionCount > 0)) return []
     this.forget(Memory.Actions)
     this.forget(Memory.SpentPoints)
+    this.forget(Memory.LastAction)
     const turnOrder = new TurnOrder(this.game)
     if (turnOrder.isLastPlayer(this.player)) {
       return [this.rules().startRule(RuleId.EndOfTurn)]

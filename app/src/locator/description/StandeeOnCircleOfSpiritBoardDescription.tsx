@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
-import { LocationDescription } from '@gamepark/react-game'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
+import { LocationDescription } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 
 export class StandeeOnCircleOfSpiritBoardDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
@@ -12,7 +12,7 @@ export class StandeeOnCircleOfSpiritBoardDescription extends LocationDescription
 
   coordinates = { x: -0.2, y: 0.2, z: 0}
 
-  getRotation(location: Location<SpiritOfNature, LocationType>): number {
+  getRotation(location: Location): number {
     return ((location.x! + 8.5) * 360 / 12)
   }
 
