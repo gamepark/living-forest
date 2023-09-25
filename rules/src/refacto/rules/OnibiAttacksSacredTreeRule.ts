@@ -4,6 +4,7 @@ import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
 import { CARDS_PER_ROW } from '../../LivingForestSetup'
 import { Fire } from '../../material/Fire'
+import times from 'lodash/times'
 
 export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
 
@@ -21,33 +22,38 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
 
       if (takenLevel1Cards) {
         const tokens = Math.min(takenLevel1Cards, max)
-        moves.push(
-          ...fireStack
-            .locationId(Fire.Fire2)
-            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire }}, tokens)
-        )
+        times(tokens, () => {
+          moves.push(
+            fireStack
+              .locationId(Fire.Fire2)
+              .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
+          )
+        })
         max -= tokens
       }
 
       if (max && takenLevel2Cards) {
         const tokens = Math.min(takenLevel2Cards, max)
-        moves.push(
-          ...fireStack
-            .locationId(Fire.Fire3)
-            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire }}, tokens)
-        )
+        times(tokens, () => {
+          moves.push(
+            fireStack
+              .locationId(Fire.Fire3)
+              .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
+          )
+        })
         max -= tokens
       }
 
       if (max && takenLevel3Cards) {
         const tokens = Math.min(takenLevel3Cards, max)
-        moves.push(
-          ...fireStack
-            .locationId(Fire.Fire4)
-            .moveItems({ location: { type: LocationType.CircleOfSpiritBoardFire }}, tokens)
-        )
+        times(tokens, () => {
+          moves.push(
+            fireStack
+              .locationId(Fire.Fire4)
+              .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
+          )
+        })
       }
-
     }
 
     moves.push(this.rules().startRule(RuleId.GuardianAnimalsArrival))
