@@ -2,9 +2,11 @@ import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import { tableLocator } from './TableLocator'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
+import { PlayerDiscardDescription } from './description/PlayerDiscardDescription'
 
 export class PlayerDiscardLocator extends DeckLocator {
-  delta = { x: -0.05, y: -0.05, z: 0.1 }
+  delta = { x: -0.03, y: -0.03, z: 0.1 }
+  locationDescription = new PlayerDiscardDescription()
 
   getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
     const parentPosition = tableLocator.getPosition(

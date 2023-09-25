@@ -8,8 +8,9 @@ import { guardianAnimalCardDescription } from '../../material/description/Guardi
 import { playerDeckLocator } from '../PlayerDeckLocator'
 
 export class PlayerDeckDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
-  getLocations({ rules: { players } }: MaterialContext): Location[] {
-    return players.map((player) => ({ type: LocationType.PlayerDeckStack, player }))
+  getLocations({ player }: MaterialContext): Location[] {
+    if (!player) return []
+    return [{ type: LocationType.PlayerDeckStack, player }]
   }
 
   width = guardianAnimalCardDescription.width + 1

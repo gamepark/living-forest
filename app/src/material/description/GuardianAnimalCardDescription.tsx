@@ -1,6 +1,10 @@
-import { CardDescription } from '@gamepark/react-game'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
+import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
+import { isMoveItemType } from '@gamepark/rules-api/dist/material/moves/items/MoveItem'
+import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
+import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 
 export class GuardianAnimalCardDescription extends CardDescription {
   backImage = Images.sampleImage
@@ -73,6 +77,17 @@ export class GuardianAnimalCardDescription extends CardDescription {
     [GuardianAnimal.Stag]: Images.stag,
     [GuardianAnimal.Tapir]: Images.tapir,
     [GuardianAnimal.Varan]: Images.varan
+  }
+
+  canDrag(move: MaterialMove, context: ItemContext) {
+    const { index, rules, player } = context
+    const drag = super.canDrag(move, context)
+    if (drag) return drag
+    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.position.location?.type !== LocationType.FragmentStack) return false
+
+    const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
+    const helpLine = rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(item.location.player)
+    return (item.location.x === (helpLine.length - 1)) && item.location.player === player
   }
 
   rules = () => <p></p>

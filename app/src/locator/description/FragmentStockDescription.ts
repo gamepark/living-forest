@@ -3,8 +3,8 @@ import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialT
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { fragmentStockCoordinate } from '../FragmentStockLocation'
 import { fragmentTileDescription } from '../../material/description/FragmentTileDescription'
-import { LocationDescription, MaterialContext } from '@gamepark/react-game'
-import { Location } from '@gamepark/rules-api'
+import { ItemContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { Location, MaterialMove } from '@gamepark/rules-api'
 
 
 export class FragmentStockDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
@@ -20,6 +20,10 @@ export class FragmentStockDescription extends LocationDescription<SpiritOfNature
       y: stock.y - 0.1,
       z: 20
     }
+  }
+
+  canDrop(move: MaterialMove, location: Location, context: ItemContext): boolean {
+    return super.canDrop(move, location, context) && context.type === MaterialType.FragmentTile
   }
 }
 

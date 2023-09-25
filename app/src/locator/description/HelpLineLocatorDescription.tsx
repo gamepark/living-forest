@@ -9,8 +9,9 @@ import { playerDeckLocator } from '../PlayerDeckLocator'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
 
 export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
-  getLocations({ rules: { players } }: MaterialContext) {
-    return players.map((p) => ({ type: LocationType.HelpLine, player: p }))
+  getLocations({ player }: MaterialContext) {
+    if (!player) return []
+    return [{ type: LocationType.HelpLine, player: player }]
   }
 
   width = 30
