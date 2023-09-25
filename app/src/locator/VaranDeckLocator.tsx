@@ -1,10 +1,10 @@
 import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
-import { VaranDeckLocatorDescription } from './VaranDeckLocatorDescription'
+import { VaranDeckDescription } from './VaranDeckDescription'
 
 export class VaranDeckLocator extends DeckLocator {
   limit = 10
-  locationDescription = new VaranDeckLocatorDescription()
+  locationDescription = new VaranDeckDescription()
 
   delta = { x: -0.05, y: -0.05, z: 0.05 }
 

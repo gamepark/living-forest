@@ -7,7 +7,7 @@ import { css } from '@emotion/react'
 import Images from '../images/Images'
 import { Location } from '@gamepark/rules-api'
 
-export class VaranDeckLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
+export class VaranDeckDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true
   location = { type: LocationType.VaranDeck, id: 99 }
   ratio = 600 / 451

@@ -7,7 +7,7 @@ import { Location } from '@gamepark/rules-api/dist/material/location/Location'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
 import { playerDeckLocator } from './PlayerDeckLocator'
 
-export class PlayerDeckLocationDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
+export class PlayerDeckDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   getLocations({ rules: { players } }: MaterialContext): Location[] {
     return players.map((player) => ({ type: LocationType.PlayerDeckStack, player }))
   }

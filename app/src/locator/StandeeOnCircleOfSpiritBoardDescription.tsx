@@ -5,7 +5,7 @@ import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialT
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { Location } from '@gamepark/rules-api'
 
-export class StandeeOnCircleOfSpiritBoardLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
+export class StandeeOnCircleOfSpiritBoardDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   width = 4.5
   height = 3.8
   borderRadius = 1
