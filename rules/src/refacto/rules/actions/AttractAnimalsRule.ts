@@ -9,7 +9,16 @@ import { GuardianAnimalDescriptions } from '../../../material/GuardianAnimalDesc
 export class AttractAnimalsRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {
-    return this.attractAnimalMoves
+    const moves: MaterialMove[] = this.attractAnimalMoves
+    if (this.spentPoints) {
+      moves.push(this.rules().startRule(RuleId.Action))
+    }
+
+    return moves
+  }
+
+  get spentPoints() {
+    return this.remind(Memory.SpentPoints)
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {

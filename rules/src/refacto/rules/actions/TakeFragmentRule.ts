@@ -15,7 +15,6 @@ export class TakeFragmentRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.FragmentTile)(move)) return []
-    this.memorize(Memory.Actions, (action) => action - 1)
     return [this.rules().startRule(RuleId.Action)]
   }
 
@@ -23,8 +22,7 @@ export class TakeFragmentRule extends PlayerTurnRule {
     return this
       .material(MaterialType.FragmentTile)
       .location(LocationType.FragmentStack)
-      .limit(1 + this.bonus)
-      .moveItems({ location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FragmentTile }})
+      .moveItems({ location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FragmentTile }}, 1 + this.bonus)
   }
 
   get bonus() {
@@ -32,6 +30,7 @@ export class TakeFragmentRule extends PlayerTurnRule {
   }
 
   onRuleEnd() {
+    this.memorize(Memory.Actions, (action) => action - 1)
     this.forget(Memory.Bonus)
     return []
   }

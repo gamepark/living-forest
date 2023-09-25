@@ -8,7 +8,12 @@ import { RuleId } from '../RuleId'
 export class ExtinguishFireRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove[] {
-    return this.extinguishFireMoves
+    const moves: MaterialMove[] = this.extinguishFireMoves
+
+    if (this.spentPoints) {
+      moves.push(this.rules().startRule(RuleId.Action))
+    }
+    return moves
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
@@ -45,6 +50,10 @@ export class ExtinguishFireRule extends PlayerTurnRule {
 
   get resources() {
     return this.playerState.waterResources
+  }
+
+  get spentPoints() {
+    return this.remind(Memory.SpentPoints)
   }
 
   onRuleEnd() {
