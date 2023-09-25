@@ -3,7 +3,7 @@ import Images from '../../images/Images'
 
 export class SacredTreeDescription extends TokenDescription {
   width = 5
-  ratio = 1
+  ratio = 356/320
   image = Images.SacredTree
   rules = () => <p></p>
 }

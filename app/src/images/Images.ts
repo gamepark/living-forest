@@ -107,44 +107,35 @@ import stag from './cards/stag.jpg'
 import tapir from './cards/tapir.jpg'
 import varan from './cards/varan.jpg'
 
-import tree3A from './trees/tree3A.png'
-import tree3B from './trees/tree3B.png'
-import tree4A from './trees/tree4A.png'
-import tree4B from './trees/tree4B.png'
-import tree5A from './trees/tree5A.png'
-import tree5B from './trees/tree5B.png'
-import tree6 from './trees/tree6.png'
-import tree7 from './trees/tree7.png'
-import tree8 from './trees/tree8.png'
-import tree9 from './trees/tree9.png'
-import tree10 from './trees/tree10.png'
-import tree11 from './trees/tree11.png'
-import forestBack from './forestBack.jpg'
-import autumnBack from './autumnBack.jpg'
-import autumnBackGreen from './autumnBackGreen.png'
-import autumnVerso from './autumnVerso.jpg'
+import tree3A from './trees/tree3A.jpg'
+import tree3B from './trees/tree3B.jpg'
+import tree4A from './trees/tree4A.jpg'
+import tree4B from './trees/tree4B.jpg'
+import tree5A from './trees/tree5A.jpg'
+import tree5B from './trees/tree5B.jpg'
+import tree6 from './trees/tree6.jpg'
+import tree7 from './trees/tree7.jpg'
+import tree8 from './trees/tree8.jpg'
+import tree9 from './trees/tree9.jpg'
+import tree10 from './trees/tree10.jpg'
+import tree11 from './trees/tree11.jpg'
 import autumnCases from './autumnCases.png'
-import autumnSpirit1 from './autumnSpirit1.png'
-import autumnSpirit2 from './autumnSpirit2.png'
 import autumnVictoryFire from './autumnVictoryFire.png'
 import autumnVictorySacredFlower from './autumnVictorySacredFlower.png'
 import autumnVictoryTree from './autumnVictoryTree.png'
 import autumnSpiritCircle from './autumnSpiritCircle.png'
 
 
-import summerVerso from './summerVerso.jpg'
 import summerVictoryFire from './summerVictoryFire.png'
 import summerVictorySacredFlower from './summerVictorySacredFlower.png'
 import summerVictoryTree from './summerVictoryTree.png'
 import summerSpiritCircle from './summerSpiritCircle.png'
 
-import winterVerso from './winterVerso.jpg'
 import winterVictoryFire from './winterVictoryFire.png'
 import winterVictorySacredFlower from './winterVictorySacredFlower.png'
 import winterVictoryTree from './winterVictoryTree.png'
 import winterSpiritCircle from './winterSpiritCircle.png'
 
-import springVerso from './springVerso.jpg'
 import springVictoryFire from './springVictoryFire.png'
 import springVictorySacredFlower from './springVictorySacredFlower.png'
 import springVictoryTree from './springVictoryTree.png'
@@ -174,8 +165,8 @@ import ReserveHolder from './reserve-holder.png'
 import VaranHolder from './varan-holder.png'
 
 
-
 import sampleImage from './cards/verso1.jpg'
+import forestBack from './forestBack.jpg'
 
 const Images = {
   sampleImage, bear1, beetle1, lynx1, fox1, goldfish1, tanuki1, boar1, weasel1, rabbit1, doe1, hummingbird1, bee1, monkey1, owl1,
@@ -187,11 +178,10 @@ const Images = {
   platypus, crane, sloth, koala, leopard, eagle, snake, cricket, panther, gorilla, bison, chameleon, crocodile, elephant, dolphin, dog, panda,
   stag, tapir, varan,
   tree3A, tree3B, tree4A, tree4B, tree5A, tree5B, tree6, tree7, tree8, tree9, tree10, tree11,
-  forestBack,
-  springVerso, springSpiritCircle, springVictoryFire, springVictorySacredFlower, springVictoryTree,
-  summerVerso, summerSpiritCircle, summerVictoryFire, summerVictorySacredFlower, summerVictoryTree,
-  autumnVerso, autumnBack, autumnBackGreen, autumnCases, autumnSpirit1, autumnSpirit2, autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
-  winterVerso, winterSpiritCircle, winterVictoryFire, winterVictorySacredFlower, winterVictoryTree,
+  springSpiritCircle, springVictoryFire, springVictorySacredFlower, springVictoryTree,
+  summerSpiritCircle, summerVictoryFire, summerVictorySacredFlower, summerVictoryTree,
+  autumnCases, autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
+  winterSpiritCircle, winterVictoryFire, winterVictorySacredFlower, winterVictoryTree,
   circleOfSpirits,
   sun, drop, seed, wind, sacredFlower, gregarious,
   fragment, fire, fire2, fire3, fire4, firePanel,
@@ -201,7 +191,8 @@ const Images = {
   WinterPlayerBoard,
   AutumnPlayerBoard,
   ReserveHolder,
-  VaranHolder
+  VaranHolder,
+  forestBack
 }
 
 export default Images

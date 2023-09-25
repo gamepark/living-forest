@@ -17,7 +17,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     if (this.possible) return []
 
     this.memorize(Memory.Actions, (action) => action - 1)
-    return [this.rules().startPlayerTurn(RuleId.Action, this.player)]
+    return [this.rules().startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {
@@ -41,10 +41,11 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   }
 
   get resources() {
-    return this.helpLine.waterResources - (this.remind(Memory.SpentPoints) ?? 0)
+    return this.helpLine.waterResources
   }
 
   onRuleEnd() {
+    this.forget(Memory.Bonus)
     this.forget(Memory.SpentPoints)
     return []
   }

@@ -3,6 +3,10 @@ import { MaterialType } from '../../material/MaterialType'
 import { HelpLine } from '../helper/HelpLine'
 import { LocationType } from '../../material/LocationType'
 import { RuleId } from '../RuleId'
+import { PlantProtectiveTreeRule } from './PlantProtectiveTreeRule'
+import { TakeFragmentRule } from './TakeFragmentRule'
+import { ExtinguishFireRule } from './ExtinguishFireRule'
+import { AttractAnimalsRule } from './AttractAnimalsRule'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
@@ -30,7 +34,22 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
     const space = move.position.location?.x!
     const ruleId = this.rockRules[space]
-    return [this.rules().startRule(ruleId)]
+    return [this.rules().startRule(!this.canDoAction(ruleId)? RuleId.Action: ruleId)]
+  }
+
+  canDoAction(ruleId: RuleId) {
+    switch (ruleId) {
+      case RuleId.PlantTree:
+        return new PlantProtectiveTreeRule(this.game).getPlayerMoves().length
+      case RuleId.TakeFragment:
+        return new TakeFragmentRule(this.game).getPlayerMoves().length
+      case RuleId.ExtinguishFire:
+        return new ExtinguishFireRule(this.game).getPlayerMoves().length
+      case RuleId.AttractAnimals:
+        return new AttractAnimalsRule(this.game).getPlayerMoves().length
+    }
+
+    return false
   }
 
   get standee() {

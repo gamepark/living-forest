@@ -3,7 +3,7 @@ import { MaterialItem } from '@gamepark/rules-api'
 
 export class FragmentStockLocator extends LineLocator {
   limit = 10
-  delta = { x: -0.05, y: -0.05, z: 0.01 }
+  delta = { x: -0.05, y: -0.05, z: 0.1 }
 
   getCoordinates(_item: MaterialItem, { rules: { players }}: ItemContext) {
     if (players.length < 4) {

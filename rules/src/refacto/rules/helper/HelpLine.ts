@@ -5,6 +5,8 @@ import { getSolitaryGregariousDifference, GuardianAnimalDescriptions } from '../
 import Resource from '../../../material/Resource'
 import sumBy from 'lodash/sumBy'
 import SpiritOfNature from '../../../SpiritOfNature'
+import { RuleId } from '../RuleId'
+import { Memory } from '../Memory'
 
 export class HelpLine extends MaterialRulesPart {
   private helpLine: Material;
@@ -19,7 +21,7 @@ export class HelpLine extends MaterialRulesPart {
   }
 
   get waterResources() {
-    return this.getResources(Resource.Drop)
+    return this.getResources(Resource.Drop) + this.modifier(RuleId.ExtinguishFire)
   }
 
   get windResources() {
@@ -27,7 +29,23 @@ export class HelpLine extends MaterialRulesPart {
   }
 
   get sunResources() {
-    return this.getResources(Resource.Sun)
+    return this.getResources(Resource.Sun) + this.modifier(RuleId.AttractAnimals)
+  }
+
+  modifier(ruleId: RuleId) {
+    if (ruleId === this.game.rule?.id) {
+      return this.bonus - this.spent
+    }
+
+    return 0
+  }
+
+  get bonus() {
+    return this.remind(Memory.Bonus) ?? 0
+  }
+
+  get spent() {
+    return this.remind(Memory.SpentPoints) ?? 0
   }
 
   getResources(type: Resource) {

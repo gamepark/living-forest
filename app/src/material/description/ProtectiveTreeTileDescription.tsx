@@ -5,6 +5,7 @@ import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
 export class ProtectiveTreeTileDescription extends TokenDescription {
   ratio = 1
   width = 3.6
+  borderRadius = 0.3
 
   images = {
     [ProtectiveTree.Tree3A]: Images.tree3A,

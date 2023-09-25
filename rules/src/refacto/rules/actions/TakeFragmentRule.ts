@@ -20,9 +20,19 @@ export class TakeFragmentRule extends PlayerTurnRule {
   }
 
   get takeFragmentMoves() {
-    return [this
+    return this
       .material(MaterialType.FragmentTile)
       .location(LocationType.FragmentStack)
-      .moveItem({ location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FragmentTile }})]
+      .limit(1 + this.bonus)
+      .moveItems({ location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FragmentTile }})
+  }
+
+  get bonus() {
+    return this.remind(Memory.Bonus) ?? 0
+  }
+
+  onRuleEnd() {
+    this.forget(Memory.Bonus)
+    return []
   }
 }
