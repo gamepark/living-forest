@@ -41,9 +41,12 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
 
   afterItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return []
-    
-    // TODO: if there is an effect, don't decrease and go to action
-    this.memorize(Memory.Actions, (action) => action - 1)
+
+    // Only decrease action count if there is no bonus action
+    // TODO: implement
+    const hasAction = false
+
+    if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
     return [this.rules().startRule(RuleId.Action)]
   }
 
@@ -60,7 +63,6 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
 
   onRuleEnd() {
     this.forget(Memory.Bonus)
-    this.forget(Memory.SpentPoints)
     return []
   }
 

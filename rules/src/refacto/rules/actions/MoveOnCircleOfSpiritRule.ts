@@ -7,6 +7,7 @@ import { PlantProtectiveTreeRule } from './PlantProtectiveTreeRule'
 import { TakeFragmentRule } from './TakeFragmentRule'
 import { ExtinguishFireRule } from './ExtinguishFireRule'
 import { AttractAnimalsRule } from './AttractAnimalsRule'
+import { Memory } from '../Memory'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
@@ -34,7 +35,11 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
     const space = move.position.location?.x!
     const ruleId = this.rockRules[space]
-    return [this.rules().startRule(!this.canDoAction(ruleId)? RuleId.Action: ruleId)]
+    const hasAction = this.canDoAction(ruleId)
+
+    // Only decrease action count if there is no bonus action
+    if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
+    return [this.rules().startRule(!hasAction? RuleId.Action: ruleId)]
   }
 
   canDoAction(ruleId: RuleId) {

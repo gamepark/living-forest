@@ -16,14 +16,12 @@ export class AttractAnimalsRule extends PlayerTurnRule {
     if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move)) return []
     this.updateSpent(move)
     if (this.possible) return []
-
-    this.memorize<number>(Memory.Actions, (action) => action - 1)
     return [this.rules().startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {
     const item = this.material(move.itemType).index(move.itemIndex).getItem()!
-    this.memorize<number>(Memory.SpentPoints, (points) => points + GuardianAnimalDescriptions[item.id].cost!)
+    this.memorize<number>(Memory.SpentPoints, (points) => (points ?? 0) + GuardianAnimalDescriptions[item.id].cost!)
   }
 
   get possible() {
@@ -47,6 +45,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
   }
 
   onRuleEnd() {
+    this.memorize<number>(Memory.Actions, (action) => action - 1)
     this.forget(Memory.Bonus)
     this.forget(Memory.SpentPoints)
     return []

@@ -8,37 +8,39 @@ import { RuleId } from '../RuleId'
 export class ExtinguishFireRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove[] {
-    return this.extinguishFire
+    return this.extinguishFireMoves
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (!isMoveItemType(MaterialType.FireTile)(move)) return []
     this.updateSpent(move)
     if (this.possible) return []
-
-    this.memorize(Memory.Actions, (action) => action - 1)
     return [this.rules().startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {
     const item = this.material(move.itemType).index(move.itemIndex).getItem()!
-    this.memorize(Memory.SpentPoints, (points) => points + item.id)
+    this.memorize(Memory.SpentPoints, (points) => (points ?? 0) + item.id)
   }
 
   get possible() {
-    return this.extinguishFire.length
+    return this.extinguishFireMoves.length
   }
 
   get playerState() {
     return new PlayerState(this.game, this.player)
   }
 
-  get extinguishFire() {
+  get extinguishFireMoves() {
     const resources = this.resources
-    const fire = this.material(MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardSpace)
+    const fire = this.material(MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire)
     return fire
       .filter((item) => item.id <= resources)
-      .moveItems({ location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FireTile }})
+      .moveItems(this.toPlayerArea)
+  }
+
+  get toPlayerArea() {
+    return { location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FireTile }}
   }
 
   get resources() {
@@ -46,6 +48,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   }
 
   onRuleEnd() {
+    this.memorize<number>(Memory.Actions, (action) => action - 1)
     this.forget(Memory.Bonus)
     this.forget(Memory.SpentPoints)
     return []

@@ -38,7 +38,7 @@ export class PlayerState extends MaterialRulesPart {
 
   modifier(ruleId: RuleId) {
     if (ruleId === this.game.rule?.id) {
-      return this.bonus - this.spent
+      return (this.bonus ?? 0) - (this.spent ?? 0)
     }
 
     return 0
