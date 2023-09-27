@@ -13,7 +13,7 @@ export class PlayerDiscardLocator extends DeckLocator {
     const parentPosition = getPositionOnTable(MaterialType.ForestBoard, rules, item, player)
 
     return {
-      x: parentPosition.x + 15.5,
+      x: parentPosition.x + 15.2,
       y: parentPosition.y - 3,
       z: 0.1
     }

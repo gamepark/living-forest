@@ -11,6 +11,6 @@ export class ProtectiveTreeDeckLocator extends GridLocator {
       return { x: -24, y: -16, z: 0}
     }
 
-    return { x: -24, y: -10, z: 0}
+    return { x: -25, y: -7, z: 0}
   }
 }

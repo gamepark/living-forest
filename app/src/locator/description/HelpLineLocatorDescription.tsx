@@ -10,9 +10,8 @@ import { getPositionOnTable } from '../../utils/PositionOnTable'
 
 export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true
-  getLocations({ player }: MaterialContext) {
-    if (!player) return []
-    return [{ type: LocationType.HelpLine, player: player }]
+  getLocations({ rules: { players } }: MaterialContext) {
+    return players.map((p) => ({ type: LocationType.HelpLine, player: p }))
   }
 
   width = 38

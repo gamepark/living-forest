@@ -10,7 +10,7 @@ export class ReserveStackLocator extends DeckLocator {
   delta = { x: -0.05, y: -0.05, z: 0.05 }
 
   getCoordinates(item: MaterialItem, { rules: { players } }: ItemContext): Coordinates {
-    const x = players.length < 4 ? 36: 17
+    const x = players.length < 4 ? 36: 18
     const y = players.length < 4 ? -24: -25
     return {
       x,
