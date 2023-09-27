@@ -12,7 +12,6 @@ export class VaranDeckDescription extends LocationDescription<SpiritOfNature, Ma
   location = { type: LocationType.VaranDeck, id: 99 }
   ratio = 600 / 451
   height = 9.9
-  coordinates = { x: 20, y: 0, z: 0 }
   extraCss = css`
     background-image: url(${Images.VaranHolder});
     background-size: contain;
@@ -20,11 +19,15 @@ export class VaranDeckDescription extends LocationDescription<SpiritOfNature, Ma
   `
 
   getCoordinates(_location: Location, { rules: { players }}: ItemContext) {
-    if (players.length < 4) {
-      return { x: -20, y: -24.2, z: 0}
-    }
-
-    return { x: 73, y: -5.1, z: 0}
+    return getVaranDeckHolderCoordinates(players)
   }
 
+}
+
+export const getVaranDeckHolderCoordinates = (players: SpiritOfNature[]) => {
+  if (players.length < 3) {
+    return { x: -20, y: -24.2, z: 0}
+  }
+
+  return { x: 18, y: 22.5, z: 0}
 }

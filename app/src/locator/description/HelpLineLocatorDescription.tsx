@@ -6,7 +6,7 @@ import { LocationType } from '@gamepark/living-forest/refacto/material/LocationT
 import { css } from '@emotion/react'
 import { Location } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
-import { getPositionOnTable } from '../../utils/PositionOnTable'
+import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
 
 export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true
@@ -24,7 +24,7 @@ export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNatu
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
-    const boardPosition = getPositionOnTable(MaterialType.ForestBoard, rules, { location }, player)
+    const boardPosition = getPlayerBoardPositionOnTable(rules, { location }, player)
 
     return {
       x: boardPosition.x,

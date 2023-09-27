@@ -1,6 +1,6 @@
 import { ItemLocator } from '@gamepark/react-game'
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
-import { tableLocator, TableLocator } from './TableLocator'
+import { tableLocator } from './TableLocator'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { VaranDeckLocator } from './VaranDeckLocator'
@@ -16,6 +16,7 @@ import { FireStockLocation } from './FireStockLocation'
 import { playerDiscardLocator } from './PlayerDiscardLocator'
 import { playerAreaLocation } from './PlayerAreaLocation'
 import { TreeSpaceLocator } from './TreeSpaceLocator'
+import { victoryTileAreaLocator } from './VictoryTileAreaLocator'
 
 export const locators: Record<LocationType, ItemLocator<SpiritOfNature, MaterialType, LocationType>> = {
   [LocationType.Table]: tableLocator,
@@ -27,7 +28,7 @@ export const locators: Record<LocationType, ItemLocator<SpiritOfNature, Material
   [LocationType.ReserveStack]: reserveStackLocator,
   [LocationType.ReserveRow]: new ReserveRowLocator(),
   [LocationType.TreeDispenser]: new ProtectiveTreeDeckLocator(),
-  [LocationType.VictoryTileArea]: new TableLocator(),
+  [LocationType.VictoryTileArea]: victoryTileAreaLocator,
   [LocationType.VaranDeck]: new VaranDeckLocator(),
   [LocationType.FragmentStack]: new FragmentStockLocator(),
   [LocationType.HelpLine]: new HelpLineLocator(),

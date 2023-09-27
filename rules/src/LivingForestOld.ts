@@ -71,7 +71,7 @@
   //   var end = false
   //   this.state.players.forEach((player) => {
   //     {
-  //       Object.entries(Victory).splice(3, 3).map((_, index) => {
+  //       Object.entries(VictoryTiles).splice(3, 3).map((_, index) => {
   //         const number = getvictoryCount(player.victoryTiles, player.line, player.forest, index + 1, player.extinguishedFires.length)
   //         if (number >= 12) end = true
   //       })

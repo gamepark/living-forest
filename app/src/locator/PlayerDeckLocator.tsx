@@ -1,11 +1,10 @@
 import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { PlayerDeckDescription } from './description/PlayerDeckDescription'
-import { getPositionOnTable } from '../utils/PositionOnTable'
+import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
 
 export class PlayerDeckLocator extends DeckLocator {
-
+  limit = 10
   locationDescription = new PlayerDeckDescription()
   hidden = true
 
@@ -13,10 +12,10 @@ export class PlayerDeckLocator extends DeckLocator {
 
   getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
     const { rules, player } = context
-    const parentPosition = getPositionOnTable(MaterialType.ForestBoard, rules, item, player)
+    const parentPosition = getPlayerBoardPositionOnTable(rules, item, player)
 
     return {
-      x: parentPosition.x - 15.5,
+      x: parentPosition.x - 15.3,
       y: parentPosition.y - 3,
       z: 0.1
     }

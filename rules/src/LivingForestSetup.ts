@@ -6,11 +6,11 @@ import { LivingForestOptions } from './LivingForestOptions'
 import { RuleId } from './refacto/rules/RuleId'
 import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve'
 import GuardianAnimal, { startingGuardianAnimals } from './material/GuardianAnimal'
-import VictoryTile from './material/VictoryTile'
 import { getInitializationDispenser } from './material/ProtectiveTree'
 import { getInitializationPlayersRocks } from './material/CircleOfSpirits'
 import { locationsStrategies } from './configuration/LocationStrategies'
 import { Fire } from './material/Fire'
+import VictoryTiles, { VictoryTileTypes } from './material/VictoryTiles'
 
 export const CARDS_PER_ROW = 4
 export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, MaterialType, LocationType, LivingForestOptions> {
@@ -62,7 +62,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({ id: card, location: { type: LocationType.PlayerDeckStack, player } })))
     this.material(MaterialType.GuardianAnimalCard).player(player).shuffle()
 
-    this.material(MaterialType.VictoryTile).createItems(this.getSpiritVictoryTiles(player).map((tile) => ({ id: tile, location: { type: LocationType.VictoryTileArea, player } })))
+    this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({ id: tile, location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile]  } })))
 
     // Place on the starting point
     this.material(MaterialType.SpiritOfNatureStandee).createItem({ id: player, location: { type: LocationType.CircleOfSpiritBoardSpace, x: getInitializationPlayersRocks(spirits)![player] } })
@@ -89,17 +89,12 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     return { id: RuleId.GuardianAnimals, players: options.players.map((p) => p.id) }
   }
 
-  getSpiritVictoryTiles(spirit: SpiritOfNature): VictoryTile[] {
-    switch (spirit) {
-      case SpiritOfNature.Spring:
-        return [VictoryTile.FireSpring, VictoryTile.SacredFlowerSpring, VictoryTile.TreeSpring]
-      case SpiritOfNature.Summer:
-        return [VictoryTile.FireSummer, VictoryTile.SacredFlowerSummer, VictoryTile.TreeSummer]
-      case SpiritOfNature.Autumn:
-        return [VictoryTile.FireAutumn, VictoryTile.SacredFlowerAutumn, VictoryTile.TreeAutumn]
-      case SpiritOfNature.Winter:
-      default:
-        return [VictoryTile.FireWinter, VictoryTile.SacredFlowerWinter, VictoryTile.TreeWinter]
+  get spiritVictoryTiles() {
+    return {
+      [SpiritOfNature.Spring]: [VictoryTiles.SpringFire, VictoryTiles.SpringFlower, VictoryTiles.SpringTree],
+      [SpiritOfNature.Summer]: [VictoryTiles.SummerFire, VictoryTiles.SummerFlower, VictoryTiles.SummerTree],
+      [SpiritOfNature.Autumn]: [VictoryTiles.AutumnFire, VictoryTiles.AutumnFlower, VictoryTiles.AutumnTree],
+      [SpiritOfNature.Winter]: [VictoryTiles.WinterFire, VictoryTiles.WinterFlower, VictoryTiles.WinterTree],
     }
   }
 }

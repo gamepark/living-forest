@@ -5,7 +5,7 @@ import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialT
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
-import { getPositionOnTable } from '../../utils/PositionOnTable'
+import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
 
 export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   getLocations({ player }: MaterialContext): Location[] {
@@ -19,7 +19,7 @@ export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
-    const parentPosition = getPositionOnTable(MaterialType.ForestBoard, rules, { location }, player)
+    const parentPosition = getPlayerBoardPositionOnTable(rules, { location }, player)
 
     return {
       x: parentPosition.x + 15.5,

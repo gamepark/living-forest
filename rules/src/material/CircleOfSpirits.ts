@@ -12,26 +12,26 @@ export default CircleOfSpirits
 export const circleOfSpiritsRocks = [ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile, ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile]
 export function getTwoPlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
-        [players[0]]: 2,
-        [players[1]]: 8
+        [players[0]]: 0,
+        [players[1]]: 6
     }
 }
 
 export function getThreePlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
-        [players[0]]: 4,
-        [players[1]]: 8,
-        [players[2]]: 0
+        [players[0]]: 2,
+        [players[1]]: 6,
+        [players[2]]: 10
 
     }
 }
 
 export function getFourPlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
-        [players[0]]: 2,
-        [players[1]]: 8,
-        [players[2]]: 11,
-        [players[3]]: 5
+        [players[0]]: 0,
+        [players[1]]: 6,
+        [players[2]]: 9,
+        [players[3]]: 3
     }
 }
 
