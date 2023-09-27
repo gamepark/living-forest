@@ -5,7 +5,7 @@ import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialT
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
-import { playerDiscardLocator } from '../PlayerDiscardLocator'
+import { getPositionOnTable } from '../../utils/PositionOnTable'
 
 export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   getLocations({ player }: MaterialContext): Location[] {
@@ -18,14 +18,12 @@ export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature
   borderRadius = guardianAnimalCardDescription.borderRadius
 
   getCoordinates(location: Location, context: MaterialContext) {
-    // FIXME: better solution ?
-    const deckPosition = playerDiscardLocator.getCoordinates(
-      { location: { type: LocationType.PlayerDiscardStack, player: location.player }},
-      { ...context, type: MaterialType.GuardianAnimalCard, index: 0, displayIndex: 0 },
-    )
+    const { rules, player } = context
+    const parentPosition = getPositionOnTable(MaterialType.ForestBoard, rules, { location }, player)
+
     return {
-      x: deckPosition.x - 0.1,
-      y: deckPosition.y - 0.1,
+      x: parentPosition.x + 15.5,
+      y: parentPosition.y - 3,
       z: 10
     }
   }

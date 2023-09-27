@@ -10,6 +10,7 @@ import { TakeFragmentRule } from './actions/TakeFragmentRule'
 import { MoveOnCircleOfSpiritRule } from './actions/MoveOnCircleOfSpiritRule'
 import { PlantProtectiveTreeRule } from './actions/PlantProtectiveTreeRule'
 import { TurnOrder } from './helper/TurnOrder'
+import ProtectiveTree from '../../material/ProtectiveTree'
 
 
 export class ActionRule extends PlayerTurnRule {
@@ -112,6 +113,12 @@ export class ActionRule extends PlayerTurnRule {
   }
 
   memorizeLastAction(ruleId: RuleId) {
+    const specialTree = this.material(MaterialType.ProtectiveTreeTiles)
+      .location(LocationType.TreeSpace)
+      .player(this.player)
+      .id(ProtectiveTree.Tree11)
+
+    if (specialTree.length) return;
     this.memorize(Memory.LastAction, ruleId)
   }
 

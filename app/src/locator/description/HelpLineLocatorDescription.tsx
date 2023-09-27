@@ -5,16 +5,17 @@ import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialT
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 import { css } from '@emotion/react'
 import { Location } from '@gamepark/rules-api'
-import { playerDeckLocator } from '../PlayerDeckLocator'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
+import { getPositionOnTable } from '../../utils/PositionOnTable'
 
 export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
+  alwaysVisible = true
   getLocations({ player }: MaterialContext) {
     if (!player) return []
     return [{ type: LocationType.HelpLine, player: player }]
   }
 
-  width = 30
+  width = 38
   height = guardianAnimalCardDescription.getSize(0).height
   //coordinates = { x: 20, y: 0, z: 0 }
   extraCss = css`
@@ -23,15 +24,13 @@ export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNatu
   `
 
   getCoordinates(location: Location, context: MaterialContext) {
-    // FIXME: better solution ?
-    const deckPosition = playerDeckLocator.getCoordinates(
-      { location: { type: LocationType.PlayerDeckStack, player: location.player }},
-      { ...context, type: MaterialType.GuardianAnimalCard, index: 0, displayIndex: 0 },
-    )
+    const { rules, player } = context
+    const boardPosition = getPositionOnTable(MaterialType.ForestBoard, rules, { location }, player)
+
     return {
-      x: deckPosition.x + 19,
-      y: deckPosition.y,
-      z: 20
+      x: boardPosition.x,
+      y: boardPosition.y - 13,
+      z: 0
     }
   }
 
