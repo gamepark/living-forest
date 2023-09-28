@@ -26,9 +26,11 @@ const holder =  css`
 
 const resourceStyle = (image: string) => css`
   flex: 1;
+  align-self: center;
   background-image: url(${image});
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   width: 100%;
   height: 100%;
   filter: drop-shadow(0.1em 0.1em 0.2em gray);

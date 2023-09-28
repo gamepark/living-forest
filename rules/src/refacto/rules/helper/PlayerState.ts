@@ -6,7 +6,7 @@ import Resource from '../../../material/Resource'
 import sumBy from 'lodash/sumBy'
 import SpiritOfNature from '../../../SpiritOfNature'
 import { Memory } from '../Memory'
-import { protectiveTreeDetail } from '../../../material/ProtectivesTrees'
+import { ProtectiveTreeDetail } from '../../../material/ProtectivesTrees'
 import { VictoryTileType, VictoryTileTypes } from '../../../material/VictoryTiles'
 import uniqBy from 'lodash/uniqBy'
 
@@ -72,7 +72,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getTreeResources(resource: Resource) {
-    return sumBy(this.forest.getItems(), (item) => protectiveTreeDetail[item.id][resource] ?? 0) ?? 0
+    return sumBy(this.forest.getItems(), (item) => ProtectiveTreeDetail[item.id]?.resources?.[resource] ?? 0) ?? 0
   }
 
   getHelpLineResources(resource: Resource) {

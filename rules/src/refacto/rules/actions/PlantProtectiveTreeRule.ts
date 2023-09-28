@@ -3,7 +3,7 @@ import { MaterialType } from '../../material/MaterialType'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
 import { LocationType } from '../../material/LocationType'
-import { protectiveTreeDetail } from '../../../material/ProtectivesTrees'
+import { ProtectiveTreeDetail } from '../../../material/ProtectivesTrees'
 import { forestTreeSpaces } from '../../../material/ForestTreeSpaces'
 import { PlayerState } from '../helper/PlayerState'
 
@@ -56,7 +56,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     const resources = this.resources
     return this.material(MaterialType.ProtectiveTreeTiles)
       .location(LocationType.TreeDispenser)
-      .filter((item) => protectiveTreeDetail[item.id].cost <= resources)
+      .filter((item) => ProtectiveTreeDetail[item.id].cost <= resources)
   }
 
   get plantedTrees() {
