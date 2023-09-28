@@ -1,8 +1,7 @@
 import { CardDescription, ItemContext } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
-import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
-import { isMoveItemType } from '@gamepark/rules-api/dist/material/moves/items/MoveItem'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
 
