@@ -3,8 +3,7 @@ import { MaterialType } from '../../material/MaterialType'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
 import { LocationType } from '../../material/LocationType'
-import ProtectiveTree from '../../../material/ProtectiveTree'
-import { Tree10, Tree11, Tree3A, Tree3B, Tree4A, Tree4B, Tree5A, Tree5B, Tree6, Tree7, Tree8, Tree9 } from '../../../material/ProtectivesTrees'
+import { protectiveTreeDetail } from '../../../material/ProtectivesTrees'
 import { forestTreeSpaces } from '../../../material/ForestTreeSpaces'
 import { PlayerState } from '../helper/PlayerState'
 
@@ -57,7 +56,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     const resources = this.resources
     return this.material(MaterialType.ProtectiveTreeTiles)
       .location(LocationType.TreeDispenser)
-      .filter((item) => this.protectiveTreeDetail[item.id].cost <= resources)
+      .filter((item) => protectiveTreeDetail[item.id].cost <= resources)
   }
 
   get plantedTrees() {
@@ -75,23 +74,6 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
 
   get playerState() {
     return new PlayerState(this.game, this.player)
-  }
-  
-  get protectiveTreeDetail() {
-    return {
-      [ProtectiveTree.Tree3A]: Tree3A,
-      [ProtectiveTree.Tree3B]: Tree3B,
-      [ProtectiveTree.Tree4A]: Tree4A,
-      [ProtectiveTree.Tree4B]: Tree4B,
-      [ProtectiveTree.Tree5A]: Tree5A,
-      [ProtectiveTree.Tree5B]: Tree5B,
-      [ProtectiveTree.Tree6]: Tree6,
-      [ProtectiveTree.Tree7]: Tree7,
-      [ProtectiveTree.Tree8]: Tree8,
-      [ProtectiveTree.Tree9]: Tree9,
-      [ProtectiveTree.Tree10]: Tree10,
-      [ProtectiveTree.Tree11]: Tree11,
-    }
   }
 
   onPlantTree(move: MoveItem) {
