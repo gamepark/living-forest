@@ -1,8 +1,7 @@
 import { ComponentSize, ItemContext, TokenDescription } from '@gamepark/react-game'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import Images from '../../images/Images'
-import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
-import { isCustomMoveType } from '@gamepark/rules-api/dist/material/moves/CustomMove'
+import { MaterialMove, isCustomMoveType } from '@gamepark/rules-api'
 import { CustomMoveType } from '@gamepark/living-forest/refacto/rules/CustomMoveType'
 import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 

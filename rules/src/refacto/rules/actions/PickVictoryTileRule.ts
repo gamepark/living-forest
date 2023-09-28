@@ -1,8 +1,6 @@
-import { PlayerTurnRule } from '@gamepark/rules-api/dist/material/rules/PlayerTurnRule'
-import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
+import { PlayerTurnRule, MaterialMove, ItemMove } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
-import { ItemMove } from '@gamepark/rules-api/dist/material/moves/items/ItemMove'
 import { RuleId } from '../RuleId'
 import { VictoryTileTypes } from '../../../material/VictoryTiles'
 

@@ -7,13 +7,21 @@ import sumBy from 'lodash/sumBy'
 import SpiritOfNature from '../../../SpiritOfNature'
 import { Memory } from '../Memory'
 import { protectiveTreeDetail } from '../../../material/ProtectivesTrees'
+import { VictoryTileType, VictoryTileTypes } from '../../../material/VictoryTiles'
+import uniqBy from 'lodash/uniqBy'
 
 export class PlayerState extends MaterialRulesPart {
   private helpLine: Material;
+  private victoryTiles: Material
+  private forest: Material
+  private fires: Material
 
   constructor(game: MaterialGame, readonly player: SpiritOfNature) {
     super(game)
     this.helpLine = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(player)
+    this.victoryTiles = this.material(MaterialType.VictoryTile).location(LocationType.VictoryTileArea).player(player)
+    this.forest = this.material(MaterialType.ProtectiveTreeTiles).location(LocationType.TreeSpace).player(this.player)
+    this.fires = this.material(MaterialType.FireTile).location(LocationType.PlayerFireTileStack).player(this.player)
   }
 
   get solidarityGregariousDifference() {
@@ -34,6 +42,10 @@ export class PlayerState extends MaterialRulesPart {
 
   get seedResources() {
     return this.getResources(Resource.Seed) + this.modifier
+  }
+
+  get flowers() {
+    return this.getResources(Resource.SacredFlower)
   }
 
   get modifier() {
@@ -60,7 +72,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getTreeResources(resource: Resource) {
-    return sumBy(this.plantedTrees.getItems(), (item) => protectiveTreeDetail[item.id][resource] ?? 0) ?? 0
+    return sumBy(this.forest.getItems(), (item) => protectiveTreeDetail[item.id][resource] ?? 0) ?? 0
   }
 
   getHelpLineResources(resource: Resource) {
@@ -68,22 +80,60 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getForestBonus(resource: Resource) {
-    const forest = this.plantedTrees
     switch (resource) {
       case Resource.Drop:
-        return forest.filter((item) => item.location.x === 1).length === 3? 1: 0
+        return this.forest.filter((item) => item.location.x === 1).length === 3? 1: 0
       case Resource.Wind:
-        return forest.filter((item) => item.location.x === 3).length === 3? 1: 0
+        return this.forest.filter((item) => item.location.x === 3).length === 3? 1: 0
       case Resource.SacredFlower:
-        return forest.filter((item) => item.location.y === 1).length === 4? 2: 0
+        return this.forest.filter((item) => item.location.y === 1).length === 4? 2: 0
       case Resource.Sun:
-        return forest.filter((item) => item.location.x === 2).length === 2? 1: 0
+        return this.forest.filter((item) => item.location.x === 2).length === 2? 1: 0
     }
 
     return 0
   }
 
-  get plantedTrees() {
-    return this.material(MaterialType.ProtectiveTreeTiles).location(LocationType.TreeSpace).player(this.player)
+  get firePoints() {
+    const fireFactor = this.countVictoryTileOfType(VictoryTileType.Fire)
+    return fireFactor * this.fires.length
+  }
+
+  get uniqTrees() {
+    return uniqBy(this.forest.getItems(), (item) => item.id)
+  }
+
+  get treePoints() {
+    const treeFactor = this.countVictoryTileOfType(VictoryTileType.Tree)
+    const tree = this.uniqTrees
+    return treeFactor * tree.length
+  }
+
+  get flowerPoints() {
+    const flowerFactor = this.countVictoryTileOfType(VictoryTileType.Flower)
+    return flowerFactor * this.flowers
+  }
+
+  getPointForType(victory: VictoryTileType) {
+    switch (victory) {
+      case VictoryTileType.Fire:
+        return this.flowerPoints
+      case VictoryTileType.Tree:
+        return this.treePoints
+      case VictoryTileType.Flower:
+        return this.flowerPoints
+    }
+  }
+
+  get hasEnded() {
+    return
+  }
+
+  get points() {
+    return this.firePoints + this.treePoints + this.flowerPoints
+  }
+
+  countVictoryTileOfType(victory: VictoryTileType) {
+    return this.victoryTiles.filter((item) => VictoryTileTypes[item.id] === victory).length
   }
 }
