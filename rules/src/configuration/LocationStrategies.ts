@@ -18,9 +18,9 @@ export const locationsStrategies = {
   },
   [MaterialType.FireTile]: {
     [LocationType.CircleOfSpiritBoardFire]: new FillGapStrategy(),
-    [LocationType.PlayerArea]: new PositiveSequenceStrategy()
+    [LocationType.PlayerFireTileStack]: new PositiveSequenceStrategy()
   },
   [MaterialType.FragmentTile]: {
-    [LocationType.PlayerArea]: new PositiveSequenceStrategy()
+    [LocationType.PlayerFragmentTileStack]: new PositiveSequenceStrategy()
   }
 }

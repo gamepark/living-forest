@@ -59,7 +59,7 @@ export class ActionRule extends PlayerTurnRule {
     if (this.isMoveMaterialOnLocation(MaterialType.SpiritOfNatureStandee, LocationType.CircleOfSpiritBoardSpace)(move)) return []
 
     // Take fragment: nothing happen here, only forgot later
-    if (this.isMoveMaterialOnLocation(MaterialType.FragmentTile, LocationType.PlayerArea)(move)) {
+    if (this.isMoveMaterialOnLocation(MaterialType.FragmentTile, LocationType.PlayerFragmentTileStack)(move)) {
       this.memorizeLastAction(RuleId.TakeFragment)
       const takeFragment = new TakeFragmentRule(this.game)
       // Here, we don't care about consequences
@@ -81,7 +81,7 @@ export class ActionRule extends PlayerTurnRule {
     }
 
     // Stop fire
-    if (this.isMoveMaterialOnLocation(MaterialType.FireTile, LocationType.PlayerArea)(move)) {
+    if (this.isMoveMaterialOnLocation(MaterialType.FireTile, LocationType.PlayerFireTileStack)(move)) {
       this.memorizeLastAction(RuleId.ExtinguishFire)
       const estinguishFire = new ExtinguishFireRule(this.game)
       // Here, we don't care about consequences
@@ -109,7 +109,6 @@ export class ActionRule extends PlayerTurnRule {
   }
 
   get mayGoToEndOfTurn() {
-    console.trace("Player", this.game.rule?.player)
     if (this.getPlayerMoves().length && (this.actionCount === undefined || this.actionCount > 0)) return []
     this.forget(Memory.Actions)
     this.forget(Memory.SpentPoints)
@@ -119,7 +118,6 @@ export class ActionRule extends PlayerTurnRule {
       return [this.rules().startRule(RuleId.EndOfTurn)]
     }
 
-    console.log(this.player, turnOrder.getNextPlayer(this.player))
     return [this.rules().startPlayerTurn(RuleId.Action, turnOrder.getNextPlayer(this.player))]
   }
 

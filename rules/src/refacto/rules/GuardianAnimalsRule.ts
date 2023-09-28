@@ -30,7 +30,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     if (!playerState.isEmptyHelpLine) {
       const fragments = this
         .material(MaterialType.FragmentTile)
-        .location(LocationType.PlayerArea)
+        .location(LocationType.PlayerFragmentTileStack)
         .player(playerId);
       if (fragments.length) {
         moves.push(fragments.moveItem({ location: { type: LocationType.FragmentStack }}))
@@ -62,7 +62,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
 
     if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move) || move.position.location?.type !== LocationType.HelpLine) return []
     const playerId = move.position.location.player!
-    const fragments = this.material(MaterialType.FragmentTile).location(LocationType.PlayerArea).player(playerId)
+    const fragments = this.material(MaterialType.FragmentTile).location(LocationType.PlayerFragmentTileStack).player(playerId)
     const playerState = new PlayerState(this.game, playerId)
     if (playerState.solidarityGregariousDifference >= 3 && !fragments.length) {
       return [this.rules().endPlayerTurn(playerId)]

@@ -14,9 +14,11 @@ import { StandeeOnCircleOfSpiritBoardLocator } from './StandeeOnCircleOfSpiritBo
 import { FireOnCircleOfSpiritBoardLocator } from './FireOnCircleOfSpiritBoardLocator'
 import { FireStockLocation } from './FireStockLocation'
 import { playerDiscardLocator } from './PlayerDiscardLocator'
-import { playerAreaLocation } from './PlayerAreaLocation'
+import { playerFireTileStackLocator } from './PlayerFireStackLocator'
 import { TreeSpaceLocator } from './TreeSpaceLocator'
 import { victoryTileAreaLocator } from './VictoryTileAreaLocator'
+import { playerFragmentStackLocator } from './PlayerFragmentStackLocator'
+import { sacredTreeLocator } from './SacredTreeLocator'
 
 export const locators: Record<LocationType, ItemLocator<SpiritOfNature, MaterialType, LocationType>> = {
   [LocationType.Table]: tableLocator,
@@ -33,6 +35,8 @@ export const locators: Record<LocationType, ItemLocator<SpiritOfNature, Material
   [LocationType.FragmentStack]: new FragmentStockLocator(),
   [LocationType.HelpLine]: new HelpLineLocator(),
   [LocationType.FireStack]: new FireStockLocation(),
-  [LocationType.PlayerArea]: playerAreaLocation,
-  [LocationType.TreeSpace]: new TreeSpaceLocator()
+  [LocationType.SacredTree]: sacredTreeLocator,
+  [LocationType.TreeSpace]: new TreeSpaceLocator(),
+  [LocationType.PlayerFireTileStack]: playerFireTileStackLocator,
+  [LocationType.PlayerFragmentTileStack]: playerFragmentStackLocator
 }

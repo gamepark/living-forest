@@ -13,6 +13,8 @@ export enum LocationType {
   HelpLine,
   FireStack,
   CircleOfSpiritBoardFire,
-  PlayerArea,
-  TreeSpace
+  SacredTree,
+  TreeSpace,
+  PlayerFireTileStack,
+  PlayerFragmentTileStack
 }

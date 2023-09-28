@@ -43,7 +43,10 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
         newPosition = newPosition % (rocks.length)
       }
 
-      const isStandeeOnNewPosition = !!this.material(MaterialType.SpiritOfNatureStandee).location((location) => LocationType.CircleOfSpiritBoardSpace === location.type && location.x === newPosition).length
+      const isStandeeOnNewPosition = !!this
+        .material(MaterialType.SpiritOfNatureStandee)
+        .location((location) => LocationType.CircleOfSpiritBoardSpace === location.type && location.x === newPosition)
+        .length
       if (isStandeeOnNewPosition) {
         max++
         continue
@@ -90,7 +93,6 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     const hasAction = this.canDoAction(ruleId)
     if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
     this.forget(Memory.RemainingMoves)
-    console.log(this.player)
     moves.push(this.rules().startRule(!hasAction? RuleId.Action: ruleId))
     return moves;
   }
@@ -115,7 +117,6 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   }
 
   get standee() {
-    console.log(this.player)
     return this.material(MaterialType.SpiritOfNatureStandee).id(this.player)
   }
 

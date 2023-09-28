@@ -45,7 +45,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   }
 
   get toPlayerArea() {
-    return { location: { type: LocationType.PlayerArea, player: this.player, id: MaterialType.FireTile }}
+    return { location: { type: LocationType.PlayerFireTileStack, player: this.player, id: MaterialType.FireTile }}
   }
 
   get resources() {
