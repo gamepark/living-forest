@@ -36,6 +36,10 @@ export const GuardianAnimalsHeader = () => {
     return <Trans defaults="<0>Draw a card</0>">
       <PlayMoveButton move={draw}/>
     </Trans>
+  } else if (shuffleAndDraw) {
+    return <Trans defaults="<0>Shuffle and draw</0>">
+      <PlayMoveButton move={shuffleAndDraw}/>
+    </Trans>
   } else {
     return <>Guardian animals</>
   }

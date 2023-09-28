@@ -13,6 +13,7 @@ import { GuardianAnimalsArrivalRule } from '../refacto/rules/GuardianAnimalsArri
 import { ReturnOfGuardianAnimalsRule } from '../refacto/rules/ReturnOfGuardianAnimalsRule'
 import { PassingSacredTreeRule } from '../refacto/rules/PassingSacredTreeRule'
 import { MoveOnCircleOfSpiritRule } from '../refacto/rules/actions/MoveOnCircleOfSpiritRule'
+import { PickVictoryTileRule } from '../refacto/rules/actions/PickVictoryTileRule'
 
 
 export const rules: Record<RuleId, MaterialRulesPartCreator> = {
@@ -28,5 +29,6 @@ export const rules: Record<RuleId, MaterialRulesPartCreator> = {
     [RuleId.GuardianAnimalsArrival]: GuardianAnimalsArrivalRule,
     [RuleId.ReturnOfGuardianAnimals]: ReturnOfGuardianAnimalsRule,
     [RuleId.PassingSacredTree]: PassingSacredTreeRule,
-    [RuleId.MoveOnCircleOfSpirit]: MoveOnCircleOfSpiritRule
+    [RuleId.MoveOnCircleOfSpirit]: MoveOnCircleOfSpiritRule,
+    [RuleId.PickVictoryTile]: PickVictoryTileRule
 }

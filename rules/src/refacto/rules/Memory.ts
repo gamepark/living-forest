@@ -3,5 +3,6 @@ export enum Memory {
   SpentPoints,
   LastAction,
   Bonus,
-  FragmentTaken
+  FragmentTaken,
+  RemainingMoves
 }

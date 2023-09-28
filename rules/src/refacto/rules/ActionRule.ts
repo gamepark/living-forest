@@ -1,4 +1,4 @@
-import { isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { Memory } from './Memory'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
@@ -11,6 +11,7 @@ import { MoveOnCircleOfSpiritRule } from './actions/MoveOnCircleOfSpiritRule'
 import { PlantProtectiveTreeRule } from './actions/PlantProtectiveTreeRule'
 import { TurnOrder } from './helper/TurnOrder'
 import ProtectiveTree from '../../material/ProtectiveTree'
+import { CustomMoveType } from './CustomMoveType'
 
 
 export class ActionRule extends PlayerTurnRule {
@@ -39,7 +40,24 @@ export class ActionRule extends PlayerTurnRule {
     return moves;
   }
 
+  onCustomMove(move: CustomMove) {
+    // Move spirit of nature (may trigger a new rule change)
+    if (isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move)) {
+      this.memorizeLastAction(RuleId.MoveOnCircleOfSpirit)
+      const moves = new MoveOnCircleOfSpiritRule(this.game).onCustomMove(move)
+      if (moves) {
+        return moves;
+      }
+    }
+
+    return this.mayGoToEndOfTurn
+  }
+
   afterItemMove(move: ItemMove): MaterialMove[] {
+
+    // Ignore move of spirit
+    if (this.isMoveMaterialOnLocation(MaterialType.SpiritOfNatureStandee, LocationType.CircleOfSpiritBoardSpace)(move)) return []
+
     // Take fragment: nothing happen here, only forgot later
     if (this.isMoveMaterialOnLocation(MaterialType.FragmentTile, LocationType.PlayerArea)(move)) {
       this.memorizeLastAction(RuleId.TakeFragment)
@@ -75,15 +93,6 @@ export class ActionRule extends PlayerTurnRule {
       }
     }
 
-    // Move spirit of nature (may trigger a new rule change)
-    if (this.isMoveMaterialOnLocation(MaterialType.SpiritOfNatureStandee, LocationType.CircleOfSpiritBoardSpace)(move)) {
-      this.memorizeLastAction(RuleId.MoveOnCircleOfSpirit)
-      const moves = new MoveOnCircleOfSpiritRule(this.game).afterItemMove(move)
-      if (moves) {
-        return moves;
-      }
-    }
-
     // Plant tree
     if (this.isMoveMaterialOnLocation(MaterialType.ProtectiveTreeTiles, LocationType.TreeSpace)(move)) {
       this.memorizeLastAction(RuleId.PlantTree)
@@ -92,7 +101,6 @@ export class ActionRule extends PlayerTurnRule {
         return moves;
       }
     }
-
     return this.mayGoToEndOfTurn
   }
 
@@ -101,6 +109,7 @@ export class ActionRule extends PlayerTurnRule {
   }
 
   get mayGoToEndOfTurn() {
+    console.trace("Player", this.game.rule?.player)
     if (this.getPlayerMoves().length && (this.actionCount === undefined || this.actionCount > 0)) return []
     this.forget(Memory.Actions)
     this.forget(Memory.SpentPoints)
@@ -109,6 +118,8 @@ export class ActionRule extends PlayerTurnRule {
     if (turnOrder.isLastPlayer(this.player)) {
       return [this.rules().startRule(RuleId.EndOfTurn)]
     }
+
+    console.log(this.player, turnOrder.getNextPlayer(this.player))
     return [this.rules().startPlayerTurn(RuleId.Action, turnOrder.getNextPlayer(this.player))]
   }
 

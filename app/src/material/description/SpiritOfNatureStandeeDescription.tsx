@@ -1,6 +1,10 @@
-import { ComponentSize, TokenDescription } from '@gamepark/react-game'
+import { ComponentSize, ItemContext, TokenDescription } from '@gamepark/react-game'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import Images from '../../images/Images'
+import { MaterialMove } from '@gamepark/rules-api/dist/material/moves/MaterialMove'
+import { isCustomMoveType } from '@gamepark/rules-api/dist/material/moves/CustomMove'
+import { CustomMoveType } from '@gamepark/living-forest/refacto/rules/CustomMoveType'
+import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
 
 export class SpiritOfNatureStandeeDescription extends TokenDescription {
   height = 5.1
@@ -19,6 +23,13 @@ export class SpiritOfNatureStandeeDescription extends TokenDescription {
       default:
         return { width: this.height * 214 / 320, height: this.height }
     }
+  }
+
+  canDrag(move: MaterialMove, context: ItemContext): boolean {
+    const { player, index, rules } = context
+    if (!isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move)) return super.canDrag(move, context)
+    const standee = rules.material(MaterialType.SpiritOfNatureStandee).getItem(index)!
+    return standee.id === player;
   }
 
   rules = () => <p></p>

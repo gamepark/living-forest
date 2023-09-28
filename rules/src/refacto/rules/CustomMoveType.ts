@@ -1,3 +1,4 @@
 export enum CustomMoveType {
-  ShuffleAndDraw = 1
+  ShuffleAndDraw = 1,
+  MoveOnCircleOfSpirit
 }

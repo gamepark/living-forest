@@ -42,4 +42,5 @@ const headers: Record<RuleId, () => any> = {
   [RuleId.ReturnOfGuardianAnimals]: () => <>Header</>,
   [RuleId.PassingSacredTree]: () => <>Header</>,
   [RuleId.MoveOnCircleOfSpirit]: () => <>Header</>,
+  [RuleId.PickVictoryTile]: () => <>Header</>,
 }

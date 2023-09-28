@@ -25,7 +25,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   get windResources() {
-    return this.getResources(Resource.Drop)
+    return this.getResources(Resource.Wind)
   }
 
   get sunResources() {

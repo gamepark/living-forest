@@ -1,4 +1,4 @@
-import { GameProvider, MaterialGameAnimations, setupTranslation } from '@gamepark/react-game'
+import { GameProvider, setupTranslation } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -8,6 +8,7 @@ import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
 import { material } from './material/Material'
 import { locators } from './locator/Locator'
+import { LivingForestAnimations } from './animation/LivingForestAnimations'
 //import Images from './images/Images'
 
 setupTranslation(translations, { debug: false })
@@ -20,7 +21,7 @@ ReactDOM.render(
                   optionsSpec={LivingForestOptionsSpec}
                   material={material}
                   locators={locators}
-                  animations={new MaterialGameAnimations()}
+                  animations={new LivingForestAnimations()}
                   /*theme={{
                     root: {
                       background: {
