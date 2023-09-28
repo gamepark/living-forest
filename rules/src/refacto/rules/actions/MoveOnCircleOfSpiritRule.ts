@@ -88,7 +88,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
 
     // Only decrease action count if there is no bonus action
-    const space = move.data
+    const space = move.data.target
     const ruleId = this.rockRules[space]
     const hasAction = this.canDoAction(ruleId)
     if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
