@@ -1,8 +1,13 @@
-import Resource from './Resource';
-import ProtectiveTreeDetails from './ProtectiveTreeDetails';
+import Resource from './Resource'
 import ProtectiveTree from './ProtectiveTree'
 
 const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
+
+type ProtectiveTreeDetails = {
+    resource: Partial<Record<Resource, number>>
+    cost?: number
+}
+
 
 export const Tree3A: ProtectiveTreeDetails = {
     resource: {

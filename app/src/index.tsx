@@ -8,7 +8,7 @@ import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
 import { material } from './material/Material'
 import { locators } from './locator/Locator'
-//import Images from './images/Images'
+import Images from './images/Images'
 
 setupTranslation(translations, { debug: false })
 
@@ -21,7 +21,7 @@ ReactDOM.render(
                   material={material}
                   locators={locators}
                   animations={new MaterialGameAnimations()}
-                  /*theme={{
+                  theme={{
                     root: {
                       background: {
                         image: Images.forestBack,
@@ -32,7 +32,7 @@ ReactDOM.render(
                       color: '#6B4135',
                       backgroundColor: '#FEF9F5'
                     }
-                  }}*/
+                  }}
     >
       <App/>
     </GameProvider>
