@@ -33,7 +33,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
         .location(LocationType.PlayerFragmentTileStack)
         .player(playerId);
       if (fragments.length) {
-        moves.push(fragments.moveItem({ location: { type: LocationType.FragmentStack }}))
+        moves.push(...fragments.moveItems({ location: { type: LocationType.FragmentStack }}))
       }
       moves.push(this.rules().endPlayerTurn(playerId))
     }
