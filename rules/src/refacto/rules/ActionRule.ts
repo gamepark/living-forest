@@ -115,6 +115,12 @@ export class ActionRule extends PlayerTurnRule {
     this.forget(Memory.LastAction)
     const turnOrder = new TurnOrder(this.game)
     if (turnOrder.isLastPlayer(this.player)) {
+
+      // If someone has triggered the end of game and all players played => end of the game
+      if (this.game.players.some((player) => new PlayerState(this.game, player).hasEnded)) {
+        return [this.rules().endGame()]
+      }
+
       return [this.rules().startRule(RuleId.EndOfTurn)]
     }
 

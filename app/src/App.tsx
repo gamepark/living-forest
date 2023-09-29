@@ -6,6 +6,7 @@ import { MaterialGame } from '@gamepark/rules-api'
 import { RuleId } from '@gamepark/living-forest/refacto/rules/RuleId'
 import { GuardianAnimalsHeader } from './header/GuardianAnimalsHeader'
 import { ActionHeader } from './header/ActionHeader'
+import { GameOverHeader } from './header/GameOverHeader'
 
 export default function App() {
   const game = useGame<MaterialGame>()
@@ -20,7 +21,7 @@ export default function App() {
       <GameDisplay/>
       <LoadingScreen  display={loading} author="Aske Christiansen" artist="Apolline Etienne" publisher="Ludonaute" developer="Laetitia Decoudu" />
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)}/>
-      <MaterialHeader rulesStepsHeaders={headers} GameOver={() => <p>GameOver</p>} />
+      <MaterialHeader rulesStepsHeaders={headers} GameOver={GameOverHeader} />
       <Menu/>
       <FailuresDialog/>
       <FullscreenDialog/>

@@ -96,7 +96,7 @@ export class PlayerState extends MaterialRulesPart {
 
   get firePoints() {
     const victoryFire = this.countVictoryTileOfType(VictoryTileType.Fire)
-    return victoryFire * this.fires.length
+    return victoryFire + this.fires.length
   }
 
   get uniqTrees() {
@@ -118,7 +118,7 @@ export class PlayerState extends MaterialRulesPart {
   getPointForType(victory: VictoryTileType) {
     switch (victory) {
       case VictoryTileType.Fire:
-        return this.flowerPoints
+        return this.firePoints
       case VictoryTileType.Tree:
         return this.treePoints
       case VictoryTileType.Flower:
@@ -127,7 +127,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   get hasEnded() {
-    return
+    return this.flowerPoints >= 12 || this.treePoints >= 12 || this.firePoints >= 12
   }
 
   get points() {
