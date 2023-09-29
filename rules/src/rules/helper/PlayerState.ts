@@ -1,4 +1,4 @@
-import { Material, MaterialGame, MaterialRulesPart } from '../workshop/packages/rules-api'
+import { Material, MaterialGame, MaterialRulesPart } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
 import { getSolitaryGregariousDifference, GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescriptions'

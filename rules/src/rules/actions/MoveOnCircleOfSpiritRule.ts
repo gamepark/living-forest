@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '../workshop/packages/rules-api'
+import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { PlayerState } from '../helper/PlayerState'
 import { LocationType } from '../../material/LocationType'

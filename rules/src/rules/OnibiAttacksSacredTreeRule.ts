@@ -1,4 +1,4 @@
-import { Material, MaterialMove, MaterialRulesPart } from '../workshop/packages/rules-api'
+import { Material, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import { RuleId } from './RuleId'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'

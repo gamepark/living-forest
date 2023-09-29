@@ -1,4 +1,4 @@
-import { isMoveItemType, ItemMove, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '../workshop/packages/rules-api'
+import { isMoveItemType, ItemMove, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'

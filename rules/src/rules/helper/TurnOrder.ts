@@ -1,4 +1,4 @@
-import { MaterialRulesPart } from '../workshop/packages/rules-api'
+import { MaterialRulesPart } from '@gamepark/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import SpiritOfNature from '../../SpiritOfNature'
 
