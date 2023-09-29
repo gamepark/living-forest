@@ -3,7 +3,7 @@ import { FailuresDialog, FullscreenDialog, LoadingScreen, MaterialHeader, Materi
 import { useEffect, useState } from 'react'
 import GameDisplay from './GameDisplay'
 import { MaterialGame } from '@gamepark/rules-api'
-import { RuleId } from '@gamepark/living-forest/refacto/rules/RuleId'
+import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import { GuardianAnimalsHeader } from './header/GuardianAnimalsHeader'
 import { ActionHeader } from './header/ActionHeader'
 import { GameOverHeader } from './header/GameOverHeader'

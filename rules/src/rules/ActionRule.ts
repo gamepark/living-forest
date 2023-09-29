@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '../workshop/packages/rules-api'
 import { Memory } from './Memory'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
@@ -10,7 +10,7 @@ import { TakeFragmentRule } from './actions/TakeFragmentRule'
 import { MoveOnCircleOfSpiritRule } from './actions/MoveOnCircleOfSpiritRule'
 import { PlantProtectiveTreeRule } from './actions/PlantProtectiveTreeRule'
 import { TurnOrder } from './helper/TurnOrder'
-import ProtectiveTree from '../../material/ProtectiveTree'
+import ProtectiveTree from '../material/ProtectiveTree'
 import { CustomMoveType } from './CustomMoveType'
 
 

@@ -1,5 +1,5 @@
 import { MaterialDescription } from '@gamepark/react-game'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { guardianAnimalCardDescription } from './description/GuardianAnimalCardDescription'
 import { spiritOfNatureStandeeDescription } from './description/SpiritOfNatureStandeeDescription'
 import { protectiveTreeTileDescription } from './description/ProtectiveTreeTileDescription'

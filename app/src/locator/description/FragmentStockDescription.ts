@@ -1,6 +1,6 @@
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
-import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { fragmentStockCoordinate } from '../FragmentStockLocation'
 import { fragmentTileDescription } from '../../material/description/FragmentTileDescription'
 import { ItemContext, LocationDescription, MaterialContext } from '@gamepark/react-game'

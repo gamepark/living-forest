@@ -2,8 +2,8 @@
 import { Trans } from 'react-i18next'
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { PlayMoveButton, useLegalMoves } from '@gamepark/react-game'
-import { CustomMoveType } from '@gamepark/living-forest/refacto/rules/CustomMoveType'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
+import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 
 export const GuardianAnimalsHeader = () => {
   const legalMoves = useLegalMoves<MaterialMove>()

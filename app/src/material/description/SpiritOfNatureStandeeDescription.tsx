@@ -2,8 +2,8 @@ import { ComponentSize, ItemContext, TokenDescription } from '@gamepark/react-ga
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import Images from '../../images/Images'
 import { MaterialMove, isCustomMoveType } from '@gamepark/rules-api'
-import { CustomMoveType } from '@gamepark/living-forest/refacto/rules/CustomMoveType'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
+import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 
 export class SpiritOfNatureStandeeDescription extends TokenDescription {
   height = 5.1

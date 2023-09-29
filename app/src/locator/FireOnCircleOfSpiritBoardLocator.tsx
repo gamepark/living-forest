@@ -1,5 +1,5 @@
 import { ItemLocator } from '@gamepark/react-game'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { Location, XYCoordinates } from '@gamepark/rules-api'
 
 export class FireOnCircleOfSpiritBoardLocator extends ItemLocator {

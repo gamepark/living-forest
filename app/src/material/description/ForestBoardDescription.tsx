@@ -1,7 +1,7 @@
 import { BoardDescription, ItemContext, MaterialContext } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import { MaterialItem } from '@gamepark/rules-api'
-import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { forestTreeSpaces } from '@gamepark/living-forest/material/ForestTreeSpaces'
 

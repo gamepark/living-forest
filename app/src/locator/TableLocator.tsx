@@ -1,7 +1,7 @@
 import { ItemContext, ItemLocator } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 
 
 export class TableLocator extends ItemLocator {

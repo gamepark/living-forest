@@ -1,6 +1,6 @@
 import { BoardDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
-import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
 
 export class CircleOfSpiritBoardDescription extends BoardDescription {
   ratio = 1

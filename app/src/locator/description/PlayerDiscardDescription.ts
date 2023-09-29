@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { ItemContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
-import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
 import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'

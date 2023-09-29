@@ -1,9 +1,9 @@
 import { isMoveItemType, isShuffleItemType, MaterialMove } from '@gamepark/rules-api'
 import { AnimationStep } from '@gamepark/react-client'
 import { MaterialAnimationContext, MaterialGameAnimations } from '@gamepark/react-game'
-import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
-import { RuleId } from '@gamepark/living-forest/refacto/rules/RuleId'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 
 export class LivingForestAnimations extends MaterialGameAnimations {
 

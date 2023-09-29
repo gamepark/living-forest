@@ -1,10 +1,10 @@
-import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '../workshop/packages/rules-api'
 import { PlayerState } from '../helper/PlayerState'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
-import { GuardianAnimalDescriptions } from '../../../material/GuardianAnimalDescriptions'
+import { GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescriptions'
 
 export class AttractAnimalsRule extends PlayerTurnRule {
 

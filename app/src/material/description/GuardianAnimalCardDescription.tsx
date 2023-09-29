@@ -2,8 +2,8 @@ import { CardDescription, ItemContext } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
-import { MaterialType } from '@gamepark/living-forest/refacto/material/MaterialType'
-import { LocationType } from '@gamepark/living-forest/refacto/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
 
 export class GuardianAnimalCardDescription extends CardDescription {
   backImage = Images.sampleImage

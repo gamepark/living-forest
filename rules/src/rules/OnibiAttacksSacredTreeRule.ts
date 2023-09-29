@@ -1,9 +1,9 @@
-import { Material, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
+import { Material, MaterialMove, MaterialRulesPart } from '../workshop/packages/rules-api'
 import { RuleId } from './RuleId'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
-import { CARDS_PER_ROW } from '../../LivingForestSetup'
-import { Fire } from '../../material/Fire'
+import { CARDS_PER_ROW } from '../LivingForestSetup'
+import { Fire } from '../material/Fire'
 import times from 'lodash/times'
 
 export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {

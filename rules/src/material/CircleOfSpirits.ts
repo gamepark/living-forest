@@ -1,15 +1,5 @@
 import SpiritOfNature from '../SpiritOfNature'
-import { Fire } from './Fire'
-import ActionMove from '../moves/ActionMove'
 
-type CircleOfSpirits = {
-    fire: (Fire | null)[]
-    position: Partial<Record<SpiritOfNature, number>>
-}
-
-export default CircleOfSpirits
-
-export const circleOfSpiritsRocks = [ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile, ActionMove.ExtinguishFire, ActionMove.TakeFragmentTile, ActionMove.PlantTree, ActionMove.TakeFragmentTile, ActionMove.AttractGuardianAnimal, ActionMove.TakeFragmentTile]
 export function getTwoPlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
         [players[0]]: 0,

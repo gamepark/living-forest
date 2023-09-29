@@ -2,7 +2,7 @@
 import { css } from '@emotion/react'
 import Images from '../images/Images'
 import { Player } from '@gamepark/react-client'
-import { PlayerState } from '@gamepark/living-forest/refacto/rules/helper/PlayerState'
+import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { FC } from 'react'
 import { VictoryTileType, victoryTileTypes } from '@gamepark/living-forest/material/VictoryTiles'
 import { PlayerCounter } from './PlayerCounter'

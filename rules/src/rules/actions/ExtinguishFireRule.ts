@@ -1,4 +1,4 @@
-import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
+import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '../workshop/packages/rules-api'
 import { PlayerState } from '../helper/PlayerState'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'

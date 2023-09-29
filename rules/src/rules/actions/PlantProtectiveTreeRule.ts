@@ -1,10 +1,10 @@
-import { isMoveItemType, ItemMove, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
+import { isMoveItemType, ItemMove, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '../workshop/packages/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
 import { LocationType } from '../../material/LocationType'
-import { ProtectiveTreeDetail } from '../../../material/ProtectivesTrees'
-import { forestTreeSpaces } from '../../../material/ForestTreeSpaces'
+import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
+import { forestTreeSpaces } from '../../material/ForestTreeSpaces'
 import { PlayerState } from '../helper/PlayerState'
 
 export class PlantProtectiveTreeRule extends PlayerTurnRule {

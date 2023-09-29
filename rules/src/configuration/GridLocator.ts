@@ -2,8 +2,8 @@
 import { ItemContext, LineLocator } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import SpiritOfNature from '../SpiritOfNature'
-import { MaterialType } from '../refacto/material/MaterialType'
-import { LocationType } from '../refacto/material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import { LocationType } from '../material/LocationType'
 
 export class GridLocator extends LineLocator<SpiritOfNature, MaterialType, LocationType> {
   coordinates = { x: 0, y: 0, z: 0 }

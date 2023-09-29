@@ -1,8 +1,8 @@
-import { PlayerTurnRule, MaterialMove, ItemMove } from '@gamepark/rules-api'
+import { PlayerTurnRule, MaterialMove, ItemMove } from '../workshop/packages/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
 import { RuleId } from '../RuleId'
-import { VictoryTileTypes } from '../../../material/VictoryTiles'
+import { VictoryTileTypes } from '../../material/VictoryTiles'
 
 export class PickVictoryTileRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {

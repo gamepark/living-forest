@@ -1,4 +1,4 @@
-import { MaterialRulesPart, RuleMove, MaterialMove } from '@gamepark/rules-api'
+import { MaterialRulesPart, RuleMove, MaterialMove } from '../workshop/packages/rules-api'
 import { RuleId } from './RuleId'
 
 export class EndOfTurnRule extends MaterialRulesPart {

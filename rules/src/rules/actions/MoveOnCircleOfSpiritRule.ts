@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '../workshop/packages/rules-api'
 import { MaterialType } from '../../material/MaterialType'
 import { PlayerState } from '../helper/PlayerState'
 import { LocationType } from '../../material/LocationType'
@@ -9,7 +9,7 @@ import { ExtinguishFireRule } from './ExtinguishFireRule'
 import { AttractAnimalsRule } from './AttractAnimalsRule'
 import { Memory } from '../Memory'
 import { CustomMoveType } from '../CustomMoveType'
-import SpiritOfNature from '../../../SpiritOfNature'
+import SpiritOfNature from '../../SpiritOfNature'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 

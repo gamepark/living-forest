@@ -1,8 +1,8 @@
-import { CustomMove, isCustomMoveType, isMoveItemType, isShuffleItemType, ItemMove, MaterialMove, SimultaneousRule } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItemType, isShuffleItemType, ItemMove, MaterialMove, SimultaneousRule } from '../workshop/packages/rules-api'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
 import { CustomMoveType } from './CustomMoveType'
-import SpiritOfNature from '../../SpiritOfNature'
+import SpiritOfNature from '../SpiritOfNature'
 import { RuleId } from './RuleId'
 import { PlayerState } from './helper/PlayerState'
 

@@ -2,7 +2,7 @@
 import { useTranslation } from 'react-i18next'
 import { usePlayerId, useRules } from '@gamepark/react-game'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
-import { Memory } from '@gamepark/living-forest/refacto/rules/Memory'
+import { Memory } from '@gamepark/living-forest/rules/Memory'
 
 export const ActionHeader = () => {
   const { t } = useTranslation()

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { PlayerState } from '@gamepark/living-forest/refacto/rules/helper/PlayerState'
+import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { Player } from '@gamepark/react-client'
 import { FC } from 'react'
 import Resource, { resources } from '@gamepark/living-forest/material/Resource'
