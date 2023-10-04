@@ -1,6 +1,7 @@
 import { BoardDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import VictoryTiles from '@gamepark/living-forest/material/VictoryTiles'
+import { useTranslation } from 'react-i18next'
 
 export class VictoryTileDescription extends BoardDescription {
   width = 4.6
@@ -21,7 +22,13 @@ export class VictoryTileDescription extends BoardDescription {
     [VictoryTiles.WinterFlower]: Images.winterVictorySacredFlower,
   }
 
-  rules = () => <p></p>
+  rules = () => {
+    const { t } = useTranslation()
+    return <>
+      <h2>{t('rules.victory-tile.title')}</h2>
+      <p>{t('rules.victory-tile.description')}</p>
+    </>
+  }
 }
 
 export const victoryTileDescription = new VictoryTileDescription()
