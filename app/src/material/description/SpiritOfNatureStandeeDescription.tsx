@@ -4,7 +4,7 @@ import Images from '../../images/Images'
 import { MaterialMove, isCustomMoveType } from '@gamepark/rules-api'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { useTranslation } from 'react-i18next'
+import { SpiritOfNatureStandeeRules } from './SpiritOfNatureStandeeRules'
 
 export class SpiritOfNatureStandeeDescription extends TokenDescription {
   height = 5.1
@@ -32,13 +32,7 @@ export class SpiritOfNatureStandeeDescription extends TokenDescription {
     return standee.id === player;
   }
 
-  rules = () => {
-    const { t } = useTranslation()
-    return <>
-      <h2>{t('rules.spirit-nature.title')}</h2>
-      <p>{t('rules.spirit-nature.description')}</p>
-    </>
-  }
+  rules = SpiritOfNatureStandeeRules
 }
 
 export const spiritOfNatureStandeeDescription = new SpiritOfNatureStandeeDescription()

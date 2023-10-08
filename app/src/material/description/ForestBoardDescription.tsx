@@ -4,7 +4,7 @@ import { MaterialItem } from '@gamepark/rules-api'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { forestTreeSpaces } from '@gamepark/living-forest/material/ForestTreeSpaces'
-import { useTranslation } from 'react-i18next'
+import { ForestBoardRules } from './ForestBoardRules'
 
 export class ForestBoardDescription extends BoardDescription {
   height = 16.5
@@ -26,15 +26,7 @@ export class ForestBoardDescription extends BoardDescription {
     [SpiritOfNature.Summer]: Images.SummerPlayerBoard,
   }
 
-  rules = () => {
-    const { t } = useTranslation()
-    return <>
-      <h2>{t('rules.forest.title')}</h2>
-      <p>{t('rules.forest.description')}</p>
-      <p>{t('rules.forest.resources')}</p>
-      <p>{t('rules.forest.victory')}</p>
-    </>
-  }
+  rules = ForestBoardRules
 }
 
 export const forestBoardDescription = new ForestBoardDescription()
