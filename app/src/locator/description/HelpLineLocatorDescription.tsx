@@ -15,7 +15,7 @@ export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNatu
   }
 
   width = 38
-  height = guardianAnimalCardDescription.getSize(0).height
+  height = guardianAnimalCardDescription.height
   //coordinates = { x: 20, y: 0, z: 0 }
   extraCss = css`
     background-color: rgba(0, 128, 0, 0.5);

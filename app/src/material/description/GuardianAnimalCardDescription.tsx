@@ -9,6 +9,7 @@ import { GuardianAnimalCardRules } from './GuardianAnimalCardRules'
 
 export class GuardianAnimalCardDescription extends CardDescription {
   backImage = Images.sampleImage
+  height = 8.89
 
   images = {
     [GuardianAnimal.Bear]: Images.bear1,

@@ -6,6 +6,7 @@ import { ProtectiveTreeTileRules } from './ProtectiveTreeTileRules'
 export class ProtectiveTreeTileDescription extends TokenDescription {
   ratio = 1
   width = 3.6
+  height = 3.6
   borderRadius = 0.3
 
   images = {

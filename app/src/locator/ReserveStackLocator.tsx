@@ -23,7 +23,7 @@ export const getReserveStackCoordinates = (level: number, players: SpiritOfNatur
   const y = playerCount < 3 ? -24: -32.9
   return {
     x,
-    y: y + ((guardianAnimalCardDescription.getSize(0).height + 1.2) * (level - 1)),
+    y: y + ((guardianAnimalCardDescription.height + 1.2) * (level - 1)),
     z: 0.05
   }
 }

@@ -20,8 +20,8 @@ export class GridLocator extends LineLocator<SpiritOfNature, MaterialType, Locat
     const deltaX = (index % columns) * (this.delta?.x ?? 0) + (item.location.z ?? 0) * (this.delta?.z ?? 0)
     const deltaY = Math.floor(index / columns) * (this.delta?.y ?? 0)
 
-    const x = coordinates.x + ((index % columns) * context.material[context.type].getSize(item.id).width) + deltaX
-    const y = coordinates.y + (Math.floor(index / columns) * context.material[context.type].getSize(item.id).height) + deltaY
+    const x = coordinates.x + ((index % columns) * context.material[context.type]!.width!) + deltaX
+    const y = coordinates.y + (Math.floor(index / columns) * context.material[context.type]!.height!) + deltaY
 
     return { x, y, z: coordinates.z }
   }
