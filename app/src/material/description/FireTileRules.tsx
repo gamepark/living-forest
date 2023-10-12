@@ -13,8 +13,6 @@ export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialRulesPro
   const extinguish = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.FireTile, itemIndex)(move) && item.location?.type === LocationType.CircleOfSpiritBoardFire
   )
-  console.log(item);
-  console.log(extinguish);
 
   return <>
     <h2>{t('rules.fire-tile.title')}</h2>
