@@ -9,8 +9,8 @@ export const ActionHeader = () => {
   const rules = useRules<LivingForestRules>()!
   const player = usePlayerId()
   if (player === rules.getActivePlayer()) {
-    return <>{ t('You can perform {action} action(s)', { action: rules.remind(Memory.Actions)})} </>
+    return <>{t('header.actions', { action: rules.remind(Memory.Actions) })} </>
   }
 
-  return <>{ t('Opponent can perform {action} action(s)', { action: rules.remind(Memory.Actions)})} </>
+  return <>{t('header.actions-opponent', { action: rules.remind(Memory.Actions) })} </>
 }
