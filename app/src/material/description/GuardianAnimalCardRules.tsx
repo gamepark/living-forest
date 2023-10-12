@@ -28,7 +28,7 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   const helpline = item.location?.type === LocationType.HelpLine
 
   //verso cards
-  if (item.id == undefined) {
+  if (item.id === undefined) {
 
     //deck stack cards
     if (deck) {
@@ -53,7 +53,7 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
     }
   }
   //varan card
-  if (item.id == GuardianAnimal.Varan) {
+  if (item.id === GuardianAnimal.Varan) {
     return <>
       <h2>{t('rules.varan.title')}</h2>
       <p>
