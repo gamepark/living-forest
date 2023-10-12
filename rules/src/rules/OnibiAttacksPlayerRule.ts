@@ -13,6 +13,7 @@ export class OnibiAttacksPlayerRule extends MaterialRulesPart {
     const fire = this.fireOnCicleOfSpirit
 
     const moves: MaterialMove[] = []
+    console.log("Fire length", fire.length)
     if (fire.length) {
       const fireTotal = sumBy(fire.getItems(), (item) => item.id)
       const targetedPlayers = []
@@ -29,13 +30,10 @@ export class OnibiAttacksPlayerRule extends MaterialRulesPart {
       const varanCount = Math.min(varanDeck.getItem()!.quantity ?? 1, fire.length)
       const varanMoves: MoveItem[] = []
 
-      for (const player of targetedPlayers) {
-        varanMoves.push(varanDeck.moveItem({
-          location: {
-            type: LocationType.PlayerDiscardStack,
-            player: player
-          }
-        }, varanCount))
+      for (let i = 0; i < varanCount; i++) {
+        for (const player of targetedPlayers) {
+          varanMoves.push(varanDeck.moveItem({ location: { type: LocationType.PlayerDiscardStack, player: player } }))
+        }
       }
 
       moves.push(

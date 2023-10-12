@@ -13,8 +13,10 @@ import { Fire } from './material/Fire'
 import VictoryTiles, { VictoryTileTypes } from './material/VictoryTiles'
 
 export const CARDS_PER_ROW = 4
+
 export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, MaterialType, LocationType, LivingForestOptions> {
   locationsStrategies = locationsStrategies
+
   setupMaterial(options: LivingForestOptions) {
     this.setupReserveStack()
     this.setupReserveRows()
@@ -34,7 +36,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack2.map((card) => ({ id: card, location: { type: LocationType.ReserveStack, id: 2 } })))
     this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveStack).locationId(2).shuffle()
 
-    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack3.map((card) => ({ id: card, location: { type: LocationType.ReserveStack, id: 3 } })));
+    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack3.map((card) => ({ id: card, location: { type: LocationType.ReserveStack, id: 3 } })))
     this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveStack).locationId(3).shuffle()
   }
 
@@ -67,15 +69,30 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({ id: card, location: { type: LocationType.PlayerDeckStack, player } })))
     this.material(MaterialType.GuardianAnimalCard).player(player).shuffle()
 
-    this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({ id: tile, location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile] } })))
+    this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({
+      id: tile,
+      location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile] },
+    })))
 
     // Place on the starting point
-    this.material(MaterialType.SpiritOfNatureStandee).createItem({ id: player, location: { type: LocationType.CircleOfSpiritBoardSpace, x: getInitializationPlayersRocks(spirits)![player] } })
+    this.material(MaterialType.SpiritOfNatureStandee).createItem({
+      id: player,
+      location: { type: LocationType.CircleOfSpiritBoardSpace, x: getInitializationPlayersRocks(spirits)![player] },
+    })
   }
 
   setupVaranDeck() {
-    this.material(MaterialType.GuardianAnimalCard).createItem({ id: GuardianAnimal.Varan, quantity: 23, location: { type: LocationType.VaranDeck } })
+    this.material(MaterialType.GuardianAnimalCard).createItems(
+      Array
+        .from(Array(23))
+        .map((_) => ({
+          id: GuardianAnimal.Varan,
+          location: { type: LocationType.VaranDeck },
+        })),
+    )
+
   }
+
 
   setupFragmentTile() {
     this.material(MaterialType.FragmentTile).createItem({ id: GuardianAnimal.Varan, quantity: 20, location: { type: LocationType.FragmentStack } })
