@@ -1,15 +1,20 @@
-import { MaterialRulesProps } from '@gamepark/react-game'
+/** @jsxImportSource @emotion/react */
+import { MaterialRulesProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import { Trans, useTranslation } from 'react-i18next'
 import Resource from '@gamepark/living-forest/material/Resource'
 import { css } from '@emotion/react'
 import { ProtectiveTreeDetail } from '@gamepark/living-forest/material/ProtectivesTrees'
+import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+// import { LocationType } from '@gamepark/living-forest/material/LocationType'
 
-export const ProtectiveTreeTileRules = ({ item }: MaterialRulesProps) => {
+export const ProtectiveTreeTileRules = ({ item, itemIndex }: MaterialRulesProps) => {
   const { t } = useTranslation()
-  console.log(ProtectiveTreeDetail[item.id]);
-
-
+  const takeProtectiveTree = useLegalMove((move: MaterialMove) =>
+    isMoveItemType(MaterialType.ProtectiveTreeTiles, itemIndex)(move) && item.location?.type === LocationType.TreeDispenser
+  )
   return <>
     <h2>{t('rules.protected-tree.title')}</h2>
     <p>
@@ -23,14 +28,18 @@ export const ProtectiveTreeTileRules = ({ item }: MaterialRulesProps) => {
       </Trans>
     </p>
     <hr />
-    <p>{t('rules.cost')} : {ProtectiveTreeDetail[item.id].cost} <div css={resourceStyle(ResourceImage[1])} /></p>
+    <p>{t('rules.cost')} : {ProtectiveTreeDetail[item.id].cost} <div css={resourceStyle(ResourceImage[3])} /></p>
     <div>{t('rules.resources')} :
       {Object.keys(ProtectiveTreeDetail[item.id].resources).map((element, index) => {
-        return <>{ProtectiveTreeDetail[item.id].resources[element]}
-          <span key={index} css={resourceStyle(ResourceImage[element])} />
+        return <>{ProtectiveTreeDetail[item.id].resources[element] > 0 && ProtectiveTreeDetail[item.id].resources[element]}
+          {ProtectiveTreeDetail[item.id].resources[element] > 0 && <span key={index} css={resourceStyle(ResourceImage[element])} />}
         </>
       })}
     </div>
+    {takeProtectiveTree && <hr />}
+    {takeProtectiveTree && <Trans defaults="rules.take-tree">
+      <PlayMoveButton move={takeProtectiveTree} />
+    </Trans>}
   </>
 }
 

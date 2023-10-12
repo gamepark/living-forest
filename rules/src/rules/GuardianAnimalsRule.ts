@@ -5,10 +5,15 @@ import { CustomMoveType } from './CustomMoveType'
 import SpiritOfNature from '../SpiritOfNature'
 import { RuleId } from './RuleId'
 import { PlayerState } from './helper/PlayerState'
+import GuardianAnimal from '../material/GuardianAnimal'
+// import GuardianAnimal from '../material/GuardianAnimal'
 
 export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, MaterialType, LocationType> {
 
   getLegalMoves(playerId: SpiritOfNature) {
+
+    console.log(this.material(MaterialType.FireTile)
+      .location(LocationType.CircleOfSpiritBoardFire));
 
     if (!this.isTurnToPlay(playerId)) {
       return []
@@ -33,7 +38,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
         .location(LocationType.PlayerFragmentTileStack)
         .player(playerId);
       if (fragments.length) {
-        moves.push(...fragments.moveItems({ location: { type: LocationType.FragmentStack }}))
+        moves.push(...fragments.moveItems({ location: { type: LocationType.FragmentStack } }))
       }
       moves.push(this.rules().endPlayerTurn(playerId))
     }
@@ -43,13 +48,26 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
 
   beforeItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.position.location?.type !== LocationType.FragmentStack) return []
-    
+
     const player = this.material(MaterialType.FragmentTile).index(move.itemIndex).getItem()!.location.player!
-    return this
+
+    const lastCard = this
       .getPlayerCards(player)
-      .location(LocationType.HelpLine)
-      .maxBy((item) => item.location.x!)
-      .moveItems({ location: { type: LocationType.PlayerDiscardStack, player }})
+      .location(LocationType.HelpLine).maxBy((item) => item.location.x!).getItem()?.id
+
+    if (lastCard == GuardianAnimal.Varan) {
+      return this
+        .getPlayerCards(player)
+        .location(LocationType.HelpLine)
+        .maxBy((item) => item.location.x!)
+        .moveItems({ location: { type: LocationType.VaranDeck } })
+    } else {
+      return this
+        .getPlayerCards(player)
+        .location(LocationType.HelpLine)
+        .maxBy((item) => item.location.x!)
+        .moveItems({ location: { type: LocationType.PlayerDiscardStack, player } })
+    }
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
@@ -72,13 +90,12 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
   }
 
 
-
   onCustomMove(move: CustomMove): MaterialMove[] {
     if (!isCustomMoveType(CustomMoveType.ShuffleAndDraw)(move)) return []
 
     const discard = this.getPlayerCards(move.data).location(LocationType.PlayerDiscardStack)
     return [
-      ...discard.sort((item) => -item.location.x!).moveItems({ location: { type: LocationType.PlayerDeckStack, player: move.data }}),
+      ...discard.sort((item) => -item.location.x!).moveItems({ location: { type: LocationType.PlayerDeckStack, player: move.data } }),
       discard.shuffle(),
     ]
   }
@@ -92,7 +109,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
       .player(playerId)
       .location(LocationType.PlayerDeckStack)
       .sort((item) => -item.location.x!)
-      .moveItem({ location: { type: LocationType.HelpLine, player: playerId }})
+      .moveItem({ location: { type: LocationType.HelpLine, player: playerId } })
   }
 
   getMovesAfterPlayersDone(): MaterialMove[] {

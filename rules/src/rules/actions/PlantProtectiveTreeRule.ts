@@ -11,7 +11,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     return this.planTreeMoves
   }
-  
+
   get planTreeMoves() {
     const playerTrees = this.plantedTrees
     const availableTrees = this.availableTrees
@@ -28,7 +28,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
   }
 
   isNextToSpace(item: MaterialItem, space: XYCoordinates) {
-    return this.getDistance({ x: item.location.x!, y: item.location.y!}, space) === 1
+    return this.getDistance({ x: item.location.x!, y: item.location.y! }, space) === 1
   }
 
   isNextToStartTree(space: XYCoordinates) {
@@ -86,7 +86,9 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     const triggerFragment = (move.position.location?.x === 4 && move.position.location?.y === 0) || (move.position.location?.x === 0 && move.position.location?.y === 2)
     if (triggerFragment) {
       this.memorize(Memory.Bonus, 1)
-      return [this.rules().startRule(RuleId.TakeFragment)]
+      return [
+        this.rules().startRule(RuleId.TakeFragment),
+        this.rules().startRule(RuleId.TakeFragment)]
     }
 
     const extinguishFire = move.position.location?.x === 4 && move.position.location?.y === 2

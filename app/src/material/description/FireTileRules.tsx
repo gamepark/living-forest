@@ -1,12 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import { MaterialRulesProps } from '@gamepark/react-game'
+import { MaterialRulesProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import Resource from '@gamepark/living-forest/material/Resource'
 import { css } from '@emotion/react'
 import { Trans, useTranslation } from 'react-i18next'
+import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
 
-export const FileTileRules = ({ item }: MaterialRulesProps) => {
+export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialRulesProps) => {
   const { t } = useTranslation()
+  const extinguish = useLegalMove((move: MaterialMove) =>
+    isMoveItemType(MaterialType.FireTile, itemIndex)(move) && item.location?.type === LocationType.CircleOfSpiritBoardFire
+  )
+  console.log(item);
+  console.log(extinguish);
+
   return <>
     <h2>{t('rules.fire-tile.title')}</h2>
     <p>{t('rules.fire-tile.points')}</p>
@@ -28,7 +37,10 @@ export const FileTileRules = ({ item }: MaterialRulesProps) => {
       </Trans>
     </p>
     <p>{t('rules.fire-tile.victory')}</p>
-
+    {extinguish && <hr />}
+    {extinguish && <Trans defaults="rules.extinguish-fire">
+      <PlayMoveButton move={extinguish} onPlay={closeDialog} />
+    </Trans>}
   </>
 }
 
