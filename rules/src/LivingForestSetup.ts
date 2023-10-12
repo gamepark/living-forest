@@ -23,7 +23,8 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.setupFireTile()
     this.setupFragmentTile()
     this.setupPlayers(options)
-    this.material(MaterialType.SacredTree).createItem({ location: { type: LocationType.SacredTree, player: options.players[0].id}})
+    this.material(MaterialType.SacredTree).createItem({ location: { type: LocationType.SacredTree, player: options.players[0].id } })
+    this.setupFireTileCircleOfSpirit()
   }
 
   setupReserveStack() {
@@ -43,13 +44,17 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.material(MaterialType.FireTile).createItem({ id: Fire.Fire4, quantity: 20, location: { type: LocationType.FireStack, id: Fire.Fire4 } })
   }
 
+  setupFireTileCircleOfSpirit() {
+    this.material(MaterialType.FireTile).createItem({ id: Fire.Fire2, quantity: 1, location: { type: LocationType.CircleOfSpiritBoardFire } })
+  }
+
   setupReserveRows() {
     [1, 2, 3].forEach((level) => {
       this.material(MaterialType.GuardianAnimalCard)
         .location(LocationType.ReserveStack)
         .locationId(level)
         .sort((item) => -item.location.x!).limit(CARDS_PER_ROW)
-        .moveItems({ location: { type: LocationType.ReserveRow, id: level }})
+        .moveItems({ location: { type: LocationType.ReserveRow, id: level } })
     })
   }
 
@@ -62,7 +67,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({ id: card, location: { type: LocationType.PlayerDeckStack, player } })))
     this.material(MaterialType.GuardianAnimalCard).player(player).shuffle()
 
-    this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({ id: tile, location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile]  } })))
+    this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({ id: tile, location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile] } })))
 
     // Place on the starting point
     this.material(MaterialType.SpiritOfNatureStandee).createItem({ id: player, location: { type: LocationType.CircleOfSpiritBoardSpace, x: getInitializationPlayersRocks(spirits)![player] } })
