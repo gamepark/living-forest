@@ -6,14 +6,10 @@ import SpiritOfNature from '../SpiritOfNature'
 import { RuleId } from './RuleId'
 import { PlayerState } from './helper/PlayerState'
 import GuardianAnimal from '../material/GuardianAnimal'
-// import GuardianAnimal from '../material/GuardianAnimal'
 
 export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, MaterialType, LocationType> {
 
   getLegalMoves(playerId: SpiritOfNature) {
-
-    console.log(this.material(MaterialType.FireTile)
-      .location(LocationType.CircleOfSpiritBoardFire));
 
     if (!this.isTurnToPlay(playerId)) {
       return []

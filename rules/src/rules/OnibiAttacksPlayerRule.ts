@@ -26,13 +26,16 @@ export class OnibiAttacksPlayerRule extends MaterialRulesPart {
 
       const varanDeck = this.varanDeck
       const turnOrder = new TurnOrder(this.game).turnOrder
-      const varanCount = Math.min(varanDeck.length, fire.length)
+      const varanCount = Math.min(varanDeck.getItem()!.quantity ?? 1, fire.length)
       const varanMoves: MoveItem[] = []
 
-      for (let i = 0; i < varanCount; i++) {
-        for (const player of targetedPlayers) {
-          varanMoves.push(varanDeck.moveItem({ location: { type: LocationType.PlayerDiscardStack, player: player } }))
-        }
+      for (const player of targetedPlayers) {
+        varanMoves.push(varanDeck.moveItem({
+          location: {
+            type: LocationType.PlayerDiscardStack,
+            player: player
+          }
+        }, varanCount))
       }
 
       moves.push(
