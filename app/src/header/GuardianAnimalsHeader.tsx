@@ -12,33 +12,33 @@ export const GuardianAnimalsHeader = () => {
   const spendFragment = legalMoves.find(isMoveItemType(MaterialType.FragmentTile))
   const draw = legalMoves.find(isMoveItemType(MaterialType.GuardianAnimalCard))
   if (shuffleAndDraw && pass) {
-    return <Trans defaults="<0>Shuffle and draw</0> or <1>Pass</1>">
-      <PlayMoveButton move={shuffleAndDraw}/>
-      <PlayMoveButton move={pass}/>
+    return <Trans defaults="header.shuffle-pass">
+      <PlayMoveButton move={shuffleAndDraw} />
+      <PlayMoveButton move={pass} />
     </Trans>
   } else if (pass && spendFragment && draw) {
-    return <Trans defaults="<0>Draw a card</0>, <1>Use a fragment</1> or <2>Pass</2>">
-      <PlayMoveButton move={draw}/>
-      <PlayMoveButton move={spendFragment}/>
-      <PlayMoveButton move={pass}/>
+    return <Trans defaults="header.draw-fragment-pass">
+      <PlayMoveButton move={draw} />
+      <PlayMoveButton move={spendFragment} />
+      <PlayMoveButton move={pass} />
     </Trans>
   } else if (pass && spendFragment) {
-    return <Trans defaults="<0>Use a fragment</0> or <1>Pass</1>">
-      <PlayMoveButton move={spendFragment}/>
-      <PlayMoveButton move={pass}/>
+    return <Trans defaults="header.fragment-pass">
+      <PlayMoveButton move={spendFragment} />
+      <PlayMoveButton move={pass} />
     </Trans>
   } else if (draw && pass) {
-    return <Trans defaults="<0>Draw a card</0> or <1>Pass</1>">
-      <PlayMoveButton move={draw}/>
-      <PlayMoveButton move={pass}/>
+    return <Trans defaults="header.draw-pass">
+      <PlayMoveButton move={draw} />
+      <PlayMoveButton move={pass} />
     </Trans>
   } else if (draw) {
-    return <Trans defaults="<0>Draw a card</0>">
-      <PlayMoveButton move={draw}/>
+    return <Trans defaults="header.draw">
+      <PlayMoveButton move={draw} />
     </Trans>
   } else if (shuffleAndDraw) {
-    return <Trans defaults="<0>Shuffle and draw</0>">
-      <PlayMoveButton move={shuffleAndDraw}/>
+    return <Trans defaults="header.shuffle">
+      <PlayMoveButton move={shuffleAndDraw} />
     </Trans>
   } else {
     return <>Guardian animals</>
