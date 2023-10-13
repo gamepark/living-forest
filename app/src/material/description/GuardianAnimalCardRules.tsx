@@ -88,14 +88,16 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
         </Trans>
       </p>
       <hr />
-      <p>{t('rules.cost')} : {GuardianAnimalDescriptions[item.id].cost} <div css={resourceStyle(ResourceImage[1])} /></p>
-      <div>{t('rules.resources')} :
+      <p>{t('rules.cost')} : {GuardianAnimalDescriptions[item.id].cost}
+        <span css={resourceStyle(ResourceImage[1])} />
+      </p>
+      <p>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
-          return <>{GuardianAnimalDescriptions[item.id].resources[element]}
-            <span key={index} css={resourceStyle(ResourceImage[element])} />
-          </>
+          return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
+            <span css={resourceStyle(ResourceImage[element])} />
+          </span>
         })}
-      </div>
+      </p>
       {attract && <hr />}
       {attract && <Trans defaults="rules.attract">
         <PlayMoveButton move={attract} onPlay={closeDialog} />
@@ -116,14 +118,14 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
         </Trans>
       </p>
       <hr />
-      <p>{t('rules.cost')} : {GuardianAnimalDescriptions[item.id].cost} <div css={resourceStyle(ResourceImage[1])} /></p>
-      <div>{t('rules.resources')} :
+      <p>{t('rules.cost')} : {GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])} /></p>
+      <p>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
-          return <>{GuardianAnimalDescriptions[item.id].resources[element]}
-            <span key={index} css={resourceStyle(ResourceImage[element])} />
-          </>
+          return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
+            <span css={resourceStyle(ResourceImage[element])} />
+          </span>
         })}
-      </div>
+      </p>
     </>
 
   }

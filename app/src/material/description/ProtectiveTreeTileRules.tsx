@@ -8,7 +8,6 @@ import { ProtectiveTreeDetail } from '@gamepark/living-forest/material/Protectiv
 import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
-// import { LocationType } from '@gamepark/living-forest/material/LocationType'
 
 export const ProtectiveTreeTileRules = ({ item, itemIndex }: MaterialRulesProps) => {
   const { t } = useTranslation()
@@ -28,12 +27,12 @@ export const ProtectiveTreeTileRules = ({ item, itemIndex }: MaterialRulesProps)
       </Trans>
     </p>
     <hr />
-    <p>{t('rules.cost')} : {ProtectiveTreeDetail[item.id].cost} <div css={resourceStyle(ResourceImage[3])} /></p>
+    <p>{t('rules.cost')} : {ProtectiveTreeDetail[item.id].cost} <span css={resourceStyle(ResourceImage[3])} /></p>
     <div>{t('rules.resources')} :
       {Object.keys(ProtectiveTreeDetail[item.id].resources).map((element, index) => {
-        return <>{ProtectiveTreeDetail[item.id].resources[element] > 0 && ProtectiveTreeDetail[item.id].resources[element]}
-          {ProtectiveTreeDetail[item.id].resources[element] > 0 && <span key={index} css={resourceStyle(ResourceImage[element])} />}
-        </>
+        return <span key={index}>{ProtectiveTreeDetail[item.id].resources[element] > 0 && ProtectiveTreeDetail[item.id].resources[element]}
+          {ProtectiveTreeDetail[item.id].resources[element] > 0 && <span css={resourceStyle(ResourceImage[element])} />}
+        </span>
       })}
     </div>
     {takeProtectiveTree && <hr />}
