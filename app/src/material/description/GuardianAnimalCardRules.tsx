@@ -82,16 +82,17 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
     return <>
       <h2>{t('rules.guardian-animal.title')}</h2>
       <p>{t('rules.guardian-animal.description')}</p>
-      <p>
+      <p css={alignIconText}>
         <Trans defaults="rules.guardian-animal.get">
           <span css={resourceStyle(ResourceImage[1])} />
         </Trans>
       </p>
       <hr />
-      <p>{t('rules.cost')} : {GuardianAnimalDescriptions[item.id].cost}
-        <span css={resourceStyle(ResourceImage[1])} />
+      <p css={alignIcon}>{t('rules.cost')} :
+        <span>{GuardianAnimalDescriptions[item.id].cost}
+          <span css={resourceStyle(ResourceImage[1])} /></span>
       </p>
-      <p>{t('rules.resources')} :
+      <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
           return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
             <span css={resourceStyle(ResourceImage[element])} />
@@ -112,16 +113,18 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
       {activePlayer && <p>{t('rules.help-line')}</p>}
       {!activePlayer && <p>{t('rules.help-line-opponent')}</p>}
       <p>{t('rules.guardian-animal.description')}</p>
-      <p>
+      <p css={alignIconText}>
         <Trans defaults="rules.guardian-animal.get">
           <span css={resourceStyle(ResourceImage[1])} />
         </Trans>
       </p>
       <hr />
-      <p>{t('rules.cost')} : {GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])} /></p>
-      <p>{t('rules.resources')} :
+      <p css={alignIcon}>{t('rules.cost')} :
+        <span>{GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])} /></span>
+      </p>
+      <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
-          return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
+          return <span key={index} >{GuardianAnimalDescriptions[item.id].resources[element]}
             <span css={resourceStyle(ResourceImage[element])} />
           </span>
         })}
@@ -132,10 +135,7 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   return <></>
 }
 
-
-
-
-const ResourceImage: Record<Resource, string> = {
+export const ResourceImage: Record<Resource, string> = {
   [Resource.Sun]: Images.sun,
   [Resource.Drop]: Images.drop,
   [Resource.Seed]: Images.seed,
@@ -143,7 +143,7 @@ const ResourceImage: Record<Resource, string> = {
   [Resource.SacredFlower]: Images.sacredFlower,
 }
 
-const resourceStyle = (image: string) => css`
+export const resourceStyle = (image: string) => css`
   flex: 1;
   align-self: center;
   background-image: url(${image});
@@ -154,4 +154,30 @@ const resourceStyle = (image: string) => css`
   height: 1.2em;
   filter: drop-shadow(0.1em 0.1em 0.2em gray);
   display:inline-block;
+`
+
+export const alignIcon = css`
+display:flex;
+gap:4px;
+align-items:start;
+justify-content:start;
+
+span{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:2px;
+    }
+`
+
+export const alignIconText = css`
+  > * {
+    vertical-align: middle;
+  }
+
+  picture, img {
+    vertical-align: middle;
+    height: 1.5em;
+    margin-right: 0.1em;
+  }
 `
