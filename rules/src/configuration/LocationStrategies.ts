@@ -8,7 +8,8 @@ export const locationsStrategies = {
     [LocationType.ReserveRow]: new FillGapStrategy(),
     [LocationType.PlayerDeckStack]: new PositiveSequenceStrategy(),
     [LocationType.PlayerDiscardStack]: new PositiveSequenceStrategy(),
-    [LocationType.HelpLine]: new PositiveSequenceStrategy()
+    [LocationType.HelpLine]: new PositiveSequenceStrategy(),
+    [LocationType.VaranDeck]: new PositiveSequenceStrategy()
   },
   [MaterialType.VictoryTile]: {
     [LocationType.VictoryTileArea]: new PositiveSequenceStrategy()

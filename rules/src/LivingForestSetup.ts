@@ -1,21 +1,21 @@
-import { MaterialGameSetup, RuleStep } from '@gamepark/rules-api'
-import SpiritOfNature from './SpiritOfNature'
-import { MaterialType } from './material/MaterialType'
-import { LocationType } from './material/LocationType'
+import { MaterialGameSetup } from '@gamepark/rules-api'
 import { LivingForestOptions } from './LivingForestOptions'
-import { RuleId } from './rules/RuleId'
-import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve'
-import GuardianAnimal, { startingGuardianAnimals } from './material/GuardianAnimal'
-import { getInitializationDispenser } from './material/ProtectiveTree'
+import { LivingForestRules } from './LivingForestRules'
 import { getInitializationPlayersRocks } from './material/CircleOfSpirits'
-import { locationsStrategies } from './configuration/LocationStrategies'
 import { Fire } from './material/Fire'
+import GuardianAnimal, { startingGuardianAnimals } from './material/GuardianAnimal'
+import { LocationType } from './material/LocationType'
+import { MaterialType } from './material/MaterialType'
+import { getInitializationDispenser } from './material/ProtectiveTree'
 import VictoryTiles, { VictoryTileTypes } from './material/VictoryTiles'
+import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve'
+import { RuleId } from './rules/RuleId'
+import SpiritOfNature from './SpiritOfNature'
 
 export const CARDS_PER_ROW = 4
 
 export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, MaterialType, LocationType, LivingForestOptions> {
-  locationsStrategies = locationsStrategies
+  Rules = LivingForestRules
 
   setupMaterial(options: LivingForestOptions) {
     this.setupReserveStack()
@@ -30,13 +30,22 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
   }
 
   setupReserveStack() {
-    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack1.map((card) => ({ id: card, location: { type: LocationType.ReserveStack, id: 1 } })))
+    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack1.map((card) => ({
+      id: card,
+      location: { type: LocationType.ReserveStack, id: 1 }
+    })))
     this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveStack).locationId(1).shuffle()
 
-    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack2.map((card) => ({ id: card, location: { type: LocationType.ReserveStack, id: 2 } })))
+    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack2.map((card) => ({
+      id: card,
+      location: { type: LocationType.ReserveStack, id: 2 }
+    })))
     this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveStack).locationId(2).shuffle()
 
-    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack3.map((card) => ({ id: card, location: { type: LocationType.ReserveStack, id: 3 } })))
+    this.material(MaterialType.GuardianAnimalCard).createItems(startingReserveStack3.map((card) => ({
+      id: card,
+      location: { type: LocationType.ReserveStack, id: 3 }
+    })))
     this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveStack).locationId(3).shuffle()
   }
 
@@ -66,18 +75,21 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
 
   setupPlayer(player: SpiritOfNature, options: LivingForestOptions) {
     const spirits = options.players.map((p) => p.id)
-    this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({ id: card, location: { type: LocationType.PlayerDeckStack, player } })))
+    this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({
+      id: card,
+      location: { type: LocationType.PlayerDeckStack, player }
+    })))
     this.material(MaterialType.GuardianAnimalCard).player(player).shuffle()
 
     this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({
       id: tile,
-      location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile] },
+      location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile] }
     })))
 
     // Place on the starting point
     this.material(MaterialType.SpiritOfNatureStandee).createItem({
       id: player,
-      location: { type: LocationType.CircleOfSpiritBoardSpace, x: getInitializationPlayersRocks(spirits)![player] },
+      location: { type: LocationType.CircleOfSpiritBoardSpace, x: getInitializationPlayersRocks(spirits)![player] }
     })
   }
 
@@ -87,8 +99,8 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
         .from(Array(23))
         .map((_) => ({
           id: GuardianAnimal.Varan,
-          location: { type: LocationType.VaranDeck },
-        })),
+          location: { type: LocationType.VaranDeck }
+        }))
     )
 
   }
@@ -103,12 +115,12 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     Object.entries(protectiveTreeCounts)
       .map(([id, quantity]) => this
         .material(MaterialType.ProtectiveTreeTiles)
-        .createItem({ id: +id, quantity, location: { type: LocationType.TreeDispenser } }),
+        .createItem({ id: +id, quantity, location: { type: LocationType.TreeDispenser } })
       )
   }
 
-  start(options: LivingForestOptions): RuleStep<SpiritOfNature> {
-    return { id: RuleId.GuardianAnimals, players: options.players.map((p) => p.id) }
+  start() {
+    this.startSimultaneousRule(RuleId.GuardianAnimals)
   }
 
   get spiritVictoryTiles() {
@@ -116,7 +128,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
       [SpiritOfNature.Spring]: [VictoryTiles.SpringFire, VictoryTiles.SpringFlower, VictoryTiles.SpringTree],
       [SpiritOfNature.Summer]: [VictoryTiles.SummerFire, VictoryTiles.SummerFlower, VictoryTiles.SummerTree],
       [SpiritOfNature.Autumn]: [VictoryTiles.AutumnFire, VictoryTiles.AutumnFlower, VictoryTiles.AutumnTree],
-      [SpiritOfNature.Winter]: [VictoryTiles.WinterFire, VictoryTiles.WinterFlower, VictoryTiles.WinterTree],
+      [SpiritOfNature.Winter]: [VictoryTiles.WinterFire, VictoryTiles.WinterFlower, VictoryTiles.WinterTree]
     }
   }
 }

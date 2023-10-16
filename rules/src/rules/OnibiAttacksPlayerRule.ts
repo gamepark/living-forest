@@ -1,56 +1,35 @@
-import { MaterialRulesPart, MoveItem, MaterialMove } from '@gamepark/rules-api'
-import { RuleId } from './RuleId'
-import { MaterialType } from '../material/MaterialType'
-import { LocationType } from '../material/LocationType'
-import { PlayerState } from './helper/PlayerState'
+import { MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
 import sumBy from 'lodash/sumBy'
-import orderBy from 'lodash/orderBy'
+import { LocationType } from '../material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import { PlayerState } from './helper/PlayerState'
 import { TurnOrder } from './helper/TurnOrder'
+import { RuleId } from './RuleId'
 
 export class OnibiAttacksPlayerRule extends MaterialRulesPart {
 
   onRuleStart() {
-    const fire = this.fireOnCicleOfSpirit
+    const fire = this.material(MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire)
 
     const moves: MaterialMove[] = []
-    console.log("Fire length", fire.length)
     if (fire.length) {
       const fireTotal = sumBy(fire.getItems(), (item) => item.id)
-      const targetedPlayers = []
-      for (const player of this.game.players) {
-        const playerState = new PlayerState(this.game, player)
-        const water = playerState.waterResources
-        if (water < fireTotal) {
-          targetedPlayers.push(player)
-        }
-      }
-
-      const varanDeck = this.varanDeck
-      const turnOrder = new TurnOrder(this.game).turnOrder
-      const varanCount = Math.min(varanDeck.getItem()!.quantity ?? 1, fire.length)
-      const varanMoves: MoveItem[] = []
-
-      for (let i = 0; i < varanCount; i++) {
-        for (const player of targetedPlayers) {
-          varanMoves.push(varanDeck.moveItem({ location: { type: LocationType.PlayerDiscardStack, player: player } }))
-        }
-      }
-
-      moves.push(
-        ...orderBy(varanMoves, (move) => turnOrder.indexOf(move.position.location?.player!))
+      const targetedPlayers = new TurnOrder(this.game).turnOrder.filter(player =>
+        new PlayerState(this.game, player).waterResources < fireTotal
       )
+
+      const varanDeck = this.material(MaterialType.GuardianAnimalCard).location(LocationType.VaranDeck).deck()
+
+      for (let i = 0; i < fire.length; i++) {
+        for (const player of targetedPlayers) {
+          if (varanDeck.length) {
+            moves.push(varanDeck.dealOne({ location: { type: LocationType.PlayerDiscardStack, player: player } }))
+          }
+        }
+      }
     }
 
     moves.push(this.rules().startRule(RuleId.OnibiAttacksSacredTree))
-    return moves;
-  }
-
-  get fireOnCicleOfSpirit() {
-    return this.material(MaterialType.FireTile)
-      .location(LocationType.CircleOfSpiritBoardFire)
-  }
-
-  get varanDeck() {
-    return this.material(MaterialType.GuardianAnimalCard).location(LocationType.VaranDeck)
+    return moves
   }
 }
