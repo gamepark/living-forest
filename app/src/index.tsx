@@ -10,32 +10,34 @@ import { material } from './material/Material'
 import { locators } from './locator/Locator'
 import { LivingForestAnimations } from './animation/LivingForestAnimations'
 import Images from './images/Images'
+import { ai } from './tutorial/TutorialAi'
 
 setupTranslation(translations, { debug: false })
 
 ReactDOM.render(
   <StrictMode>
     <GameProvider game="living-forest"
-                  GameSetup={LivingForestSetup}
-                  Rules={LivingForestRules}
-                  optionsSpec={LivingForestOptionsSpec}
-                  material={material}
-                  locators={locators}
-                  animations={new LivingForestAnimations()}
-                  theme={{
-                    root: {
-                      background: {
-                        image: Images.forestBack,
-                        overlay: 'rgba(0, 0, 0, 0.7)'
-                      }
-                    },
-                    dialog: {
-                      color: '#6B4135',
-                      backgroundColor: '#FEF9F5'
-                    }
-                  }}
+      GameSetup={LivingForestSetup}
+      Rules={LivingForestRules}
+      optionsSpec={LivingForestOptionsSpec}
+      material={material}
+      locators={locators}
+      animations={new LivingForestAnimations()}
+      theme={{
+        root: {
+          background: {
+            image: Images.forestBack,
+            overlay: 'rgba(0, 0, 0, 0.7)'
+          }
+        },
+        dialog: {
+          color: '#6B4135',
+          backgroundColor: '#FEF9F5'
+        }
+      }}
+      ai={ai}
     >
-      <App/>
+      <App />
     </GameProvider>
   </StrictMode>,
   document.getElementById('root')
