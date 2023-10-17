@@ -8,9 +8,9 @@ import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { getInitializationDispenser } from './material/ProtectiveTree'
 import VictoryTiles, { VictoryTileTypes } from './material/VictoryTiles'
-import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve'
 import { RuleId } from './rules/RuleId'
 import SpiritOfNature from './SpiritOfNature'
+import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve'
 
 export const CARDS_PER_ROW = 4
 
