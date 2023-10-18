@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { Trans } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { PlayMoveButton, useLegalMoves } from '@gamepark/react-game'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
@@ -11,6 +11,7 @@ export const GuardianAnimalsHeader = () => {
   const pass = legalMoves.find(isEndPlayerTurn)
   const spendFragment = legalMoves.find(isMoveItemType(MaterialType.FragmentTile))
   const draw = legalMoves.find(isMoveItemType(MaterialType.GuardianAnimalCard))
+  const { t } = useTranslation()
   if (shuffleAndDraw && pass) {
     return <Trans defaults="header.shuffle-pass">
       <PlayMoveButton move={shuffleAndDraw} />
@@ -41,6 +42,6 @@ export const GuardianAnimalsHeader = () => {
       <PlayMoveButton move={shuffleAndDraw} />
     </Trans>
   } else {
-    return <>Guardian animals</>
+    return <>{t('header.draw-card.opponent')} </>
   }
 }
