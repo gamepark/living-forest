@@ -12,8 +12,8 @@ export class TreeSpaceLocator extends ItemLocator<SpiritOfNature, MaterialType, 
 
   getPositionOnParent(location: Location) {
     return {
-      x: 17 + location.x! * 15.2,
-      y: 19 + location.y! * 24.2
+      x: 17.5 + location.x! * 14.8,
+      y: 20.5 + location.y! * 23.8
     }
   }
 

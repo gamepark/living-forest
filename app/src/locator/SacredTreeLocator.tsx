@@ -6,7 +6,7 @@ export class SacredTreeLocator extends ItemLocator {
   getPosition(item: MaterialItem, context: ItemContext): Coordinates {
     const { rules, player } = context
     const parentPosition = getPlayerBoardPositionOnTable(rules, item, player)
-    return { x: parentPosition.x + 10.7, y: parentPosition.y - 7.5, z: 0.1 }
+    return { x: parentPosition.x + 10.9, y: parentPosition.y - 7.5, z: 0.1 }
   }
 }
 

@@ -7,8 +7,8 @@ import { forestTreeSpaces } from '@gamepark/living-forest/material/ForestTreeSpa
 import { ForestBoardRules } from './ForestBoardRules'
 
 export class ForestBoardDescription extends BoardDescription {
-  height = 16.5
-  width = 27
+  height = 17.72
+  width = 29
 
   getLocations(item: MaterialItem, { player }: ItemContext) {
     if (!player || item.location.player !== player) return []

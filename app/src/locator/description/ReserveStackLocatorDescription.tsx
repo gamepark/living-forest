@@ -11,9 +11,8 @@ import { Location } from '@gamepark//rules-api'
 export class ReserveStackLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true
   location = { type: LocationType.ReserveStack }
-  ratio = 12 / 27
-  height = 31
-  coordinates = { x: 20, y: 0, z: 0 }
+  ratio = 12.5 / 27
+  height = 32
   extraCss = css`
     background-image: url(${Images.ReserveHolder});
     background-size: contain;
@@ -23,7 +22,7 @@ export class ReserveStackLocatorDescription extends LocationDescription<SpiritOf
   getCoordinates(_location: Location, context: MaterialContext) {
     const stack = reserveStackLocator.getCoordinates({ location: { type: LocationType.Table, id: 1 }}, context as ItemContext)
     return {
-      x: stack.x - 2.5,
+      x: stack.x - 2.4,
       y: stack.y + 9.8,
       z: 0
     }
