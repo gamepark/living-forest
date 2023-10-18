@@ -7,12 +7,12 @@ import { css } from '@emotion/react'
 import { LocationDescription } from '@gamepark/react-game'
 
 export class TreeSpaceDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
-  alwaysVisible = true
+  alwaysVisible = false
   width = protectiveTreeTileDescription.width + 0.3
   ratio = protectiveTreeTileDescription.ratio
   borderRadius = protectiveTreeTileDescription.borderRadius
   rules = () => <p></p>
   extraCss = css`
-    background-color: rgba(0, 101, 250, 0.3);
+    background-color: rgba(0, 128, 0, 0.30);
   `
 }
