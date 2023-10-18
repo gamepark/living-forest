@@ -12,8 +12,8 @@ export class FragmentStockLocator extends LineLocator {
   getCoordinates(_item: MaterialItem, { rules: { players }}: ItemContext) {
     const holder = getVaranDeckHolderCoordinates(players)
     return {
-      x: holder.x - 3.5,
-      y: holder.y + 0.9,
+      x: holder.x - 3.6,
+      y: holder.y + 0.7,
       z: 0.05
     }
   }

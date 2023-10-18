@@ -10,8 +10,8 @@ import { Location } from '@gamepark/rules-api'
 export class VaranDeckDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true
   location = { type: LocationType.VaranDeck, id: 99 }
-  ratio = 600 / 451
-  height = 9.9
+  ratio = 600 / 455
+  height = 10.5
   extraCss = css`
     background-image: url(${Images.VaranHolder});
     background-size: contain;
@@ -26,7 +26,7 @@ export class VaranDeckDescription extends LocationDescription<SpiritOfNature, Ma
 
 export const getVaranDeckHolderCoordinates = (players: SpiritOfNature[]) => {
   if (players.length < 3) {
-    return { x: -20, y: -24.2, z: 0}
+    return { x: -20, y: -24, z: 0}
   }
 
   return { x: 18, y: 22.5, z: 0}
