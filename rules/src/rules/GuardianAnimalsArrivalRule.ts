@@ -20,7 +20,7 @@ export class GuardianAnimalsArrivalRule extends MaterialRulesPart {
           .locationId(level)
           .sort((item) => -item.location.x!)
           .limit(attractedAnimals)
-          .moveItems({ location: { type: LocationType.ReserveRow, id: level }})
+          .moveItems({ type: LocationType.ReserveRow, id: level })
       )
     }
 

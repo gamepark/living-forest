@@ -85,7 +85,7 @@ export class GuardianAnimalCardDescription extends CardDescription {
     const { index, rules, player } = context
     const drag = super.canDrag(move, context)
     if (drag) return drag
-    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.position.location?.type !== LocationType.FragmentStack) return false
+    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.location?.type !== LocationType.FragmentStack) return false
 
     const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
     const helpLine = rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(item.location.player)

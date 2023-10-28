@@ -34,7 +34,7 @@ export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature
 
     if (type === MaterialType.GuardianAnimalCard) {
       const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
-      return move.position.location!.type === LocationType.FragmentStack
+      return move.location!.type === LocationType.FragmentStack
        && item.location.player === location.player
     }
 

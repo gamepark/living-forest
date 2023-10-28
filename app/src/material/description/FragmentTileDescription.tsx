@@ -22,7 +22,7 @@ export class FragmentTileDescription extends TokenDescription {
 
   isTopItem(move: MaterialMove, context: ItemContext): boolean {
     // Only compute it for element that goes to player fragment token
-    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.position.location?.type !== LocationType.PlayerFragmentTileStack) return true
+    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.location?.type !== LocationType.PlayerFragmentTileStack) return true
     const  { displayIndex, index, rules, type } = context
     const shineIndex = (Math.min(rules.material(type).getItem(index)?.quantity ?? 0, 10) - 1)
     return displayIndex === shineIndex

@@ -34,7 +34,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
         .location(LocationType.PlayerFragmentTileStack)
         .player(playerId);
       if (fragments.length) {
-        moves.push(...fragments.moveItems({ location: { type: LocationType.FragmentStack } }))
+        moves.push(...fragments.moveItems({ type: LocationType.FragmentStack }))
       }
       moves.push(this.rules().endPlayerTurn(playerId))
     }
@@ -43,7 +43,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
   }
 
   beforeItemMove(move: ItemMove) {
-    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.position.location?.type !== LocationType.FragmentStack) return []
+    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.location?.type !== LocationType.FragmentStack) return []
 
     const player = this.material(MaterialType.FragmentTile).index(move.itemIndex).getItem()!.location.player!
 
@@ -56,13 +56,13 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
         .getPlayerCards(player)
         .location(LocationType.HelpLine)
         .maxBy((item) => item.location.x!)
-        .moveItems({ location: { type: LocationType.VaranDeck } })
+        .moveItems({ type: LocationType.VaranDeck })
     } else {
       return this
         .getPlayerCards(player)
         .location(LocationType.HelpLine)
         .maxBy((item) => item.location.x!)
-        .moveItems({ location: { type: LocationType.PlayerDiscardStack, player } })
+        .moveItems({ type: LocationType.PlayerDiscardStack, player })
     }
   }
 
@@ -74,8 +74,8 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     }
 
 
-    if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move) || move.position.location?.type !== LocationType.HelpLine) return []
-    const playerId = move.position.location.player!
+    if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move) || move.location?.type !== LocationType.HelpLine) return []
+    const playerId = move.location.player!
     const fragments = this.material(MaterialType.FragmentTile).location(LocationType.PlayerFragmentTileStack).player(playerId)
     const playerState = new PlayerState(this.game, playerId)
     if (playerState.solidarityGregariousDifference >= 3 && !fragments.length) {
@@ -91,7 +91,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
 
     const discard = this.getPlayerCards(move.data).location(LocationType.PlayerDiscardStack)
     return [
-      ...discard.sort((item) => -item.location.x!).moveItems({ location: { type: LocationType.PlayerDeckStack, player: move.data } }),
+      ...discard.sort((item) => -item.location.x!).moveItems({ type: LocationType.PlayerDeckStack, player: move.data }),
       discard.shuffle(),
     ]
   }
@@ -105,7 +105,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
       .player(playerId)
       .location(LocationType.PlayerDeckStack)
       .sort((item) => -item.location.x!)
-      .moveItem({ location: { type: LocationType.HelpLine, player: playerId } })
+      .moveItem({ type: LocationType.HelpLine, player: playerId })
   }
 
   getMovesAfterPlayersDone(): MaterialMove[] {

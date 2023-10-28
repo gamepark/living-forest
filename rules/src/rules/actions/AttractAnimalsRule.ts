@@ -46,7 +46,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
     const reserve = this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)
     return reserve
       .filter((item) => GuardianAnimalDescriptions[item.id]!.cost <= resources)
-      .moveItems({ location: { type: LocationType.PlayerDeckStack, player: this.player}})
+      .moveItems({ type: LocationType.PlayerDeckStack, player: this.player })
   }
 
   get resources() {

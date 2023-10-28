@@ -64,8 +64,9 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
       this.material(MaterialType.GuardianAnimalCard)
         .location(LocationType.ReserveStack)
         .locationId(level)
-        .sort((item) => -item.location.x!).limit(CARDS_PER_ROW)
-        .moveItems({ location: { type: LocationType.ReserveRow, id: level } })
+        .sort((item) => -item.location.x!)
+        .limit(CARDS_PER_ROW)
+        .moveItems({ type: LocationType.ReserveRow, id: level })
     })
   }
 

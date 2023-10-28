@@ -105,7 +105,7 @@ export class ActionRule extends PlayerTurnRule {
   }
 
   isMoveMaterialOnLocation(type: MaterialType, location: LocationType) {
-    return (move: ItemMove) => isMoveItemType(type)(move) && move.position.location?.type === location
+    return (move: ItemMove) => isMoveItemType(type)(move) && move.location?.type === location
   }
 
   get mayGoToEndOfTurn() {

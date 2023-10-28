@@ -9,7 +9,7 @@ export class PickVictoryTileRule extends PlayerTurnRule {
     return this.material(MaterialType.VictoryTile)
       .location(LocationType.VictoryTileArea)
       .player((player) => player !== this.player)
-      .moveItems((item) => ({ location: { type: LocationType.VictoryTileArea, player: this.player, id: VictoryTileTypes[item.id] }}))
+      .moveItems((item) => ({ type: LocationType.VictoryTileArea, player: this.player, id: VictoryTileTypes[item.id] }))
   }
 
   afterItemMove(_move: ItemMove<number, number, number>): MaterialMove<number, number, number>[] {

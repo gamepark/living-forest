@@ -17,7 +17,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     const availableTrees = this.availableTrees
     return forestTreeSpaces
       .filter((space) => this.isAvailableSpace(space, playerTrees))
-      .flatMap((space) => availableTrees.moveItems({ location: { type: LocationType.TreeSpace, ...space, player: this.player } }))
+      .flatMap((space) => availableTrees.moveItems({ type: LocationType.TreeSpace, ...space, player: this.player }))
   }
 
   isAvailableSpace(space: XYCoordinates, playerTrees: MaterialItem[]) {
@@ -77,13 +77,13 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
   }
 
   onPlantTree(move: MoveItem) {
-    const attrackAnimal = move.position.location?.x === 0 && move.position.location?.y === 0
+    const attrackAnimal = move.location?.x === 0 && move.location?.y === 0
     if (attrackAnimal) {
       this.memorize(Memory.Bonus, 3)
       return [this.rules().startRule(RuleId.AttractAnimals)]
     }
 
-    const triggerFragment = (move.position.location?.x === 4 && move.position.location?.y === 0) || (move.position.location?.x === 0 && move.position.location?.y === 2)
+    const triggerFragment = (move.location?.x === 4 && move.location?.y === 0) || (move.location?.x === 0 && move.location?.y === 2)
     if (triggerFragment) {
       this.memorize(Memory.Bonus, 1)
       return [
@@ -91,7 +91,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
         this.rules().startRule(RuleId.TakeFragment)]
     }
 
-    const extinguishFire = move.position.location?.x === 4 && move.position.location?.y === 2
+    const extinguishFire = move.location?.x === 4 && move.location?.y === 2
     if (extinguishFire) {
       this.memorize(Memory.Bonus, 2)
       return [this.rules().startRule(RuleId.ExtinguishFire)]

@@ -24,7 +24,7 @@ export class TakeFragmentRule extends PlayerTurnRule {
     return [this
       .material(MaterialType.FragmentTile)
       .location(LocationType.FragmentStack)
-      .moveItem({ location: { type: LocationType.PlayerFragmentTileStack, player: this.player }})]
+      .moveItem({ type: LocationType.PlayerFragmentTileStack, player: this.player })]
   }
 
   get fragmentToTake() {

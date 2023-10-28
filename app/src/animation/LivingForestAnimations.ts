@@ -9,14 +9,14 @@ export class LivingForestAnimations extends MaterialGameAnimations {
 
   override getDuration(move: MaterialMove, context: MaterialAnimationContext): number {
     if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)
-      && move.position.location?.type === LocationType.PlayerDiscardStack
+      && move.location?.type === LocationType.PlayerDiscardStack
       && context.game.items[move.itemType]![move.itemIndex].location.type === LocationType.HelpLine
       && context.step === AnimationStep.BEFORE_MOVE
       && context.game.rule?.id === RuleId.ReturnOfGuardianAnimals
     ) return 0.4
 
     if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)
-      && move.position.location?.type === LocationType.PlayerDeckStack
+      && move.location?.type === LocationType.PlayerDeckStack
       && context.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDiscardStack
       && context.step === AnimationStep.BEFORE_MOVE
     ) return 0.4

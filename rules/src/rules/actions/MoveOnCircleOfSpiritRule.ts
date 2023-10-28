@@ -75,7 +75,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
       const standeeOnPosition = this.material(MaterialType.SpiritOfNatureStandee).location((location) => LocationType.CircleOfSpiritBoardSpace === location.type && location.x === newPosition)
 
-      if (!standeeOnPosition.length) moves.push(standee.moveItem({ location: { type: LocationType.CircleOfSpiritBoardSpace, x: newPosition}}))
+      if (!standeeOnPosition.length) moves.push(standee.moveItem({ type: LocationType.CircleOfSpiritBoardSpace, x: newPosition }))
 
       if (passedPlayer) {
         this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined? distance - i: remaining - i)

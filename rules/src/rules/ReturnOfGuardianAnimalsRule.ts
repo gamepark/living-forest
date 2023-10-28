@@ -13,7 +13,7 @@ export class ReturnOfGuardianAnimalsRule extends MaterialRulesPart {
           .location(LocationType.HelpLine)
           .player(player)
           .sort((item) => -item.location.x!)
-          .moveItems({ location: { type: LocationType.PlayerDiscardStack, player }})
+          .moveItems({ type: LocationType.PlayerDiscardStack, player })
       )
     }
 

@@ -23,7 +23,7 @@ export class OnibiAttacksPlayerRule extends MaterialRulesPart {
       for (let i = 0; i < fire.length; i++) {
         for (const player of targetedPlayers) {
           if (varanDeck.length) {
-            moves.push(varanDeck.dealOne({ location: { type: LocationType.PlayerDiscardStack, player: player } }))
+            moves.push(varanDeck.dealOne({ type: LocationType.PlayerDiscardStack, player: player }))
           }
         }
       }

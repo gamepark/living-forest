@@ -47,7 +47,7 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
       tokens,
       () => fireStack
         .locationId(fire)
-        .moveItem({ location: { type: LocationType.CircleOfSpiritBoardFire }})
+        .moveItem({ type: LocationType.CircleOfSpiritBoardFire })
     )
   }
 
