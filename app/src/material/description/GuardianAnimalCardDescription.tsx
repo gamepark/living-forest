@@ -92,6 +92,16 @@ export class GuardianAnimalCardDescription extends CardDescription {
     return (item.location.x === (helpLine.length - 1)) && item.location.player === player
   }
 
+  canShortClick(move: MaterialMove<number, number, number>, context: ItemContext<number, number, number>): boolean {
+    const { type, index, rules, player } = context
+    if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)) {
+      const item = rules.material(type).index(index).getItem()!
+      return item.location.type ===  LocationType.PlayerDeckStack && item.location.player === player && move.location.type === LocationType.HelpLine
+    }
+
+    return super.canShortClick(move, context)
+  }
+
   help = GuardianAnimalCardRules
 }
 
