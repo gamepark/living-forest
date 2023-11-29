@@ -5,7 +5,6 @@ import { ItemContext } from '@gamepark/react-game'
 export class ProtectiveTreeDeckLocator extends GridLocator {
   delta = { x: 0.5, y: 0.5 }
 
-
   getColumns(_item: MaterialItem, { rules: { players } }: ItemContext): number {
     return players.length < 3? 4: 3
   }

@@ -1,10 +1,10 @@
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { MaterialRulesProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
-import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
+import { MaterialHelpProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
 
-export const FragmentTileRules = ({ item, itemIndex, closeDialog }: MaterialRulesProps) => {
+export const FragmentTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
 
   const { t } = useTranslation()
   const takeFragment = useLegalMove((move: MaterialMove) =>

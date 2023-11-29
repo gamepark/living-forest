@@ -92,7 +92,7 @@ export class GuardianAnimalCardDescription extends CardDescription {
     return (item.location.x === (helpLine.length - 1)) && item.location.player === player
   }
 
-  rules = GuardianAnimalCardRules
+  help = GuardianAnimalCardRules
 }
 
 export const guardianAnimalCardDescription = new GuardianAnimalCardDescription()

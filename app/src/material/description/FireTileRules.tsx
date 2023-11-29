@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { MaterialRulesProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
+import { MaterialHelpProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
 import { Trans, useTranslation } from 'react-i18next'
 import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardRules'
 
-export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialRulesProps) => {
+export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const extinguish = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.FireTile, itemIndex)(move) && item.location?.type === LocationType.CircleOfSpiritBoardFire

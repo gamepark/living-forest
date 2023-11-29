@@ -22,7 +22,7 @@ export class VictoryTileDescription extends BoardDescription {
     [VictoryTiles.WinterFlower]: Images.winterVictorySacredFlower,
   }
 
-  rules = VictoryTileRules
+  help = VictoryTileRules
 }
 
 export const victoryTileDescription = new VictoryTileDescription()

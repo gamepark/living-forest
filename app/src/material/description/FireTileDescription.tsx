@@ -30,7 +30,7 @@ export class FireTileDescription extends TokenDescription {
     return { height, width: this.ratio * height }
   }
 
-  rules = FileTileRules
+  help = FileTileRules
 
 }
 

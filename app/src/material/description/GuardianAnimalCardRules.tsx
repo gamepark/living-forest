@@ -1,17 +1,17 @@
 /** @jsxImportSource @emotion/react */
-import { MaterialRulesProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlayerId } from '@gamepark/react-game'
-import Images from '../../images/Images'
-import { GuardianAnimalDescriptions } from '@gamepark/living-forest/material/GuardianAnimalDescriptions';
-import Resource from '@gamepark/living-forest/material/Resource'
 import { css } from '@emotion/react'
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
+import { GuardianAnimalDescriptions } from '@gamepark/living-forest/material/GuardianAnimalDescriptions'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import Resource from '@gamepark/living-forest/material/Resource'
+import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
+import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlayerId } from '@gamepark/react-game'
+import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
-import { MaterialMove, isCustomMoveType, isEndPlayerTurn, isMoveItemType } from '@gamepark/rules-api';
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType';
-import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType';
-import { LocationType } from '@gamepark/living-forest/material/LocationType';
-import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal';
+import Images from '../../images/Images'
 
-export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: MaterialRulesProps) => {
+export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const legalMoves = useLegalMoves<MaterialMove>()
   const shuffleAndDraw = legalMoves.find(isCustomMoveType(CustomMoveType.ShuffleAndDraw))

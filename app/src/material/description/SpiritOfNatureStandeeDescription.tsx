@@ -32,7 +32,7 @@ export class SpiritOfNatureStandeeDescription extends TokenDescription {
     return standee.id === player;
   }
 
-  rules = SpiritOfNatureStandeeRules
+  help = SpiritOfNatureStandeeRules
 }
 
 export const spiritOfNatureStandeeDescription = new SpiritOfNatureStandeeDescription()

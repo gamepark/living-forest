@@ -4,7 +4,6 @@ import { getVaranDeckHolderCoordinates, VaranDeckDescription } from './descripti
 
 export class VaranDeckLocator extends DeckLocator {
   limit = 10
-  hidden = false
   locationDescription = new VaranDeckDescription()
 
   delta = { x: -0.05, y: -0.05, z: 0.05 }

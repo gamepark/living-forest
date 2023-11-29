@@ -6,7 +6,7 @@ export class SacredTreeDescription extends TokenDescription {
   width = 5
   ratio = 356 / 320
   image = Images.SacredTree
-  rules = SacredTreeRules
+  help = SacredTreeRules
 }
 
 export const sacredTreeDescription = new SacredTreeDescription()

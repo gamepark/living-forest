@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { MaterialRulesProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
-import { Trans, useTranslation } from 'react-i18next'
-import { ProtectiveTreeDetail } from '@gamepark/living-forest/material/ProtectivesTrees'
-import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
-import { ResourceImage, alignIcon, alignIconText, resourceStyle } from './GuardianAnimalCardRules'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { ProtectiveTreeDetail } from '@gamepark/living-forest/material/ProtectivesTrees'
+import { MaterialHelpProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import { Trans, useTranslation } from 'react-i18next'
+import { alignIcon, alignIconText, ResourceImage, resourceStyle } from './GuardianAnimalCardRules'
 
-export const ProtectiveTreeTileRules = ({ item, itemIndex }: MaterialRulesProps) => {
+export const ProtectiveTreeTileRules = ({ item, itemIndex }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const takeProtectiveTree = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.ProtectiveTreeTiles, itemIndex)(move) && item.location?.type === LocationType.TreeDispenser

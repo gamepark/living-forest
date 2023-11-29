@@ -5,7 +5,6 @@ import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
 
 export class PlayerDiscardLocator extends DeckLocator {
   limit = 10
-  hidden = false
   delta = { x: -0.03, y: -0.03, z: 0.1 }
   locationDescription = new PlayerDiscardDescription()
 

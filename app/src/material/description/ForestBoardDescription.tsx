@@ -26,7 +26,7 @@ export class ForestBoardDescription extends BoardDescription {
     [SpiritOfNature.Summer]: Images.SummerPlayerBoard,
   }
 
-  rules = ForestBoardRules
+  help = ForestBoardRules
 }
 
 export const forestBoardDescription = new ForestBoardDescription()

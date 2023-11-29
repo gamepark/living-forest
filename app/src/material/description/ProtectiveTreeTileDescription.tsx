@@ -24,7 +24,7 @@ export class ProtectiveTreeTileDescription extends TokenDescription {
     [ProtectiveTree.Tree11]: Images.tree11
   }
 
-  rules = ProtectiveTreeTileRules
+  help = ProtectiveTreeTileRules
 }
 
 export const protectiveTreeTileDescription = new ProtectiveTreeTileDescription()

@@ -8,7 +8,6 @@ import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
 import { css } from '@emotion/react'
 
 export class PlayerFragmentStackDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
-  //alwaysVisible = true
   extraCss = css`background-color: rgba(255, 255, 255, 0.3)`
   width = 5
   height = 5

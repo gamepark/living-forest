@@ -12,7 +12,7 @@ export class CircleOfSpiritBoardDescription extends BoardDescription {
   staticItem = { location: { type: LocationType.Table } }
   image = Images.circleOfSpirits
 
-  rules = CircleOfSpiritBoardRules
+  help = CircleOfSpiritBoardRules
 
 }
 export const circleOfSpiritBoardDescription = new CircleOfSpiritBoardDescription()

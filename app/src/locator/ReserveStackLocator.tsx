@@ -7,7 +7,6 @@ import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 export class ReserveStackLocator extends DeckLocator {
   locationDescription = new ReserveStackLocatorDescription()
   limit = 20
-  hidden = true
   delta = { x: -0.05, y: -0.05, z: 0.05 }
 
   getCoordinates(item: MaterialItem, { rules: { players } }: ItemContext): Coordinates {

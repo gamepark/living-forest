@@ -11,7 +11,7 @@ export class TreeSpaceDescription extends LocationDescription<SpiritOfNature, Ma
   width = protectiveTreeTileDescription.width + 0.3
   ratio = protectiveTreeTileDescription.ratio
   borderRadius = protectiveTreeTileDescription.borderRadius
-  rules = () => <p></p>
+  help = () => <p></p>
   extraCss = css`
     background-color: rgba(0, 128, 0, 0.30);
   `

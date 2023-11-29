@@ -10,7 +10,7 @@ export class FragmentTileDescription extends TokenDescription {
   ratio = 1
   image = Images.fragment
 
-  rules = FragmentTileRules
+  help = FragmentTileRules
 
   canDrag(move: MaterialMove, context: ItemContext): boolean {
     return super.canDrag(move, context) && this.isTopItem(move, context)
