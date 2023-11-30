@@ -11,6 +11,7 @@ import { locators } from './locator/Locator'
 import { LivingForestAnimations } from './animation/LivingForestAnimations'
 import Images from './images/Images'
 import { ai } from './tutorial/TutorialAi'
+import { Tutorial } from './tutorial/Tutorial'
 
 setupTranslation(translations, { debug: false })
 
@@ -23,6 +24,7 @@ ReactDOM.render(
       material={material}
       locators={locators}
       animations={new LivingForestAnimations()}
+      tutorial={new Tutorial()}
       theme={{
         root: {
           background: {
@@ -36,6 +38,7 @@ ReactDOM.render(
         }
       }}
       ai={ai}
+
     >
       <App />
     </GameProvider>

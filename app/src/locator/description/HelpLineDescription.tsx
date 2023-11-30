@@ -7,8 +7,9 @@ import { css } from '@emotion/react'
 import { Location } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
 import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
+import { HelpLineRules } from './HelpLineRules'
 
-export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
+export class HelpLineDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   alwaysVisible = true
   getLocations({ rules: { players } }: MaterialContext) {
     return players.map((p) => ({ type: LocationType.HelpLine, player: p }))
@@ -31,5 +32,7 @@ export class HelpLineLocatorDescription extends LocationDescription<SpiritOfNatu
       z: 0
     }
   }
+
+  help = HelpLineRules
 
 }

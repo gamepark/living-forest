@@ -1,11 +1,12 @@
 import { ItemContext, LineLocator } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
-import { HelpLineLocatorDescription } from './description/HelpLineLocatorDescription'
+
 import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
+import { HelpLineDescription } from './description/HelpLineDescription'
 
 export class HelpLineLocator extends LineLocator {
-  locationDescription = new HelpLineLocatorDescription()
+  locationDescription = new HelpLineDescription()
   delta = { x: 2, y: 0, z: 0.1 }
   getDeltaMax(): Partial<Coordinates> {
     return { x: 33.6 }

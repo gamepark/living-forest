@@ -35,13 +35,5 @@ const computeBestPath = (game: MaterialGame, bot: SpiritOfNature, path: Material
         moves: path,
         score: 10
     }
-    // }
 
-    // const paths = filterStupidMoves(rules, legalMoves).map(move =>
-    //   computeBestPath(applyMove(game, move, bot), bot, [...path, move], iteration + 1)
-    // )
-
-    // const maxScore = maxBy(paths, (p) => p.score)!.score!
-    // const maxPaths = paths.filter((p) => p.score === maxScore)
-    // return maxPaths[Math.floor(Math.random() * maxPaths.length)]
 }
