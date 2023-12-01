@@ -1,15 +1,15 @@
+import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
+import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
+import { LivingForestSetup } from '@gamepark/living-forest/LivingForestSetup'
 import { GameProvider, setupTranslation } from '@gamepark/react-game'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
-import translations from './translations.json'
-import { LivingForestSetup } from '@gamepark/living-forest/LivingForestSetup'
-import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
-import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
-import { material } from './material/Material'
-import { locators } from './locator/Locator'
 import { LivingForestAnimations } from './animation/LivingForestAnimations'
+import App from './App'
 import Images from './images/Images'
+import { locators } from './locator/Locator'
+import { material } from './material/Material'
+import translations from './translations.json'
 
 setupTranslation(translations, { debug: false })
 

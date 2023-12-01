@@ -104,7 +104,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     return this.material(MaterialType.GuardianAnimalCard)
       .player(playerId)
       .location(LocationType.PlayerDeckStack)
-      .sort((item) => -item.location.x!)
+      .maxBy((item) => item.location.x!)
       .moveItem({ type: LocationType.HelpLine, player: playerId })
   }
 
