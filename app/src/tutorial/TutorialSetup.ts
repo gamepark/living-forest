@@ -1,23 +1,116 @@
+import { LivingForestOptions } from '@gamepark/living-forest/LivingForestOptions'
 import { LivingForestSetup } from '@gamepark/living-forest/LivingForestSetup'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 
 export class TutorialSetup extends LivingForestSetup {
-  // setupPlayer(player: SpiritOfNature, options: LivingForestOptions) {
-  //     const spirits = options.players.map((p) => p.id)
-  //     this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({
-  //       id: card,
-  //       location: { type: LocationType.PlayerDeckStack, player }
-  //     })))
-  //     this.material(MaterialType.GuardianAnimalCard).player(player).shuffle()
 
-  //     this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({
-  //       id: tile,
-  //       location: { type: LocationType.VictoryTileArea, player, id: VictoryTileTypes[tile] }
-  //     })))
+  setupPlayer(player: SpiritOfNature, options: LivingForestOptions): void {
+    super.setupPlayer(player, options)
 
-  //     // Place on the starting point
-  //     this.material(MaterialType.SpiritOfNatureStandee).createItem({
-  //       id: player,
-  //       location: { type: LocationType.CircleOfSpiritBoardSpace, x: getInitializationPlayersRocks(spirits)![player] }
-  //     })
-  //   }
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.PlayerDeckStack)
+      .id(GuardianAnimal.Owl)
+      .moveItem({
+        type: LocationType.PlayerDeckStack,
+        player: SpiritOfNature.Spring
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.PlayerDeckStack)
+      .id(GuardianAnimal.Lynx)
+      .moveItem({
+        type: LocationType.PlayerDeckStack,
+        player: SpiritOfNature.Spring
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.PlayerDeckStack)
+      .id(GuardianAnimal.GoldFish)
+      .moveItem({
+        type: LocationType.PlayerDeckStack,
+        player: SpiritOfNature.Spring
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.PlayerDeckStack)
+      .id(GuardianAnimal.Weasel)
+      .moveItem({
+        type: LocationType.PlayerDeckStack,
+        player: SpiritOfNature.Spring
+      })
+
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.PlayerDeckStack)
+      .id(GuardianAnimal.Beetle)
+      .moveItem({
+        type: LocationType.PlayerDeckStack,
+        player: SpiritOfNature.Winter
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.PlayerDeckStack)
+      .id(GuardianAnimal.Fox)
+      .moveItem({
+        type: LocationType.PlayerDeckStack,
+        player: SpiritOfNature.Winter
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.PlayerDeckStack)
+      .id(GuardianAnimal.Bear)
+      .moveItem({
+        type: LocationType.PlayerDeckStack,
+        player: SpiritOfNature.Winter
+      })
+  }
+
+  setupReserveStack() {
+    super.setupReserveStack()
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.ReserveStack)
+      .id(GuardianAnimal.Hedgehog)
+      .moveItem({
+        type: LocationType.ReserveStack,
+        id: 1
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.ReserveStack)
+      .id(GuardianAnimal.Ram)
+      .moveItem({
+        type: LocationType.ReserveStack,
+        id: 1
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.ReserveStack)
+      .id(GuardianAnimal.Butterfly)
+      .moveItem({
+        type: LocationType.ReserveStack,
+        id: 1
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.ReserveStack)
+      .id(GuardianAnimal.Wolf)
+      .moveItem({
+        type: LocationType.ReserveStack,
+        id: 1
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.ReserveStack)
+      .id(GuardianAnimal.Flamingo)
+      .moveItem({
+        type: LocationType.ReserveStack,
+        id: 1
+      })
+  }
+
 }

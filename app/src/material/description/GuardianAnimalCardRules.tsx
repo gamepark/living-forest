@@ -10,6 +10,7 @@ import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlay
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
 import Images from '../../images/Images'
+import CardType from '@gamepark/living-forest/material/CardType'
 
 export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
@@ -141,6 +142,11 @@ export const ResourceImage: Record<Resource, string> = {
   [Resource.Seed]: Images.seed,
   [Resource.Wind]: Images.wind,
   [Resource.SacredFlower]: Images.sacredFlower,
+}
+
+export const TypeImage: Record<CardType, string> = {
+  [CardType.Gregarious]: Images.gregarious,
+  [CardType.Solitary]: Images.gregarious,
 }
 
 export const resourceStyle = (image: string) => css`

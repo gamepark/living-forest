@@ -164,6 +164,12 @@ import AutumnPlayerBoard from './autumn-player-board.png'
 import ReserveHolder from './reserve-holder.png'
 import VaranHolder from './varan-holder.png'
 
+import PlantTree from './plantTree.png'
+import ExtinguishFire from './extinguishFire.png'
+import MoveCircle from './moveCircle.png'
+import TakeFragment from './takeFragment.png'
+import AttractGuardian from './attractGuardian.png'
+
 
 import sampleImage from './cards/verso1.jpg'
 import forestBack from './forestBack.jpg'
@@ -192,7 +198,8 @@ const Images = {
   AutumnPlayerBoard,
   ReserveHolder,
   VaranHolder,
-  forestBack
+  forestBack,
+  TakeFragment, ExtinguishFire, PlantTree, MoveCircle, AttractGuardian
 }
 
 export default Images
