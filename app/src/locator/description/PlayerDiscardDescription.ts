@@ -8,6 +8,7 @@ import { guardianAnimalCardDescription } from '../../material/description/Guardi
 import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
 
 export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
+
   getLocations({ player }: MaterialContext): Location[] {
     if (!player) return []
     return  [{ type: LocationType.PlayerDiscardStack, player }]
@@ -26,6 +27,10 @@ export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature
       y: parentPosition.y - 3,
       z: 10
     }
+  }
+
+  couldDrop(move: MaterialMove): boolean {
+    return isMoveItemType(MaterialType.FragmentTile)(move) && move.location.type === LocationType.FragmentStack
   }
 
   canDrop(move: MaterialMove, location: Location, context: ItemContext) {
