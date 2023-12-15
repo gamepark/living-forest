@@ -87,8 +87,8 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     if (triggerFragment) {
       this.memorize(Memory.Bonus, 1)
       return [
-        this.rules().startRule(RuleId.TakeFragment),
-        this.rules().startRule(RuleId.TakeFragment)]
+        this.rules().startRule(RuleId.TakeFragment)
+      ]
     }
 
     const extinguishFire = move.location?.x === 4 && move.location?.y === 2

@@ -7,7 +7,6 @@ import ReactDOM from 'react-dom'
 import { LivingForestAnimations } from './animation/LivingForestAnimations'
 import App from './App'
 import Images from './images/Images'
-import { ai } from './tutorial/TutorialAi'
 import { Tutorial } from './tutorial/Tutorial'
 import { material } from './material/Material'
 import { locators } from './locator/Locator'
@@ -37,8 +36,6 @@ ReactDOM.render(
           backgroundColor: '#FEF9F5'
         }
       }}
-      ai={ai}
-
     >
       <App />
     </GameProvider>

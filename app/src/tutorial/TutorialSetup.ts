@@ -9,64 +9,85 @@ export class TutorialSetup extends LivingForestSetup {
 
   setupPlayer(player: SpiritOfNature, options: LivingForestOptions): void {
     super.setupPlayer(player, options)
+    if (player === SpiritOfNature.Spring) {
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Spring)
+        .id(GuardianAnimal.Beetle)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Spring
+        })
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Spring)
+        .id(GuardianAnimal.Owl)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Spring
+        })
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Spring)
+        .id(GuardianAnimal.Lynx)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Spring
+        })
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Spring)
+        .id(GuardianAnimal.GoldFish)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Spring
+        })
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Spring)
+        .id(GuardianAnimal.Weasel)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Spring
+        })
+    }
 
-    this
-      .material(MaterialType.GuardianAnimalCard)
-      .location(LocationType.PlayerDeckStack)
-      .id(GuardianAnimal.Owl)
-      .moveItem({
-        type: LocationType.PlayerDeckStack,
-        player: SpiritOfNature.Spring
-      })
-    this
-      .material(MaterialType.GuardianAnimalCard)
-      .location(LocationType.PlayerDeckStack)
-      .id(GuardianAnimal.Lynx)
-      .moveItem({
-        type: LocationType.PlayerDeckStack,
-        player: SpiritOfNature.Spring
-      })
-    this
-      .material(MaterialType.GuardianAnimalCard)
-      .location(LocationType.PlayerDeckStack)
-      .id(GuardianAnimal.GoldFish)
-      .moveItem({
-        type: LocationType.PlayerDeckStack,
-        player: SpiritOfNature.Spring
-      })
-    this
-      .material(MaterialType.GuardianAnimalCard)
-      .location(LocationType.PlayerDeckStack)
-      .id(GuardianAnimal.Weasel)
-      .moveItem({
-        type: LocationType.PlayerDeckStack,
-        player: SpiritOfNature.Spring
-      })
+    if (player === SpiritOfNature.Winter) {
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Winter)
+        .id(GuardianAnimal.Beetle)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Winter
+        })
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Winter)
+        .id(GuardianAnimal.Fox)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Winter
+        })
+      this
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.PlayerDeckStack)
+        .player(SpiritOfNature.Winter)
+        .id(GuardianAnimal.Bear)
+        .moveItem({
+          type: LocationType.PlayerDeckStack,
+          player: SpiritOfNature.Winter
+        })
+    }
 
-    this
-      .material(MaterialType.GuardianAnimalCard)
-      .location(LocationType.PlayerDeckStack)
-      .id(GuardianAnimal.Beetle)
-      .moveItem({
-        type: LocationType.PlayerDeckStack,
-        player: SpiritOfNature.Winter
-      })
-    this
-      .material(MaterialType.GuardianAnimalCard)
-      .location(LocationType.PlayerDeckStack)
-      .id(GuardianAnimal.Fox)
-      .moveItem({
-        type: LocationType.PlayerDeckStack,
-        player: SpiritOfNature.Winter
-      })
-    this
-      .material(MaterialType.GuardianAnimalCard)
-      .location(LocationType.PlayerDeckStack)
-      .id(GuardianAnimal.Bear)
-      .moveItem({
-        type: LocationType.PlayerDeckStack,
-        player: SpiritOfNature.Winter
-      })
+
   }
 
   setupReserveStack() {

@@ -31,13 +31,14 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   }
 
   getStandeeDestinations(maxMoves: number) {
+    console.log(JSON.parse(JSON.stringify(this.standee)), this.player)
     const standee = this.standee
     const position = standee.getItem()!.location.x!
     const moves: MaterialMove[] = []
     const rocks = this.rockRules
 
     let max = maxMoves
-    for (let  i = 1; i <= max; i++) {
+    for (let i = 1; i <= max; i++) {
       let newPosition = position + i
       if (newPosition >= rocks.length) {
         newPosition = newPosition % (rocks.length)
@@ -78,7 +79,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
       if (!standeeOnPosition.length) moves.push(standee.moveItem({ type: LocationType.CircleOfSpiritBoardSpace, x: newPosition }))
 
       if (passedPlayer) {
-        this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined? distance - i: remaining - i)
+        this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined ? distance - i : remaining - i)
         moves.push(this.rules().startRule(RuleId.PickVictoryTile))
         return moves;
       }
@@ -93,7 +94,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     const hasAction = this.canDoAction(ruleId)
     if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
     this.forget(Memory.RemainingMoves)
-    moves.push(this.rules().startRule(!hasAction? RuleId.Action: ruleId))
+    moves.push(this.rules().startRule(!hasAction ? RuleId.Action : ruleId))
     return moves;
   }
 

@@ -36,6 +36,10 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
         const tokens = Math.min(takenLevel3Cards, max)
         moves.push(...this.addFireTokenMoves(fireStack, Fire.Fire4, tokens))
       }
+
+      if (!takenLevel1Cards && !takenLevel2Cards && !takenLevel3Cards && fireOnCircle === 0) {
+        moves.push(...this.addFireTokenMoves(fireStack, Fire.Fire2, 1))
+      }
     }
 
     moves.push(this.rules().startRule(RuleId.GuardianAnimalsArrival))

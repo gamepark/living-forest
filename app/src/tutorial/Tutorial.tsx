@@ -9,6 +9,7 @@ import { Trans } from "react-i18next";
 import { resourceStyle, ResourceImage, TypeImage } from '../material/description/GuardianAnimalCardRules';
 import GuardianAnimal from "@gamepark/living-forest/material/GuardianAnimal";
 import Images from "../images/Images";
+import { isEndPlayerTurn, isMoveItemType } from "@gamepark/rules-api";
 
 export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, LocationType> {
     version = 1
@@ -84,12 +85,6 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
             focus: (game) => [
                 this.location(LocationType.HelpLine).player(SpiritOfNature.Spring),
                 this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(SpiritOfNature.Spring).maxBy((item) => item.location.x!)
-            ]
-        },
-        {
-            focus: (game) => [
-                this.location(LocationType.HelpLine).player(SpiritOfNature.Spring),
-                this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(SpiritOfNature.Spring).maxBy((item) => item.location.x!)
             ],
             move: {
                 player: SpiritOfNature.Spring,
@@ -140,6 +135,9 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
             ],
             move: {
                 player: SpiritOfNature.Spring,
+                filter: (move) => isEndPlayerTurn(move) && move.player === SpiritOfNature.Spring
+                // filter: (move) =>
+                //     isEndPlayerTurn(move)
             }
         },
         {
@@ -150,11 +148,15 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         {
             move: {
                 player: SpiritOfNature.Winter,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
             }
         },
         {
             move: {
                 player: SpiritOfNature.Winter,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
             }
         },
         {

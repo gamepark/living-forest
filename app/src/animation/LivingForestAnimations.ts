@@ -21,6 +21,12 @@ export class LivingForestAnimations extends MaterialGameAnimations {
       && context.step === AnimationStep.BEFORE_MOVE
     ) return 0.4
 
+    if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+      && move.location?.type === LocationType.HelpLine
+      && context.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDeckStack
+      && context.step === AnimationStep.BEFORE_MOVE
+    ) return 0.4
+
     if (isShuffleItemType(MaterialType.GuardianAnimalCard)(move)) return 0
     return super.getDuration(move, context);
   }

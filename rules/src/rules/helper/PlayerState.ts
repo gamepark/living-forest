@@ -9,6 +9,7 @@ import { Memory } from '../Memory'
 import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
 import { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
 import uniqBy from 'lodash/uniqBy'
+import { RuleId } from '../RuleId'
 
 export class PlayerState extends MaterialRulesPart {
   private helpLine: Material;
@@ -49,6 +50,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   get modifier() {
+    console.log(this.remind(Memory.Bonus))
     return (this.bonus ?? 0) - (this.spent ?? 0)
   }
 
@@ -68,7 +70,14 @@ export class PlayerState extends MaterialRulesPart {
     const helpLineResources = this.getHelpLineResources(type)
     const treeResources = this.getTreeResources(type)
     const forestResources = this.getForestBonus(type)
-    return helpLineResources + treeResources + forestResources
+    const modifier = this.getModifier(type)
+    return helpLineResources + treeResources + forestResources + modifier
+  }
+
+  getModifier(type: Resource) {
+    if (type === Resource.Sun && RuleId.AttractAnimals) return this.modifier
+    if (type === Resource.Drop && RuleId.ExtinguishFire) return this.modifier
+    return 0
   }
 
   getTreeResources(resource: Resource) {
@@ -82,13 +91,13 @@ export class PlayerState extends MaterialRulesPart {
   getForestBonus(resource: Resource) {
     switch (resource) {
       case Resource.Drop:
-        return this.forest.filter((item) => item.location.x === 1).length === 3? 1: 0
+        return this.forest.filter((item) => item.location.x === 1).length === 3 ? 1 : 0
       case Resource.Wind:
-        return this.forest.filter((item) => item.location.x === 3).length === 3? 1: 0
+        return this.forest.filter((item) => item.location.x === 3).length === 3 ? 1 : 0
       case Resource.SacredFlower:
-        return this.forest.filter((item) => item.location.y === 1).length === 4? 2: 0
+        return this.forest.filter((item) => item.location.y === 1).length === 4 ? 2 : 0
       case Resource.Sun:
-        return this.forest.filter((item) => item.location.x === 2).length === 2? 1: 0
+        return this.forest.filter((item) => item.location.x === 2).length === 2 ? 1 : 0
     }
 
     return 0

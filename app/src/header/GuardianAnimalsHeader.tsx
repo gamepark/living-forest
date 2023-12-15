@@ -41,6 +41,10 @@ export const GuardianAnimalsHeader = () => {
     return <Trans defaults="header.shuffle">
       <PlayMoveButton move={shuffleAndDraw} />
     </Trans>
+  } else if (pass) {
+    return <Trans defaults="You should (not) <0>pass</0>">
+      <PlayMoveButton move={pass} />
+    </Trans>
   } else {
     return <>{t('header.draw-card.opponent')} </>
   }
