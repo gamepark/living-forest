@@ -26,7 +26,7 @@ export function getFourPlayersRocks(players: SpiritOfNature[]): Partial<Record<S
 }
 
 export function getInitializationPlayersRocks(players: SpiritOfNature[]) {
-    if (players.length === 2) return getTwoPlayersRocks(players )
+    if (players.length === 2) return getTwoPlayersRocks(players)
     if (players.length === 3) return getThreePlayersRocks(players)
     if (players.length === 4) return getFourPlayersRocks(players)
     return

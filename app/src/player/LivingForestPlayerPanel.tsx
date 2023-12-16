@@ -19,11 +19,11 @@ export const LivingForestPlayerPanel: FC<LivingForestPlayerPanelProps> = (props)
   const rules = useRules<LivingForestRules>()!
   const state = useMemo(() => new PlayerState(rules.game, player.id), [rules.game, player.id])
   return (<>
-    <PlayerPanel key={player.id} playerId={player.id} {...rest}>
+    <PlayerPanel key={player.id} playerId={player.id} {...rest} onClick={() => setPlayerDialog(player.id)}>
       <PlayerResources state={state} player={player} />
       <PlayerVictories state={state} player={player} />
     </PlayerPanel>
-    {<PlayerDialog open={!!playerDialog} player={playerDialog!} close={() => setPlayerDialog(undefined)} />}
+    {<PlayerDialog open={!!playerDialog} player={playerDialog!} state={state} close={() => setPlayerDialog(undefined)} />}
   </>
   )
 
