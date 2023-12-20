@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { ItemContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
-import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import { LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
 import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
 
@@ -29,20 +29,20 @@ export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature
     }
   }
 
-  couldDrop(move: MaterialMove): boolean {
-    return isMoveItemType(MaterialType.FragmentTile)(move) && move.location.type === LocationType.FragmentStack
-  }
-
-  canDrop(move: MaterialMove, location: Location, context: ItemContext) {
-    const { type, rules, index } = context
-    if (!isMoveItemType(MaterialType.FragmentTile)(move) || type === MaterialType.FragmentTile) return false
-
-    if (type === MaterialType.GuardianAnimalCard) {
-      const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
-      return move.location!.type === LocationType.FragmentStack
-       && item.location.player === location.player
-    }
-
-    return false
-  }
+  // couldDrop(_move: MaterialMove): boolean {
+  //   return true
+  // }
+  //
+  // canDrop(move: MaterialMove, location: Location, context: ItemContext) {
+  //   const { type, rules, index } = context
+  //   if (!isMoveItemType(MaterialType.FragmentTile)(move) || type === MaterialType.FragmentTile) return false
+  //
+  //   if (type === MaterialType.GuardianAnimalCard) {
+  //     const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
+  //     return move.location!.type === LocationType.FragmentStack
+  //      && item.location.player === location.player
+  //   }
+  //
+  //   return false
+  // }
 }

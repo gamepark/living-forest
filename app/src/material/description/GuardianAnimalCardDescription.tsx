@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import { CardDescription, ItemContext } from '@gamepark/react-game'
-import Images from '../../images/Images'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
-import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { CardDescription, ItemContext } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import Images from '../../images/Images'
 import { GuardianAnimalCardRules } from './GuardianAnimalCardRules'
 
 export class GuardianAnimalCardDescription extends CardDescription {
@@ -81,16 +81,16 @@ export class GuardianAnimalCardDescription extends CardDescription {
     [GuardianAnimal.Varan]: Images.varan
   }
 
-  canDrag(move: MaterialMove, context: ItemContext) {
-    const { index, rules, player } = context
-    const drag = super.canDrag(move, context)
-    if (drag) return drag
-    if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.location?.type !== LocationType.FragmentStack) return false
-
-    const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
-    const helpLine = rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(item.location.player)
-    return (item.location.x === (helpLine.length - 1)) && item.location.player === player
-  }
+  // canDrag(move: MaterialMove, context: ItemContext) {
+  //   const { index, rules, player } = context
+  //   const drag = super.canDrag(move, context)
+  //   if (drag) return drag
+  //   if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.location?.type !== LocationType.FragmentStack) return false
+  //
+  //   const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
+  //   const helpLine = rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(item.location.player)
+  //   return (item.location.x === (helpLine.length - 1)) && item.location.player === player
+  // }
 
   canShortClick(move: MaterialMove<number, number, number>, context: ItemContext<number, number, number>): boolean {
     const { type, index, rules, player } = context
