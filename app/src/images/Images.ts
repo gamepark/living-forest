@@ -119,7 +119,6 @@ import tree8 from './trees/tree8.jpg'
 import tree9 from './trees/tree9.jpg'
 import tree10 from './trees/tree10.jpg'
 import tree11 from './trees/tree11.jpg'
-import autumnCases from './autumnCases.png'
 import autumnVictoryFire from './autumnVictoryFire.png'
 import autumnVictorySacredFlower from './autumnVictorySacredFlower.png'
 import autumnVictoryTree from './autumnVictoryTree.png'
@@ -185,7 +184,7 @@ const Images = {
   tree3A, tree3B, tree4A, tree4B, tree5A, tree5B, tree6, tree7, tree8, tree9, tree10, tree11,
   springSpiritCircle, springVictoryFire, springVictorySacredFlower, springVictoryTree,
   summerSpiritCircle, summerVictoryFire, summerVictorySacredFlower, summerVictoryTree,
-  autumnCases, autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
+  autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
   winterSpiritCircle, winterVictoryFire, winterVictorySacredFlower, winterVictoryTree,
   circleOfSpirits,
   sun, drop, seed, wind, sacredFlower, gregarious,
