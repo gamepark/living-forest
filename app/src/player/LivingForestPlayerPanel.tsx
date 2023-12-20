@@ -23,7 +23,7 @@ export const LivingForestPlayerPanel: FC<LivingForestPlayerPanelProps> = (props)
       <PlayerResources state={state} player={player} />
       <PlayerVictories state={state} player={player} />
     </PlayerPanel>
-    {<PlayerDialog open={!!playerDialog} player={playerDialog!} state={state} close={() => setPlayerDialog(undefined)} />}
+    <PlayerDialog open={!!playerDialog} player={playerDialog!} state={state} close={() => setPlayerDialog(undefined)} />
   </>
   )
 
