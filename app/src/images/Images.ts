@@ -172,7 +172,6 @@ import AttractGuardian from './attractGuardian.png'
 
 
 import sampleImage from './cards/verso1.jpg'
-import forestBack from './forestBack.jpg'
 
 const Images = {
   sampleImage, bear1, beetle1, lynx1, fox1, goldfish1, tanuki1, boar1, weasel1, rabbit1, doe1, hummingbird1, bee1, monkey1, owl1,
@@ -198,7 +197,6 @@ const Images = {
   AutumnPlayerBoard,
   ReserveHolder,
   VaranHolder,
-  forestBack,
   TakeFragment, ExtinguishFire, PlantTree, MoveCircle, AttractGuardian
 }
 

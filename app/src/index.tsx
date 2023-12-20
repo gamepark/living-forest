@@ -6,11 +6,10 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import { LivingForestAnimations } from './animation/LivingForestAnimations'
 import App from './App'
-import Images from './images/Images'
-import { Tutorial } from './tutorial/Tutorial'
-import { material } from './material/Material'
 import { locators } from './locator/Locator'
+import { material } from './material/Material'
 import translations from './translations.json'
+import { Tutorial } from './tutorial/Tutorial'
 
 setupTranslation(translations, { debug: false })
 
@@ -24,18 +23,6 @@ ReactDOM.render(
       locators={locators}
       animations={new LivingForestAnimations()}
       tutorial={new Tutorial()}
-      theme={{
-        root: {
-          background: {
-            image: Images.forestBack,
-            overlay: 'rgba(0, 0, 0, 0.7)'
-          }
-        },
-        dialog: {
-          color: '#6B4135',
-          backgroundColor: '#FEF9F5'
-        }
-      }}
     >
       <App />
     </GameProvider>
