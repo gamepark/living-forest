@@ -39,7 +39,7 @@ export const PlayerDialog: FC<PlayerDialogProps> = ({ open, close, player, state
                 </div>
                 {victoryTileTypes.map((v) => {
                     <PlayerDialogIndicator
-                        width={2.1}
+                        width={2.5}
                         ratio={0.8}
                         image={VictoryImage[v]}
                         value={t('player.dialog.score.victory.' + v + '.value', { player: name, score: state.getPointForType(v) })}
@@ -47,16 +47,16 @@ export const PlayerDialog: FC<PlayerDialogProps> = ({ open, close, player, state
                     />
                 })}
                 <PlayerDialogIndicator
-                    width={2.1}
-                    ratio={0.8}
+                    width={2.5}
+                    ratio={1}
                     image={Images.gregarious}
                     value={t('player.dialog.score.gregorious.value', { player: name, score: state.solidarityGregariousDifference })}
                     description={t('player.dialog.score.gregarious.board-score')}
                 />
                 {resources.filter((r) => r !== Resource.SacredFlower).map((r) => (
                     <PlayerDialogIndicator
-                        width={2.1}
-                        ratio={0.8}
+                        width={3}
+                        ratio={1}
                         image={ResourceImage[r]}
                         value={t('player.dialog.score.resource.' + r + '.value', { player: name, score: state.getResources(r) })}
                         description={t('player.dialog.score.resource.' + r + '.board-score')}

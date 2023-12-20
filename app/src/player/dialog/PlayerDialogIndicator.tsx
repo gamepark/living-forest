@@ -38,7 +38,7 @@ const indicator = css`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 0.5em;
+  margin-top: 1.5em;
 `
 
 const fontIcon = css`
@@ -77,6 +77,7 @@ const iconImageStyle = (image: any, borderRadius: number = 0) => css`
   border-radius: ${borderRadius}em;
   background-image: url(${image});
   background-size: cover;
+  filter: drop-shadow(0.1em 0.1em 0.2em gray);
 `
 
 export {
