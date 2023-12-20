@@ -1,18 +1,18 @@
 import { Material, MaterialGame, MaterialRulesPart } from '@gamepark/rules-api'
-import { MaterialType } from '../../material/MaterialType'
-import { LocationType } from '../../material/LocationType'
-import { getSolitaryGregariousDifference, GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescriptions'
-import Resource from '../../material/Resource'
 import sumBy from 'lodash/sumBy'
+import uniqBy from 'lodash/uniqBy'
+import { getSolitaryGregariousDifference, GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescriptions'
+import { LocationType } from '../../material/LocationType'
+import { MaterialType } from '../../material/MaterialType'
+import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
+import Resource from '../../material/Resource'
+import { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
 import SpiritOfNature from '../../SpiritOfNature'
 import { Memory } from '../Memory'
-import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
-import { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
-import uniqBy from 'lodash/uniqBy'
 import { RuleId } from '../RuleId'
 
 export class PlayerState extends MaterialRulesPart {
-  private helpLine: Material;
+  private helpLine: Material
   private victoryTiles: Material
   private forest: Material
   private fires: Material
@@ -50,7 +50,6 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   get modifier() {
-    console.log(this.remind(Memory.Bonus))
     return (this.bonus ?? 0) - (this.spent ?? 0)
   }
 

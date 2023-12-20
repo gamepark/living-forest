@@ -1,15 +1,15 @@
 import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
-import { MaterialType } from '../../material/MaterialType'
-import { PlayerState } from '../helper/PlayerState'
 import { LocationType } from '../../material/LocationType'
+import { MaterialType } from '../../material/MaterialType'
+import SpiritOfNature from '../../SpiritOfNature'
+import { CustomMoveType } from '../CustomMoveType'
+import { PlayerState } from '../helper/PlayerState'
+import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
+import { AttractAnimalsRule } from './AttractAnimalsRule'
+import { ExtinguishFireRule } from './ExtinguishFireRule'
 import { PlantProtectiveTreeRule } from './PlantProtectiveTreeRule'
 import { TakeFragmentRule } from './TakeFragmentRule'
-import { ExtinguishFireRule } from './ExtinguishFireRule'
-import { AttractAnimalsRule } from './AttractAnimalsRule'
-import { Memory } from '../Memory'
-import { CustomMoveType } from '../CustomMoveType'
-import SpiritOfNature from '../../SpiritOfNature'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
@@ -31,7 +31,6 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   }
 
   getStandeeDestinations(maxMoves: number) {
-    console.log(JSON.parse(JSON.stringify(this.standee)), this.player)
     const standee = this.standee
     const position = standee.getItem()!.location.x!
     const moves: MaterialMove[] = []
@@ -55,7 +54,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
       moves.push(this.rules().customMove(CustomMoveType.MoveOnCircleOfSpirit, { target: newPosition, distance: i }))
     }
 
-    return moves;
+    return moves
   }
 
   onCustomMove(move: CustomMove) {
@@ -81,7 +80,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
       if (passedPlayer) {
         this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined ? distance - i : remaining - i)
         moves.push(this.rules().startRule(RuleId.PickVictoryTile))
-        return moves;
+        return moves
       }
 
       if (standeeOnPosition.length) passedPlayer = standeeOnPosition.getItem()!.id
@@ -95,7 +94,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
     this.forget(Memory.RemainingMoves)
     moves.push(this.rules().startRule(!hasAction ? RuleId.Action : ruleId))
-    return moves;
+    return moves
   }
 
   canDoAction(ruleId: RuleId) {
@@ -138,7 +137,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
       RuleId.AttractAnimals,
       RuleId.TakeFragment,
       RuleId.ExtinguishFire,
-      RuleId.TakeFragment,
+      RuleId.TakeFragment
     ]
   }
 }
