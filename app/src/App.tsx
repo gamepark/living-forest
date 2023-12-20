@@ -1,24 +1,23 @@
 /** @jsxImportSource @emotion/react */
+import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import { FailuresDialog, FullscreenDialog, LoadingScreen, MaterialHeader, MaterialImageLoader, Menu, useGame } from '@gamepark/react-game'
+import { MaterialGame } from '@gamepark/rules-api'
 import { useEffect, useState } from 'react'
 import GameDisplay from './GameDisplay'
-import { MaterialGame } from '@gamepark/rules-api'
-import { RuleId } from '@gamepark/living-forest/rules/RuleId'
-import { GuardianAnimalsHeader } from './header/GuardianAnimalsHeader'
 import { ActionHeader } from './header/ActionHeader'
-import { GameOverHeader } from './header/GameOverHeader'
 import { AttractAnimalsHeader } from './header/AttractAnimalsHeader'
-import { ExtinguishFireHeader } from './header/ExtinguishFireHeader'
-import { TakeFragmentHeader } from './header/TakeFragmentHeader'
-import { PlantTreeHeader } from './header/PlantTreeHeader'
 import { EndOfTurnHeader } from './header/EndOfTurnHeader'
+import { ExtinguishFireHeader } from './header/ExtinguishFireHeader'
+import { GuardianAnimalsArrivalHeader } from './header/GuardianAnimalsArrivalHeader'
+import { GuardianAnimalsHeader } from './header/GuardianAnimalsHeader'
+import { MoveOnCircleOfSpiritHeader } from './header/MoveOnCircleOfSpiritHeader'
 import { OnibiAttacksPlayerHeader } from './header/OnibiAttacksPlayerHeader'
 import { OnibiAttacksSacredTreeHeader } from './header/OnibiAttacksSacredTreeHeader'
-import { GuardianAnimalsArrivalHeader } from './header/GuardianAnimalsArrivalHeader'
-import { ReturnOfGuardianAnimalsHeader } from './header/ReturnOfGuardianAnimalsHeader'
 import { PassingSacredTreeHeader } from './header/PassingSacredTreeHeader'
-import { MoveOnCircleOfSpiritHeader } from './header/MoveOnCircleOfSpiritHeader'
 import { PickVictoryTileHeader } from './header/PickVictoryTileHeader'
+import { PlantTreeHeader } from './header/PlantTreeHeader'
+import { ReturnOfGuardianAnimalsHeader } from './header/ReturnOfGuardianAnimalsHeader'
+import { TakeFragmentHeader } from './header/TakeFragmentHeader'
 
 export default function App() {
   const game = useGame<MaterialGame>()
@@ -33,7 +32,7 @@ export default function App() {
       <GameDisplay />
       <LoadingScreen display={loading} author="Aske Christiansen" artist="Apolline Etienne" publisher="Ludonaute" developer="Laetitia Decoudu" />
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)} />
-      <MaterialHeader rulesStepsHeaders={headers} GameOver={GameOverHeader} />
+      <MaterialHeader rulesStepsHeaders={headers} loading={loading} />
       <Menu />
       <FailuresDialog />
       <FullscreenDialog />
