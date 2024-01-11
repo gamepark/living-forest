@@ -42,7 +42,7 @@ export const GuardianAnimalsHeader = () => {
       <PlayMoveButton move={shuffleAndDraw} />
     </Trans>
   } else if (pass) {
-    return <Trans defaults="You should (not) <0>pass</0>">
+    return <Trans defaults="header.pass">
       <PlayMoveButton move={pass} />
     </Trans>
   } else {

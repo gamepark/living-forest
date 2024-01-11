@@ -9,7 +9,9 @@ import { Trans } from "react-i18next";
 import { resourceStyle, ResourceImage, TypeImage } from '../material/description/GuardianAnimalCardRules';
 import GuardianAnimal from "@gamepark/living-forest/material/GuardianAnimal";
 import Images from "../images/Images";
-import { isEndPlayerTurn, isMoveItemType } from "@gamepark/rules-api";
+import { isCustomMoveType, isEndPlayerTurn, isMoveItemType } from "@gamepark/rules-api";
+import ProtectiveTree from "@gamepark/living-forest/material/ProtectiveTree";
+import { CustomMoveType } from "@gamepark/living-forest/rules/CustomMoveType";
 
 export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, LocationType> {
     version = 1
@@ -70,7 +72,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                 text: () => <Trans defaults="tuto.sun">
                     <span css={resourceStyle(ResourceImage[1])} />
                 </Trans >,
-                position: { x: -40, y: 0 }
+                position: { x: -20, y: 0 }
             },
             focus: (game) => [
                 this.location(LocationType.HelpLine).player(SpiritOfNature.Spring),
@@ -101,12 +103,17 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
             }
         },
         {
+            move: {
+                player: SpiritOfNature.Spring,
+            }
+        },
+        {
             popup: {
                 text: () => <Trans defaults="tuto.solitary">
                     <strong />
                     <span css={resourceStyle(TypeImage[1])} />
                 </Trans >,
-                position: { x: -40, y: 0 }
+                position: { x: 0, y: 0 }
             },
             focus: (game) => [
                 this.location(LocationType.HelpLine).player(SpiritOfNature.Spring),
@@ -128,6 +135,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                     <strong />
                     <span css={resourceStyle(TypeImage[1])} />
                 </Trans >,
+                position: { x: 10, y: 0 }
             },
             focus: (game) => [
                 this.location(LocationType.HelpLine).player(SpiritOfNature.Spring),
@@ -136,8 +144,6 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
             move: {
                 player: SpiritOfNature.Spring,
                 filter: (move) => isEndPlayerTurn(move) && move.player === SpiritOfNature.Spring
-                // filter: (move) =>
-                //     isEndPlayerTurn(move)
             }
         },
         {
@@ -191,7 +197,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         {
             popup: {
                 text: (t: TFunction) => t('tuto.action.sun'),
-                position: { x: -70, y: 0 }
+                position: { x: -5, y: 2 }
             },
             focus: (game) => this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)
 
@@ -201,18 +207,21 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                 text: () => <Trans defaults="tuto.action.sun.rule" values={{ 'number': '4' }}>
                     <span css={resourceStyle(ResourceImage[1])} />
                 </Trans >,
-                position: { x: -70, y: 0 }
+                position: { x: -5, y: 2 }
             },
             focus: (game) => this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)
         },
         {
             popup: {
                 text: (t: TFunction) => t('tuto.action.sun.take'),
-                position: { x: 0, y: 30 }
+                position: { x: 0, y: 25 }
             },
             focus: (game) => this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Flamingo),
             move: {
                 player: SpiritOfNature.Spring,
+                filter: (move, game) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+                    && this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Flamingo).getIndex() === move.itemIndex
             }
         },
         {
@@ -230,6 +239,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                 position: { x: 0, y: 30 }
             },
             focus: (game) => this.material(game, MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire).id(2),
+
         },
         {
             popup: {
@@ -239,6 +249,9 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
             focus: (game) => this.material(game, MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire).id(2),
             move: {
                 player: SpiritOfNature.Spring,
+                filter: (move, game) =>
+                    isMoveItemType(MaterialType.FireTile)(move)
+                    && this.material(game, MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire).id(2).getIndex() === move.itemIndex
             }
         },
         {
@@ -258,7 +271,10 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         },
         {
             move: {
-                player: SpiritOfNature.Winter
+                player: SpiritOfNature.Winter,
+                filter: (move, game) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+                    && this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Meerkat).getIndex() === move.itemIndex
             }
         },
         {
@@ -286,34 +302,90 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                 text: (t: TFunction) => t('tuto.turn.2'),
             },
             move: {
-                player: SpiritOfNature.Spring
+                player: SpiritOfNature.Spring,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
             }
         },
         {
             move: {
-                player: SpiritOfNature.Spring
+                player: SpiritOfNature.Spring,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
             }
         },
         {
             move: {
-                player: SpiritOfNature.Spring
+                player: SpiritOfNature.Spring,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+            }
+        },
+        {
+            move: {
+                player: SpiritOfNature.Spring,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+            }
+        },
+        {
+            move: {
+                player: SpiritOfNature.Spring,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
             }
         },
         {
             popup: {
                 text: () => <Trans defaults="tuto.solitary.2" >
+                    <strong />
                     <span css={resourceStyle(TypeImage[1])} />
                 </Trans >,
             },
-        },
-        {
             move: {
-                player: SpiritOfNature.Winter
+                player: SpiritOfNature.Spring,
+                filter: (move) => isEndPlayerTurn(move) && move.player === SpiritOfNature.Spring
             }
         },
         {
             move: {
-                player: SpiritOfNature.Winter
+                player: SpiritOfNature.Winter,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+            }
+        },
+        {
+            move: {
+                player: SpiritOfNature.Winter,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+            }
+        },
+        {
+            move: {
+                player: SpiritOfNature.Winter,
+                filter: (move) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+            }
+        },
+        {
+            move: {
+                player: SpiritOfNature.Winter,
+                filter: (move) => isEndPlayerTurn(move) && move.player === SpiritOfNature.Winter
+            }
+        },
+        {
+            move: {
+                player: SpiritOfNature.Winter,
+                filter: (move, _game) =>
+                    isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)
+            }
+        },
+        {
+            move: {
+                player: SpiritOfNature.Winter,
+                filter: (move, _game) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
             }
         },
         {
@@ -335,7 +407,6 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                     <strong />
                 </Trans >
             },
-            focus: () => this.location(LocationType.ForestBoard).id(SpiritOfNature.Spring),
         },
         {
             popup: {
@@ -343,14 +414,20 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                     <span css={resourceStyle(ResourceImage[3])} />
                 </Trans >
             },
+            focus: (game) => this.material(game, MaterialType.ForestBoard).location(LocationType.ForestBoard).id(SpiritOfNature.Spring),
         },
         {
             popup: {
-                text: (t: TFunction) => t('tuto.tree.plant'),
+                text: () => <Trans defaults="tuto.tree.plant">
+                    <span css={resourceStyle(ResourceImage[1])} />
+                </Trans >
             },
             focus: (game) => this.material(game, MaterialType.ProtectiveTreeTiles).location(LocationType.TreeDispenser),
             move: {
-                player: SpiritOfNature.Spring
+                player: SpiritOfNature.Spring,
+                filter: (move, game) =>
+                    isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)
+                    && this.material(game, MaterialType.ProtectiveTreeTiles).location(LocationType.TreeDispenser).id(ProtectiveTree.Tree3A).getIndex() === move.itemIndex
             }
         },
         {
@@ -371,7 +448,9 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
             },
             focus: () => this.location(LocationType.CircleOfSpiritBoardFire),
             move: {
-                player: SpiritOfNature.Spring
+                player: SpiritOfNature.Spring,
+                filter: (move) => isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move)
+                // isMoveItemType(MaterialType.CircleOfSpiritBoard)(move)
             }
         },
         {
@@ -392,35 +471,37 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         },
         {
             popup: {
-                text: (t: TFunction) => t('tuto.wind.action'),
+                text: () => <Trans defaults="tuto.wind.action">
+                    <span css={resourceStyle(ResourceImage[1])} />
+                </Trans >,
                 position: { x: 50, y: 0 }
             },
             focus: () => this.location(LocationType.CircleOfSpiritBoardFire),
         },
         {
             popup: {
-                text: () => <Trans defaults="tuto.sun.tree.bonus" values={{ 'number': '3' }}>
-                    <span css={resourceStyle(ResourceImage[4])} />
+                text: () => <Trans defaults="tuto.sun.tree.bonus" values={{ 'number': '5' }}>
+                    <span css={resourceStyle(ResourceImage[1])} />
                 </Trans >,
                 position: { x: 50, y: 0 }
             },
             focus: () => this.location(LocationType.CircleOfSpiritBoardFire),
-            move: {
-                player: SpiritOfNature.Spring
-            }
         },
         {
             popup: {
                 text: () => <Trans defaults="tuto.gregarious">
                     <strong />
-                    <span css={resourceStyle(TypeImage[1])} />
+                    <span css={resourceStyle(TypeImage[0])} />
                     <span css={resourceStyle(TypeImage[1])} />
                 </Trans >,
                 position: { x: 70, y: 0 }
             },
             focus: (game) => this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Butterfly),
             move: {
-                player: SpiritOfNature.Spring
+                player: SpiritOfNature.Spring,
+                filter: (move, game) =>
+                    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+                    && this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Butterfly).getIndex() === move.itemIndex
             }
         },
         {

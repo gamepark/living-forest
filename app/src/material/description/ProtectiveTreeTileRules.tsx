@@ -7,7 +7,7 @@ import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
 import { alignIcon, alignIconText, ResourceImage, resourceStyle } from './GuardianAnimalCardRules'
 
-export const ProtectiveTreeTileRules = ({ item, itemIndex }: MaterialHelpProps) => {
+export const ProtectiveTreeTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const takeProtectiveTree = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.ProtectiveTreeTiles, itemIndex)(move) && item.location?.type === LocationType.TreeDispenser
@@ -37,7 +37,7 @@ export const ProtectiveTreeTileRules = ({ item, itemIndex }: MaterialHelpProps) 
     </p>
     {takeProtectiveTree && <hr />}
     {takeProtectiveTree && <Trans defaults="rules.take-tree">
-      <PlayMoveButton move={takeProtectiveTree} />
+      <PlayMoveButton move={takeProtectiveTree} onPlay={closeDialog} />
     </Trans>}
   </>
 }
