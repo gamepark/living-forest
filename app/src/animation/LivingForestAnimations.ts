@@ -1,33 +1,38 @@
-import { isMoveItemType, isShuffleItemType, MaterialMove } from '@gamepark/rules-api'
-import { AnimationStep } from '@gamepark/react-client'
-import { MaterialAnimationContext, MaterialGameAnimations } from '@gamepark/react-game'
-import { LocationType } from '@gamepark/living-forest/material/LocationType'
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { RuleId } from '@gamepark/living-forest/rules/RuleId'
+import {isMoveItemType, isShuffleItemType} from '@gamepark/rules-api'
+import {MaterialGameAnimations} from '@gamepark/react-game'
+import {LocationType} from '@gamepark/living-forest/material/LocationType'
+import {MaterialType} from '@gamepark/living-forest/material/MaterialType'
+import {RuleId} from '@gamepark/living-forest/rules/RuleId'
 
-export class LivingForestAnimations extends MaterialGameAnimations {
+export const livingForestAnimations = new MaterialGameAnimations()
 
-  override getDuration(move: MaterialMove, context: MaterialAnimationContext): number {
-    if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)
-      && move.location?.type === LocationType.PlayerDiscardStack
-      && context.game.items[move.itemType]![move.itemIndex].location.type === LocationType.HelpLine
-      && context.step === AnimationStep.BEFORE_MOVE
-      && context.game.rule?.id === RuleId.ReturnOfGuardianAnimals
-    ) return 0.4
+livingForestAnimations
+  .when()
+  .rule(RuleId.ReturnOfGuardianAnimals)
+  .move((move, context) =>
+    isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+    && move.location?.type === LocationType.PlayerDiscardStack
+    && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.HelpLine
+  )
+  .duration(0.4)
 
-    if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)
-      && move.location?.type === LocationType.PlayerDeckStack
-      && context.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDiscardStack
-      && context.step === AnimationStep.BEFORE_MOVE
-    ) return 0.4
+livingForestAnimations
+  .when()
+  .move((move, context) => isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+    && move.location?.type === LocationType.PlayerDeckStack
+    && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDiscardStack
+  )
+  .duration(0.4)
 
-    if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)
-      && move.location?.type === LocationType.HelpLine
-      && context.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDeckStack
-      && context.step === AnimationStep.BEFORE_MOVE
-    ) return 0.4
+livingForestAnimations
+  .when()
+  .move((move, context) => isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+    && move.location?.type === LocationType.HelpLine
+    && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDeckStack
+  )
+  .duration(0.4)
 
-    if (isShuffleItemType(MaterialType.GuardianAnimalCard)(move)) return 0
-    return super.getDuration(move, context);
-  }
-}
+livingForestAnimations
+  .when()
+  .move(isShuffleItemType(MaterialType.GuardianAnimalCard))
+  .none()

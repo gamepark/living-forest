@@ -341,7 +341,7 @@
             "tuto.sun.tree.bonus": "Vous avez {number} <0/> : en effet, le bonus permanent de l'Arbre protecteur que vous venez de planter prend effet immédiatement !",
             "tuto.gregarious": "Prenez cet Animal gardien et placez-le au sommet de votre pioche.\nIl paraît faible, mais il a un <0>symbole grégaire</0> <1/>. Ce symbole annule un <0>symbole solitaire</0> <2/> !",
             "tuto.varan": "C'est un nouveau tour.\nAïe, Onibi vous a attaqué avec un varan à la fin du tour précédent...",
-            "tuto.varan.rule": "À la fin de chaque tour, avant d'ajouter des tuiles Feu sur l'Arbre sacré, on fait <0>la somme des valeurs</0> des tuiles Feu qui n'ont pas été éteintes.\nChaque joueur qui a une valeur en <0/> inférieure à la puissance du Feu reçoit <0>un varan par tuile flamme</0> non éteinte.",
+            "tuto.varan.rule": "À la fin de chaque tour, avant d'ajouter des tuiles Feu sur l'Arbre sacré, on fait <0>la somme des valeurs</0> des tuiles Feu qui n'ont pas été éteintes.\nChaque joueur qui a une valeur en <1/> inférieure à la puissance du Feu reçoit <0>un varan par tuile flamme</0> non éteinte.",
             "tuto.fragment.varan": "Ce varan est embêtant, mais il est possible de l'éliminer.\nVoici les tuiles Fragment. Lorsque vous piocher un varan, si vous avez un Fragment en votre possession vous pourrez détruire le varan avec.",
             "tuto.fragment.other": "Si vous utilisez une tuile fragments sur un autre Animal gardien, il ira dans votre défausse.",
             "tuto.game.over": "La partie se termine si à la fin d’une phase d'actions complète, un des joueur possède, au choix :\n- <1/> 12 Arbre protecteur <0>différents</0>.\n- <2/> 12 tuiles Feu.\n- <3/> 12 Fleurs sacrées <0>visibles</0>.",
