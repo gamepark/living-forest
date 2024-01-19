@@ -27,7 +27,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
 
   updateSpent(move: MoveItem) {
     const item = this.material(move.itemType).getItem(move.itemIndex)!
-    this.memorize<SpentPoint>(Memory.SpentPoints, (s) => {
+    this.memorize<SpentPoint>(Memory.SpentPoints, (s = {}) => {
       const spent = { ...s }
       if (!(Resource.Sun in spent)) {
         spent[Resource.Sun] = 0
