@@ -33,14 +33,6 @@ export class HelpLineDescription extends LocationDescription<SpiritOfNature, Mat
     }
   }
 
-  canShortClick(move: MaterialMove, location: Location, context: MaterialContext): boolean {
-    if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)) {
-      return isSameLocationArea(move.location, location)
-    }
-
-    return super.canShortClick(move, location, context)
-  }
-
   help = HelpLineRules
 
 }
