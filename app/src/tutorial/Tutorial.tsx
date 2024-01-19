@@ -7,9 +7,10 @@ import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
 import Resource from '@gamepark/living-forest/material/Resource'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
+import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialTutorial, TutorialStep } from '@gamepark/react-game'
-import { isCustomMoveType, isEndPlayerTurn, isMoveItemType } from '@gamepark/rules-api'
+import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, isStartRule } from '@gamepark/rules-api'
 import { TFunction } from 'i18next'
 import { Trans } from 'react-i18next'
 import Images from '../images/Images'
@@ -392,8 +393,13 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     {
       move: {
         player: SpiritOfNature.Winter,
-        filter: (move, _game) =>
-          isMoveItemType(MaterialType.GuardianAnimalCard)(move)
+        filter: (move, game) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) && game.items[move.itemType]![move.itemIndex].id === GuardianAnimal.Hedgehog
+      }
+    },
+    {
+      move: {
+        player: SpiritOfNature.Winter,
+        filter: (move) => isStartRule(move) && move.id === RuleId.Action
       }
     },
     {
