@@ -1,8 +1,9 @@
 import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
+import Resource from '../../material/Resource'
 import { PlayerState } from '../helper/PlayerState'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
-import { Memory } from '../Memory'
+import { Memory, SpentPoint } from '../Memory'
 import { RuleId } from '../RuleId'
 import { GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescriptions'
 
@@ -10,15 +11,11 @@ export class AttractAnimalsRule extends PlayerTurnRule {
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves: MaterialMove[] = this.attractAnimalMoves
-    if (this.spentPoints) {
+    if (this.playerState.getSpent(Resource.Sun)) {
       moves.push(this.rules().startRule(RuleId.Action))
     }
 
     return moves
-  }
-
-  get spentPoints() {
-    return this.remind(Memory.SpentPoints)
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {
@@ -30,7 +27,15 @@ export class AttractAnimalsRule extends PlayerTurnRule {
 
   updateSpent(move: MoveItem) {
     const item = this.material(move.itemType).getItem(move.itemIndex)!
-    this.memorize<number>(Memory.SpentPoints, (points) => (points ?? 0) + GuardianAnimalDescriptions[item.id].cost!)
+    this.memorize<SpentPoint>(Memory.SpentPoints, (s) => {
+      const spent = { ...s }
+      if (!(Resource.Sun in spent)) {
+        spent[Resource.Sun] = 0
+      }
+
+      spent[Resource.Sun] += GuardianAnimalDescriptions[item.id].cost!
+      return spent
+    })
   }
 
   get possible() {
@@ -56,7 +61,10 @@ export class AttractAnimalsRule extends PlayerTurnRule {
   onRuleEnd() {
     this.memorize<number>(Memory.Actions, (action) => action - 1)
     this.forget(Memory.Bonus)
-    this.forget(Memory.SpentPoints)
+    this.memorize<SpentPoint>(Memory.SpentPoints, (s) => {
+      if (Resource.Sun in s) delete s[Resource.Sun]
+      return s
+    })
     return []
   }
 }

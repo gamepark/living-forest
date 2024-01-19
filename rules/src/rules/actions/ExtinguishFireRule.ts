@@ -1,8 +1,9 @@
 import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
-import { PlayerState } from '../helper/PlayerState'
-import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
-import { Memory } from '../Memory'
+import { MaterialType } from '../../material/MaterialType'
+import Resource from '../../material/Resource'
+import { PlayerState } from '../helper/PlayerState'
+import { Memory, SpentPoint } from '../Memory'
 import { RuleId } from '../RuleId'
 
 export class ExtinguishFireRule extends PlayerTurnRule {
@@ -10,7 +11,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = this.extinguishFireMoves
 
-    if (this.spentPoints) {
+    if (this.playerState.getSpent(Resource.Drop)) {
       moves.push(this.rules().startRule(RuleId.Action))
     }
     return moves
@@ -19,13 +20,21 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (!isMoveItemType(MaterialType.FireTile)(move)) return []
     this.updateSpent(move)
+
     if (this.possible) return []
     return [this.rules().startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {
     const item = this.material(move.itemType).getItem(move.itemIndex)!
-    this.memorize(Memory.SpentPoints, (points) => (points ?? 0) + item.id)
+    this.memorize<SpentPoint>(Memory.SpentPoints, (spent) => {
+      if (!(Resource.Drop in spent)) {
+        spent[Resource.Drop] = 0
+      }
+
+      spent[Resource.Drop] += item.id
+      return spent
+    })
   }
 
   get possible() {
@@ -52,14 +61,13 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     return this.playerState.waterResources
   }
 
-  get spentPoints() {
-    return this.remind(Memory.SpentPoints)
-  }
-
   onRuleEnd() {
     this.memorize<number>(Memory.Actions, (action) => action - 1)
     this.forget(Memory.Bonus)
-    this.forget(Memory.SpentPoints)
+    this.memorize<SpentPoint>(Memory.SpentPoints, (s) => {
+      if (Resource.Drop in s) delete s[Resource.Drop]
+      return s
+    })
     return []
   }
 }

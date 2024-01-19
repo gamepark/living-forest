@@ -19,14 +19,7 @@ export const ai: GameAI<MaterialGame<SpiritOfNature, MaterialType, LocationType>
         return Promise.resolve(bestPath.moves)
     }
 
-const computeBestPath = (game: MaterialGame, bot: SpiritOfNature, path: MaterialMove[] = [], iteration: number = 0): Path => {
-    const rules = new LivingForestRules(game)
-    const legalMoves = rules.getLegalMoves(bot)
-    console.log(legalMoves);
-    console.log(path);
-    console.log(iteration);
-
-
+const computeBestPath = (_game: MaterialGame, _bot: SpiritOfNature, path: MaterialMove[] = [], _iteration: number = 0): Path => {
 
     // if (legalMoves.length === 0 || iteration >= 4) {
     //   const botScore = rules.getScore(bot)!

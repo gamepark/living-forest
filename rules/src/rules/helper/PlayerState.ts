@@ -8,8 +8,7 @@ import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
 import Resource from '../../material/Resource'
 import { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
 import SpiritOfNature from '../../SpiritOfNature'
-import { Memory } from '../Memory'
-import { RuleId } from '../RuleId'
+import { Memory, SpentPoint } from '../Memory'
 
 export class PlayerState extends MaterialRulesPart {
   private helpLine: Material
@@ -19,8 +18,8 @@ export class PlayerState extends MaterialRulesPart {
 
   constructor(game: MaterialGame, readonly player: SpiritOfNature) {
     super(game)
-    this.helpLine = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(player)
-    this.victoryTiles = this.material(MaterialType.VictoryTile).location(LocationType.VictoryTileArea).player(player)
+    this.helpLine = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player)
+    this.victoryTiles = this.material(MaterialType.VictoryTile).location(LocationType.VictoryTileArea).player(this.player)
     this.forest = this.material(MaterialType.ProtectiveTreeTiles).location(LocationType.TreeSpace).player(this.player)
     this.fires = this.material(MaterialType.FireTile).location(LocationType.PlayerFireTileStack).player(this.player)
   }
@@ -30,7 +29,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   get waterResources() {
-    return this.getResources(Resource.Drop) + this.modifier
+    return this.getResources(Resource.Drop)
   }
 
   get windResources() {
@@ -38,27 +37,24 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   get sunResources() {
-    return this.getResources(Resource.Sun) + this.modifier
+    return this.getResources(Resource.Sun)
   }
 
   get seedResources() {
-    return this.getResources(Resource.Seed) + this.modifier
+    return this.getResources(Resource.Seed)
   }
 
   get flowers() {
     return this.getResources(Resource.SacredFlower)
   }
 
-  get modifier() {
-    return (this.bonus ?? 0) - (this.spent ?? 0)
-  }
-
   get bonus() {
+    if (this.player !== this.game.rule?.player) return 0
     return this.remind(Memory.Bonus) ?? 0
   }
 
-  get spent() {
-    return this.remind(Memory.SpentPoints) ?? 0
+  getSpent(resource: Resource) {
+    return this.remind<SpentPoint>(Memory.SpentPoints)?.[resource] ?? 0
   }
 
   get isEmptyHelpLine() {
@@ -74,9 +70,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getModifier(type: Resource) {
-    if (type === Resource.Sun && RuleId.AttractAnimals) return this.modifier
-    if (type === Resource.Drop && RuleId.ExtinguishFire) return this.modifier
-    return 0
+    return (this.bonus ?? 0) - (this.getSpent(type))
   }
 
   getTreeResources(resource: Resource) {

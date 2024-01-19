@@ -1,17 +1,16 @@
 /** @jsxImportSource @emotion/react */
-import { getPlayerName } from '@gamepark/living-forest/LivingForestOptions'
-import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { css } from '@emotion/react'
+import { getPlayerName } from '@gamepark/living-forest/LivingForestOptions'
+import Resource, { resources } from '@gamepark/living-forest/material/Resource'
+import { VictoryTileType, victoryTileTypes } from '@gamepark/living-forest/material/VictoryTiles'
+import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { Avatar, RulesDialog, usePlayerName, useRules } from '@gamepark/react-game'
+import { Avatar, RulesDialog, usePlayerName } from '@gamepark/react-game'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { PlayerDialogIndicator } from './PlayerDialogIndicator'
-import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
-import Resource, { resources } from '@gamepark/living-forest/material/Resource'
-import { ResourceImage } from '../../material/description/GuardianAnimalCardRules'
-import { VictoryTileType, victoryTileTypes } from '@gamepark/living-forest/material/VictoryTiles'
 import Images from '../../images/Images'
+import { ResourceImage } from '../../material/description/GuardianAnimalCardRules'
+import { PlayerDialogIndicator } from './PlayerDialogIndicator'
 
 
 type PlayerDialogProps = {
@@ -23,12 +22,7 @@ type PlayerDialogProps = {
 
 export const PlayerDialog: FC<PlayerDialogProps> = ({ open, close, player, state }) => {
     const { t } = useTranslation()
-    const rules = useRules<LivingForestRules>()!
     const name = usePlayerName(player) ?? getPlayerName(player, t)
-
-    console.log(rules);
-    console.log(name);
-
 
     return (
         <RulesDialog open={open} close={close}>

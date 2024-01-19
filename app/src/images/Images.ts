@@ -147,6 +147,7 @@ import seed from './resources/seed.png'
 import wind from './resources/wind.png'
 import sacredFlower from './resources/sacredFlower.png'
 import gregarious from './resources/gregarious.png'
+import solitary from './resources/solitary.png'
 import fragment from './fragment.png'
 import fire from './fire.png'
 import fire2 from './fire2.png'
@@ -187,7 +188,7 @@ const Images = {
   autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
   winterSpiritCircle, winterVictoryFire, winterVictorySacredFlower, winterVictoryTree,
   circleOfSpirits,
-  sun, drop, seed, wind, sacredFlower, gregarious,
+  sun, drop, seed, wind, sacredFlower, gregarious, solitary,
   fragment, fire, fire2, fire3, fire4, firePanel,
   SacredTree,
   SpringPlayerBoard,

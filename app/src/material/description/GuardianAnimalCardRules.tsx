@@ -146,7 +146,7 @@ export const ResourceImage: Record<Resource, string> = {
 
 export const TypeImage: Record<CardType, string> = {
   [CardType.Gregarious]: Images.gregarious,
-  [CardType.Solitary]: Images.gregarious,
+  [CardType.Solitary]: Images.solitary,
 }
 
 export const resourceStyle = (image: string) => css`
