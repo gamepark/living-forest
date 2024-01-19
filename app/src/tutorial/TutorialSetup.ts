@@ -149,6 +149,14 @@ export class TutorialSetup extends LivingForestSetup {
     this
       .material(MaterialType.GuardianAnimalCard)
       .location(LocationType.ReserveStack)
+      .id(GuardianAnimal.Caterpillar)
+      .moveItem({
+        type: LocationType.ReserveStack,
+        id: 1
+      })
+    this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.ReserveStack)
       .id(GuardianAnimal.Hedgehog)
       .moveItem({
         type: LocationType.ReserveStack,

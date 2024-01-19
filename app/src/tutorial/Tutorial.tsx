@@ -386,7 +386,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
             move: {
                 player: SpiritOfNature.Winter,
                 filter: (move, _game) =>
-                    isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)
+                    isMoveItemType(MaterialType.ProtectiveTreeTiles)(move) && _game.items[move.itemType]![move.itemIndex].id === ProtectiveTree.Tree3B
             }
         },
         {
@@ -395,12 +395,6 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
                 filter: (move, game) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) && game.items[move.itemType]![move.itemIndex].id === GuardianAnimal.Hedgehog
             }
         },
-        // {
-        //     move: {
-        //         player: SpiritOfNature.Winter,
-        //         filter: (move) => isStartRule(move) && move.id === RuleId.Action
-        //     }
-        // },
         {
             popup: {
                 text: (t: TFunction) => t('tuto.opponent.played')
