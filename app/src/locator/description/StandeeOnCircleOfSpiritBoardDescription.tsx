@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { LocationDescription } from '@gamepark/react-game'
 import { isCustomMoveType, Location, MaterialMove } from '@gamepark/rules-api'
-import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
 
 export class StandeeOnCircleOfSpiritBoardDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
   width = 4.5

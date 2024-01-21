@@ -47,11 +47,16 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
         .material(MaterialType.SpiritOfNatureStandee)
         .location((location) => LocationType.CircleOfSpiritBoardSpace === location.type && location.x === newPosition)
         .length
+
       if (isStandeeOnNewPosition) {
         max++
         continue
       }
-      moves.push(this.rules().customMove(CustomMoveType.MoveOnCircleOfSpirit, { target: newPosition, distance: i }))
+
+      // Ignore path with greater distance
+      if (!moves.some((m) => isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(m) && m.data.target === newPosition)) {
+        moves.push(this.rules().customMove(CustomMoveType.MoveOnCircleOfSpirit, { target: newPosition, distance: i }))
+      }
     }
 
     return moves
