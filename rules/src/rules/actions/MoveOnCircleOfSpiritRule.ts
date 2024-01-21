@@ -82,7 +82,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
       if (!standeeOnPosition.length) moves.push(standee.moveItem({ type: LocationType.CircleOfSpiritBoardSpace, x: newPosition }))
 
-      if (passedPlayer) {
+      if (passedPlayer && this.material(MaterialType.VictoryTile).player(passedPlayer).length) {
         this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined ? distance - i : remaining - i)
         moves.push(this.rules().startRule(RuleId.PickVictoryTile))
         return moves
