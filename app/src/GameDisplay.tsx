@@ -16,7 +16,7 @@ export default function GameDisplay() {
     yMin={!twoPlayers ? -39: -30}
     yMax={!twoPlayers? 28: 30}
     collisionAlgorithm={pointerWithin} 
-    margin={{ top: 7, left: 0, right: bigTable? 30: 0, bottom: 0 }}
+    margin={{ top: 7, left: 0, right: bigTable? 38: 0, bottom: 0 }}
     //css={css`background-color: rgba(255, 255, 255, 0.47)`}
     />
     <PlayerPanels/>

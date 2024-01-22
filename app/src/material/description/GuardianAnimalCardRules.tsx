@@ -8,7 +8,7 @@ import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import Resource from '@gamepark/living-forest/material/Resource'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
-import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlayerId, useRules } from '@gamepark/react-game'
+import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
 import Images from '../../images/Images'
@@ -29,6 +29,7 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   const discard = item.location?.type === LocationType.PlayerDiscardStack
   const reserveRow = item.location?.type === LocationType.ReserveRow
   const helpline = item.location?.type === LocationType.HelpLine
+  const playerName = usePlayerName(item.location?.player)
 
   //verso cards
   if (item.id === undefined) {
@@ -37,8 +38,8 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
     if (deck) {
       return <>
         <h2>{t('rules.guardian-animal.title')}</h2>
-        {activePlayer && <p>{t('rules.deck-stack')}</p>}
-        {!activePlayer && <p>{t('rules.deck-stack-opponent')}</p>}
+        {activePlayer && <p css={italic}>{t('rules.deck-stack')}</p>}
+        {!activePlayer && <p css={italic}>{t('rules.deck-stack-opponent', { player: playerName })}</p>}
         {draw && activePlayer && <hr/>}
         {draw && !pass && activePlayer && <Trans defaults="rules.draw-card">
           <PlayMoveButton move={draw}/>
@@ -77,12 +78,30 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   if (discard) {
     return <>
       <h2>{t('rules.guardian-animal.title')}</h2>
-      {activePlayer && <p>{t('rules.discard-stack')}</p>}
-      {!activePlayer && <p>{t('rules.discard-stack-opponent')}</p>}
-      {shuffleAndDraw && activePlayer && <hr />}
+      {activePlayer && <p css={italic}>{t('rules.discard-stack')}</p>}
+      {!activePlayer && <p css={italic}>{t('rules.discard-stack-opponent', { player: playerName })}</p>}
+
+      <p>{t('rules.guardian-animal.description')}</p>
+      <p css={alignIconText}>
+        <Trans defaults="rules.guardian-animal.get">
+          <span css={resourceStyle(ResourceImage[1])}/>
+        </Trans>
+      </p>
+      <hr/>
+      <p css={alignIcon}>{t('rules.cost')} :
+        <span>{GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])}/></span>
+      </p>
+      <p css={alignIcon}>{t('rules.resources')} :
+        {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
+          return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
+            <span css={resourceStyle(ResourceImage[element])}/>
+          </span>
+        })}
+      </p>
+      {shuffleAndDraw && activePlayer && <hr/>}
       {shuffleAndDraw && activePlayer &&
         <Trans defaults="rules.shuffle-draw">
-          <PlayMoveButton move={shuffleAndDraw} onPlay={closeDialog} />
+          <PlayMoveButton move={shuffleAndDraw} onPlay={closeDialog}/>
         </Trans>}
     </>
   }
@@ -93,13 +112,13 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
       <p>{t('rules.guardian-animal.description')}</p>
       <p css={alignIconText}>
         <Trans defaults="rules.guardian-animal.get">
-          <span css={resourceStyle(ResourceImage[1])} />
+          <span css={resourceStyle(ResourceImage[1])}/>
         </Trans>
       </p>
-      <hr />
+      <hr/>
       <p css={alignIcon}>{t('rules.cost')} :
         <span>{GuardianAnimalDescriptions[item.id].cost}
-          <span css={resourceStyle(ResourceImage[1])} /></span>
+          <span css={resourceStyle(ResourceImage[1])}/></span>
       </p>
       <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
@@ -119,8 +138,8 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   if (helpline) {
     return <>
       <h2>{t('rules.guardian-animal.title')}</h2>
-      {activePlayer && <p>{t('rules.help-line')}</p>}
-      {!activePlayer && <p>{t('rules.help-line-opponent')}</p>}
+      {activePlayer && <p css={italic}>{t('rules.help-line')}</p>}
+      {!activePlayer && <p css={italic}>{t('rules.help-line-opponent')}</p>}
       <p>{t('rules.guardian-animal.description')}</p>
       <p css={alignIconText}>
         <Trans defaults="rules.guardian-animal.get">

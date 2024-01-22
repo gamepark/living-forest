@@ -22,6 +22,6 @@ const panelPosition = (index: number, players: number, player?: SpiritOfNature) 
   cursor: pointer;
   right: 1em;
   top: ${8.5 + (players < 4? ((index) * 19.5): ((player === undefined ? index : (index || players) - 1) * 72 / (players - 1)))}em;
-  width: ${players < 4? 34: 28}em;
+  width: 28em;
   height: 17.5em;
 `
