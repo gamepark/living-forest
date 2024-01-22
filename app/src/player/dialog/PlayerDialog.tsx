@@ -28,11 +28,11 @@ export const PlayerDialog: FC<PlayerDialogProps> = ({ open, close, player, state
     <RulesDialog open={open} close={close}>
       <div css={container}>
         <div css={header}>
-          <Avatar playerId={player} css={avatar}/>
+          <Avatar playerId={player} css={avatar} />
           <h2>{name}</h2>
         </div>
         {victoryTileTypes.map((v) => {
-          <PlayerDialogIndicator
+          return <PlayerDialogIndicator
             key={v}
             width={2.5}
             ratio={0.8}
