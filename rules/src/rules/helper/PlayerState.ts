@@ -54,6 +54,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getSpent(resource: Resource) {
+    if (this.player !== this.game.rule?.player) return 0
     return this.remind<SpentPoint>(Memory.SpentPoints)?.[resource] ?? 0
   }
 
