@@ -63,11 +63,6 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     return this.material(MaterialType.ProtectiveTreeTiles).location(LocationType.TreeSpace).player(this.player).getItems()
   }
 
-  onRuleEnd() {
-    this.forget(Memory.Bonus)
-    return []
-  }
-
   get resources() {
     return this.playerState.seedResources
   }
