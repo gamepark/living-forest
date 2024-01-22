@@ -1,19 +1,21 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
+import CardType from '@gamepark/living-forest/material/CardType'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { GuardianAnimalDescriptions } from '@gamepark/living-forest/material/GuardianAnimalDescriptions'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import Resource from '@gamepark/living-forest/material/Resource'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
-import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlayerId } from '@gamepark/react-game'
+import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlayerId, useRules } from '@gamepark/react-game'
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
 import Images from '../../images/Images'
-import CardType from '@gamepark/living-forest/material/CardType'
 
 export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
+  const rules = useRules<LivingForestRules>()!
   const legalMoves = useLegalMoves<MaterialMove>()
   const shuffleAndDraw = legalMoves.find(isCustomMoveType(CustomMoveType.ShuffleAndDraw))
   const pass = legalMoves.find(isEndPlayerTurn)
@@ -37,14 +39,20 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
         <h2>{t('rules.guardian-animal.title')}</h2>
         {activePlayer && <p>{t('rules.deck-stack')}</p>}
         {!activePlayer && <p>{t('rules.deck-stack-opponent')}</p>}
-        {draw && activePlayer && <hr />}
+        {draw && activePlayer && <hr/>}
         {draw && !pass && activePlayer && <Trans defaults="rules.draw-card">
-          <PlayMoveButton move={draw} />
+          <PlayMoveButton move={draw}/>
         </Trans>}
         {draw && pass && activePlayer && <Trans defaults="rules.draw-pass">
-          <PlayMoveButton move={draw} />
-          <PlayMoveButton move={pass} onPlay={closeDialog} />
+          <PlayMoveButton move={draw}/>
+          <PlayMoveButton move={pass} onPlay={closeDialog}/>
         </Trans>}
+        <hr/>
+        <div css={italic}>
+          <Trans defaults={'help.location.deck'} values={{ cards: rules.material(MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(item.location?.player).length }}>
+            <strong/>
+          </Trans>
+        </div>
       </>
     } else {
       //reserve stack cards
@@ -186,4 +194,9 @@ export const alignIconText = css`
     height: 1.5em;
     margin-right: 0.1em;
   }
+`
+
+export const italic = css`
+  font-style: italic;
+  font-size: 0.9em;
 `
