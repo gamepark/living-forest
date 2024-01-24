@@ -1,11 +1,12 @@
-import {isShuffleItemType} from '@gamepark/rules-api'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { RuleId } from '@gamepark/living-forest/rules/RuleId'
+import { isMoveItemType, isShuffleItemType } from '@gamepark/rules-api'
 import {MaterialGameAnimations} from '@gamepark/react-game'
 import {MaterialType} from '@gamepark/living-forest/material/MaterialType'
 
 export const livingForestAnimations = new MaterialGameAnimations()
 
-// TODO: Waiting to framework release
-/**livingForestAnimations
+livingForestAnimations
   .when()
   .rule(RuleId.ReturnOfGuardianAnimals)
   .move((move, context) =>
@@ -29,7 +30,7 @@ livingForestAnimations
     && move.location?.type === LocationType.HelpLine
     && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDeckStack
   )
-  .duration(0.4)*/
+  .duration(0.4)
 
 livingForestAnimations
   .when()

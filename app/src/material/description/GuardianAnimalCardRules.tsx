@@ -91,8 +91,8 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
       <p css={alignIcon}>{t('rules.cost')} :
         <span>{GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])} /></span>
       </p>
-      {GuardianAnimalDescriptions[item.id].type != undefined && <p>
-        Type : {GuardianAnimalDescriptions[item.id].type == 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
+      {GuardianAnimalDescriptions[item.id].type !== undefined && <p>
+        Type : {GuardianAnimalDescriptions[item.id].type === 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
       </p>}
       <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
@@ -123,8 +123,8 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
         <span>{GuardianAnimalDescriptions[item.id].cost}
           <span css={resourceStyle(ResourceImage[1])} /></span>
       </p>
-      {GuardianAnimalDescriptions[item.id].type != undefined && <p>
-        Type : {GuardianAnimalDescriptions[item.id].type == 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
+      {GuardianAnimalDescriptions[item.id].type !== undefined && <p>
+        Type : {GuardianAnimalDescriptions[item.id].type === 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
       </p>}
       <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
@@ -156,10 +156,8 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
       <p css={alignIcon}>{t('rules.cost')} :
         <span>{GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])} /></span>
       </p>
-      {console.log(GuardianAnimalDescriptions[item.id].type)
-      }
-      {GuardianAnimalDescriptions[item.id].type != undefined && <p>
-        Type : {GuardianAnimalDescriptions[item.id].type == 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
+      {GuardianAnimalDescriptions[item.id].type !== undefined && <p>
+        Type : {GuardianAnimalDescriptions[item.id].type === 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
       </p>}
       <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
