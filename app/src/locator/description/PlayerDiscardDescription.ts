@@ -6,17 +6,18 @@ import { LocationDescription, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../../material/description/GuardianAnimalCardDescription'
 import { getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
+import { PlayerDiscardHelp } from '../help/PlayerDiscardHelp'
 
 export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
 
-  getLocations({ player }: MaterialContext): Location[] {
-    if (!player) return []
-    return  [{ type: LocationType.PlayerDiscardStack, player }]
+  getLocations({ rules: { players} }: MaterialContext): Location[] {
+    return players.map((p) => ({ type: LocationType.PlayerDiscardStack, player: p }))
   }
 
   width = guardianAnimalCardDescription.width + 1
   height = guardianAnimalCardDescription.width / guardianAnimalCardDescription.ratio + 1
   borderRadius = guardianAnimalCardDescription.borderRadius
+  alwaysVisible = true
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
@@ -29,20 +30,5 @@ export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature
     }
   }
 
-  // couldDrop(_move: MaterialMove): boolean {
-  //   return true
-  // }
-  //
-  // canDrop(move: MaterialMove, location: Location, context: ItemContext) {
-  //   const { type, rules, index } = context
-  //   if (!isMoveItemType(MaterialType.FragmentTile)(move) || type === MaterialType.FragmentTile) return false
-  //
-  //   if (type === MaterialType.GuardianAnimalCard) {
-  //     const item = rules.material(MaterialType.GuardianAnimalCard).getItem(index)!
-  //     return move.location!.type === LocationType.FragmentStack
-  //      && item.location.player === location.player
-  //   }
-  //
-  //   return false
-  // }
+  help = PlayerDiscardHelp
 }
