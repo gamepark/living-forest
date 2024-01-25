@@ -15,6 +15,7 @@ import Images from '../../images/Images'
 
 export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
+  const player = usePlayerId()
   const rules = useRules<LivingForestRules>()!
   const legalMoves = useLegalMoves<MaterialMove>()
   const shuffleAndDraw = legalMoves.find(isCustomMoveType(CustomMoveType.ShuffleAndDraw))
@@ -23,7 +24,6 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   const attract = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.GuardianAnimalCard, itemIndex)(move) && item.location?.type === LocationType.ReserveRow
   )
-  const player = usePlayerId()
   const activePlayer = item.location?.player === player
   const deck = item.location?.type === LocationType.PlayerDeckStack
   const discard = item.location?.type === LocationType.PlayerDiscardStack
@@ -37,7 +37,7 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
     //deck stack cards
     if (deck) {
       return <>
-        <h2>{t('rules.guardian-animal.title')}</h2>
+        <h2>{player === item.location!.player? t('help.deck.title.mine') : t('help.deck.title', { player })}</h2>
         {activePlayer && <p css={italic}>{t('rules.deck-stack')}</p>}
         {!activePlayer && <p css={italic}>{t('rules.deck-stack-opponent', { player: playerName })}</p>}
         {draw && activePlayer && <hr />}
@@ -50,7 +50,7 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
         </Trans>}
         <hr />
         <div css={italic}>
-          <Trans defaults={'help.location.deck'} values={{ cards: rules.material(MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(item.location?.player).length }}>
+          <Trans defaults={player === item.location!.player? "help.deck.content.mine" : "help.deck.content"} values={{ number: rules.material(MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(item.location?.player).length, player: playerName }}>
             <strong />
           </Trans>
         </div>

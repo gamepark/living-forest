@@ -15,10 +15,10 @@ export const PlayerDiscardHelp = ({ location }: LocationHelpProps) => {
     .sort(item => -item.location.x!)
   const play = usePlay()
   return <>
-    <h2>{playerId === location.player ? t('rules.discard.title.mine') : t('rules.discard.title', { player })}</h2>
+    <h2>{playerId === location.player ? t('help.discard.title.mine') : t('help.discard.title', { player })}</h2>
   <p>
-  {playerId === location.player ? t('rules.discard.content.mine', { number: cards?.length })
-    : t('rules.discard.content', { number: cards?.length, player })}
+  {playerId === location.player ? t('help.discard.content.mine', { number: cards?.length })
+    : t('help.discard.content', { number: cards?.length, player })}
   </p>
   <ol css={grid}>
     {cards?.entries.map(([index, card]) =>
