@@ -7,6 +7,7 @@ import { FileTileRules } from './FireTileRules'
 export class FireTileDescription extends TokenDescription {
   width = 3
   ratio = 74 / 100
+  borderRadius = 1
   images = {
     [Fire.Fire2]: Images.fire2,
     [Fire.Fire3]: Images.fire3,

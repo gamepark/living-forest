@@ -22,7 +22,7 @@ livingForestAnimations
     && move.location?.type === LocationType.PlayerDeckStack
     && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDiscardStack
   )
-  .duration(0.4)
+  .duration(0.2)
 
 livingForestAnimations
   .when()
@@ -31,6 +31,30 @@ livingForestAnimations
     && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDeckStack
   )
   .duration(0.4)
+
+livingForestAnimations
+  .when()
+  .move((move) => isMoveItemType(MaterialType.FireTile)(move) && move.location.type === LocationType.CircleOfSpiritBoardFire)
+  .duration(0.4)
+
+livingForestAnimations
+  .when()
+  .move((move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) && move.location.type === LocationType.ReserveRow)
+  .duration(0.4)
+
+livingForestAnimations
+  .when()
+  .move((move) => isMoveItemType(MaterialType.FireTile)(move) && move.location.type === LocationType.PlayerFireTileStack)
+  .duration(0.8)
+
+
+livingForestAnimations
+  .when()
+  .move((move, context) => isMoveItemType(MaterialType.FireTile)(move)
+    && move.location?.type === LocationType.ReserveRow
+    && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDeckStack
+  )
+  .duration(0.8)
 
 livingForestAnimations
   .when()

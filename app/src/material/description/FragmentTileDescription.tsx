@@ -1,19 +1,24 @@
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { ItemContext, TokenDescription } from '@gamepark/react-game'
+import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import Images from '../../images/Images'
 import { FragmentTileRules } from './FragmentTileRules'
-import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { LocationType } from '@gamepark/living-forest/material/LocationType'
 
 export class FragmentTileDescription extends TokenDescription {
   width = 3
   ratio = 1
+  borderRadius = 0.2
   image = Images.fragment
 
   help = FragmentTileRules
 
   canDrag(move: MaterialMove, context: ItemContext): boolean {
     return super.canDrag(move, context) && this.isTopItem(move, context)
+  }
+
+  canShortClick(move: MaterialMove, context: ItemContext): boolean {
+    return super.canLongClick(move, context)
   }
 
   canLongClick(move: MaterialMove, context: ItemContext): boolean {
