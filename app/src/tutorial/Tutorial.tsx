@@ -274,13 +274,18 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.action.sun.rule" values={{ 'number': '3' }}>
+        text: () => <Trans defaults="tuto.action.sun.rule" values={{ number: '3' }}>
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
         </Trans>,
-        position: { x: -5, y: 2 }
+        position: { x: 10, y: 0 }
       },
+
       focus: (game) => ({
-        materials: [this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)]
+        materials: [
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Weasel), // weasel
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Boar), // boar
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Tanuki), // tanu
+        ],
       })
     },
     {
@@ -289,7 +294,13 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         position: { x: 0, y: 25 }
       },
       focus: (game) => ({
-        materials: [this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Flamingo)]
+        materials: [this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Flamingo)],
+        locations: [this.location(LocationType.PlayerDeckStack).player(SpiritOfNature.Spring).location],
+        margin: {
+          top: 1,
+          bottom: 1,
+          left: 1
+        }
       }),
       move: {
         player: SpiritOfNature.Spring,
@@ -312,20 +323,31 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         text: () => <Trans defaults="tuto.action.water.rule" values={{ 'number': '2' }}>
           <span css={resourceStyle(ResourceImage[Resource.Drop])}/>
         </Trans>,
-        position: { x: 0, y: 30 }
+        position: { x: 10, y: 0 }
       },
       focus: (game) => ({
-        materials: [this.material(game, MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire).id(2)]
+        materials: [
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Fox), // weasel
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Bear), // boar
+        ],
+        margin: {
+          right: 25
+        }
       })
 
     },
     {
       popup: {
         text: (t: TFunction) => t('tuto.action.water.take'),
-        position: { x: 0, y: 30 }
+        position: { x: 0, y: 0 }
       },
       focus: (game) => ({
-        materials: [this.material(game, MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire).id(2)]
+        materials: [this.material(game, MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire).id(2)],
+        locations: [this.location(LocationType.PlayerFireTileStack).player(SpiritOfNature.Spring).location],
+        margin: {
+          top: 1,
+          bottom: 1
+        }
       }),
       move: {
         player: SpiritOfNature.Spring,
@@ -341,8 +363,15 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: (t: TFunction) => t('tuto.solitary.opponent')
-      }
+        text: (t: TFunction) => t('tuto.solitary.opponent'),
+        position: { x: 10, y: 2 }
+      },
+      focus: (game) => ({
+        materials: [this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Winter)],
+        margin: {
+          right: 25
+        }
+      }),
     },
     {
       popup: {
