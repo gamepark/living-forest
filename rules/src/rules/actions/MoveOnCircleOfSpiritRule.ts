@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, MaterialMove, PlayerTurnRule, RuleMove, RuleStep } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import SpiritOfNature from '../../SpiritOfNature'
@@ -13,21 +13,30 @@ import { TakeFragmentRule } from './TakeFragmentRule'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
-  onRuleStart() {
-    // If there is any remaining move, trigger MoveOnCircleOfSpiri to the position
+  onRuleStart(_move: RuleMove, previous?: RuleStep) {
+    // If there is any remaining move, trigger MoveOnCircleOfSpirit to the position
     if (this.remainingMoves) {
       const moves = this.getStandeeDestinations(this.remainingMoves)
       return moves.slice(-1)
+    } else if (previous?.id === RuleId.PickVictoryTile) {
+      const space = this.standee.getItem()!.location.x!
+      return this.applyAction(space)
     }
 
     return []
   }
 
+  private applyAction(space: number) {
+    const ruleId = this.rockRules[space]
+    const hasAction = this.canDoAction(ruleId)
+    if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
+    this.forget(Memory.RemainingMoves)
+    return [this.rules().startRule(!hasAction ? RuleId.Action : ruleId)]
+  }
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const resources = this.playerState.windResources
     return this.getStandeeDestinations(resources)
-
   }
 
   getStandeeDestinations(maxMoves: number) {
@@ -94,11 +103,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
     // Only decrease action count if there is no bonus action
     const space = move.data.target
-    const ruleId = this.rockRules[space]
-    const hasAction = this.canDoAction(ruleId)
-    if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
-    this.forget(Memory.RemainingMoves)
-    moves.push(this.rules().startRule(!hasAction ? RuleId.Action : ruleId))
+    moves.push(...this.applyAction(space))
     return moves
   }
 
