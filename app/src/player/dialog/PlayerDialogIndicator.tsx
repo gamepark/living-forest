@@ -4,10 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar'
 import { css } from '@emotion/react'
 import { shadowCss } from '@gamepark/react-game'
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 type PlayerDialogIndicatorProps = {
-  icon?: IconDefinition
+  icon?: any
   image?: string
   ratio?: number
   width?: number
