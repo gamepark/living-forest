@@ -13,7 +13,7 @@ export class StandeeOnCircleOfSpiritBoardDescription extends LocationDescription
 
   coordinates = { x: -0.2, y: 0.2, z: 0}
 
-  protected isMoveToLocation(move: MaterialMove, location: Location): any {
+  isMoveToLocation(move: MaterialMove, location: Location): any {
     if (!isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move)) return false;
     return move.data.target === location.x
   }

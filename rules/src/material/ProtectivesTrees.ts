@@ -4,7 +4,7 @@ import ProtectiveTree from './ProtectiveTree'
 const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
 
 type ProtectiveTreeDetails = {
-    resources: Partial<Record<Resource, number>>
+    resources?: Partial<Record<Resource, number>>
     cost?: number
 }
 
@@ -72,7 +72,7 @@ export const Tree10: ProtectiveTreeDetails = {
 }
 
 export const Tree11: ProtectiveTreeDetails = {
-    resources: {},
+    resources: undefined,
     cost: 11
 }
 
