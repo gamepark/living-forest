@@ -1,7 +1,74 @@
-import Resource from "./Resource"
 import CardType from './CardType'
-import GuardianAnimal from "./GuardianAnimal"
-import { Bear, Beetle, Fox, Lynx, GoldFish, Tanuki, Boar, Weasel, Rabbit, Doe, HummingBird, Bee, Monkey, Owl, Hedgehog, Caterpillar, Flamingo, Ram, Wolf, Lemur, Squirrel, Turtle, Coati, Racoon, Beaver, Raven, Bat, Parrot, Meerkat, Horse, Axolotls, Chimpanzee, Toucan, Butterfly, Spider, Hippopotamus, EagleOwl, Woodpecker, Badger, Rooster, Rhinoceros, Goat, Bull, Lizard, Frog, Marmot, Platypus, Crane, Sloth, Koala, Leopard, Eagle, Snake, Cricket, Panther, Gorilla, Bison, Chameleon, Crocodile, Elephant, Dolphin, Dog, Panda, Stag, Tapir, Varan } from './GuardiansAnimals';
+import GuardianAnimal from './GuardianAnimal'
+import {
+    Axolotls,
+    Badger,
+    Bat,
+    Bear,
+    Beaver,
+    Bee,
+    Beetle,
+    Bison,
+    Boar,
+    Bull,
+    Butterfly,
+    Caterpillar,
+    Chameleon,
+    Chimpanzee,
+    Coati,
+    Crane,
+    Cricket,
+    Crocodile,
+    Doe,
+    Dog,
+    Dolphin,
+    Eagle,
+    EagleOwl,
+    Elephant,
+    Flamingo,
+    Fox,
+    Frog,
+    Goat,
+    GoldFish,
+    Gorilla,
+    Hedgehog,
+    Hippopotamus,
+    Horse,
+    HummingBird,
+    Koala,
+    Lemur,
+    Leopard,
+    Lizard,
+    Lynx,
+    Marmot,
+    Meerkat,
+    Monkey,
+    Owl,
+    Panda,
+    Panther,
+    Parrot,
+    Platypus,
+    Rabbit,
+    Racoon,
+    Ram,
+    Raven,
+    Rhinoceros,
+    Rooster,
+    Sloth,
+    Snake,
+    Spider,
+    Squirrel,
+    Stag,
+    Tanuki,
+    Tapir,
+    Toucan,
+    Turtle,
+    Varan,
+    Weasel,
+    Wolf,
+    Woodpecker
+} from './GuardiansAnimals'
+import Resource from './Resource'
 
 
 type GuardianAnimalDetails = {
@@ -85,10 +152,10 @@ export function getAnimalsResource(animals: GuardianAnimal[], resource: Resource
     return animals.reduce((sum, animal) => sum + (GuardianAnimalDescriptions[animal].resources![resource] ?? 0), 0)
 }
 export function countSolitary(animals: GuardianAnimal[]): number {
-    return animals.reduce((sum, animal) => sum + ((GuardianAnimalDescriptions[animal].type == 0) ? 1 : 0), 0)
+    return animals.reduce((sum, animal) => sum + ((GuardianAnimalDescriptions[animal].type == CardType.Solitary) ? 1 : 0), 0)
 }
 export function countGregarious(animals: GuardianAnimal[]): number {
-    return animals.reduce((sum, animal) => sum + ((GuardianAnimalDescriptions[animal].type == 1) ? 1 : 0), 0)
+    return animals.reduce((sum, animal) => sum + ((GuardianAnimalDescriptions[animal].type == CardType.Gregarious) ? 1 : 0), 0)
 }
 export function getSolitaryGregariousDifference(animals: GuardianAnimal[]): number {
     return countSolitary(animals) - countGregarious(animals)

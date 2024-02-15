@@ -10,6 +10,7 @@ import Resource from '@gamepark/living-forest/material/Resource'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
 import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import Images from '../../images/Images'
 
@@ -31,27 +32,31 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   const helpline = item.location?.type === LocationType.HelpLine
   const playerName = usePlayerName(item.location?.player)
 
+
   //verso cards
   if (item.id === undefined) {
 
     //deck stack cards
     if (deck) {
       return <>
-        <h2>{player === item.location!.player? t('help.deck.title.mine') : t('help.deck.title', { player })}</h2>
+        <h2>{player === item.location!.player ? t('help.deck.title.mine') : t('help.deck.title', { player })}</h2>
         {activePlayer && <p css={italic}>{t('rules.deck-stack')}</p>}
         {!activePlayer && <p css={italic}>{t('rules.deck-stack-opponent', { player: playerName })}</p>}
-        {draw && activePlayer && <hr />}
+        {draw && activePlayer && <hr/>}
         {draw && !pass && activePlayer && <Trans defaults="rules.draw-card">
-          <PlayMoveButton move={draw} />
+          <PlayMoveButton move={draw}/>
         </Trans>}
         {draw && pass && activePlayer && <Trans defaults="rules.draw-pass">
-          <PlayMoveButton move={draw} />
-          <PlayMoveButton move={pass} onPlay={closeDialog} />
+          <PlayMoveButton move={draw}/>
+          <PlayMoveButton move={pass} onPlay={closeDialog}/>
         </Trans>}
-        <hr />
+        <hr/>
         <div css={italic}>
-          <Trans defaults={player === item.location!.player? "help.deck.content.mine" : "help.deck.content"} values={{ number: rules.material(MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(item.location?.player).length, player: playerName }}>
-            <strong />
+          <Trans defaults={player === item.location!.player ? 'help.deck.content.mine' : 'help.deck.content'} values={{
+            number: rules.material(MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(item.location?.player).length,
+            player: playerName
+          }}>
+            <strong/>
           </Trans>
         </div>
       </>
@@ -62,13 +67,15 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
       </>
     }
   }
+
+  const description = GuardianAnimalDescriptions[item.id]
   //varan card
   if (item.id === GuardianAnimal.Varan) {
     return <>
       <h2>{t('rules.varan.title')}</h2>
       <p>
         <Trans defaults="rules.varan.description">
-          <span css={resourceStyle(ResourceImage[2])} />
+          <span css={resourceStyle(ResourceImage[2])}/>
         </Trans>
       </p>
       <p>{t('rules.varan.destroy')}</p>
@@ -82,29 +89,21 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
       {!activePlayer && <p css={italic}>{t('rules.discard-stack-opponent', { player: playerName })}</p>}
 
       <p>{t('rules.guardian-animal.description')}</p>
-      <p css={alignIconText}>
-        <Trans defaults="rules.guardian-animal.get">
-          <span css={resourceStyle(ResourceImage[1])} />
-        </Trans>
-      </p>
-      <hr />
-      <p css={alignIcon}>{t('rules.cost')} :
-        <span>{GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])} /></span>
-      </p>
-      {GuardianAnimalDescriptions[item.id].type !== undefined && <p>
-        Type : {GuardianAnimalDescriptions[item.id].type === 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
-      </p>}
+      <Cost />
+      <hr/>
+      <Cost cost={description.cost} />
+      <GregariousSolitary type={description.type} />
       <p css={alignIcon}>{t('rules.resources')} :
-        {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
-          return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
-            <span css={resourceStyle(ResourceImage[element])} />
+        {Object.keys(description.resources).map((element, index) => {
+          return <span key={index}>{description.resources[element]}
+            <span css={resourceStyle(ResourceImage[element])}/>
           </span>
         })}
       </p>
-      {shuffleAndDraw && activePlayer && <hr />}
+      {shuffleAndDraw && activePlayer && <hr/>}
       {shuffleAndDraw && activePlayer &&
         <Trans defaults="rules.shuffle-draw">
-          <PlayMoveButton move={shuffleAndDraw} onPlay={closeDialog} />
+          <PlayMoveButton move={shuffleAndDraw} onPlay={closeDialog}/>
         </Trans>}
     </>
   }
@@ -113,29 +112,20 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
     return <>
       <h2>{t('rules.guardian-animal.title')}</h2>
       <p>{t('rules.guardian-animal.description')}</p>
-      <p css={alignIconText}>
-        <Trans defaults="rules.guardian-animal.get">
-          <span css={resourceStyle(ResourceImage[1])} />
-        </Trans>
-      </p>
-      <hr />
-      <p css={alignIcon}>{t('rules.cost')} :
-        <span>{GuardianAnimalDescriptions[item.id].cost}
-          <span css={resourceStyle(ResourceImage[1])} /></span>
-      </p>
-      {GuardianAnimalDescriptions[item.id].type !== undefined && <p>
-        Type : {GuardianAnimalDescriptions[item.id].type === 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
-      </p>}
+      <Cost />
+      <hr/>
+      <Cost cost={description.cost} />
+      <GregariousSolitary type={description.type} />
       <p css={alignIcon}>{t('rules.resources')} :
-        {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
-          return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
-            <span css={resourceStyle(ResourceImage[element])} />
+        {Object.keys(description.resources).map((element, index) => {
+          return <span key={index}>{description.resources[element]}
+            <span css={resourceStyle(ResourceImage[element])}/>
           </span>
         })}
       </p>
-      {attract && <hr />}
+      {attract && <hr/>}
       {attract && <Trans defaults="rules.attract">
-        <PlayMoveButton move={attract} onPlay={closeDialog} />
+        <PlayMoveButton move={attract} onPlay={closeDialog}/>
       </Trans>}
     </>
   }
@@ -147,22 +137,14 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
       {activePlayer && <p css={italic}>{t('rules.help-line')}</p>}
       {!activePlayer && <p css={italic}>{t('rules.help-line-opponent')}</p>}
       <p>{t('rules.guardian-animal.description')}</p>
-      <p css={alignIconText}>
-        <Trans defaults="rules.guardian-animal.get">
-          <span css={resourceStyle(ResourceImage[1])} />
-        </Trans>
-      </p>
-      <hr />
-      <p css={alignIcon}>{t('rules.cost')} :
-        <span>{GuardianAnimalDescriptions[item.id].cost} <span css={resourceStyle(ResourceImage[1])} /></span>
-      </p>
-      {GuardianAnimalDescriptions[item.id].type !== undefined && <p>
-        Type : {GuardianAnimalDescriptions[item.id].type === 0 ? <span css={resourceStyle(Images.gregarious)} /> : <span css={resourceStyle(Images.solitary)} />}
-      </p>}
+      <Cost />
+      <hr/>
+      <Cost cost={description.cost} />
+      <GregariousSolitary type={description.type} />
       <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(GuardianAnimalDescriptions[item.id].resources).map((element, index) => {
-          return <span key={index} >{GuardianAnimalDescriptions[item.id].resources[element]}
-            <span css={resourceStyle(ResourceImage[element])} />
+          return <span key={index}>{GuardianAnimalDescriptions[item.id].resources[element]}
+            <span css={resourceStyle(ResourceImage[element])}/>
           </span>
         })}
       </p>
@@ -172,44 +154,87 @@ export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: Materi
   return <></>
 }
 
+export const Cost: FC<{ cost?: number}> = ({cost}) => {
+  if (cost !== undefined) {
+    return (
+      <p css={alignIcon}>
+        <Trans defaults="rules.cost" values={{ cost: cost }}>
+          <span css={resourceStyle(ResourceImage[1])}/>
+        </Trans>
+      </p>
+    )
+  }
+
+  return (
+    <p css={alignIconText}>
+      <Trans defaults="rules.guardian-animal.get">
+        <span css={resourceStyle(ResourceImage[1])}/>
+      </Trans>
+    </p>
+  )
+}
+
+export const GregariousSolitary: FC<{ type?: CardType }> = ({ type }) => {
+  if (!type) return null
+
+
+  if (type === CardType.Solitary) {
+    return (
+      <p css={alignIcon}>
+        <Trans defaults="help.solitary.desc">
+          <span css={resourceStyle(Images.solitary)}/>
+        </Trans>
+      </p>
+    )
+  }
+
+  return (
+    <p css={alignIcon}>
+      <Trans defaults="help.gregarious.desc">
+        <span css={resourceStyle(Images.gregarious)}/>
+        <span css={resourceStyle(Images.solitary)}/>
+      </Trans>
+    </p>
+  )
+}
+
 export const ResourceImage: Record<Resource, string> = {
   [Resource.Sun]: Images.sun,
   [Resource.Drop]: Images.drop,
   [Resource.Seed]: Images.seed,
   [Resource.Wind]: Images.wind,
-  [Resource.SacredFlower]: Images.sacredFlower,
+  [Resource.SacredFlower]: Images.sacredFlower
 }
 
 export const TypeImage: Record<CardType, string> = {
   [CardType.Gregarious]: Images.gregarious,
-  [CardType.Solitary]: Images.solitary,
+  [CardType.Solitary]: Images.solitary
 }
 
 export const resourceStyle = (image: string) => css`
-  flex: 1;
+  //flex: 1;
   align-self: center;
   background-image: url(${image});
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
   width: 1.2em;
   height: 1.2em;
   filter: drop-shadow(0.1em 0.1em 0.2em gray);
-  display:inline-block;
+  display: inline-block;
 `
 
 export const alignIcon = css`
-display:flex;
-gap:4px;
-align-items:start;
-justify-content:start;
+  display: flex;
+  //gap: 4px;
+  align-items: start;
+  justify-content: start;
 
-span{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:2px;
-    }
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+  }
 `
 
 export const alignIconText = css`

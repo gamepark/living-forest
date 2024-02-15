@@ -3,7 +3,7 @@ import GuardianAnimalDetails from './GuardianAnimalDescriptions';
 import CardType from './CardType';
 
 const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
-const { Solitary = 1, Gregarious } = CardType
+const { Solitary, Gregarious } = CardType
 
 export const Bear: GuardianAnimalDetails = {
     resources: {
