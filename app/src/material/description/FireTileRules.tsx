@@ -16,11 +16,6 @@ export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProp
     <h2>{t('rules.fire-tile.title')}</h2>
     <p>{t('rules.fire-tile.points')}</p>
     <p css={alignIconText}>
-      <Trans defaults="rules.circle-spirit.description">
-        <span css={resourceStyle(ResourceImage[2])} />
-      </Trans>
-    </p>
-    <p css={alignIconText}>
       <Trans defaults="rules.circle-spirit.end">
         <span css={resourceStyle(ResourceImage[2])} />
       </Trans>
