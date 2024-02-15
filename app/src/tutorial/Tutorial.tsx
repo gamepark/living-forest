@@ -158,7 +158,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       popup: {
         text: () => <Trans defaults="tuto.solitary">
           <strong/>
-          <span css={resourceStyle(TypeImage[CardType.Gregarious])}/>
+          <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>,
         position: { x: 10, y: 0 }
       },
@@ -199,7 +199,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       popup: {
         text: () => <Trans defaults="tuto.pass">
           <strong/>
-          <span css={resourceStyle(TypeImage[CardType.Gregarious])}/>
+          <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>,
         position: { x: 10, y: 0 }
       },
@@ -243,7 +243,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       popup: {
         text: () => <Trans defaults="tuto.solitary.malus">
           <strong/>
-          <span css={resourceStyle(TypeImage[CardType.Gregarious])}/>
+          <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>
       }
     },
@@ -473,7 +473,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       popup: {
         text: () => <Trans defaults="tuto.solitary.2">
           <strong/>
-          <span css={resourceStyle(TypeImage[CardType.Gregarious])}/>
+          <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>,
         position: { x: 25, y: 4 }
       },
@@ -699,8 +699,8 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       popup: {
         text: () => <Trans defaults="tuto.gregarious">
           <strong/>
-          <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
           <span css={resourceStyle(TypeImage[CardType.Gregarious])}/>
+          <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>,
         position: { x: 0, y: 29 }
       },

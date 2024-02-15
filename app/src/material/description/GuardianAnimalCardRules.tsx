@@ -212,7 +212,7 @@ export const TypeImage: Record<CardType, string> = {
 }
 
 export const resourceStyle = (image: string) => css`
-  //flex: 1;
+  flex: 1;
   align-self: center;
   background-image: url(${image});
   background-size: contain;
