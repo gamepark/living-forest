@@ -8,16 +8,15 @@ export const getPlayerBoardPositionOnTable = (rules: MaterialRules, item: Materi
 }
 
 export const getIndexForPlayers = (item: MaterialItem, rules: MaterialRules, player?: SpiritOfNature) => {
-  const index = getBoardIndex(item, rules, player)
-  return rules.players.length < 3? index: [0, 2, 3, 5][index]
+  return [0, 2, 3, 5][getBoardIndex(item, rules, player)]
 }
 
 const getBoardIndex = (item: MaterialItem, rules: MaterialRules, player?: SpiritOfNature) => {
   if (!player) return rules.players.indexOf(item.location.player!)
   if (player && player === item.location.player) return 0
   const remainingPlayers = rules.players.filter((p) => p !== player)
-  if (remainingPlayers.length === 1) return 2
-  return remainingPlayers.indexOf(item.location.player!) + 1
+  if (remainingPlayers.length === 1) return 1
+  return remainingPlayers.indexOf(item.location.player!)
 }
 
 const getPositionForIndex = (index: number, players: SpiritOfNature[]) => {
