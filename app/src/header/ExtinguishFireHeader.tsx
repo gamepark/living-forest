@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
-import { Trans, useTranslation } from 'react-i18next'
-import { PlayMoveButton, useLegalMoves, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
-import { MaterialMove, isStartRule } from '@gamepark/rules-api'
-import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
+import Resource from '@gamepark/living-forest/material/Resource'
+import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
+import { RuleId } from '@gamepark/living-forest/rules/RuleId'
+import { PlayMoveButton, useLegalMoves, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
+import { isStartRule, MaterialMove } from '@gamepark/rules-api'
+import { Trans, useTranslation } from 'react-i18next'
 
 export const ExtinguishFireHeader = () => {
   const { t } = useTranslation()
@@ -11,12 +13,13 @@ export const ExtinguishFireHeader = () => {
   const pass = legalMoves.find((move) => isStartRule(move) && move.id === RuleId.Action)
   const rules = useRules<LivingForestRules>()!
   const player = usePlayerId()
-  const activePlayer = rules.getActivePlayer()
+  const activePlayer = rules.getActivePlayer()!
   const name = usePlayerName(activePlayer)
-  if (player === rules.getActivePlayer()) {
+  const spent = new PlayerState(rules.game, activePlayer).getSpent(Resource.Drop)
+  if (player === activePlayer) {
     if (pass) {
       return <>
-        <Trans defaults="header.extinguish-fire-pass">
+        <Trans defaults="header.extinguish-fire-pass.me">
           <PlayMoveButton move={pass} />
         </Trans>
       </>
@@ -25,6 +28,10 @@ export const ExtinguishFireHeader = () => {
       return <>{t('header.extinguish-fire.me')} </>
     }
   } else {
+    if (!spent) {
+      return <>{t('header.extinguish-fire.must', { player: name })} </>
+    }
+
     return <>{t('header.extinguish-fire', { player: name })} </>
   }
 }

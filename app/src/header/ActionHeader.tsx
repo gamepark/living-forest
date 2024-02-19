@@ -11,8 +11,8 @@ export const ActionHeader = () => {
   const player = usePlayerId()
   const name = usePlayerName(activePlayer)
   if (player === rules.getActivePlayer()) {
-    return <>{t('header.actions.me', { action: rules.remind(Memory.Actions) })} </>
+    return <>{t('header.actions.me', { action: rules.remind(Memory.Actions) || 1 })} </>
   }
 
-  return <>{t('header.actions', { action: rules.remind(Memory.Actions), player: name })} </>
+  return <>{t('header.actions', { action: rules.remind(Memory.Actions) || 1, player: name })} </>
 }
