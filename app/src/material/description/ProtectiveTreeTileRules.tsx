@@ -29,7 +29,7 @@ export const ProtectiveTreeTileRules = ({ item, itemIndex, closeDialog }: Materi
       </Trans>
     </p>
     <hr />
-    <p css={alignIcon}>
+    <p css={alignIconText}>
       <Trans defaults="rules.cost" values={{ cost: detail.cost }}>
         <span css={resourceStyle(ResourceImage[3])}/>
       </Trans>
