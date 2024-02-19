@@ -15,19 +15,53 @@ export const GuardianAnimalsHeader = () => {
   const draw = legalMoves.find((move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) || isCustomMoveType(CustomMoveType.ShuffleAndDraw)(move))
   const { t } = useTranslation()
   const playerId = usePlayerId()
-  const remainingPlayers =  rules.game.rule?.players ?? [];
+  const remainingPlayers = rules.game.rule?.players ?? []
   const iHaveFinished = playerId && !remainingPlayers.includes(playerId)
   const remainingWithoutMe = remainingPlayers.filter((p) => p !== playerId)
-  const lastPlayer = remainingWithoutMe.length === 1 ? remainingWithoutMe[0]: undefined
+  const lastPlayer = remainingWithoutMe.length === 1 ? remainingWithoutMe[0] : undefined
   const lastPlayerName = usePlayerName(lastPlayer)
 
   if (playerId && !iHaveFinished) {
+    const hasCardInHelpLine = rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(playerId).length > 0
+    const hasFragment = rules.material(MaterialType.FragmentTile).location(LocationType.PlayerFragmentTileStack).player(playerId).length > 0
+    const hasDrawableCards = rules
+      .material(MaterialType.GuardianAnimalCard)
+      .location((location) => LocationType.PlayerDiscardStack === location.type || LocationType.PlayerDeckStack === location.type)
+      .player(playerId)
+      .length > 0
 
-    return <Trans defaults="header.draw-fragment-pass">
-      <PlayMoveButton move={draw} />
-      <PlayMoveButton move={spendFragment} />
-      <PlayMoveButton move={pass} />
-    </Trans>
+    if (!hasCardInHelpLine && !hasFragment && hasDrawableCards) {
+      return (
+        <Trans defaults="header.draw">
+          <PlayMoveButton move={draw}/>
+        </Trans>
+      )
+    }
+
+    if (hasDrawableCards && !hasFragment && hasCardInHelpLine) {
+      return (
+        <Trans defaults="header.draw-pass">
+          <PlayMoveButton move={draw}/>
+          <PlayMoveButton move={pass}/>
+        </Trans>
+      )
+    }
+
+    if (!hasDrawableCards && !hasFragment) {
+      return (
+        <Trans defaults="header.pass">
+          <PlayMoveButton move={pass}/>
+        </Trans>
+      )
+    }
+
+    return (
+      <Trans defaults="header.draw-fragment-pass">
+        <PlayMoveButton move={draw}/>
+        <PlayMoveButton move={spendFragment}/>
+        <PlayMoveButton move={pass}/>
+      </Trans>
+    )
   } else {
     if (lastPlayer && lastPlayer !== playerId) {
       if (rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(lastPlayer).length) {
