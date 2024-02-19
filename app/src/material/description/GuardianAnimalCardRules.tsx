@@ -2,7 +2,7 @@
 import { css } from '@emotion/react'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import CardType from '@gamepark/living-forest/material/CardType'
-import GuardianAnimal, { getAnimalTranslation } from '@gamepark/living-forest/material/GuardianAnimal'
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { GuardianAnimalDescriptions } from '@gamepark/living-forest/material/GuardianAnimalDescriptions'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
@@ -13,6 +13,7 @@ import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from 
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import Images from '../../images/Images'
+import { getAnimalTranslation } from '../../utils/AnimalName'
 
 export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()

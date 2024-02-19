@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
-import GuardianAnimal, { getAnimalTranslation } from '@gamepark/living-forest/material/GuardianAnimal'
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
@@ -8,6 +8,7 @@ import { MaterialHistoryProps, PlayMoveButton, usePlayerId, usePlayerName } from
 import { displayMaterialHelp, isEndPlayerTurn, isMoveItemType } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
+import { getAnimalTranslation } from '../../utils/AnimalName'
 import { rulesLinkButton } from '../LivingForestHistory'
 import { ActionHistory } from './ActionHistory'
 

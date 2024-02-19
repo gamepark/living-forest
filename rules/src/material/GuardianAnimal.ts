@@ -1,5 +1,4 @@
 import { isEnumValue } from '@gamepark/rules-api'
-import { TFunction } from 'i18next'
 
 enum GuardianAnimal {
   Bear = 1,
@@ -76,7 +75,3 @@ export const startingGuardianAnimals = guardianAnimals.slice(0, 14)
 export const isVaran = (guardianAnimal: GuardianAnimal) => GuardianAnimal.Varan === guardianAnimal
 
 export default GuardianAnimal
-
-export const getAnimalTranslation = (t: TFunction, animal: GuardianAnimal) => {
-  return t(`guardian.${animal}`)
-}
