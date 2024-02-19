@@ -6,6 +6,7 @@ import {StrictMode} from 'react'
 import ReactDOM from 'react-dom'
 import {livingForestAnimations} from './animation/LivingForestAnimations'
 import App from './App'
+import { LivingForestHistoryHistory } from './history/LivingForestHistory'
 import {locators} from './locator/Locator'
 import {material} from './material/Material'
 import translations from './translations.json'
@@ -22,6 +23,7 @@ ReactDOM.render(
       material={material}
       locators={locators}
       animations={livingForestAnimations}
+      MaterialHistory={LivingForestHistoryHistory}
       tutorial={new Tutorial()}
     >
       <App />
