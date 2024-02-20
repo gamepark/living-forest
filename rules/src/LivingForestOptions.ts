@@ -22,7 +22,7 @@ export type LivingForestOptions = {
 export const LivingForestOptionsSpec: OptionsSpec<LivingForestOptions> = {
   players: {
     id: {
-      label: (t: TFunction) => t('Color'),
+      label: (t: TFunction) => t('Spirit'),
       values: spirits,
       valueSpec: color => ({ label: t => getPlayerName(color, t) })
     }
