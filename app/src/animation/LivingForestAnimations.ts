@@ -14,7 +14,7 @@ livingForestAnimations
     && move.location?.type === LocationType.PlayerDiscardStack
     && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.HelpLine
   )
-  .duration(0.2)
+  .duration(0.3)
 
 livingForestAnimations
   .when()
@@ -22,7 +22,7 @@ livingForestAnimations
     && move.location?.type === LocationType.PlayerDeckStack
     && context.rules.game.items[move.itemType]![move.itemIndex].location.type === LocationType.PlayerDiscardStack
   )
-  .duration(0.2)
+  .duration(0.3)
 
 livingForestAnimations
   .when()

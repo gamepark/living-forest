@@ -32,12 +32,12 @@ export const LivingForestOptionsSpec: OptionsSpec<LivingForestOptions> = {
 export function getPlayerName(playerId: SpiritOfNature, t: TFunction) {
   switch (playerId) {
     case SpiritOfNature.Winter:
-      return t('Winter Spirit')
+      return t('Winter')
     case SpiritOfNature.Spring:
-      return t('Spring Spirit')
+      return t('Spring')
     case SpiritOfNature.Summer:
-      return t('Summer Spirit')
+      return t('Summer')
     case SpiritOfNature.Autumn:
-      return t('Autumn Spirit')
+      return t('Autumn')
   }
 }
