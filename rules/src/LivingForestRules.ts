@@ -13,7 +13,7 @@ export class LivingForestRules extends SecretMaterialRules<SpiritOfNature, Mater
   getScore(playerId: SpiritOfNature) {
     const playerState = new PlayerState(this.game, playerId)
     const otherPlayerEnded = this.game.players.filter((p) => p !== playerId).some((p) => new PlayerState(this.game, p).hasEnded)
-    if (playerState.hasEnded && otherPlayerEnded) return 0
+    if (!playerState.hasEnded || otherPlayerEnded) return 0
     return playerState.points
   }
 
