@@ -1,10 +1,9 @@
 import { Material, MaterialMove, MaterialRulesPart } from '@gamepark/rules-api'
-import { RuleId } from './RuleId'
-import { MaterialType } from '../material/MaterialType'
-import { LocationType } from '../material/LocationType'
 import { CARDS_PER_ROW } from '../LivingForestSetup'
 import { Fire } from '../material/Fire'
-import times from 'lodash/times'
+import { LocationType } from '../material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import { RuleId } from './RuleId'
 
 export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
 
@@ -47,12 +46,7 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
   }
 
   addFireTokenMoves(fireStack: Material, fire: Fire, tokens: number): MaterialMove[] {
-    return times(
-      tokens,
-      () => fireStack
-        .locationId(fire)
-        .moveItem({ type: LocationType.CircleOfSpiritBoardFire })
-    )
+    return fireStack.locationId(fire).limit(tokens).moveItems({ type: LocationType.CircleOfSpiritBoardFire })
   }
 
   get fireOnCircle() {
