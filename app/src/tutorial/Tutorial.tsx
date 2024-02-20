@@ -262,10 +262,11 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     {
       popup: {
         text: (t: TFunction) => t('tuto.action.sun'),
-        position: { x: -5, y: 2 }
+        position: { x: -40, y: 3 }
       },
       focus: (game) => ({
-        materials: [this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)]
+        materials: [this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)],
+        margin: { left: 30, top: 1, bottom: 1 }
       })
     },
     {
