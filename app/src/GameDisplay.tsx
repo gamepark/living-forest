@@ -20,7 +20,7 @@ export default function GameDisplay() {
     margin={{ top: 7, left: 0, right: bigTable? 38: 0, bottom: 0 }}
     //css={css`background-color: rgba(255, 255, 255, 0.47)`}
     >
-      <GameTableNavigation css={navigationPosition(players.length)} />
+      <GameTableNavigation scaleStep={0.2} css={navigationPosition(players.length)} />
     </GameTable>
     <PlayerPanels/>
   </>
