@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 export const NewRoundHistory: FC = () => {
   const { t } = useTranslation()
   return (
-    <HistoryEntry border css={newRoundStyle}>{t('history.round.new')}</HistoryEntry>
+    <HistoryEntry border={{top: true, bottom: true}} css={newRoundStyle}>{t('history.round.new')}</HistoryEntry>
   )
 }
 

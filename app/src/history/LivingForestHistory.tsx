@@ -12,6 +12,7 @@ import { ExtinguishFireRuleHistory } from './entry/ExtinguishFireRuleHistory'
 import { GuardianAnimalRuleHistory } from './entry/GuardianAnimalRuleHistory'
 import { NewRoundHistory } from './entry/NewRoundHistory'
 import { OnibiAttacksPlayerRuleHistory } from './entry/OnibiAttacksPlayerRuleHistory'
+import { OnibiAttacksSacredTreeRuleHistory } from './entry/OnibiAttacksSacredTreeRuleHistory'
 import { PickVictoryTileRuleHistory } from './entry/PickVictoryTileRuleHistory'
 import { PlayerTurnHistory } from './entry/PlayerTurnHistory'
 
@@ -55,8 +56,12 @@ export const LivingForestHistoryHistory: FC<MaterialHistoryProps> = (props) => {
     return <EndGameHistory move={move} context={context}/>
   }
 
-  if (game.rule?.id === RuleId.OnibiAttacksPlayer || (isStartRule(move) && move.id === RuleId.OnibiAttacksPlayer)) {
+  if (isStartRule(move) && move.id === RuleId.OnibiAttacksPlayer) {
     return <OnibiAttacksPlayerRuleHistory move={move} context={context} />
+  }
+
+  if (isStartRule(move) && move.id === RuleId.OnibiAttacksSacredTree) {
+    return <OnibiAttacksSacredTreeRuleHistory move={move} context={context} />
   }
 
   return null
