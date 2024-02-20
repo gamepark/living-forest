@@ -12,7 +12,7 @@ export const SkipSecondActionHistory: FC<SkipSecondActionHistoryProps> = (props)
   const { player, context } = props
 
   return (
-    <ActionHistory consequence  playerId={player} context={context}>
+    <ActionHistory consequence playerId={player} context={context}>
         <div css={alertStyle}>
           {t('history.action.impossible')}
         </div>

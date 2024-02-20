@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
 import { Fire } from '@gamepark/living-forest/material/Fire'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
@@ -10,7 +9,7 @@ import { StartRule } from '@gamepark/rules-api/dist/material/moves/rules/StartRu
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { fireTileDescription } from '../../material/description/FireTileDescription'
-import { noBorder } from '../LivingForestHistory'
+import { allBorders, bold, noBorder } from '../LivingForestHistory'
 
 type OnibiAttacksSacredTreeRuleHistoryProps = { move: StartRule } & Omit<MaterialHistoryProps, 'move'>
 
@@ -25,7 +24,7 @@ export const OnibiAttacksSacredTreeRuleHistory: FC<OnibiAttacksSacredTreeRuleHis
 
   return (
     <>
-      <HistoryEntry border={{top: true, bottom: true}} css={bold}>{t('history.onibi-attack-tree')}</HistoryEntry>
+      <HistoryEntry border={allBorders} css={bold}>{t('history.onibi-attack-tree')}</HistoryEntry>
       {!fireTiles && <HistoryEntry context={context}>{t('history.no-fire')}</HistoryEntry>}
       {!!fireTiles && <NewFireTileHistory move={move} context={context}/>}
 
@@ -74,7 +73,3 @@ const getCountByFireTile = (game: MaterialGame, moves: MoveItem[]): Partial<Reco
 
   return counts
 }
-
-const bold = css`
-  font-weight: bold;
-`

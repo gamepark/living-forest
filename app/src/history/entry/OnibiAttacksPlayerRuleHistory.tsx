@@ -8,6 +8,7 @@ import { StartRule } from '@gamepark/rules-api/dist/material/moves/rules/StartRu
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import Images from '../../images/Images'
+import { allBorders } from '../LivingForestHistory'
 import { ActionHistory } from './ActionHistory'
 
 type OnibiAttacksPlayerRuleHistoryProps = { move: StartRule } & Omit<MaterialHistoryProps, 'move'>
@@ -23,7 +24,7 @@ export const OnibiAttacksPlayerRuleHistory: FC<OnibiAttacksPlayerRuleHistoryProp
 
   return (
     <>
-      <HistoryEntry border={{top: true, bottom: true}} css={bold}>{t('history.onibi-attack-players')}</HistoryEntry>
+      <HistoryEntry border={allBorders} css={bold}>{t('history.onibi-attack-players')}</HistoryEntry>
       {!varans && <HistoryEntry context={context}>{t('history.no-varan')}</HistoryEntry>}
       {!!varans && game.players.map((p: number) => (
         <PlayerVaranHistory key={p} player={p} move={move} context={context}/>

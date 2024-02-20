@@ -86,3 +86,9 @@ export const pictureCss = css`
     vertical-align: sub;
   }
 `
+
+export const bold = css`
+  font-weight: bold;
+`
+
+export const allBorders = {top: true, bottom: true}
