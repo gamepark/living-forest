@@ -16,7 +16,7 @@ const getBoardIndex = (item: MaterialItem, rules: MaterialRules, player?: Spirit
   if (player && player === item.location.player) return 0
   const remainingPlayers = rules.players.filter((p) => p !== player)
   if (remainingPlayers.length === 1) return 1
-  return remainingPlayers.indexOf(item.location.player!)
+  return remainingPlayers.indexOf(item.location.player!) + 1
 }
 
 const getPositionForIndex = (index: number, players: SpiritOfNature[]) => {
