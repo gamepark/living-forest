@@ -30,19 +30,20 @@ export const GuardianAnimalsHeader = () => {
       .player(playerId)
       .length > 0
 
-    if (!hasCardInHelpLine && !hasFragment && hasDrawableCards) {
-      return (
-        <Trans defaults="header.draw">
-          <PlayMoveButton move={draw}/>
-        </Trans>
-      )
-    }
 
     if (hasDrawableCards && !hasFragment && hasCardInHelpLine) {
       return (
         <Trans defaults="header.draw-pass">
           <PlayMoveButton move={draw}/>
           <PlayMoveButton move={pass}/>
+        </Trans>
+      )
+    }
+
+      if ((!hasCardInHelpLine || !hasFragment) && hasDrawableCards) {
+      return (
+        <Trans defaults="header.draw">
+          <PlayMoveButton move={draw}/>
         </Trans>
       )
     }
