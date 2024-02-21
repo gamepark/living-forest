@@ -1,7 +1,7 @@
 import { TokenDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
-import { ProtectiveTreeTileRules } from './ProtectiveTreeTileRules'
+import { ProtectiveTreeTileHelp } from './help/ProtectiveTreeTileHelp'
 
 export class ProtectiveTreeTileDescription extends TokenDescription {
   ratio = 1
@@ -24,7 +24,7 @@ export class ProtectiveTreeTileDescription extends TokenDescription {
     [ProtectiveTree.Tree11]: Images.tree11
   }
 
-  help = ProtectiveTreeTileRules
+  help = ProtectiveTreeTileHelp
 }
 
 export const protectiveTreeTileDescription = new ProtectiveTreeTileDescription()

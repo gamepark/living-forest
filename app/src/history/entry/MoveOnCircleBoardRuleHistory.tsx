@@ -4,7 +4,7 @@ import { MaterialHistoryProps, usePlayerId, usePlayerName } from '@gamepark/reac
 import { CustomMove } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
-import { ResourceImage } from '../../material/description/GuardianAnimalCardRules'
+import { ResourceImage } from '../../material/description/help/GuardianAnimalCardHelp'
 import { noBorder } from '../LivingForestHistory'
 import { ActionHistory } from './ActionHistory'
 

@@ -6,7 +6,8 @@ export enum Memory {
   LastAction,
   Bonus,
   FragmentTaken,
-  RemainingMoves
+  RemainingMoves,
+  PassedPlayers
 }
 
 export type SpentPoint = Partial<Record<Resource, number>>

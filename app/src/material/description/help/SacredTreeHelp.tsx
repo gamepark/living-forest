@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-export const SacredTreeRules = () => {
+export const SacredTreeHelp = () => {
   const { t } = useTranslation()
   return <>
     <h2>{t('rules.sacred-tree.title')}</h2>

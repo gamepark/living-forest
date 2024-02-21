@@ -3,7 +3,7 @@ import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { ItemContext, TokenDescription } from '@gamepark/react-game'
 import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import Images from '../../images/Images'
-import { FragmentTileRules } from './FragmentTileRules'
+import { FragmentTileHelp } from './help/FragmentTileHelp'
 
 export class FragmentTileDescription extends TokenDescription {
   width = 3
@@ -11,7 +11,7 @@ export class FragmentTileDescription extends TokenDescription {
   borderRadius = 0.2
   image = Images.fragment
 
-  help = FragmentTileRules
+  help = FragmentTileHelp
 
   canDrag(move: MaterialMove, context: ItemContext): boolean {
     return super.canDrag(move, context) && this.isTopItem(move, context)

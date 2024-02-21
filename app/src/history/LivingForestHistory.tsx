@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import { linkButtonCss, MaterialHistoryProps } from '@gamepark/react-game'
-import { isMoveItemType, isStartPlayerTurn, isStartRule, isStartSimultaneousRule, MaterialGame, MoveKind, RuleMoveType } from '@gamepark/rules-api'
+import { isEndGame, isMoveItemType, isStartPlayerTurn, isStartRule, isStartSimultaneousRule, MaterialGame } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { ActionRuleHistory } from './entry/ActionRuleHistory'
 import { AttractAnimalRuleHistory } from './entry/AttractAnimalRuleHistory'
@@ -52,16 +52,16 @@ export const LivingForestHistoryHistory: FC<MaterialHistoryProps> = (props) => {
     return <ExtinguishFireRuleHistory move={move} context={context} />
   }
 
-  if (move.kind === MoveKind.RulesMove && move.type === RuleMoveType.EndGame) {
-    return <EndGameHistory move={move} context={context}/>
-  }
-
   if (isStartRule(move) && move.id === RuleId.OnibiAttacksPlayer) {
     return <OnibiAttacksPlayerRuleHistory move={move} context={context} />
   }
 
   if (isStartRule(move) && move.id === RuleId.OnibiAttacksSacredTree) {
     return <OnibiAttacksSacredTreeRuleHistory move={move} context={context} />
+  }
+
+  if (isEndGame(move)) {
+    return <EndGameHistory />
   }
 
   return null

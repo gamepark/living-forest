@@ -7,7 +7,7 @@ import { HistoryEntry, MaterialHistoryProps, Picture, usePlayerId, usePlayerName
 import { StartPlayerTurn } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { ResourceImage } from '../../material/description/GuardianAnimalCardRules'
+import { ResourceImage } from '../../material/description/help/GuardianAnimalCardHelp'
 import { allBorders, bold } from '../LivingForestHistory'
 import { ActionHistory } from './ActionHistory'
 

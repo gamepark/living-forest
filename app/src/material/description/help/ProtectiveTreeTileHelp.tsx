@@ -6,9 +6,9 @@ import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
 import { MaterialHelpProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
 import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
-import { alignIcon, alignIconText, ResourceImage, resourceStyle } from './GuardianAnimalCardRules'
+import { alignIcon, alignIconText, ResourceImage, resourceStyle } from './GuardianAnimalCardHelp'
 
-export const ProtectiveTreeTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
+export const ProtectiveTreeTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const takeProtectiveTree = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.ProtectiveTreeTiles, itemIndex)(move) && item.location?.type === LocationType.TreeDispenser

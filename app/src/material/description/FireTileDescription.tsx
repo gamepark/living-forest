@@ -2,7 +2,7 @@
 import { TokenDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import { Fire } from '@gamepark/living-forest/material/Fire'
-import { FileTileRules } from './FireTileRules'
+import { FileTileRules } from './help/FireTileHelp'
 
 export class FireTileDescription extends TokenDescription {
   width = 3

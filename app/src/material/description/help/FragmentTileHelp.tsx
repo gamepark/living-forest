@@ -4,7 +4,7 @@ import { MaterialHelpProps, PlayMoveButton, useLegalMove } from '@gamepark/react
 import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
 
-export const FragmentTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
+export const FragmentTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
 
   const { t } = useTranslation()
   const takeFragment = useLegalMove((move: MaterialMove) =>

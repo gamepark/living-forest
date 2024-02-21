@@ -4,7 +4,7 @@ import { MaterialItem } from '@gamepark/rules-api'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { forestTreeSpaces } from '@gamepark/living-forest/material/ForestTreeSpaces'
-import { ForestBoardRules } from './ForestBoardRules'
+import { ForestBoardHelp } from './help/ForestBoardHelp'
 
 export class ForestBoardDescription extends BoardDescription {
   height = 17.72
@@ -26,7 +26,7 @@ export class ForestBoardDescription extends BoardDescription {
     [SpiritOfNature.Summer]: Images.SummerPlayerBoard,
   }
 
-  help = ForestBoardRules
+  help = ForestBoardHelp
 }
 
 export const forestBoardDescription = new ForestBoardDescription()

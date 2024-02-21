@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { Trans, useTranslation } from 'react-i18next'
-import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardRules'
+import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardHelp'
 
-export const ForestBoardRules = () => {
+export const ForestBoardHelp = () => {
   const { t } = useTranslation()
   return <>
     <h2>{t('rules.forest.title')}</h2>

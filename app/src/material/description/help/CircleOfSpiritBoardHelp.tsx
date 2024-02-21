@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { Trans, useTranslation } from 'react-i18next'
-import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardRules'
+import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardHelp'
 
 
-export const CircleOfSpiritBoardRules = () => {
+export const CircleOfSpiritBoardHelp = () => {
   const { t } = useTranslation()
   return <>
     <h2>{t('rules.circle-spirit.title')}</h2>

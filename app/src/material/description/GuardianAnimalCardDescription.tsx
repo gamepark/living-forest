@@ -5,7 +5,7 @@ import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { CardDescription, ItemContext } from '@gamepark/react-game'
 import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import Images from '../../images/Images'
-import { GuardianAnimalCardRules } from './GuardianAnimalCardRules'
+import { GuardianAnimalCardHelp } from './help/GuardianAnimalCardHelp'
 
 export class GuardianAnimalCardDescription extends CardDescription {
   backImage = Images.sampleImage
@@ -94,7 +94,7 @@ export class GuardianAnimalCardDescription extends CardDescription {
     return super.canShortClick(move, context)
   }
 
-  help = GuardianAnimalCardRules
+  help = GuardianAnimalCardHelp
 }
 
 export const guardianAnimalCardDescription = new GuardianAnimalCardDescription()

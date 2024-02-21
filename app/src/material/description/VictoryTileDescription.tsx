@@ -1,7 +1,7 @@
 import { BoardDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import VictoryTiles from '@gamepark/living-forest/material/VictoryTiles'
-import { VictoryTileRules } from './VictoryTileRules'
+import { VictoryTileHelp } from './help/VictoryTileHelp'
 
 export class VictoryTileDescription extends BoardDescription {
   width = 4.6
@@ -22,7 +22,7 @@ export class VictoryTileDescription extends BoardDescription {
     [VictoryTiles.WinterFlower]: Images.winterVictorySacredFlower,
   }
 
-  help = VictoryTileRules
+  help = VictoryTileHelp
 }
 
 export const victoryTileDescription = new VictoryTileDescription()

@@ -4,7 +4,7 @@ import { MaterialHelpProps, PlayMoveButton, useLegalMove } from '@gamepark/react
 import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Trans, useTranslation } from 'react-i18next'
 
-export const VictoryTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
+export const VictoryTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const takeVictory = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.VictoryTile, itemIndex)(move) && item.location?.type === LocationType.VictoryTileArea

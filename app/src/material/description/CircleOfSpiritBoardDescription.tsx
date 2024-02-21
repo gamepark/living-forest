@@ -1,7 +1,7 @@
 import { BoardDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
-import { CircleOfSpiritBoardRules } from './CircleOfSpiritBoardRules'
+import { CircleOfSpiritBoardHelp } from './help/CircleOfSpiritBoardHelp'
 
 export class CircleOfSpiritBoardDescription extends BoardDescription {
   ratio = 1
@@ -12,7 +12,7 @@ export class CircleOfSpiritBoardDescription extends BoardDescription {
   staticItem = { location: { type: LocationType.Table } }
   image = Images.circleOfSpirits
 
-  help = CircleOfSpiritBoardRules
+  help = CircleOfSpiritBoardHelp
 
 }
 export const circleOfSpiritBoardDescription = new CircleOfSpiritBoardDescription()

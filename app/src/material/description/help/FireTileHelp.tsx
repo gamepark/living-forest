@@ -4,7 +4,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
-import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardRules'
+import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardHelp'
 
 export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()

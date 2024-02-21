@@ -12,10 +12,10 @@ import { MaterialHelpProps, PlayMoveButton, useLegalMove, useLegalMoves, usePlay
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import Images from '../../images/Images'
-import { getAnimalTranslation } from '../../utils/AnimalName'
+import Images from '../../../images/Images'
+import { getAnimalTranslation } from '../../../utils/AnimalName'
 
-export const GuardianAnimalCardRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
+export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const player = usePlayerId()
   const rules = useRules<LivingForestRules>()!

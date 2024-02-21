@@ -9,7 +9,7 @@ import { Avatar, RulesDialog, usePlayerName } from '@gamepark/react-game'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import Images from '../../images/Images'
-import { ResourceImage } from '../../material/description/GuardianAnimalCardRules'
+import { ResourceImage } from '../../material/description/help/GuardianAnimalCardHelp'
 import { PlayerDialogIndicator } from './PlayerDialogIndicator'
 
 

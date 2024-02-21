@@ -81,7 +81,7 @@ export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (pr
   }
 
   if (isEndPlayerTurn(move)) {
-    const rules = new LivingForestRules(context.game)
+    const rules = new LivingForestRules(JSON.parse(JSON.stringify(context.game)))
     rules.play(move)
     const playerState = new PlayerState(rules.game, actionPlayer)
     const actionCount = playerState.solidarityGregariousDifference === 3? 1: 2

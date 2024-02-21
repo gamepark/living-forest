@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-export const SpiritOfNatureStandeeRules = () => {
+export const SpiritOfNatureStandeeHelp = () => {
   const { t } = useTranslation()
   return <>
     <h2>{t('rules.spirit-nature.title')}</h2>

@@ -78,26 +78,33 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     const position = standee.getItem()!.location.x!
     const { distance } = move.data
     const rocks = this.rockRules
-    let passedPlayer: undefined | SpiritOfNature = undefined
 
     const moves: MaterialMove[] = []
+    const passedPlayers: SpiritOfNature[] = []
     for (let i = 1; i <= distance; i++) {
       let newPosition = position + i
       if (newPosition >= rocks.length) {
         newPosition = newPosition % (rocks.length)
       }
 
-      const standeeOnPosition = this.material(MaterialType.SpiritOfNatureStandee).location((location) => LocationType.CircleOfSpiritBoardSpace === location.type && location.x === newPosition)
+      const standeeOnPosition = this
+        .material(MaterialType.SpiritOfNatureStandee)
+        .location((location) => LocationType.CircleOfSpiritBoardSpace === location.type && location.x === newPosition)
+      if (standeeOnPosition.length) {
+        const player = standeeOnPosition.getItem()!.id
+        if (!passedPlayers.includes(player) && this.material(MaterialType.VictoryTile).player(player).length) {
+          passedPlayers.push(player)
+        }
+      } else {
+        moves.push(standee.moveItem({ type: LocationType.CircleOfSpiritBoardSpace, x: newPosition }))
+        if (passedPlayers.length > 0 && this.material(MaterialType.VictoryTile).player((p: SpiritOfNature | undefined) => !!p && passedPlayers.includes(p)).length) {
+          this.memorize(Memory.PassedPlayers, passedPlayers)
+          this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined ? distance - i : remaining - i)
+          moves.push(this.rules().startRule(RuleId.PickVictoryTile))
+          return moves
+        }
 
-      if (!standeeOnPosition.length) moves.push(standee.moveItem({ type: LocationType.CircleOfSpiritBoardSpace, x: newPosition }))
-
-      if (passedPlayer && this.material(MaterialType.VictoryTile).player(passedPlayer).length) {
-        this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined ? distance - i : remaining - i)
-        moves.push(this.rules().startRule(RuleId.PickVictoryTile))
-        return moves
       }
-
-      if (standeeOnPosition.length) passedPlayer = standeeOnPosition.getItem()!.id
     }
 
 

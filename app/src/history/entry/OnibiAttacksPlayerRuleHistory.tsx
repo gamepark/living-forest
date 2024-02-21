@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { HistoryEntry, MaterialHistoryProps, usePlayerId, usePlayerName } from '@gamepark/react-game'
@@ -19,6 +20,8 @@ export const OnibiAttacksPlayerRuleHistory: FC<OnibiAttacksPlayerRuleHistoryProp
   const varans = action.consequences.filter((move) =>
     isMoveItemType(MaterialType.GuardianAnimalCard)(move)
     && move.location.type === LocationType.PlayerDiscardStack
+    && context.game.items[move.itemType][move.itemIndex].id === GuardianAnimal.Varan
+    && context.game.items[move.itemType][move.itemIndex].location.type === LocationType.VaranDeck
   ).length
 
   return (
@@ -45,6 +48,8 @@ export const PlayerVaranHistory: FC<PlayerVaranHistoryProps> = (props) => {
     isMoveItemType(MaterialType.GuardianAnimalCard)(move)
     && move.location.type === LocationType.PlayerDiscardStack
     && move.location.player === player
+    && context.game.items[move.itemType][move.itemIndex].id === GuardianAnimal.Varan
+    && context.game.items[move.itemType][move.itemIndex].location.type === LocationType.VaranDeck
   ).length
   const name = usePlayerName(player)
 

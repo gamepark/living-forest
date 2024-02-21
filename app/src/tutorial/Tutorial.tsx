@@ -15,7 +15,7 @@ import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, isStartRule, Materia
 import { TFunction } from 'i18next'
 import { Trans } from 'react-i18next'
 import Images from '../images/Images'
-import { ResourceImage, resourceStyle, TypeImage } from '../material/description/GuardianAnimalCardRules'
+import { ResourceImage, resourceStyle, TypeImage } from '../material/description/help/GuardianAnimalCardHelp'
 import { TutorialSetup } from './TutorialSetup'
 
 export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, LocationType> {

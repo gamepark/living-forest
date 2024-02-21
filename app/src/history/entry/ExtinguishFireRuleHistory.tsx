@@ -6,7 +6,7 @@ import { MaterialHistoryProps, Picture, PlayMoveButton, usePlayerId, usePlayerNa
 import { displayMaterialHelp, isMoveItemType } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
-import { ResourceImage } from '../../material/description/GuardianAnimalCardRules'
+import { ResourceImage } from '../../material/description/help/GuardianAnimalCardHelp'
 import { noBorder, pictureCss, rulesLinkButton } from '../LivingForestHistory'
 import { ActionHistory } from './ActionHistory'
 
