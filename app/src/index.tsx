@@ -23,7 +23,7 @@ ReactDOM.render(
       material={material}
       locators={locators}
       animations={livingForestAnimations}
-      MaterialHistory={LivingForestHistoryHistory}
+      //MaterialHistory={LivingForestHistoryHistory}
       tutorial={new Tutorial()}
     >
       <App />
