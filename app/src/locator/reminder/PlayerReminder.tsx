@@ -53,5 +53,5 @@ const playerNameStyle = (spirit: SpiritOfNature) => css`
   flex: 1;
   border-radius: 1em;
   background: ${getColor(spirit)}80;
-  background: linear-gradient(90deg, ${getColor(spirit)}80 0%, ${getColor(spirit)}00 100%);
+  background: linear-gradient(90deg, ${getColor(spirit)} 0%, ${getColor(spirit)}00 80%);
 `

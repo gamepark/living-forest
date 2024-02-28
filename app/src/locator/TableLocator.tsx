@@ -12,7 +12,7 @@ export class TableLocator extends ItemLocator {
         return {
           x: players.length < 3 ? 9 : 40,
           y: players.length < 3 ? -15 : 13,
-          z: 0.01,
+          z: 0.1,
         }
       }
 

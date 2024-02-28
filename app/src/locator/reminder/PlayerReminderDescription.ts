@@ -32,7 +32,11 @@ export class PlayerReminderDescription extends LocationDescription {
       position.y += 11
     }
 
-    position.x -= 6
+    if (rules.players.length === 2) {
+      position.x += 11
+    } else {
+      position.x -= 6
+    }
 
     return position
   }
