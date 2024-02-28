@@ -11,7 +11,7 @@ export const getIndexForPlayers = (item: MaterialItem, rules: MaterialRules, pla
   return [0, 2, 3, 5][getBoardIndex(item, rules, player)]
 }
 
-const getBoardIndex = (item: MaterialItem, rules: MaterialRules, player?: SpiritOfNature) => {
+export const getBoardIndex = (item: MaterialItem, rules: MaterialRules, player?: SpiritOfNature) => {
   if (!player) return rules.players.indexOf(item.location.player!)
   if (player && player === item.location.player) return 0
   const remainingPlayers = rules.players.filter((p) => p !== player)

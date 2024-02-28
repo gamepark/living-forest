@@ -1,11 +1,19 @@
+import { css } from '@emotion/react'
+import VictoryTiles from '@gamepark/living-forest/material/VictoryTiles'
 import { BoardDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
-import VictoryTiles from '@gamepark/living-forest/material/VictoryTiles'
 import { VictoryTileHelp } from './help/VictoryTileHelp'
 
 export class VictoryTileDescription extends BoardDescription {
   width = 4.6
   ratio = 301 / 207
+  height = 4.6 / this.ratio
+
+  getFrontExtraCss() {
+    return css`
+      border-radius: 2em 5em 5em 2em;
+    `
+  }
 
   images = {
     [VictoryTiles.SpringTree]: Images.springVictoryTree,

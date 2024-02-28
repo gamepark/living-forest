@@ -2,9 +2,12 @@ import { ItemContext, LineLocator } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
 import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
 import { victoryTileDescription } from '../material/description/VictoryTileDescription'
+import { VictoryTileAreaDescription } from './description/VictoryTileAreaDescription'
 
 export class VictoryTileAreaLocator extends LineLocator {
   delta = { x: 1, y: 0, z: 0.05 }
+
+  locationDescription = new VictoryTileAreaDescription()
 
   getCoordinates(item: MaterialItem, { rules, player }: ItemContext): Coordinates {
     const forestCoordinates = getPlayerBoardPositionOnTable(rules, item, player)

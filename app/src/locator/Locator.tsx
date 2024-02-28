@@ -1,5 +1,6 @@
 import { ItemLocator } from '@gamepark/react-game'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { playerReminderLocator } from './reminder/PlayerReminderLocator'
 import { tableLocator } from './TableLocator'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
@@ -38,5 +39,6 @@ export const locators: Record<LocationType, ItemLocator<SpiritOfNature, Material
   [LocationType.SacredTree]: sacredTreeLocator,
   [LocationType.TreeSpace]: new TreeSpaceLocator(),
   [LocationType.PlayerFireTileStack]: playerFireTileStackLocator,
-  [LocationType.PlayerFragmentTileStack]: playerFragmentStackLocator
+  [LocationType.PlayerFragmentTileStack]: playerFragmentStackLocator,
+  [LocationType.PlayerReminder]: playerReminderLocator
 }

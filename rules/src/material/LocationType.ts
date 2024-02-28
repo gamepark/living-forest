@@ -16,5 +16,6 @@ export enum LocationType {
   SacredTree,
   TreeSpace,
   PlayerFireTileStack,
-  PlayerFragmentTileStack
+  PlayerFragmentTileStack,
+  PlayerReminder
 }
