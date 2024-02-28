@@ -14,7 +14,7 @@ export const GameOverHeader = () => {
   const rankedPlayers = useRankedPlayers()
   const firstPlayer = rankedPlayers[0]
   const tie = firstPlayer?.rank === rankedPlayers[1]?.rank
-  const winnerName = usePlayerName(firstPlayer)
+  const winnerName = usePlayerName(firstPlayer?.id)
   if (!tie) {
     const isWinningWithTotalPoints = new ScoringRule(rules.game).isWinningWithTotalPoints(rankedPlayers.filter((p) => !p.quit).map((p) => p.id))
     const headerKey = getHeaderKey(rules.game, firstPlayer.id!, isWinningWithTotalPoints, player)

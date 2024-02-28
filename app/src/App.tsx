@@ -8,6 +8,7 @@ import { ActionHeader } from './header/ActionHeader'
 import { AttractAnimalsHeader } from './header/AttractAnimalsHeader'
 import { EndOfTurnHeader } from './header/EndOfTurnHeader'
 import { ExtinguishFireHeader } from './header/ExtinguishFireHeader'
+import { GameOverHeader } from './header/GameOverHeader'
 import { GuardianAnimalsArrivalHeader } from './header/GuardianAnimalsArrivalHeader'
 import { GuardianAnimalsHeader } from './header/GuardianAnimalsHeader'
 import { MoveOnCircleOfSpiritHeader } from './header/MoveOnCircleOfSpiritHeader'
@@ -32,7 +33,7 @@ export default function App() {
       <GameDisplay />
       <LoadingScreen display={loading} author="Aske Christiansen" artist="Apolline Etienne" publisher="Ludonaute" developer="Laetitia Decoudu" />
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)} />
-      <MaterialHeader rulesStepsHeaders={headers} loading={loading} />
+      <MaterialHeader rulesStepsHeaders={headers} GameOver={GameOverHeader} loading={loading} />
       <Menu />
       <FailuresDialog />
       <FullscreenDialog />
