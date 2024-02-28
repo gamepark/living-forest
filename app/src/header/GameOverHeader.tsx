@@ -1,7 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
+import { ScoringRule } from '@gamepark/living-forest/rules/helper/ScoringRule'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { usePlayerId, usePlayerName, useRankedPlayers, useRules } from '@gamepark/react-game'
+import { MaterialGame } from '@gamepark/rules-api/dist/material/MaterialGame'
 import { useTranslation } from 'react-i18next'
 
 export const GameOverHeader = () => {
@@ -13,19 +16,21 @@ export const GameOverHeader = () => {
   const tie = firstPlayer?.rank === rankedPlayers[1]?.rank
   const winnerName = usePlayerName(firstPlayer)
   if (!tie) {
-    const winner = firstPlayer.id!
-    const playerState = new PlayerState(rules.game, winner)
-    const headerKey = getHeaderKey(playerState, tie, player && player === winner)
-    return <>{t(headerKey, { player: winnerName, score: playerState.points })}</>
+    const isWinningWithTotalPoints = new ScoringRule(rules.game).isWinningWithTotalPoints(rankedPlayers.filter((p) => !p.quit).map((p) => p.id))
+    const headerKey = getHeaderKey(rules.game, firstPlayer.id!, isWinningWithTotalPoints, player)
+    if (!headerKey) return <></>
+    return <>{t(headerKey.text, { player: winnerName, score: headerKey.score })}</>
   } else {
     return <>{t('header.tie')}</>
   }
 }
 
-export const getHeaderKey = (playerState: PlayerState, tie: boolean, me: boolean) => {
-  if (tie) return me? 'header.winner.me': 'header.winner'
-  if (playerState.firePoints >= 12) return me? 'header.winner.fire.me': 'header.winner.fire'
-  if (playerState.flowerPoints >= 12) return  me? 'header.winner.flower.me': 'header.winner.flower'
-  if (playerState.treePoints >= 12) return  me? 'header.winner.tree.me': 'header.winner.tree'
-  return 'header.winner'
+export const getHeaderKey = (game: MaterialGame, winner: SpiritOfNature, isWinningWithTotalPoints: boolean, playerId?: SpiritOfNature) => {
+  const me = playerId && playerId === winner
+  const playerState = new PlayerState(game, winner)
+  if (isWinningWithTotalPoints) return { text: me? 'result.score.victory': 'result.score.winner', score: playerState.points }
+  if (playerState.firePoints >= 12) return { text: me? 'header.winner.fire.me': 'header.winner.fire', score: playerState.firePoints }
+  if (playerState.flowerPoints >= 12) return  { text: me? 'header.winner.flower.me': 'header.winner.flower', score: playerState.flowerPoints }
+  if (playerState.treePoints >= 12) return  { text: me? 'header.winner.tree.me': 'header.winner.tree', score: playerState.treePoints }
+  return
 }
