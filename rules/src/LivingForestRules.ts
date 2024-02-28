@@ -4,7 +4,6 @@ import { locationsStrategies } from './configuration/LocationStrategies'
 import { rules } from './configuration/RuleDefinitions'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
-import { PlayerState } from './rules/helper/PlayerState'
 import { ScoringRule } from './rules/helper/ScoringRule'
 import SpiritOfNature from './SpiritOfNature'
 
