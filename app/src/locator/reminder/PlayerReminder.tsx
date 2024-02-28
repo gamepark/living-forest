@@ -43,8 +43,7 @@ const avatarStyle = css`
 
 const playerNameStyle = (spirit: SpiritOfNature) => css`
   font-size: 2.4em;
-  padding: 0.2em;
-  padding-left: 2.2em;
+  padding: 0.2em 0.2em 0.2em 2.2em;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
