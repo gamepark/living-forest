@@ -38,7 +38,7 @@ const victoriesStyle = css`
   border-bottom: 0.1em solid gray;
 `
 
-const VictoryImage: Record<VictoryTileType, string> = {
+export const VictoryImage: Record<VictoryTileType, string> = {
   [VictoryTileType.Fire]: Images.firePanel,
   [VictoryTileType.Flower]: Images.sacredFlower,
   [VictoryTileType.Tree]: Images.seed,

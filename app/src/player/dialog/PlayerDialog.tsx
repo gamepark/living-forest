@@ -44,7 +44,7 @@ export const PlayerDialog: FC<PlayerDialogProps> = ({ open, close, player, state
         <PlayerDialogIndicator
           width={2.5}
           ratio={1}
-          image={Images.gregarious}
+          image={Images.solitary}
           value={t('player.dialog.score.gregorious.value', { player: name, score: state.solidarityGregariousDifference })}
           description={t('player.dialog.score.gregarious.board-score')}
         />

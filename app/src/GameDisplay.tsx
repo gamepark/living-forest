@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
+import { pointerWithin } from '@dnd-kit/core'
 import { css } from '@emotion/react'
 import { GameTable, GameTableNavigation, usePlayers } from '@gamepark/react-game'
-import { pointerWithin } from '@dnd-kit/core'
 import { PlayerPanels } from './player/PlayerPanels'
 //import { css } from '@emotion/react'
 
@@ -18,7 +18,6 @@ export default function GameDisplay() {
     yMax={!twoPlayers? 28: 30}
     collisionAlgorithm={pointerWithin} 
     margin={{ top: 7, left: 0, right: bigTable? 38: 0, bottom: 0 }}
-    //css={css`background-color: rgba(255, 255, 255, 0.47)`}
     >
       <GameTableNavigation scaleStep={0.2} css={navigationPosition(players.length)} />
     </GameTable>
