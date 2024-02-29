@@ -19,7 +19,7 @@ export const GameOverHeader = () => {
   const firstPlayer = rankedPlayers[0]
   const tie = firstPlayer?.rank === rankedPlayers[1]?.rank
   const winnerName = usePlayerName(firstPlayer?.id)
-  const [dialogOpen, setDialogOpen] = useState(true)
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const dialog = (
     <>
