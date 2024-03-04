@@ -13,8 +13,6 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
     const takenLevel2Cards = CARDS_PER_ROW - reserve.locationId(2).length
     const takenLevel3Cards = CARDS_PER_ROW - reserve.locationId(3).length
 
-    console.log(takenLevel1Cards, takenLevel2Cards, takenLevel3Cards)
-
     const fireOnCircle = this.fireOnCircle.length
     const moves = []
     if (fireOnCircle < 7) {
