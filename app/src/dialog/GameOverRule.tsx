@@ -71,6 +71,7 @@ const PlayerLine: FC<PlayerLineProps> = (props) => {
     return otherPlayerState.firePoints >= 12 || otherPlayerState.treePoints >= 12 || otherPlayerState.flowerPoints >= 12
   })
   const winnerSolo = winners.length === 1 && winners[0].id === player && !hasWonWithTotalPoints
+  const winner = winners[0].id
   return (
     <tr>
       <td css={playerColumn}>
@@ -80,7 +81,7 @@ const PlayerLine: FC<PlayerLineProps> = (props) => {
       <td css={[resourceColumn, winnerSolo && state.firePoints >= 12 && green]}><span css={medium}>{state.firePoints}</span></td>
       <td css={[resourceColumn, winnerSolo && state.treePoints >= 12 && green]}><span css={medium}>{state.treePoints}</span></td>
       <td css={[resourceColumn, winnerSolo && state.flowerPoints >= 12 && green]}><span css={medium}>{state.flowerPoints}</span></td>
-      <td css={[resourceColumn, winnerTie && green]}><span css={medium}>{state.points}</span></td>
+      <td css={[resourceColumn, (winnerTie || (!winnerSolo && winner === player))  && green]}><span css={medium}>{state.points}</span></td>
     </tr>
   )
 }
