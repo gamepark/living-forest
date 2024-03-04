@@ -13,6 +13,8 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
     const takenLevel2Cards = CARDS_PER_ROW - reserve.locationId(2).length
     const takenLevel3Cards = CARDS_PER_ROW - reserve.locationId(3).length
 
+    console.log(takenLevel1Cards, takenLevel2Cards, takenLevel3Cards)
+
     const fireOnCircle = this.fireOnCircle.length
     const moves = []
     if (fireOnCircle < 7) {
@@ -46,7 +48,13 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
   }
 
   addFireTokenMoves(fireStack: Material, fire: Fire, tokens: number): MaterialMove[] {
-    return fireStack.locationId(fire).limit(tokens).moveItems({ type: LocationType.CircleOfSpiritBoardFire })
+    const tokenCount = this.material(MaterialType.FireTile).location(LocationType.FireStack).locationId(fire).getItem()?.quantity ?? 1
+    const moves: MaterialMove[] = []
+    for (let i = 0; i < Math.min(tokens, tokenCount); i++) {
+      moves.push(fireStack.locationId(fire).moveItem({ type: LocationType.CircleOfSpiritBoardFire }))
+    }
+
+    return moves
   }
 
   get fireOnCircle() {
