@@ -64,17 +64,22 @@ const PlayerLine: FC<PlayerLineProps> = (props) => {
   const name = usePlayerName(player)
   const rules = useRules()!
   const state = new PlayerState(rules.game, player)
-  const winnerSolo = winners.length === 1 && winners[0].id === player
   const winnerTie = winners.length > 1 && winners.some((w) => w.id === player)
+  const hasWonWithTotalPoints = rules.game.players.some((p: SpiritOfNature) => {
+    if (p === player) return false
+    const otherPlayerState = new PlayerState(rules.game, p)
+    return otherPlayerState.firePoints >= 12 || otherPlayerState.treePoints >= 12 || otherPlayerState.flowerPoints >= 12
+  })
+  const winnerSolo = winners.length === 1 && winners[0].id === player && !hasWonWithTotalPoints
   return (
     <tr>
       <td css={playerColumn}>
         {(winnerSolo || winnerTie) && <Medal rank={winners[0].rank} css={medalCss} />}
         <span>{name}</span>
       </td>
-      <td css={[resourceColumn, winnerSolo && state.firePoints > 12 && green]}><span css={medium}>{state.firePoints}</span></td>
-      <td css={[resourceColumn, winnerSolo && state.treePoints > 12 && green]}><span css={medium}>{state.treePoints}</span></td>
-      <td css={[resourceColumn, winnerSolo && state.flowerPoints > 12 && green]}><span css={medium}>{state.flowerPoints}</span></td>
+      <td css={[resourceColumn, winnerSolo && state.firePoints >= 12 && green]}><span css={medium}>{state.firePoints}</span></td>
+      <td css={[resourceColumn, winnerSolo && state.treePoints >= 12 && green]}><span css={medium}>{state.treePoints}</span></td>
+      <td css={[resourceColumn, winnerSolo && state.flowerPoints >= 12 && green]}><span css={medium}>{state.flowerPoints}</span></td>
       <td css={[resourceColumn, winnerTie && green]}><span css={medium}>{state.points}</span></td>
     </tr>
   )
