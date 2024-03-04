@@ -80,6 +80,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
       id: card,
       location: { type: LocationType.PlayerDeckStack, player }
     })))
+    this.material(MaterialType.GuardianAnimalCard).player(player).shuffle()
 
     this.material(MaterialType.VictoryTile).createItems(this.spiritVictoryTiles[player].map((tile) => ({
       id: tile,
