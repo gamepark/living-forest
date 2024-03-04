@@ -19,7 +19,7 @@ export const PlayerVictories: FC<PlayerVictoriesProps> = (props) => {
     <>
       <div css={victoriesStyle}>
         {victoryTileTypes.map((v) => <PlayerCounter key={v} image={VictoryImage[v]} value={state.getPointForType(v)} />)}
-        <PlayerCounter image={Images.gregarious} value={state.solidarityGregariousDifference} />
+        <PlayerCounter image={Images.solitary} value={state.solidarityGregariousDifference} />
       </div>
     </>
   )
