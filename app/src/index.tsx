@@ -11,6 +11,7 @@ import { locators } from './locator/Locator'
 import { material } from './material/Material'
 import translations from './translations.json'
 import { Tutorial } from './tutorial/Tutorial'
+import { ai } from './tutorial/TutorialAi'
 
 setupTranslation(translations, { debug: false })
 
@@ -25,6 +26,7 @@ ReactDOM.render(
       animations={livingForestAnimations}
       MaterialHistory={LivingForestHistoryHistory}
       tutorial={new Tutorial()}
+      ai={ai}
     >
       <App />
     </GameProvider>
