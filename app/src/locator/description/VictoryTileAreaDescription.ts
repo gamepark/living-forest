@@ -12,9 +12,6 @@ export class VictoryTileAreaDescription extends LocationDescription<SpiritOfNatu
   width = forestBoardDescription.width
   height = victoryTileDescription.height + 1
   borderRadius = 1
-
-  alwaysVisible = true
-
   getLocations({ player }: MaterialContext): Location[] {
     if (!player) return []
     return [{ type: LocationType.VictoryTileArea, player }]
