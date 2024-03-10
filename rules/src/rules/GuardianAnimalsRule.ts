@@ -9,11 +9,7 @@ import GuardianAnimal from '../material/GuardianAnimal'
 
 export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, MaterialType, LocationType> {
 
-  getLegalMoves(playerId: SpiritOfNature) {
-
-    if (!this.isTurnToPlay(playerId)) {
-      return []
-    }
+  getActivePlayerLegalMoves(playerId: SpiritOfNature) {
 
     const playerCards = this.getPlayerCards(playerId)
     const deck = playerCards.location(LocationType.PlayerDeckStack)
