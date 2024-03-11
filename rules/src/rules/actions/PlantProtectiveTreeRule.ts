@@ -1,11 +1,11 @@
-import { isMoveItemType, ItemMove, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
+import { isMoveItemType, isSelectItemType, ItemMove, MaterialItem, MaterialMove, MoveItem, PlayerTurnRule, XYCoordinates } from '@gamepark/rules-api'
+import { forestTreeSpaces } from '../../material/ForestTreeSpaces'
+import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
+import { PlayerState } from '../helper/PlayerState'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
-import { LocationType } from '../../material/LocationType'
-import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
-import { forestTreeSpaces } from '../../material/ForestTreeSpaces'
-import { PlayerState } from '../helper/PlayerState'
 
 export class PlantProtectiveTreeRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
@@ -18,6 +18,8 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     return forestTreeSpaces
       .filter((space) => this.isAvailableSpace(space, playerTrees))
       .flatMap((space) => availableTrees.moveItems({ type: LocationType.TreeSpace, ...space, player: this.player }))
+
+
   }
 
   isAvailableSpace(space: XYCoordinates, playerTrees: MaterialItem[]) {
@@ -38,7 +40,20 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
   getDistance = (space1: XYCoordinates, space2: XYCoordinates): number =>
     Math.abs(space1.x - space2.x) + Math.abs(space1.y - space2.y)
 
+  beforeItemMove(move: ItemMove) {
+    if (isSelectItemType(MaterialType.ProtectiveTreeTiles)(move)) {
+      const selected = this.material(MaterialType.ProtectiveTreeTiles)
+        .selected()
+      if (selected.length) {
+        delete selected.getItem()!.selected
+      }
+    }
+
+    return []
+  }
+
   afterItemMove(move: ItemMove) {
+
     if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return []
 
     const actions = this.onPlantTree(move)
@@ -73,6 +88,13 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
 
   onPlantTree(move: MoveItem) {
     const attrackAnimal = move.location?.x === 0 && move.location?.y === 0
+    const selected = this.material(MaterialType.ProtectiveTreeTiles).selected()
+    if (selected.length) {
+      for (const item of selected.getItems()) {
+        delete item.selected
+      }
+    }
+
     if (attrackAnimal) {
       this.memorize(Memory.Bonus, 3)
       return [this.rules().startRule(RuleId.AttractAnimals)]

@@ -1,6 +1,8 @@
 import { GridLocator } from '@gamepark/living-forest/configuration/GridLocator'
-import { MaterialItem } from '@gamepark/rules-api'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { ItemContext } from '@gamepark/react-game'
+import { MaterialItem } from '@gamepark/rules-api'
 
 export class ProtectiveTreeDeckLocator extends GridLocator {
   delta = { x: 0.5, y: 0.5 }
@@ -9,11 +11,19 @@ export class ProtectiveTreeDeckLocator extends GridLocator {
     return players.length < 3? 4: 3
   }
 
-  getCoordinates(_item: MaterialItem, { rules: { players }}: ItemContext) {
+  getCoordinates(item: MaterialItem, context: ItemContext) {
+    const { rules, displayIndex} = context
+    const { players} = rules
+    const countTreeOfTypes = rules
+      .material(MaterialType.ProtectiveTreeTiles)
+      .location(LocationType.TreeDispenser)
+      .filter((i) => i.id === item.id)
+      .length
+    const selected = item.selected && countTreeOfTypes === displayIndex
     if (players.length < 3) {
-      return { x: -25, y: -8.5, z: 0}
+      return { x: -25, y: selected? -10: -8.5, z: 0}
     }
 
-    return { x: 13.5, y: 2.5, z: 0}
+    return { x: 13.5, y: selected? 1: 2.5, z: 0}
   }
 }

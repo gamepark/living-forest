@@ -1,4 +1,4 @@
-import { CustomMove, isCustomMoveType, isMoveItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
+import { CustomMove, isCustomMoveType, isMoveItemType, isSelectItemType, ItemMove, MaterialMove, PlayerTurnRule } from '@gamepark/rules-api'
 import { Memory } from './Memory'
 import { MaterialType } from '../material/MaterialType'
 import { LocationType } from '../material/LocationType'
@@ -51,6 +51,14 @@ export class ActionRule extends PlayerTurnRule {
     }
 
     return this.mayGoToEndOfTurn
+  }
+
+  beforeItemMove(move: ItemMove) {
+    if (isSelectItemType(MaterialType.ProtectiveTreeTiles)(move)) {
+      return new PlantProtectiveTreeRule(this.game).beforeItemMove(move)
+    }
+
+    return []
   }
 
   afterItemMove(move: ItemMove): MaterialMove[] {

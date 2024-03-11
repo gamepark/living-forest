@@ -1,18 +1,29 @@
 /** @jsxImportSource @emotion/react */
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { LocationType } from '@gamepark/living-forest/material/LocationType'
-import { protectiveTreeTileDescription } from '../../material/description/ProtectiveTreeTileDescription'
 import { css } from '@emotion/react'
-import { LocationDescription } from '@gamepark/react-game'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import { isLocationSubset, LocationDescription, MaterialContext } from '@gamepark/react-game'
+import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
+import { protectiveTreeTileDescription } from '../../material/description/ProtectiveTreeTileDescription'
+import { TreeSpaceHelp } from '../help/TreeSpaceHelp'
 
 export class TreeSpaceDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
-  alwaysVisible = false
   width = protectiveTreeTileDescription.width + 0.3
   ratio = protectiveTreeTileDescription.ratio
   borderRadius = protectiveTreeTileDescription.borderRadius
-  help = () => <p></p>
+
+
+  help = TreeSpaceHelp
   extraCss = css`
     background-color: rgba(0, 128, 0, 0.30);
   `
+
+  canShortClick(move: MaterialMove, location: Location, context: MaterialContext): boolean {
+    if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return false
+    const { rules } = context
+    const item = rules.material(MaterialType.ProtectiveTreeTiles).getItem(move.itemIndex)!
+    if (!item.selected) return false
+    return isLocationSubset(move.location,location)
+  }
 }
