@@ -5,7 +5,7 @@ import { ItemContext } from '@gamepark/react-game'
 import { MaterialItem } from '@gamepark/rules-api'
 
 export class ProtectiveTreeDeckLocator extends GridLocator {
-  delta = { x: 0.5, y: 0.5 }
+  delta = { x: 0.5, y: 0.5, z: 0.5 }
 
   getColumns(_item: MaterialItem, { rules: { players } }: ItemContext): number {
     return players.length < 3? 4: 3
@@ -18,8 +18,9 @@ export class ProtectiveTreeDeckLocator extends GridLocator {
       .material(MaterialType.ProtectiveTreeTiles)
       .location(LocationType.TreeDispenser)
       .filter((i) => i.id === item.id)
-      .length
-    const selected = item.selected && countTreeOfTypes === displayIndex
+      .getItem()?.quantity ?? 1
+
+    const selected = item.selected && (countTreeOfTypes - 1 === displayIndex)
     if (players.length < 3) {
       return { x: -25, y: selected? -10: -8.5, z: 0}
     }

@@ -16,7 +16,7 @@ export class TableLocator extends ItemLocator {
         }
       }
 
-      return getPlayerBoardPositionOnTable(rules, item.location.player!, player)
+      return getPlayerBoardPositionOnTable(rules, item.id!, player)
     }
 }
 

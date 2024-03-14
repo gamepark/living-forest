@@ -17,12 +17,14 @@ export class GridLocator extends LineLocator<SpiritOfNature, MaterialType, Locat
     const coordinates = this.getCoordinates(item, context)
     const index = this.getItemIndex(item, context)
     const columns = this.getColumns(item, context)
-    const deltaX = (index % columns) * (this.delta?.x ?? 0) + (item.location.z ?? 0) * (this.delta?.z ?? 0)
+    const deltaX = (index % columns) * (this.delta?.x ?? 0)
     const deltaY = Math.floor(index / columns) * (this.delta?.y ?? 0)
+    const deltaZ = context.displayIndex * (this.delta?.z ?? 0)
 
     const x = coordinates.x + ((index % columns) * context.material[context.type]!.width!) + deltaX
     const y = coordinates.y + (Math.floor(index / columns) * context.material[context.type]!.height!) + deltaY
 
-    return { x, y, z: coordinates.z }
+
+    return { x, y, z: deltaZ }
   }
 }
