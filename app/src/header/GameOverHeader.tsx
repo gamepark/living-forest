@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons/faCircleQuestion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
@@ -25,7 +26,9 @@ export const GameOverHeader = () => {
     <>
       &nbsp;<FontAwesomeIcon icon={faCircleQuestion} onClick={() => setDialogOpen(true)} css={pointerCursorCss}/>
       <RulesDialog open={dialogOpen} close={() => setDialogOpen(false)}>
-        <GameOverRule/>
+        <div css={dialogContentCss}>
+          <GameOverRule/>
+        </div>
       </RulesDialog>
     </>
   )
@@ -57,3 +60,10 @@ export const getHeaderKey = (game: MaterialGame, winner: SpiritOfNature, isWinni
   if (playerState.treePoints >= 12) return  { text: me? 'header.winner.tree.me': 'header.winner.tree', score: playerState.treePoints }
   return
 }
+
+const dialogContentCss = css`
+  display: flex;
+  padding: 3em 1em 3em 3em;
+  max-width: inherit;
+  max-height: inherit;
+`

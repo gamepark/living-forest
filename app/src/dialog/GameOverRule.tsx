@@ -49,7 +49,7 @@ export const GameOverRule: FC<GameOverRuleProps> = () => {
         </thead>
         <tbody>
         {players.map((p) => (
-          <PlayerLine player={p.id} winners={winners}/>
+          <PlayerLine key={p.id} player={p.id} winners={winners}/>
         ))}
         </tbody>
       </table>
@@ -121,14 +121,19 @@ const headerStyle = css`
 `
 
 const container = css`
-  padding: 3em;
-  max-width: 90vw;
-  max-height: 90vh;
+  margin: 0 0.5em;
+  padding: 0 1.5em 0 0.5em;
+  overflow: auto;
+  flex: 1;
 
-  h1 {
-    padding: 0;
-    margin: 0 0 1em;
+  > h1 {
+    margin: 0 0.2em;
+    text-align: center;
     font-size: 4em;
+  }
+
+  > p {
+    white-space: break-spaces;
   }
 
   thead {
