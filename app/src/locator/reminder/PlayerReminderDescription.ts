@@ -3,7 +3,7 @@ import { css } from '@emotion/react'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { LocationContext, LocationDescription, MaterialContext } from '@gamepark/react-game'
 import { Location } from '@gamepark/rules-api'
-import { getBoardIndex, getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
+import { getIndexForPlayers, getPlayerBoardPositionOnTable } from '../../utils/PositionOnTable'
 import { PlayerReminder } from './PlayerReminder'
 
 export class PlayerReminderDescription extends LocationDescription {
@@ -24,9 +24,9 @@ export class PlayerReminderDescription extends LocationDescription {
   getCoordinates(location: Location, context: LocationContext) {
     const { rules, player } = context
     const position = getPlayerBoardPositionOnTable(rules, location.player!, player)
-    const boardIndex = getBoardIndex(location.player!, rules, player)
+    const index = getIndexForPlayers(location.player!, rules, player)
 
-    if (boardIndex < 2) {
+    if (index === 0 || index === 3) {
       position.y -= 18.4
     } else {
       position.y += 11
