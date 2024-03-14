@@ -12,6 +12,7 @@ export class TreeSpaceDescription extends LocationDescription<SpiritOfNature, Ma
   width = protectiveTreeTileDescription.width + 0.3
   ratio = protectiveTreeTileDescription.ratio
   borderRadius = protectiveTreeTileDescription.borderRadius
+  alwaysVisible = true
 
 
   help = TreeSpaceHelp

@@ -10,9 +10,8 @@ export class ForestBoardDescription extends BoardDescription {
   height = 17.72
   width = 29
 
-  getLocations(item: MaterialItem, { player }: ItemContext) {
-    if (!player || item.location.player !== player) return []
-    return forestTreeSpaces.map((coordinates) => ({ type: LocationType.TreeSpace, ...coordinates, player }))
+  getLocations(_item: MaterialItem, { rules }: ItemContext) {
+    return rules.players.flatMap((player) => forestTreeSpaces.map((coordinates) => ({ type: LocationType.TreeSpace, ...coordinates, player })))
   }
 
   getStaticItems({ rules: { players } }: MaterialContext): MaterialItem<number, number>[] {
