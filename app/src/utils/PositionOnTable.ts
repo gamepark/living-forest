@@ -1,22 +1,23 @@
-import { forestBoardDescription } from '../material/description/ForestBoardDescription'
-import { MaterialItem, MaterialRules } from '@gamepark/rules-api'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import { MaterialRules } from '@gamepark/rules-api'
+import { forestBoardDescription } from '../material/description/ForestBoardDescription'
 
-export const getPlayerBoardPositionOnTable = (rules: MaterialRules, item: MaterialItem, player?: SpiritOfNature) => {
-  const index = getIndexForPlayers(item, rules, player)
+export const getPlayerBoardPositionOnTable = (rules: MaterialRules, currentPlayer: SpiritOfNature,  player?: SpiritOfNature) => {
+  const index = getIndexForPlayers(currentPlayer, rules, player)
   return getPositionForIndex(index, rules.players)
 }
 
-export const getIndexForPlayers = (item: MaterialItem, rules: MaterialRules, player?: SpiritOfNature) => {
-  return [0, 2, 3, 5][getBoardIndex(item, rules, player)]
+export const getIndexForPlayers = (currentPlayer: SpiritOfNature, rules: MaterialRules, player?: SpiritOfNature) => {
+  console.log([0, 2, 3, 5][getBoardIndex(currentPlayer, rules, player)])
+  return [0, 2, 3, 5][getBoardIndex(currentPlayer, rules, player)]
 }
 
-export const getBoardIndex = (item: MaterialItem, rules: MaterialRules, player?: SpiritOfNature) => {
-  if (!player) return rules.players.indexOf(item.location.player!)
-  if (player && player === item.location.player) return 0
+export const getBoardIndex = (currentPlayer: SpiritOfNature, rules: MaterialRules, player?: SpiritOfNature) => {
+  if (!player) return rules.players.indexOf(currentPlayer)
+  if (player && player === currentPlayer) return 0
   const remainingPlayers = rules.players.filter((p) => p !== player)
   if (remainingPlayers.length === 1) return 1
-  return remainingPlayers.indexOf(item.location.player!) + 1
+  return remainingPlayers.indexOf(currentPlayer) + 1
 }
 
 const getPositionForIndex = (index: number, players: SpiritOfNature[]) => {

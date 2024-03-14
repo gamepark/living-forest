@@ -21,7 +21,7 @@ export class PlayerDiscardDescription extends LocationDescription<SpiritOfNature
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
-    const parentPosition = getPlayerBoardPositionOnTable(rules, { location }, player)
+    const parentPosition = getPlayerBoardPositionOnTable(rules, location.player!, player)
 
     return {
       x: parentPosition.x + 15.5,

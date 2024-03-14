@@ -20,7 +20,7 @@ export class PlayerFragmentStackDescription extends LocationDescription<SpiritOf
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
-    const parentPosition = getPlayerBoardPositionOnTable(rules, { location }, player)
+    const parentPosition = getPlayerBoardPositionOnTable(rules, location.player!, player)
     return {
       x: parentPosition.x - 16,
       y: parentPosition.y + 4.5,

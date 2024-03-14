@@ -10,7 +10,7 @@ export class PlayerDiscardLocator extends DeckLocator {
 
   getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
     const { rules, player } = context
-    const parentPosition = getPlayerBoardPositionOnTable(rules, item, player)
+    const parentPosition = getPlayerBoardPositionOnTable(rules, item.location.player!, player)
 
     return {
       x: parentPosition.x + 15.5,

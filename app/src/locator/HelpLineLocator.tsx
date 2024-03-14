@@ -14,7 +14,7 @@ export class HelpLineLocator extends LineLocator {
 
   getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
     const { rules, player } = context
-    const boardPosition = getPlayerBoardPositionOnTable(rules, item, player)
+    const boardPosition = getPlayerBoardPositionOnTable(rules, item.location.player!, player)
 
     return {
       x: boardPosition.x - 19 + guardianAnimalCardDescription.width / 2,

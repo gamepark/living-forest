@@ -21,7 +21,7 @@ export class PlayerFireStackDescription extends LocationDescription<SpiritOfNatu
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
-    const parentPosition = getPlayerBoardPositionOnTable(rules, { location }, player)
+    const parentPosition = getPlayerBoardPositionOnTable(rules, location.player!, player)
     return {
       x: parentPosition.x + 15,
       y: parentPosition.y + 4.5,

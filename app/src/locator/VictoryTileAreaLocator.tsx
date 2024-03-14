@@ -10,7 +10,7 @@ export class VictoryTileAreaLocator extends LineLocator {
   locationDescription = new VictoryTileAreaDescription()
 
   getCoordinates(item: MaterialItem, { rules, player }: ItemContext): Coordinates {
-    const forestCoordinates = getPlayerBoardPositionOnTable(rules, item, player)
+    const forestCoordinates = getPlayerBoardPositionOnTable(rules, item.location.player!, player)
     return {
       x: forestCoordinates.x - 14.5 + ((victoryTileDescription.width + 3) * item.location.id - 1),
       y: forestCoordinates.y + 8,

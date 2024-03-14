@@ -19,7 +19,7 @@ export class VictoryTileAreaDescription extends LocationDescription<SpiritOfNatu
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
-    const parentPosition = getPlayerBoardPositionOnTable(rules, { location }, player)
+    const parentPosition = getPlayerBoardPositionOnTable(rules, location.player!, player)
     return {
       x: parentPosition.x,
       y: parentPosition.y + 7.5,

@@ -24,7 +24,7 @@ export class HelpLineDescription extends LocationDescription<SpiritOfNature, Mat
 
   getCoordinates(location: Location, context: MaterialContext) {
     const { rules, player } = context
-    const boardPosition = getPlayerBoardPositionOnTable(rules, { location }, player)
+    const boardPosition = getPlayerBoardPositionOnTable(rules, location.player!, player)
 
     return {
       x: boardPosition.x,

@@ -23,8 +23,8 @@ export class PlayerReminderDescription extends LocationDescription {
 
   getCoordinates(location: Location, context: LocationContext) {
     const { rules, player } = context
-    const position = getPlayerBoardPositionOnTable(rules, { location }, player)
-    const boardIndex = getBoardIndex({location}, rules, player)
+    const position = getPlayerBoardPositionOnTable(rules, location.player!, player)
+    const boardIndex = getBoardIndex(location.player!, rules, player)
 
     if (boardIndex < 2) {
       position.y -= 18.4

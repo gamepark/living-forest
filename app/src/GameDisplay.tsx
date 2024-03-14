@@ -10,14 +10,16 @@ export default function GameDisplay() {
   if (!players.length) return null;
   const bigTable = players.length > 3
   const twoPlayers = players.length === 2
+
   return <>
     <GameTable 
-    xMin={-28} 
-    xMax={!twoPlayers ? 90: 95}
+    xMin={-28}
+    xMax={bigTable ? 90: 95}
     yMin={!twoPlayers ? -39: -30}
     yMax={!twoPlayers? 28: 30}
     collisionAlgorithm={pointerWithin} 
     margin={{ top: 7, left: 0, right: bigTable? 38: 0, bottom: 0 }}
+    css={css`background-color: rgba(255, 255, 255, 0.7)`}
     >
       <GameTableNavigation scaleStep={0.2} css={navigationPosition(players.length)} />
     </GameTable>
