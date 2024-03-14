@@ -4,6 +4,7 @@ import { MaterialType } from '../../material/MaterialType'
 import SpiritOfNature from '../../SpiritOfNature'
 import { CustomMoveType } from '../CustomMoveType'
 import { PlayerState } from '../helper/PlayerState'
+import { rockRules } from '../helper/RockRule'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
 import { AttractAnimalsRule } from './AttractAnimalsRule'
@@ -27,7 +28,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
   }
 
   private applyAction(space: number) {
-    const ruleId = this.rockRules[space]
+    const ruleId = rockRules[space]
     const hasAction = this.canDoAction(ruleId)
     if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
     this.forget(Memory.RemainingMoves)
@@ -43,7 +44,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     const standee = this.standee
     const position = standee.getItem()!.location.x!
     const moves: MaterialMove[] = []
-    const rocks = this.rockRules
+    const rocks = rockRules
 
     let max = maxMoves
     for (let i = 1; i <= max; i++) {
@@ -77,7 +78,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     const standee = this.standee
     const position = standee.getItem()!.location.x!
     const { distance } = move.data
-    const rocks = this.rockRules
+    const rocks = rockRules
 
     const moves: MaterialMove[] = []
     const passedPlayers: SpiritOfNature[] = []
@@ -139,22 +140,5 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
   get playerState() {
     return new PlayerState(this.game, this.player)
-  }
-
-  get rockRules() {
-    return [
-      RuleId.PlantTree,
-      RuleId.TakeFragment,
-      RuleId.AttractAnimals,
-      RuleId.TakeFragment,
-      RuleId.ExtinguishFire,
-      RuleId.TakeFragment,
-      RuleId.PlantTree,
-      RuleId.TakeFragment,
-      RuleId.AttractAnimals,
-      RuleId.TakeFragment,
-      RuleId.ExtinguishFire,
-      RuleId.TakeFragment
-    ]
   }
 }

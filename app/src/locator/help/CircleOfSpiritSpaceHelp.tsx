@@ -1,29 +1,40 @@
 /** @jsxImportSource @emotion/react */
-import { FC } from 'react'
-import { LocationHelpProps, PlayMoveButton, useLegalMoves } from '@gamepark/react-game'
-import { Trans, useTranslation } from 'react-i18next'
-import { MaterialMove, isCustomMoveType } from '@gamepark/rules-api'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
+import { rockRules } from '@gamepark/living-forest/rules/helper/RockRule'
+import { RuleId } from '@gamepark/living-forest/rules/RuleId'
+import { LocationHelpProps, PlayMoveButton, useLegalMoves } from '@gamepark/react-game'
+import { isCustomMoveType, MaterialMove } from '@gamepark/rules-api'
+import { FC } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 
 export const CircleOfSpiritSpaceHelp: FC<LocationHelpProps> = (({ location, closeDialog }) => {
   const { t } = useTranslation()
   const legalMoves = useLegalMoves<MaterialMove>()
-  const move = legalMoves.find((move) => isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move))
+  const move = legalMoves.find((move) => isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move) && move.data.target === location.x)
+  const effect = move? rockRules[location.x!]: undefined
   return <>
     <h2>{t('rules.circle-spirit-space.title')}</h2>
-    {(location.x == 1 || location.x == 3 || location.x == 5 || location.x == 7 || location.x == 9 || location.x == 11) &&
-      <p>{t('rules.circle-spirit-space.fragment')}</p>
+    <p><Trans defaults="rules.circle-spirit-space.desc"><strong /></Trans></p>
+    {RuleId.TakeFragment === effect &&
+      <p>
+        <Trans defaults="rules.circle-spirit-space.fragment"><strong /></Trans>
+      </p>
     }
-    {(location.x == 4 || location.x == 10) &&
-      <p>{t('rules.circle-spirit-space.extinguish')}</p>
+    {RuleId.ExtinguishFire === effect &&
+      <p>
+        <Trans defaults="rules.circle-spirit-space.extinguish"><strong /></Trans>
+      </p>
     }
-    {(location.x == 2 || location.x == 8) &&
-      <p>{t('rules.circle-spirit-space.attract')}</p>
+    {RuleId.AttractAnimals === effect &&
+      <p>
+        <Trans defaults="rules.circle-spirit-space.attract"><strong /></Trans>
+      </p>
     }
-    {(location.x == 0 || location.x == 6) &&
-      <p>{t('rules.circle-spirit-space.plant')}</p>
+    {RuleId.PlantTree === effect &&
+      <p>
+        <Trans defaults="rules.circle-spirit-space.plant"><strong /></Trans>
+      </p>
     }
-    {move && <hr />}
     {move && <Trans defaults="rules.circle-spirit-space.button">
       <PlayMoveButton move={move} onPlay={closeDialog} />
     </Trans>}
