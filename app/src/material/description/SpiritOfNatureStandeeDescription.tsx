@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import { ComponentSize, ItemContext, TokenDescription } from '@gamepark/react-game'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import Images from '../../images/Images'
@@ -14,6 +15,12 @@ export class SpiritOfNatureStandeeDescription extends TokenDescription {
     [SpiritOfNature.Summer]: Images.summerSpiritCircle,
     [SpiritOfNature.Spring]: Images.springSpiritCircle,
     [SpiritOfNature.Winter]: Images.winterSpiritCircle,
+  }
+
+  getFrontExtraCss() {
+    return css`
+      border-radius: 1em 1em 0.5em 0.5em;
+    `
   }
 
   getSize(id: SpiritOfNature): ComponentSize {
