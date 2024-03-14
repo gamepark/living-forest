@@ -16,4 +16,5 @@ export class FireOnCircleOfSpiritBoardLocator extends ItemLocator {
     const y = 50 + radius * Math.cos(angle * Math.PI / 180)
     return { x, y}
   }
+
 }
