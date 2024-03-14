@@ -47,7 +47,7 @@ export class FireTileDescription extends TokenDescription {
     if (!isMoveItemType(MaterialType.FireTile)(move) || move.location.type !== LocationType.PlayerFireTileStack) return false
     const { rules } = context
     const item = rules.material(context.type).getItem(context.index)!
-    return item.location.type === LocationType.CircleOfSpiritBoardFire;
+    return move.itemIndex === context.index && item.location.type === LocationType.CircleOfSpiritBoardFire;
 
   }
 }
