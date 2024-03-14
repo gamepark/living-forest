@@ -8,7 +8,6 @@ export const getPlayerBoardPositionOnTable = (rules: MaterialRules, currentPlaye
 }
 
 export const getIndexForPlayers = (currentPlayer: SpiritOfNature, rules: MaterialRules, player?: SpiritOfNature) => {
-  console.log([0, 2, 3, 5][getBoardIndex(currentPlayer, rules, player)])
   return [0, 2, 3, 5][getBoardIndex(currentPlayer, rules, player)]
 }
 

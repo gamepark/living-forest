@@ -11,11 +11,7 @@ export const PlayerPanels: FC = () => {
   const players = usePlayers()
   const playerId = usePlayerId()
   const rules = useRules<LivingForestRules>()!
-  const orderedPlayers = useMemo(() => orderBy(players, (p) => {
-    console.log(p.id, playerId, getBoardIndex(p.id, rules, playerId))
-    return getBoardIndex(p.id, rules, playerId)
-  }), [])
-  console.log(orderedPlayers)
+  const orderedPlayers = useMemo(() => orderBy(players, (p) => getBoardIndex(p.id, rules, playerId)), [])
   return (
     <>
       {orderedPlayers.map((player, index) =>
