@@ -19,7 +19,7 @@ export default function GameDisplay() {
     yMax={!twoPlayers? 28: 30}
     collisionAlgorithm={pointerWithin} 
     margin={{ top: 7, left: 0, right: bigTable? 38: 0, bottom: 0 }}
-    css={css`background-color: rgba(255, 255, 255, 0.7)`}
+    //css={css`background-color: rgba(255, 255, 255, 0.7)`}
     >
       <GameTableNavigation scaleStep={0.2} css={navigationPosition(players.length)} />
     </GameTable>
