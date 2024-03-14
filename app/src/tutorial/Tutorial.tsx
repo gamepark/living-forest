@@ -231,8 +231,17 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: (t: TFunction) => t('tuto.actions')
-      }
+        text: (t: TFunction) => t('tuto.actions'),
+        position: { x: 0, y: 5 }
+      },
+      focus: (game) => ({
+        materials: [
+          this.material(game, MaterialType.SacredTree)
+        ],
+        margin: {
+          bottom: 12
+        }
+      })
     },
     {
       popup: {
