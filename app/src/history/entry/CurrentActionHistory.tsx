@@ -1,9 +1,9 @@
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { Memory } from '@gamepark/living-forest/rules/Memory'
-import { MaterialHistoryProps } from '@gamepark/react-game'
+import { HistoryEntry, MaterialHistoryProps } from '@gamepark/react-game'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
-import { ActionHistory } from './ActionHistory'
+import { getColor } from '../../utils/ColorUtils'
 
 type CurrentActionHistoryProps = {} & MaterialHistoryProps
 
@@ -14,9 +14,9 @@ export const CurrentActionHistory: FC<CurrentActionHistoryProps> = (props) => {
   const actionCount = playerState.solidarityGregariousDifference === 3? 1: 2
   const current = !context.game.memory?.[Memory.Actions]? 1: (actionCount - context.game.memory[Memory.Actions] + 1)
 
-  return <ActionHistory consequence context={context}>
+  return <HistoryEntry depth={1} backgroundColor={`${getColor(context.action.playerId)}40`}>
     <Trans defaults="history.current-action" values={{ action: current}}>
       <strong />
     </Trans>
-  </ActionHistory>
+  </HistoryEntry>
 }

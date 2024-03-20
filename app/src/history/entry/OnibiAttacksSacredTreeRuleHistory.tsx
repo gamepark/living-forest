@@ -2,12 +2,13 @@
 import { Fire } from '@gamepark/living-forest/material/Fire'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { ActionHistoryEntry, HistoryEntry, MaterialHistoryProps } from '@gamepark/react-game'
+import { HistoryEntry, MaterialHistoryProps } from '@gamepark/react-game'
 import { isMoveItemType, MaterialGame, MoveItem, StartRule } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { fireTileDescription } from '../../material/description/FireTileDescription'
-import { allBorders, bold, noBorder } from '../LivingForestHistory'
+import { bold, noBorder } from '../LivingForestHistory'
+import { PictureHistoryEntry } from './PictureHistoryEntry'
 
 type OnibiAttacksSacredTreeRuleHistoryProps = { move: StartRule } & Omit<MaterialHistoryProps, 'move'>
 
@@ -22,8 +23,8 @@ export const OnibiAttacksSacredTreeRuleHistory: FC<OnibiAttacksSacredTreeRuleHis
 
   return (
     <>
-      <HistoryEntry border={allBorders} css={bold}>{t('history.onibi-attack-tree')}</HistoryEntry>
-      {!fireTiles && <HistoryEntry context={context}>{t('history.no-fire')}</HistoryEntry>}
+      <HistoryEntry borderTop borderBottom css={bold}>{t('history.onibi-attack-tree')}</HistoryEntry>
+      {!fireTiles && <HistoryEntry>{t('history.no-fire')}</HistoryEntry>}
       {!!fireTiles && <NewFireTileHistory move={move} context={context}/>}
 
     </>
@@ -49,12 +50,12 @@ export const NewFireTileHistory: FC<NewFireTileHistoryProps> = (props) => {
     <>
       {
         Object.entries(tileByValue).map(([fire, count]) => (
-          <ActionHistoryEntry consequence key={fire} context={context} pictureCss={noBorder} picture={fireTileDescription.images[fire]}>
+          <PictureHistoryEntry depth={1} key={fire} pictureCss={noBorder} picture={fireTileDescription.images[fire]}>
             {t('history.onibi.fire', {
               count: count,
               value: fire
             })}
-          </ActionHistoryEntry>
+          </PictureHistoryEntry>
         ))
       }
     </>

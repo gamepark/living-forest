@@ -2,29 +2,28 @@
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { ProtectiveTreeDetail } from '@gamepark/living-forest/material/ProtectivesTrees'
 import Resource from '@gamepark/living-forest/material/Resource'
-import { MaterialHistoryProps, Picture, PlayMoveButton, usePlayerId, usePlayerName } from '@gamepark/react-game'
+import { MaterialHistoryProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { displayMaterialHelp, isMoveItemType } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
 import { ResourceImage } from '../../material/description/help/GuardianAnimalCardHelp'
+import { getColor } from '../../utils/ColorUtils'
 import { noBorder, pictureCss, rulesLinkButton } from '../LivingForestHistory'
-import { ActionHistory } from './ActionHistory'
+import { PictureHistoryEntry } from './PictureHistoryEntry'
 
-type PlantTreeRuleHistoryProps = {} &  MaterialHistoryProps
+type PlantTreeRuleHistoryProps = {} & MaterialHistoryProps
 
 export const PlantTreeRuleHistory: FC<PlantTreeRuleHistoryProps> = (props) => {
   const { move, context } = props
-  const playerId = usePlayerId()
   const actionPlayer = context.action.playerId
-  const itsMe = playerId && actionPlayer === playerId
   const name = usePlayerName(actionPlayer)
-  if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return null;
+  if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return null
   const itemId = context.game.items[move.itemType][move.itemIndex]?.id
 
   return (
-    <ActionHistory consequence depth={2} context={context} pictureCss={noBorder} picture={ResourceImage[Resource.Seed]}>
+    <PictureHistoryEntry depth={2} backgroundColor={`${getColor(actionPlayer)}40`} pictureCss={noBorder} picture={ResourceImage[Resource.Seed]}>
       <div css={pictureCss}>
-        <Trans defaults={itsMe ? 'history.plant.me' : 'history.plant'} values={{
+        <Trans defaults="history.plant" values={{
           player: name,
           cost: ProtectiveTreeDetail[itemId].cost
         }}>
@@ -34,7 +33,7 @@ export const PlantTreeRuleHistory: FC<PlantTreeRuleHistoryProps> = (props) => {
           <u/>
         </Trans>
       </div>
-    </ActionHistory>
-)
+    </PictureHistoryEntry>
+  )
 
 }

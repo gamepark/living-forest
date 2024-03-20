@@ -7,10 +7,10 @@ import { GameOverHeader } from '../../header/GameOverHeader'
 export const EndGameHistory: FC = () => {
   return (
     <>
-      <HistoryEntry border css={winnerStyle}>
+      <HistoryEntry borderBottom css={winnerStyle}>
         <GameOverHeader/>
       </HistoryEntry>
-      <HistoryEntry border css={endOfGameStyle}></HistoryEntry>
+      <HistoryEntry borderBottom css={endOfGameStyle}></HistoryEntry>
     </>
   )
 }

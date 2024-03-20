@@ -25,43 +25,43 @@ export const LivingForestHistoryHistory: FC<MaterialHistoryProps> = (props) => {
   const game = context.game
 
   if (game.rule?.id === RuleId.PassingSacredTree && isStartSimultaneousRule(move) && move.id === RuleId.GuardianAnimals) {
-    return <NewRoundHistory />
+    return <NewRoundHistory/>
   }
 
   if (isStartPlayerTurn(move) && move.id === RuleId.Action) {
-    return <PlayerTurnHistory move={move} context={context} />
+    return <PlayerTurnHistory move={move} context={context}/>
   }
 
   if (game.rule?.id === RuleId.Action) {
-    return <ActionRuleHistory move={move} context={context} />
+    return <ActionRuleHistory move={move} context={context}/>
   }
 
   if (game.rule?.id === RuleId.PickVictoryTile && isMoveItemType(MaterialType.VictoryTile)(move)) {
-    return <PickVictoryTileRuleHistory move={move} context={context} />
+    return <PickVictoryTileRuleHistory move={move} context={context}/>
   }
 
   if (game.rule?.id === RuleId.GuardianAnimals) {
-    return <GuardianAnimalRuleHistory move={move} context={context} />
+    return <GuardianAnimalRuleHistory move={move} context={context}/>
   }
 
   if (game.rule?.id === RuleId.AttractAnimals) {
-    return <AttractAnimalRuleHistory move={move} context={context} />
+    return <AttractAnimalRuleHistory move={move} context={context}/>
   }
 
   if (game.rule?.id === RuleId.ExtinguishFire) {
-    return <ExtinguishFireRuleHistory move={move} context={context} />
+    return <ExtinguishFireRuleHistory move={move} context={context}/>
   }
 
   if (isStartRule(move) && move.id === RuleId.OnibiAttacksPlayer) {
-    return <OnibiAttacksPlayerRuleHistory move={move} context={context} />
+    return <OnibiAttacksPlayerRuleHistory move={move} context={context}/>
   }
 
   if (isStartRule(move) && move.id === RuleId.OnibiAttacksSacredTree) {
-    return <OnibiAttacksSacredTreeRuleHistory move={move} context={context} />
+    return <OnibiAttacksSacredTreeRuleHistory move={move} context={context}/>
   }
 
   if (isEndGame(move)) {
-    return <EndGameHistory />
+    return <EndGameHistory/>
   }
 
   return null
@@ -80,6 +80,7 @@ export const noBorder = css`
 
 export const pictureCss = css`
   white-space: break-spaces;
+
   > picture, img {
     height: 1.8em;
     width: 1.8em;
@@ -90,5 +91,3 @@ export const pictureCss = css`
 export const bold = css`
   font-weight: bold;
 `
-
-export const allBorders = {top: true, bottom: true}
