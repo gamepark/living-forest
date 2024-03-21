@@ -13,6 +13,7 @@ export const GuardianAnimalsHeader = () => {
   const pass = legalMoves.find(isEndPlayerTurn)
   const spendFragment = legalMoves.find(isMoveItemType(MaterialType.FragmentTile))
   const draw = legalMoves.find((move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) || isCustomMoveType(CustomMoveType.ShuffleAndDraw)(move))
+  const drawUntilSolitary = legalMoves.find((move) => isCustomMoveType(CustomMoveType.DrawUntilSolitary)(move))
   const { t } = useTranslation()
   const playerId = usePlayerId()
   const remainingPlayers = rules.game.rule?.players ?? []
@@ -36,6 +37,7 @@ export const GuardianAnimalsHeader = () => {
         <Trans defaults="header.draw-pass">
           <PlayMoveButton move={draw}/>
           <PlayMoveButton move={pass}/>
+          <PlayMoveButton move={drawUntilSolitary}/>
         </Trans>
       )
     }
@@ -44,6 +46,7 @@ export const GuardianAnimalsHeader = () => {
       return (
         <Trans defaults="header.draw">
           <PlayMoveButton move={draw}/>
+          <PlayMoveButton move={drawUntilSolitary}/>
         </Trans>
       )
     }
@@ -61,6 +64,7 @@ export const GuardianAnimalsHeader = () => {
         <PlayMoveButton move={draw}/>
         <PlayMoveButton move={spendFragment}/>
         <PlayMoveButton move={pass}/>
+        <PlayMoveButton move={drawUntilSolitary}/>
       </Trans>
     )
   } else {
