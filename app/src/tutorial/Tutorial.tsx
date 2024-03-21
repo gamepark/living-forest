@@ -48,7 +48,8 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         position: { x: -5, y: 20 }
       },
       move: {
-        player: SpiritOfNature.Spring
+        player: SpiritOfNature.Spring,
+        filter: (move) => !isCustomMoveType(CustomMoveType.DrawUntilSolitary)(move)
       },
       focus: (game) => ({
         materials: [
@@ -64,7 +65,8 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       move: {
-        player: SpiritOfNature.Winter
+        player: SpiritOfNature.Winter,
+        filter: (move) => !isCustomMoveType(CustomMoveType.DrawUntilSolitary)(move)
       }
     },
     {
