@@ -29,7 +29,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
 
     const deckLength = this.getDeck(playerId).length
     const discardLength = this.getDiscard(playerId).length
-    if (deckLength || discardLength) {
+    if (playerState.solidarityGregariousDifference < 2 && (deckLength || discardLength)) {
       moves.push(this.rules().customMove(CustomMoveType.DrawUntilSolitary, playerId))
     }
 
