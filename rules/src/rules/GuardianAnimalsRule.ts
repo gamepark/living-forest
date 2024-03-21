@@ -1,11 +1,11 @@
 import { CustomMove, isCustomMoveType, isMoveItemType, isShuffleItemType, ItemMove, MaterialMove, SimultaneousRule } from '@gamepark/rules-api'
-import { MaterialType } from '../material/MaterialType'
-import { LocationType } from '../material/LocationType'
-import { CustomMoveType } from './CustomMoveType'
-import SpiritOfNature from '../SpiritOfNature'
-import { RuleId } from './RuleId'
-import { PlayerState } from './helper/PlayerState'
 import GuardianAnimal from '../material/GuardianAnimal'
+import { LocationType } from '../material/LocationType'
+import { MaterialType } from '../material/MaterialType'
+import SpiritOfNature from '../SpiritOfNature'
+import { CustomMoveType } from './CustomMoveType'
+import { PlayerState } from './helper/PlayerState'
+import { RuleId } from './RuleId'
 
 export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, MaterialType, LocationType> {
 
@@ -72,13 +72,27 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
 
     if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move) || move.location?.type !== LocationType.HelpLine) return []
     const playerId = move.location.player!
+    const deckLength = this.getDeck(playerId).length
+    const discardLength = this.getDiscard(playerId).length
+    if (!deckLength && !discardLength) {
+      return [this.rules().endPlayerTurn(playerId)]
+    }
+
     const fragments = this.material(MaterialType.FragmentTile).location(LocationType.PlayerFragmentTileStack).player(playerId)
     const playerState = new PlayerState(this.game, playerId)
-    if (playerState.solidarityGregariousDifference >= 3 && !fragments.length) {
+    if ((playerState.solidarityGregariousDifference >= 3 && !fragments.length)) {
       return [this.rules().endPlayerTurn(playerId)]
     }
 
     return []
+  }
+
+  getDeck(player: SpiritOfNature) {
+    return this.material(MaterialType.GuardianAnimalCard).location(LocationType.PlayerDeckStack).player(player)
+  }
+
+  getDiscard(player: SpiritOfNature) {
+    return this.material(MaterialType.GuardianAnimalCard).location(LocationType.PlayerDiscardStack).player(player)
   }
 
 
