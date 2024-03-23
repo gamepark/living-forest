@@ -18,9 +18,14 @@ export class AttractAnimalsRule extends PlayerTurnRule {
     return moves
   }
 
-  afterItemMove(move: ItemMove): MaterialMove[] {
+  beforeItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move)) return []
     this.updateSpent(move)
+    return []
+  }
+
+  afterItemMove(move: ItemMove): MaterialMove[] {
+    if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move)) return []
     if (this.possible) return []
     return [this.rules().startRule(RuleId.Action)]
   }
@@ -33,7 +38,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
         spent[Resource.Sun] = 0
       }
 
-      spent[Resource.Sun] += GuardianAnimalDescriptions[item.id].cost!
+      spent[Resource.Sun] += GuardianAnimalDescriptions[item.id]!.cost
       return spent
     })
   }

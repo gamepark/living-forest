@@ -58,6 +58,10 @@ export class ActionRule extends PlayerTurnRule {
       return new PlantProtectiveTreeRule(this.game).beforeItemMove(move)
     }
 
+    if (this.isMoveMaterialOnLocation(MaterialType.GuardianAnimalCard, LocationType.PlayerDeckStack)(move)) {
+      return new AttractAnimalsRule(this.game).beforeItemMove(move)
+    }
+
     return []
   }
 
