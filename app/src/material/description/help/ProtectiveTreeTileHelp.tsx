@@ -59,7 +59,7 @@ export const ProtectiveTreeTileHelp = ({ item, itemIndex, closeDialog }: Materia
       <>
         <hr/>
         <Trans defaults="rules.take-tree">
-          <PlayMoveButton move={rules.material(MaterialType.ProtectiveTreeTiles).index(takeProtectiveTree.itemIndex).selectItem()} local onPlay={closeDialog}/>
+          <PlayMoveButton disabled={/*TODO: remove when tuto is fixed*/rules.game.tutorialStep !== undefined} move={rules.material(MaterialType.ProtectiveTreeTiles).index(takeProtectiveTree.itemIndex).selectItem()} local onPlay={closeDialog}/>
         </Trans>
       </>
     )}
