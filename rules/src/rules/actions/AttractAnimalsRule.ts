@@ -38,7 +38,8 @@ export class AttractAnimalsRule extends PlayerTurnRule {
         spent[Resource.Sun] = 0
       }
 
-      spent[Resource.Sun] += GuardianAnimalDescriptions[item.id]!.cost
+      // FIXME: THIS FAIL SOMETIMES.... IT SEEMS TO IMPACT ONLY THE HISTORY ON RELOAD
+      spent[Resource.Sun] += GuardianAnimalDescriptions[item.id]?.cost ?? 0
       return spent
     })
   }
