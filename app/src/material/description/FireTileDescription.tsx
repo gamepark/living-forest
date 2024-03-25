@@ -4,7 +4,7 @@ import { Fire } from '@gamepark/living-forest/material/Fire'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { ItemContext, TokenDescription } from '@gamepark/react-game'
-import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import { isMoveItemType, MaterialItem, MaterialMove } from '@gamepark/rules-api'
 import Images from '../../images/Images'
 import { FileTileRules } from './help/FireTileHelp'
 
@@ -18,9 +18,13 @@ export class FireTileDescription extends TokenDescription {
     [Fire.Fire4]: Images.fire4,
   }
 
-  getFrontExtraCss() {
+  getItemExtraCss(item: MaterialItem) {
+    const padding = 0.7
     return css`
       border-radius: 1em 1em 0.5em 0.5em;
+      height: ${this.getSize(item.id).height + padding}em;
+      width: ${this.getSize(item.id).width + padding}em;
+      padding: ${padding / 2}em;
     `
   }
 
