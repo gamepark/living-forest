@@ -71,7 +71,8 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getModifier(type: Resource, realtime: boolean = true) {
-    return (this.bonus ?? 0) - (!realtime? 0: this.getSpent(type))
+    if (!realtime) return 0
+    return (this.bonus ?? 0) - this.getSpent(type)
   }
 
   getTreeResources(resource: Resource) {
