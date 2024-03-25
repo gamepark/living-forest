@@ -17,7 +17,7 @@ export const PlayerResources: FC<PlayerResourcesProps> = (props) => {
   return (
     <div css={resourcesStyle}>
       { resources.filter((r) => r !== Resource.SacredFlower).map((r) => (
-        <PlayerResource key={r} type={r} value={state.getResources(r)} />
+        <PlayerResource key={r} type={r} value={state.getResources(r, false)} />
       ))}
     </div>
   )

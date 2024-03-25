@@ -62,16 +62,16 @@ export class PlayerState extends MaterialRulesPart {
     return !this.helpLine.length
   }
 
-  getResources(type: Resource) {
+  getResources(type: Resource, realtime: boolean = true) {
     const helpLineResources = this.getHelpLineResources(type)
     const treeResources = this.getTreeResources(type)
     const forestResources = this.getForestBonus(type)
-    const modifier = this.getModifier(type)
+    const modifier = this.getModifier(type, realtime)
     return helpLineResources + treeResources + forestResources + modifier
   }
 
-  getModifier(type: Resource) {
-    return (this.bonus ?? 0) - (this.getSpent(type))
+  getModifier(type: Resource, realtime: boolean = true) {
+    return (this.bonus ?? 0) - (!realtime? 0: this.getSpent(type))
   }
 
   getTreeResources(resource: Resource) {
