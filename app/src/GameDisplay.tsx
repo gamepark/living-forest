@@ -16,6 +16,7 @@ export default function GameDisplay() {
     xMin={-28}
     xMax={bigTable ? 90: 95}
     yMin={!twoPlayers ? -39: -30}
+    snapToCenter={false}
     yMax={!twoPlayers? 28: 30}
     collisionAlgorithm={pointerWithin} 
     margin={{ top: 7, left: 0, right: bigTable? 38: 0, bottom: 0 }}

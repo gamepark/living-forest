@@ -19,7 +19,7 @@ export class FireTileDescription extends TokenDescription {
   }
 
   getItemExtraCss(item: MaterialItem) {
-    const padding = 0.7
+    const padding = 1
     return css`
       border-radius: 1em 1em 0.5em 0.5em;
       height: ${this.getSize(item.id).height + padding}em;
