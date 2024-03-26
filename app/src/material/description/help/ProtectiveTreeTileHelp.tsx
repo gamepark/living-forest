@@ -12,11 +12,8 @@ import { alignIcon, alignIconText, ResourceImage, resourceStyle } from './Guardi
 export const ProtectiveTreeTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const rules = useRules<LivingForestRules>()!
-  const takeProtectiveTree = useLegalMove<MoveItem>((move: MaterialMove) => {
-      return isMoveItemType(MaterialType.ProtectiveTreeTiles, itemIndex)(move)
-        && item.location?.type === LocationType.TreeDispenser
-        && itemIndex === move.itemIndex
-    }
+  const takeProtectiveTree = useLegalMove<MoveItem>((move: MaterialMove) =>
+    isMoveItemType(MaterialType.ProtectiveTreeTiles, itemIndex)(move) && item.location?.type === LocationType.TreeDispenser
   )
 
   const detail = ProtectiveTreeDetail[item.id]

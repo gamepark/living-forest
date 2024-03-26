@@ -22,7 +22,9 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
   const legalMoves = useLegalMoves<MaterialMove>()
   const shuffleAndDraw = legalMoves.find(isCustomMoveType(CustomMoveType.ShuffleAndDraw))
   const pass = legalMoves.find(isEndPlayerTurn)
-  const draw = legalMoves.find(isMoveItemType(MaterialType.GuardianAnimalCard))
+  const draw = legalMoves.find((move) =>
+    isMoveItemType(MaterialType.GuardianAnimalCard, itemIndex)(move) && move.location.type === LocationType.HelpLine
+  )
   const attract = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.GuardianAnimalCard, itemIndex)(move) && item.location?.type === LocationType.ReserveRow
   )
@@ -88,12 +90,12 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
       {activePlayer && discard && <p css={italic}>{t('rules.discard-stack')}</p>}
       {!activePlayer && discard && <p css={italic}>{t('rules.discard-stack-opponent', { player: playerName })}</p>}
       {activePlayer && helpline && <p css={italic}>{t('rules.help-line')}</p>}
-      {!activePlayer && helpline &&<p css={italic}>{t('rules.help-line-opponent')}</p>}
+      {!activePlayer && helpline && <p css={italic}>{t('rules.help-line-opponent')}</p>}
       <p>{t('rules.guardian-animal.description')}</p>
-      <Cost />
+      <Cost/>
       <hr/>
-      <Cost cost={description.cost} />
-      <GregariousSolitary type={description.type} />
+      <Cost cost={description.cost}/>
+      <GregariousSolitary type={description.type}/>
       <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(description.resources).map((element, index) => {
           return <span key={index}>{description.resources[element]}
@@ -114,7 +116,7 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
   )
 }
 
-export const Cost: FC<{ cost?: number}> = ({cost}) => {
+export const Cost: FC<{ cost?: number }> = ({ cost }) => {
   if (cost !== undefined) {
     return (
       <p css={alignIconText}>
@@ -140,7 +142,7 @@ export const GregariousSolitary: FC<{ type?: CardType }> = ({ type }) => {
 
   if (type === CardType.Solitary) {
     return (
-      <p css={alignIconText }>
+      <p css={alignIconText}>
         <Trans defaults="help.solitary.desc">
           <span css={resourceStyle(Images.solitary)}/>
         </Trans>
@@ -181,7 +183,7 @@ export const resourceStyle = (image: string) => css`
   width: 1.2em;
   height: 1.2em;
   filter: drop-shadow(0.1em 0.1em 0.2em gray);
-  display:inline-block;
+  display: inline-block;
   margin-right: 0.2em;
 `
 
