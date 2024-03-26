@@ -27,4 +27,8 @@ export class TreeSpaceDescription extends LocationDescription<SpiritOfNature, Ma
     if (!item.selected) return false
     return isLocationSubset(move.location,location)
   }
+
+  canLongClick(): boolean {
+    return false
+  }
 }
