@@ -45,11 +45,11 @@ export const GameOverHeader = () => {
     const players = rules.players
     const winners = rankedPlayers.filter((r) => r.rank === firstPlayer?.rank).map((r) => r.id)
     if (winners.length === players.length) {
-      return t('result.comp.tie.all')
+      return <>{t('result.comp.tie.all')}</>
     } else if (player !== undefined && winners.includes(player)) {
-      return t('result.comp.tie.you', { tied: winners.length - 1 })
+      return <>{t('result.comp.tie.you', { tied: winners.length - 1 })}</>
     } else {
-      return t('result.comp.tie.other', { tied: winners.length })
+      return <>{t('result.comp.tie.other', { tied: winners.length })}</>
     }
   }
 }
