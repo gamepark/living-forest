@@ -18,7 +18,12 @@ export class LivingForestDummy extends Dummy<MaterialGame<SpiritOfNature, Materi
     const legalMoves = super.getLegalMoves(game, player)
     if (game.rule?.id === RuleId.GuardianAnimals) {
       const playerState = new PlayerState(game, player)
-      const lastHelpCard = rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).maxBy((item) => item.location.x!).getItem()
+      const lastHelpCard = rules
+        .material(MaterialType.GuardianAnimalCard)
+        .location(LocationType.HelpLine)
+        .player(player)
+        .maxBy((item) => item.location.x!).getItem()
+
       if (lastHelpCard && isVaran(lastHelpCard.id)) {
         const moves = legalMoves.filter((move) => isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.FragmentTile)(move) && move.location.type === LocationType.FragmentStack)
         if (moves.length) return moves
