@@ -60,5 +60,13 @@ export const ProtectiveTreeTileHelp = ({ item, itemIndex, closeDialog }: Materia
         </Trans>
       </>
     )}
+    {item.location?.type === LocationType.TreeDispenser && (
+      <>
+        <hr/>
+        <p>
+          {t('rules.protected-tree.count', { number: rules.material(MaterialType.ProtectiveTreeTiles).location(LocationType.TreeDispenser).id(item.id).getItem()?.quantity ?? 0})}
+        </p>
+      </>
+    )}
   </>
 }

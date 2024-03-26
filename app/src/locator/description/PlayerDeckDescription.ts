@@ -30,6 +30,8 @@ export class PlayerDeckDescription extends LocationDescription<SpiritOfNature, M
           display: flex;
           align-items: center;
           justify-content: center;
+          margin-left: -${0.01 * (Math.min(deckSize, 10))}em;
+          margin-top: -${0.01 * (Math.min(deckSize, 10))}em;
           content: '${deckSize}';
         }
       `
