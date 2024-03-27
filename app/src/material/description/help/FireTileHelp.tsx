@@ -9,7 +9,7 @@ import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCar
 export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const extinguish = useLegalMove((move: MaterialMove) =>
-    isMoveItemType(MaterialType.FireTile, itemIndex)(move) && item.location?.type === LocationType.CircleOfSpiritBoardFire
+    isMoveItemType(MaterialType.FireTile)(move) && item.location?.type === LocationType.CircleOfSpiritBoardFire && move.itemIndex === itemIndex
   )
 
   return <>
