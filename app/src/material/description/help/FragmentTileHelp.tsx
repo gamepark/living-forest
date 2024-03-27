@@ -8,10 +8,10 @@ export const FragmentTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpP
 
   const { t } = useTranslation()
   const takeFragment = useLegalMove((move: MaterialMove) =>
-    isMoveItemType(MaterialType.FragmentTile, itemIndex)(move) && item.location?.type === LocationType.FragmentStack
+    isMoveItemType(MaterialType.FragmentTile)(move) && item.location?.type === LocationType.FragmentStack && move.itemIndex === itemIndex
   )
   const spendFragment = useLegalMove((move: MaterialMove) =>
-    isMoveItemType(MaterialType.FragmentTile, itemIndex)(move) && item.location?.type === LocationType.PlayerFragmentTileStack
+    isMoveItemType(MaterialType.FragmentTile)(move) && item.location?.type === LocationType.PlayerFragmentTileStack && move.itemIndex === itemIndex
   )
 
   return <>

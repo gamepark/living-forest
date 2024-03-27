@@ -7,7 +7,7 @@ import { Trans, useTranslation } from 'react-i18next'
 export const VictoryTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpProps) => {
   const { t } = useTranslation()
   const takeVictory = useLegalMove((move: MaterialMove) =>
-    isMoveItemType(MaterialType.VictoryTile, itemIndex)(move) && item.location?.type === LocationType.VictoryTileArea
+    isMoveItemType(MaterialType.VictoryTile)(move) && item.location?.type === LocationType.VictoryTileArea && move.itemIndex === itemIndex
   )
 
   return <>

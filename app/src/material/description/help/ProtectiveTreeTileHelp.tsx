@@ -13,7 +13,7 @@ export const ProtectiveTreeTileHelp = ({ item, itemIndex, closeDialog }: Materia
   const { t } = useTranslation()
   const rules = useRules<LivingForestRules>()!
   const takeProtectiveTree = useLegalMove<MoveItem>((move: MaterialMove) =>
-    isMoveItemType(MaterialType.ProtectiveTreeTiles, itemIndex)(move) && item.location?.type === LocationType.TreeDispenser
+    isMoveItemType(MaterialType.ProtectiveTreeTiles)(move) && item.location?.type === LocationType.TreeDispenser && move.itemIndex === itemIndex
   )
 
   const detail = ProtectiveTreeDetail[item.id]

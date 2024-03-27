@@ -23,10 +23,10 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
   const shuffleAndDraw = legalMoves.find(isCustomMoveType(CustomMoveType.ShuffleAndDraw))
   const pass = legalMoves.find(isEndPlayerTurn)
   const draw = legalMoves.find((move) =>
-    isMoveItemType(MaterialType.GuardianAnimalCard, itemIndex)(move) && move.location.type === LocationType.HelpLine
+    isMoveItemType(MaterialType.GuardianAnimalCard)(move) && move.location.type === LocationType.HelpLine && move.itemIndex === itemIndex
   )
   const attract = useLegalMove((move: MaterialMove) =>
-    isMoveItemType(MaterialType.GuardianAnimalCard, itemIndex)(move) && item.location?.type === LocationType.ReserveRow
+    isMoveItemType(MaterialType.GuardianAnimalCard)(move) && item.location?.type === LocationType.ReserveRow && move.itemIndex === itemIndex
   )
   const activePlayer = item.location?.player === player
   const deck = item.location?.type === LocationType.PlayerDeckStack
