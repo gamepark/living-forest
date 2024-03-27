@@ -732,7 +732,8 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       },
       focus: (game) => ({
         materials: [this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow).id(GuardianAnimal.Butterfly)],
-        locations: [{ type: LocationType.PlayerDeckStack, player: SpiritOfNature.Spring }]
+        locations: [{ type: LocationType.PlayerDeckStack, player: SpiritOfNature.Spring }],
+        margin: { top: 1, right: 25 }
       }),
       move: {
         player: SpiritOfNature.Spring,
