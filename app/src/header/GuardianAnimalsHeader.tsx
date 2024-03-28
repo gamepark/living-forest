@@ -46,7 +46,7 @@ export const GuardianAnimalsHeader = () => {
 
     if (hasDrawableCards && drawUntilSolitary) {
       actions.push(
-        <PlayMoveButton key="ds" move={drawUntilSolitary} css={flexButton}>
+        <PlayMoveButton key="ds" move={drawUntilSolitary} css={flexButton} delayed>
           <div  css={alignIcon}>
           <Trans defaults="header.guardian-animal.draw-until-solitary">
             <div css={solitaryCss} />
