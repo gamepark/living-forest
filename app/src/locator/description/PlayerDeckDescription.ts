@@ -53,7 +53,7 @@ export class PlayerDeckDescription extends LocationDescription<SpiritOfNature, M
     return {
       x: deckPosition.x - 0.1,
       y: deckPosition.y - 0.1,
-      z: 10
+      z: 15
     }
   }
 
