@@ -37,14 +37,14 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
       const fragments = this
         .material(MaterialType.FragmentTile)
         .location(LocationType.PlayerFragmentTileStack)
-        .player(playerId);
+        .player(playerId)
       if (fragments.length) {
         moves.push(...fragments.moveItems({ type: LocationType.FragmentStack }))
       }
       moves.push(this.rules().endPlayerTurn(playerId))
     }
 
-    return moves;
+    return moves
   }
 
   beforeItemMove(move: ItemMove) {
@@ -135,8 +135,8 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
       const player = move.data
       const discard = this.getPlayerCards(player).location(LocationType.PlayerDiscardStack)
       return [
-        ...discard.sort((item) => -item.location.x!).moveItems({ type: LocationType.PlayerDeckStack, player: move.data }),
-        discard.shuffle(),
+        discard.moveItemsAtOnce({ type: LocationType.PlayerDeckStack, player: move.data }),
+        discard.shuffle()
       ]
     }
 
