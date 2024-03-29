@@ -4,6 +4,7 @@ import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
+import { GuardianAnimalsRule } from '@gamepark/living-forest/rules/GuardianAnimalsRule'
 import { PlayMoveButton, useLegalMoves, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, MaterialMove } from '@gamepark/rules-api'
 import { Fragment } from 'react'
@@ -27,45 +28,36 @@ export const GuardianAnimalsHeader = () => {
   const lastPlayerName = usePlayerName(lastPlayer)
 
   if (playerId && !iHaveFinished) {
-    const hasCardInHelpLine = rules.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(playerId).length > 0
-    const hasFragment = rules.material(MaterialType.FragmentTile).location(LocationType.PlayerFragmentTileStack).player(playerId).length > 0
-    const hasDrawableCards = rules
-      .material(MaterialType.GuardianAnimalCard)
-      .location((location) => LocationType.PlayerDiscardStack === location.type || LocationType.PlayerDeckStack === location.type)
-      .player(playerId)
-      .length > 0
+    const moves = new GuardianAnimalsRule(rules.game).getActivePlayerLegalMoves(playerId)
+    const canDraw = moves.some((move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) || isCustomMoveType(CustomMoveType.ShuffleAndDraw)(move))
+    const canPass = moves.some((move) => isEndPlayerTurn(move))
+    const canDrawUntilSolitary = moves.find((move) => isCustomMoveType(CustomMoveType.DrawUntilSolitary)(move))
+    const canUseFragment = moves.some((move) => isMoveItemType(MaterialType.FragmentTile)(move))
 
-
-    //header.guadian-animal
-    // header.fragment
-    // header.draw-until-solitary
-    // header.draw
-    // header.pass
     const actions = []
-    if (hasDrawableCards) actions.push(<PlayMoveButton key="d" move={draw}>{t('header.guardian-animal.draw')}</PlayMoveButton>)
+    if (canDraw) actions.push(<PlayMoveButton key="d" move={draw}>{t('header.guardian-animal.draw')}</PlayMoveButton>)
 
-    if (hasDrawableCards && drawUntilSolitary) {
+    if (canDrawUntilSolitary) {
       actions.push(
         <PlayMoveButton key="ds" move={drawUntilSolitary} css={flexButton} delayed>
-          <div  css={alignIcon}>
-          <Trans defaults="header.guardian-animal.draw-until-solitary">
-            <div css={solitaryCss} />
-          </Trans>
-
+          <div css={alignIcon}>
+            <Trans defaults="header.guardian-animal.draw-until-solitary">
+              <div css={solitaryCss}/>
+            </Trans>
           </div>
         </PlayMoveButton>
       )
     }
 
-    if (hasCardInHelpLine && hasFragment) actions.push(<PlayMoveButton key="f" move={spendFragment}>{t('header.guardian-animal.fragment')}</PlayMoveButton>)
-    if (hasCardInHelpLine) actions.push(<PlayMoveButton key="p" move={pass}>{t('header.guardian-animal.pass')}</PlayMoveButton>)
+    if (canUseFragment) actions.push(<PlayMoveButton key="f" move={spendFragment}>{t('header.guardian-animal.fragment')}</PlayMoveButton>)
+    if (canPass) actions.push(<PlayMoveButton key="p" move={pass}>{t('header.guardian-animal.pass')}</PlayMoveButton>)
     let content = undefined
     if (actions.length === 1) {
       content = actions
     } else {
       content = <>
         {actions.slice(0, -1).map((a, index) => (
-          <Fragment key={index}>{a}{index !== (actions.length - 2)? ', ': ''}</Fragment>
+          <Fragment key={index}>{a}{index !== (actions.length - 2) ? ', ' : ''}</Fragment>
         ))} {t('header.or')} {actions.slice(-1)}
       </>
     }

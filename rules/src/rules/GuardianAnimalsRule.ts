@@ -47,6 +47,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     return moves
   }
 
+
   beforeItemMove(move: ItemMove) {
     if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.location?.type !== LocationType.FragmentStack) return []
 
