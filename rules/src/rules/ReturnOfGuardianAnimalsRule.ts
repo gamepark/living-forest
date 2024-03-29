@@ -9,11 +9,10 @@ export class ReturnOfGuardianAnimalsRule extends MaterialRulesPart {
     const moves = []
     for (const player of this.game.players) {
       moves.push(
-        ...this.material(MaterialType.GuardianAnimalCard)
+        this.material(MaterialType.GuardianAnimalCard)
           .location(LocationType.HelpLine)
           .player(player)
-          .sort((item) => -item.location.x!)
-          .moveItems({ type: LocationType.PlayerDiscardStack, player })
+          .moveItemsAtOnce({ type: LocationType.PlayerDiscardStack, player })
       )
     }
 
