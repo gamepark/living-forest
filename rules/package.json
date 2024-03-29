@@ -1,6 +1,6 @@
 {
   "name": "@gamepark/living-forest",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "description": "Living Forest rules for Game Park",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
