@@ -1,10 +1,9 @@
 import { DeckLocator, ItemContext } from '@gamepark/react-game'
 import { Coordinates, MaterialItem } from '@gamepark/rules-api'
-import { PlayerDeckDescription } from './description/PlayerDeckDescription'
 import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
+import { PlayerDeckDescription } from './description/PlayerDeckDescription'
 
 export class PlayerDeckLocator extends DeckLocator {
-  limit = 10
   locationDescription = new PlayerDeckDescription()
 
   delta = { x: -0.05, y: -0.05, z: 0.1 }
