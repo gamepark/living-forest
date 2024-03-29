@@ -11,7 +11,7 @@ export const CircleOfSpiritSpaceHelp: FC<LocationHelpProps> = (({ location, clos
   const { t } = useTranslation()
   const legalMoves = useLegalMoves<MaterialMove>()
   const move = legalMoves.find((move) => isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move) && move.data.target === location.x)
-  const effect = move? rockRules[location.x!]: undefined
+  const effect = rockRules[location.x!]
   return <>
     <h2>{t('rules.circle-spirit-space.title')}</h2>
     <p><Trans defaults="rules.circle-spirit-space.desc"><strong /></Trans></p>
