@@ -1,4 +1,13 @@
-import { CompetitiveRank, FillGapStrategy, hideItemId, MaterialGame, MaterialMove, PositiveSequenceStrategy, SecretMaterialRules } from '@gamepark/rules-api'
+import {
+  CompetitiveRank,
+  FillGapStrategy,
+  hideItemId,
+  MaterialGame,
+  MaterialMove,
+  PositiveSequenceStrategy,
+  SecretMaterialRules,
+  TimeLimit
+} from '@gamepark/rules-api'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { ActionRule } from './rules/ActionRule'
@@ -20,7 +29,8 @@ import { RuleId } from './rules/RuleId'
 import SpiritOfNature from './SpiritOfNature'
 
 export class LivingForestRules extends SecretMaterialRules<SpiritOfNature, MaterialType, LocationType>
-  implements CompetitiveRank<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature> {
+  implements CompetitiveRank<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature>,
+    TimeLimit<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature>{
 
   rankPlayers(playerA: SpiritOfNature, playerB: SpiritOfNature): number {
     return new ScoringRule(this.game).rankPlayers(playerA, playerB)
@@ -73,5 +83,9 @@ export class LivingForestRules extends SecretMaterialRules<SpiritOfNature, Mater
       [LocationType.PlayerDeckStack]: hideItemId,
       [LocationType.ReserveStack]: hideItemId
     }
+  }
+
+  giveTime(): number {
+    return 60
   }
 }
