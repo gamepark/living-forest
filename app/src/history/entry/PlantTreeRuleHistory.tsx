@@ -2,14 +2,13 @@
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { ProtectiveTreeDetail } from '@gamepark/living-forest/material/ProtectivesTrees'
 import Resource from '@gamepark/living-forest/material/Resource'
-import { MaterialHistoryProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
+import { HistoryEntry, MaterialHistoryProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { displayMaterialHelp, isMoveItemType } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
 import { ResourceImage } from '../../material/description/help/GuardianAnimalCardHelp'
 import { getColor } from '../../utils/ColorUtils'
-import { noBorder, pictureCss, rulesLinkButton } from '../LivingForestHistory'
-import { PictureHistoryEntry } from './PictureHistoryEntry'
+import { pictureCss, rulesLinkButton } from '../LivingForestHistory'
 
 type PlantTreeRuleHistoryProps = {} & MaterialHistoryProps
 
@@ -21,7 +20,7 @@ export const PlantTreeRuleHistory: FC<PlantTreeRuleHistoryProps> = (props) => {
   const itemId = context.game.items[move.itemType][move.itemIndex]?.id
 
   return (
-    <PictureHistoryEntry depth={2} backgroundColor={`${getColor(actionPlayer)}40`} pictureCss={noBorder} picture={ResourceImage[Resource.Seed]}>
+    <HistoryEntry depth={2} backgroundColor={`${getColor(actionPlayer)}40`}>
       <div css={pictureCss}>
         <Trans defaults="history.plant" values={{
           player: name,
@@ -33,7 +32,7 @@ export const PlantTreeRuleHistory: FC<PlantTreeRuleHistoryProps> = (props) => {
           <u/>
         </Trans>
       </div>
-    </PictureHistoryEntry>
+    </HistoryEntry>
   )
 
 }

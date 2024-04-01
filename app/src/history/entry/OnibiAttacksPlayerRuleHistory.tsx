@@ -7,9 +7,7 @@ import { HistoryEntry, MaterialHistoryProps, usePlayerName } from '@gamepark/rea
 import { isMoveItemType, StartRule } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import Images from '../../images/Images'
 import { getColor } from '../../utils/ColorUtils'
-import { PictureHistoryEntry } from './PictureHistoryEntry'
 
 type OnibiAttacksPlayerRuleHistoryProps = { move: StartRule } & Omit<MaterialHistoryProps, 'move'>
 
@@ -53,22 +51,15 @@ export const PlayerVaranHistory: FC<PlayerVaranHistoryProps> = (props) => {
 
   if (!varans) return null
 
-  return <PictureHistoryEntry player={player} backgroundColor={`${getColor(player)}40`} pictureCss={varanStyle} picture={Images.varan}>
+  return <HistoryEntry player={player} backgroundColor={`${getColor(player)}40`}>
     {t('history.varan', {
       player: name,
       varan: varans
     })}
-  </PictureHistoryEntry>
+  </HistoryEntry>
 
 }
 
 const bold = css`
   font-weight: bold;
-`
-
-const varanStyle = css`
-  border-radius: 0.2em;
-  border: 0.03em solid black;
-  width: 2.2em;
-  height: auto;
 `

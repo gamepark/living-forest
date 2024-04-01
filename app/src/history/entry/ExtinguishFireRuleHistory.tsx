@@ -2,14 +2,13 @@
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import Resource from '@gamepark/living-forest/material/Resource'
-import { MaterialHistoryProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
+import { HistoryEntry, MaterialHistoryProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { displayMaterialHelp, isMoveItemType } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
 import { ResourceImage } from '../../material/description/help/GuardianAnimalCardHelp'
 import { getColor } from '../../utils/ColorUtils'
-import { noBorder, pictureCss, rulesLinkButton } from '../LivingForestHistory'
-import { PictureHistoryEntry } from './PictureHistoryEntry'
+import { pictureCss, rulesLinkButton } from '../LivingForestHistory'
 
 type ExtinguishFireRuleHistoryProps = {} & MaterialHistoryProps
 
@@ -21,7 +20,7 @@ export const ExtinguishFireRuleHistory: FC<ExtinguishFireRuleHistoryProps> = (pr
   const itemId = context.game.items[move.itemType][move.itemIndex]?.id
 
   return (
-    <PictureHistoryEntry depth={2} backgroundColor={`${getColor(actionPlayer)}40`} pictureCss={noBorder} picture={ResourceImage[Resource.Drop]}>
+    <HistoryEntry depth={2} backgroundColor={`${getColor(actionPlayer)}40`}>
       <div css={pictureCss}>
         <Trans defaults="history.extinct" values={{
           player: name,
@@ -34,7 +33,7 @@ export const ExtinguishFireRuleHistory: FC<ExtinguishFireRuleHistoryProps> = (pr
           <u/>
         </Trans>
       </div>
-    </PictureHistoryEntry>
+    </HistoryEntry>
   )
 
 }

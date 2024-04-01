@@ -10,7 +10,6 @@ export const EndGameHistory: FC = () => {
       <HistoryEntry borderBottom css={winnerStyle}>
         <GameOverHeader/>
       </HistoryEntry>
-      <HistoryEntry borderBottom css={endOfGameStyle}></HistoryEntry>
     </>
   )
 }
@@ -20,10 +19,4 @@ const winnerStyle = css`
   text-align: center;
   font-weight: bold;
   font-style: italic;
-`
-
-const endOfGameStyle = css`
-  color: grey;
-  text-align: center;
-  font-style: italic
 `

@@ -6,9 +6,7 @@ import { HistoryEntry, MaterialHistoryProps } from '@gamepark/react-game'
 import { isMoveItemType, MaterialGame, MoveItem, StartRule } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { fireTileDescription } from '../../material/description/FireTileDescription'
-import { bold, noBorder } from '../LivingForestHistory'
-import { PictureHistoryEntry } from './PictureHistoryEntry'
+import { bold } from '../LivingForestHistory'
 
 type OnibiAttacksSacredTreeRuleHistoryProps = { move: StartRule } & Omit<MaterialHistoryProps, 'move'>
 
@@ -50,12 +48,12 @@ export const NewFireTileHistory: FC<NewFireTileHistoryProps> = (props) => {
     <>
       {
         Object.entries(tileByValue).map(([fire, count]) => (
-          <PictureHistoryEntry depth={1} key={fire} pictureCss={noBorder} picture={fireTileDescription.images[fire]}>
+          <HistoryEntry depth={1} key={fire}>
             {t('history.onibi.fire', {
               count: count,
               value: fire
             })}
-          </PictureHistoryEntry>
+          </HistoryEntry>
         ))
       }
     </>
