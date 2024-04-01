@@ -24,6 +24,10 @@ export const LivingForestHistoryHistory: FC<MaterialHistoryProps> = (props) => {
   const { move, context } = props
   const game = context.game
 
+  if (isEndGame(move)) {
+    return <EndGameHistory/>
+  }
+
   if (game.rule?.id === RuleId.PassingSacredTree && isStartSimultaneousRule(move) && move.id === RuleId.GuardianAnimals) {
     return <NewRoundHistory/>
   }
