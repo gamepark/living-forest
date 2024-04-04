@@ -3,6 +3,7 @@ import { forestTreeSpaces } from '../../material/ForestTreeSpaces'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
+import ProtectiveTree from '../../material/ProtectiveTree'
 import { PlayerState } from '../helper/PlayerState'
 import { Memory } from '../Memory'
 import { RuleId } from '../RuleId'
@@ -57,6 +58,13 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return []
 
     const actions = this.onPlantTree(move)
+    const isSpecialTree = this
+      .material(MaterialType.ProtectiveTreeTiles)
+      .getItem(move.itemIndex)?.id === ProtectiveTree.Tree11
+
+    if (isSpecialTree) {
+      this.forget(Memory.LastAction)
+    }
 
     // Only decrease action count if there is no bonus action
     if (!actions.length) {
