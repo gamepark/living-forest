@@ -10,7 +10,7 @@ export const TreeSpaceHelp: FC<LocationHelpProps> = ({ location }) => {
   return <div css={bottomMargin}>
     <h2>{t('rules.forest-space.title')}</h2>
     <p>{t('rules.forest-space.plant')}</p>
-    {((location.x == 4 && location.y == 0) || (location.x == 0 && location.y == 2)) &&
+    {((location.x === 4 && location.y === 0) || (location.x === 0 && location.y === 2)) &&
       <p>{t('rules.forest-space.fragments')}</p>
     }
     {((location.x === 4 && location.y === 2)) &&
