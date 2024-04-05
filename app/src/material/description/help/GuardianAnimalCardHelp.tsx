@@ -72,7 +72,7 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
 
   const description = GuardianAnimalDescriptions[item.id]
   //varan card
-  if (item.id === GuardianAnimal.Varan) {
+  if (item.id === GuardianAnimal.FireVaran) {
     return <>
       <h2>{getAnimalTranslation(t, item.id)}</h2>
       <p>

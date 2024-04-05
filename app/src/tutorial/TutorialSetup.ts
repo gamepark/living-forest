@@ -14,7 +14,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Beetle)
+        .id(GuardianAnimal.BeetleWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -23,7 +23,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Rabbit)
+        .id(GuardianAnimal.HareWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -32,7 +32,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Monkey)
+        .id(GuardianAnimal.BaboonWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -41,7 +41,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Owl)
+        .id(GuardianAnimal.OwlWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -50,7 +50,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Bear)
+        .id(GuardianAnimal.BearWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -59,7 +59,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Fox)
+        .id(GuardianAnimal.FoxWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -68,7 +68,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Tanuki)
+        .id(GuardianAnimal.TanukiWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -77,7 +77,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Boar)
+        .id(GuardianAnimal.BoarWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -86,7 +86,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Weasel)
+        .id(GuardianAnimal.WeaselWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -98,7 +98,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Winter)
-        .id(GuardianAnimal.Lynx)
+        .id(GuardianAnimal.LynxWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Winter
@@ -107,7 +107,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Winter)
-        .id(GuardianAnimal.Weasel)
+        .id(GuardianAnimal.WeaselWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Winter
@@ -116,7 +116,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Winter)
-        .id(GuardianAnimal.Beetle)
+        .id(GuardianAnimal.BeetleWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Winter
@@ -125,7 +125,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Winter)
-        .id(GuardianAnimal.Fox)
+        .id(GuardianAnimal.FoxWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Winter
@@ -134,7 +134,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Winter)
-        .id(GuardianAnimal.Bear)
+        .id(GuardianAnimal.BearWinter)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Winter
