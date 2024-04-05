@@ -57,7 +57,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
       .getPlayerCards(player)
       .location(LocationType.HelpLine).maxBy((item) => item.location.x!).getItem()?.id
 
-    if (lastCard === GuardianAnimal.Varan) {
+    if (lastCard === GuardianAnimal.FireVaran) {
       return this
         .getPlayerCards(player)
         .location(LocationType.HelpLine)

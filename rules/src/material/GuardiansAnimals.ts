@@ -43,7 +43,7 @@ export const Fox: GuardianAnimalDetails = {
     cost: 0
 }
 
-export const GoldFish: GuardianAnimalDetails = {
+export const Goldfish: GuardianAnimalDetails = {
     resources: {
         [Drop]: 2,
         [Seed]: -1
@@ -74,21 +74,21 @@ export const Weasel: GuardianAnimalDetails = {
     cost: 0
 }
 
-export const Rabbit: GuardianAnimalDetails = {
+export const Hare: GuardianAnimalDetails = {
     resources: {
         [Wind]: 1
     },
     cost: 0
 }
 
-export const Doe: GuardianAnimalDetails = {
+export const Fawn: GuardianAnimalDetails = {
     resources: {
         [SacredFlower]: 1
     },
     cost: 0
 }
 
-export const HummingBird: GuardianAnimalDetails = {
+export const Hummingbird: GuardianAnimalDetails = {
     resources: {
         [Drop]: 1
     },
@@ -102,7 +102,7 @@ export const Bee: GuardianAnimalDetails = {
     cost: 0
 }
 
-export const Monkey: GuardianAnimalDetails = {
+export const Baboon: GuardianAnimalDetails = {
     resources: {
         [Sun]: 1
     },
@@ -168,7 +168,7 @@ export const Squirrel: GuardianAnimalDetails = {
     cost: 5
 }
 
-export const Turtle: GuardianAnimalDetails = {
+export const Tortoise: GuardianAnimalDetails = {
     resources: {
         [Sun]: 1,
         [Drop]: 2
@@ -216,7 +216,7 @@ export const Bat: GuardianAnimalDetails = {
     cost: 5
 }
 
-export const Parrot: GuardianAnimalDetails = {
+export const Cockatoo: GuardianAnimalDetails = {
     resources: {
         [Sun]: 3,
         [Seed]: -1,
@@ -244,7 +244,7 @@ export const Horse: GuardianAnimalDetails = {
 
 }
 
-export const Axolotls: GuardianAnimalDetails = {
+export const Axolotl: GuardianAnimalDetails = {
     resources: {
         [Drop]: 1,
         [Seed]: -1,
@@ -304,7 +304,7 @@ export const Hippopotamus: GuardianAnimalDetails = {
 
 }
 
-export const EagleOwl: GuardianAnimalDetails = {
+export const HornedOwl: GuardianAnimalDetails = {
     resources: {
         [Sun]: 1,
         [Drop]: 1,
@@ -363,7 +363,7 @@ export const Bull: GuardianAnimalDetails = {
     cost: 5
 }
 
-export const Lizard: GuardianAnimalDetails = {
+export const Salamander: GuardianAnimalDetails = {
     resources: {
         [Drop]: 2,
         [Wind]: 1
@@ -446,7 +446,7 @@ export const Eagle: GuardianAnimalDetails = {
 
 }
 
-export const Snake: GuardianAnimalDetails = {
+export const Cobra: GuardianAnimalDetails = {
     resources: {
         [Sun]: 4,
         [Drop]: 1,
@@ -559,7 +559,7 @@ export const Tapir: GuardianAnimalDetails = {
     type: Solitary
 }
 
-export const Varan: GuardianAnimalDetails = {
+export const FireVaran: GuardianAnimalDetails = {
     resources: {},
     cost: 0,
     type: Solitary,

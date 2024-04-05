@@ -23,7 +23,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Rabbit)
+        .id(GuardianAnimal.Hare)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring
@@ -32,7 +32,7 @@ export class TutorialSetup extends LivingForestSetup {
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.PlayerDeckStack)
         .player(SpiritOfNature.Spring)
-        .id(GuardianAnimal.Monkey)
+        .id(GuardianAnimal.Baboon)
         .moveItem({
           type: LocationType.PlayerDeckStack,
           player: SpiritOfNature.Spring

@@ -99,7 +99,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
       Array
         .from(Array(23))
         .map((_) => ({
-          id: GuardianAnimal.Varan,
+          id: GuardianAnimal.FireVaran,
           location: { type: LocationType.VaranDeck }
         }))
     )
@@ -108,7 +108,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
 
 
   setupFragmentTile() {
-    this.material(MaterialType.FragmentTile).createItem({ id: GuardianAnimal.Varan, quantity: 20, location: { type: LocationType.FragmentStack } })
+    this.material(MaterialType.FragmentTile).createItem({ id: GuardianAnimal.FireVaran, quantity: 20, location: { type: LocationType.FragmentStack } })
   }
 
   setupDispenser(option: LivingForestOptions) {

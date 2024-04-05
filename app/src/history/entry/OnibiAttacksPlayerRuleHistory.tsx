@@ -18,7 +18,7 @@ export const OnibiAttacksPlayerRuleHistory: FC<OnibiAttacksPlayerRuleHistoryProp
   const varans = action.consequences.filter((move) =>
     isMoveItemType(MaterialType.GuardianAnimalCard)(move)
     && move.location.type === LocationType.PlayerDiscardStack
-    && context.game.items[move.itemType][move.itemIndex].id === GuardianAnimal.Varan
+    && context.game.items[move.itemType][move.itemIndex].id === GuardianAnimal.FireVaran
     && context.game.items[move.itemType][move.itemIndex].location.type === LocationType.VaranDeck
   ).length
 
@@ -44,7 +44,7 @@ export const PlayerVaranHistory: FC<PlayerVaranHistoryProps> = (props) => {
     isMoveItemType(MaterialType.GuardianAnimalCard)(move)
     && move.location.type === LocationType.PlayerDiscardStack
     && move.location.player === player
-    && context.game.items[move.itemType][move.itemIndex].id === GuardianAnimal.Varan
+    && context.game.items[move.itemType][move.itemIndex].id === GuardianAnimal.FireVaran
     && context.game.items[move.itemType][move.itemIndex].location.type === LocationType.VaranDeck
   ).length
   const name = usePlayerName(player)

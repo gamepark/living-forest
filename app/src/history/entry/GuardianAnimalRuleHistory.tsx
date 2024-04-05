@@ -71,7 +71,7 @@ export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (pr
             player: name
           }}>
             <strong/>
-            <PlayMoveButton css={rulesLinkButton} move={displayMaterialHelp(MaterialType.GuardianAnimalCard, { id: GuardianAnimal.Varan })} local/>
+            <PlayMoveButton css={rulesLinkButton} move={displayMaterialHelp(MaterialType.GuardianAnimalCard, { id: GuardianAnimal.FireVaran })} local/>
           </Trans>
         </HistoryEntry>
       )
