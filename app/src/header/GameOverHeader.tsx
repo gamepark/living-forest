@@ -11,6 +11,7 @@ import { MaterialGame } from '@gamepark/rules-api'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GameOverRule } from '../dialog/GameOverRule'
+import { VictoryTileType } from '@gamepark/living-forest/material/VictoryTiles'
 
 export const GameOverHeader = () => {
   const { t } = useTranslation()
@@ -24,10 +25,10 @@ export const GameOverHeader = () => {
 
   const dialog = (
     <>
-      &nbsp;<FontAwesomeIcon icon={faCircleQuestion} onClick={() => setDialogOpen(true)} css={pointerCursorCss}/>
+      &nbsp;<FontAwesomeIcon icon={faCircleQuestion} onClick={() => setDialogOpen(true)} css={pointerCursorCss} />
       <RulesDialog open={dialogOpen} close={() => setDialogOpen(false)}>
         <div css={dialogContentCss}>
-          <GameOverRule/>
+          <GameOverRule />
         </div>
       </RulesDialog>
     </>
@@ -57,10 +58,10 @@ export const GameOverHeader = () => {
 export const getHeaderKey = (game: MaterialGame, winner: SpiritOfNature, isWinningWithTotalPoints: boolean, playerId?: SpiritOfNature) => {
   const me = playerId && playerId === winner
   const playerState = new PlayerState(game, winner)
-  if (isWinningWithTotalPoints) return { text: me? 'result.score.victory': 'result.score.winner', score: playerState.points }
-  if (playerState.firePoints >= 12) return { text: me? 'header.winner.fire.me': 'header.winner.fire', score: playerState.firePoints }
-  if (playerState.flowerPoints >= 12) return  { text: me? 'header.winner.flower.me': 'header.winner.flower', score: playerState.flowerPoints }
-  if (playerState.treePoints >= 12) return  { text: me? 'header.winner.tree.me': 'header.winner.tree', score: playerState.treePoints }
+  if (isWinningWithTotalPoints) return { text: me ? 'result.score.victory' : 'result.score.winner', score: playerState.points }
+  if (playerState.firePoints >= playerState.getWinningPointsForType(VictoryTileType.Fire)) return { text: me ? 'header.winner.fire.me' : 'header.winner.fire', score: playerState.firePoints }
+  if (playerState.flowerPoints >= playerState.getWinningPointsForType(VictoryTileType.Flower)) return { text: me ? 'header.winner.flower.me' : 'header.winner.flower', score: playerState.flowerPoints }
+  if (playerState.treePoints >= playerState.getWinningPointsForType(VictoryTileType.Tree)) return { text: me ? 'header.winner.tree.me' : 'header.winner.tree', score: playerState.treePoints }
   return
 }
 

@@ -1,13 +1,13 @@
 import { Material, MaterialGame, MaterialRulesPart } from '@gamepark/rules-api'
 import sumBy from 'lodash/sumBy'
 import uniqBy from 'lodash/uniqBy'
-import { getSolitaryGregariousDifference, GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescriptions'
+import SpiritOfNature from '../../SpiritOfNature'
+import { GuardianAnimalDescriptions, getSolitaryGregariousDifference } from '../../material/GuardianAnimalDescriptions'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
 import Resource from '../../material/Resource'
 import { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
-import SpiritOfNature from '../../SpiritOfNature'
 import { Memory, SpentPoint } from '../Memory'
 
 export class PlayerState extends MaterialRulesPart {
@@ -131,7 +131,7 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   get hasEnded() {
-    return this.flowerPoints >= 12 || this.treePoints >= 12 || this.firePoints >= 12
+    return this.flowerPoints >= this.getWinningPointsForType(VictoryTileType.Flower) || this.treePoints >= this.getWinningPointsForType(VictoryTileType.Tree) || this.firePoints >= this.getWinningPointsForType(VictoryTileType.Fire)
   }
 
   get points() {
@@ -140,5 +140,15 @@ export class PlayerState extends MaterialRulesPart {
 
   countVictoryTileOfType(victory: VictoryTileType) {
     return this.victoryTiles.filter((item) => VictoryTileTypes[item.id] === victory).length
+  }
+
+  getWinningPointsForType(victory: VictoryTileType) {
+    if (!this.isKodama) return 12
+    const kodamas = this.material(MaterialType.GuardianAnimalCard).location(LocationType.KodamaStack)
+    return kodamas.locationId(victory).length == 0 ? 15 : 13
+  }
+
+  get isKodama() {
+    return !!this.remind(Memory.Kodama)
   }
 }

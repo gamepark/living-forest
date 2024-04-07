@@ -8,7 +8,8 @@ export enum Memory {
   FragmentTaken,
   RemainingMoves,
   PassedPlayers,
-  DrawUntilSolitary
+  DrawUntilSolitary,
+  Kodama
 }
 
 export type SpentPoint = Partial<Record<Resource, number>>

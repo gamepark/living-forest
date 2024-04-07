@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { VictoryTileType } from '@gamepark/living-forest/material/VictoryTiles'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { Medal, usePlayerName, useRankedPlayers, useRules } from '@gamepark/react-game'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -22,32 +22,32 @@ export const GameOverRule: FC<GameOverRuleProps> = () => {
       <h1>{t('header.gameover.summary.title')}</h1>
       <p css={resume}>
         <Trans defaults="header.gameover.summary">
-          <strong/>
-          <span css={resourceStyle(VictoryImage[VictoryTileType.Tree])}/>
-          <span css={resourceStyle(VictoryImage[VictoryTileType.Fire])}/>
-          <span css={resourceStyle(VictoryImage[VictoryTileType.Flower])}/>
+          <strong />
+          <span css={resourceStyle(VictoryImage[VictoryTileType.Tree])} />
+          <span css={resourceStyle(VictoryImage[VictoryTileType.Fire])} />
+          <span css={resourceStyle(VictoryImage[VictoryTileType.Flower])} />
         </Trans>
       </p>
       <table css={tableStyle}>
         <thead>
-        <tr css={headerStyle}>
-          <td css={playerColumn}/>
-          <td css={resourceColumn}>
-            <span css={[large, resourceStyle(VictoryImage[VictoryTileType.Fire])]}/>
-          </td>
-          <td css={resourceColumn}>
-            <span css={[large, resourceStyle(VictoryImage[VictoryTileType.Tree])]}/>
-          </td>
-          <td css={resourceColumn}>
-            <span css={[large, resourceStyle(VictoryImage[VictoryTileType.Flower])]}/>
-          </td>
-          <td css={resourceColumn}><span css={medium}>{t('header.gameover.summary.total')}</span></td>
-        </tr>
+          <tr css={headerStyle}>
+            <td css={playerColumn} />
+            <td css={resourceColumn}>
+              <span css={[large, resourceStyle(VictoryImage[VictoryTileType.Fire])]} />
+            </td>
+            <td css={resourceColumn}>
+              <span css={[large, resourceStyle(VictoryImage[VictoryTileType.Tree])]} />
+            </td>
+            <td css={resourceColumn}>
+              <span css={[large, resourceStyle(VictoryImage[VictoryTileType.Flower])]} />
+            </td>
+            <td css={resourceColumn}><span css={medium}>{t('header.gameover.summary.total')}</span></td>
+          </tr>
         </thead>
         <tbody>
-        {players.map((p) => (
-          <PlayerLine key={p.id} player={p.id} winners={winners}/>
-        ))}
+          {players.map((p) => (
+            <PlayerLine key={p.id} player={p.id} winners={winners} />
+          ))}
         </tbody>
       </table>
     </div>
@@ -65,7 +65,7 @@ const PlayerLine: FC<PlayerLineProps> = (props) => {
   const hasWonWithTotalPoints = rules.game.players.some((p: SpiritOfNature) => {
     if (p === player) return false
     const otherPlayerState = new PlayerState(rules.game, p)
-    return otherPlayerState.firePoints >= 12 || otherPlayerState.treePoints >= 12 || otherPlayerState.flowerPoints >= 12
+    return otherPlayerState.firePoints >= state.getWinningPointsForType(VictoryTileType.Fire) || otherPlayerState.treePoints >= state.getWinningPointsForType(VictoryTileType.Tree) || otherPlayerState.flowerPoints >= state.getWinningPointsForType(VictoryTileType.Flower)
   })
   const winnerSolo = winners.length === 1 && winners[0].id === player && !hasWonWithTotalPoints
   const winner = winners[0].id
@@ -75,10 +75,10 @@ const PlayerLine: FC<PlayerLineProps> = (props) => {
         {(winnerSolo || winnerTie) && <Medal rank={winners[0].rank} css={medalCss} />}
         <span>{name}</span>
       </td>
-      <td css={[resourceColumn, winnerSolo && state.firePoints >= 12 && green]}><span css={medium}>{state.firePoints}</span></td>
-      <td css={[resourceColumn, winnerSolo && state.treePoints >= 12 && green]}><span css={medium}>{state.treePoints}</span></td>
-      <td css={[resourceColumn, winnerSolo && state.flowerPoints >= 12 && green]}><span css={medium}>{state.flowerPoints}</span></td>
-      <td css={[resourceColumn, (winnerTie || (!winnerSolo && winner === player))  && green]}><span css={medium}>{state.points}</span></td>
+      <td css={[resourceColumn, winnerSolo && state.firePoints >= state.getWinningPointsForType(VictoryTileType.Fire) && green]}><span css={medium}>{state.firePoints}</span></td>
+      <td css={[resourceColumn, winnerSolo && state.treePoints >= state.getWinningPointsForType(VictoryTileType.Tree) && green]}><span css={medium}>{state.treePoints}</span></td>
+      <td css={[resourceColumn, winnerSolo && state.flowerPoints >= state.getWinningPointsForType(VictoryTileType.Flower) && green]}><span css={medium}>{state.flowerPoints}</span></td>
+      <td css={[resourceColumn, (winnerTie || (!winnerSolo && winner === player)) && green]}><span css={medium}>{state.points}</span></td>
     </tr>
   )
 }

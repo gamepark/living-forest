@@ -13,6 +13,7 @@ type LivingForestPlayerOptions = { id: SpiritOfNature }
  */
 export type LivingForestOptions = {
   players: LivingForestPlayerOptions[]
+  kodama?: boolean
 }
 
 /**
