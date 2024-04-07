@@ -19,6 +19,7 @@ import { PickVictoryTileHeader } from './header/PickVictoryTileHeader'
 import { PlantTreeHeader } from './header/PlantTreeHeader'
 import { ReturnOfGuardianAnimalsHeader } from './header/ReturnOfGuardianAnimalsHeader'
 import { TakeFragmentHeader } from './header/TakeFragmentHeader'
+import { CallKodamaHeader } from './header/CallKodamaHeader'
 
 export default function App() {
   const game = useGame<MaterialGame>()
@@ -55,5 +56,6 @@ const headers: Record<RuleId, () => any> = {
   [RuleId.ReturnOfGuardianAnimals]: ReturnOfGuardianAnimalsHeader,
   [RuleId.PassingSacredTree]: PassingSacredTreeHeader,
   [RuleId.MoveOnCircleOfSpirit]: MoveOnCircleOfSpiritHeader,
-  [RuleId.PickVictoryTile]: PickVictoryTileHeader
+  [RuleId.PickVictoryTile]: PickVictoryTileHeader,
+  [RuleId.CallKodama]: CallKodamaHeader
 }

@@ -12,5 +12,6 @@ export enum RuleId {
   ReturnOfGuardianAnimals,
   PassingSacredTree,
   MoveOnCircleOfSpirit,
-  PickVictoryTile
+  PickVictoryTile,
+  CallKodama,
 }
