@@ -1,8 +1,8 @@
 /**
  * In here, you describe what a GameState will look like at any time during a game.
  */
-import { guardianAnimals } from './material/GuardianAnimal'
+import GuardianAnimal, { guardianAnimals } from './material/GuardianAnimal'
 
-export const startingReserveStack1 = guardianAnimals.slice(14, 37)
-export const startingReserveStack2 = guardianAnimals.slice(37, 53)
-export const startingReserveStack3 = guardianAnimals.slice(53, 65)
+export const startingReserveStack1 = guardianAnimals.filter((g) => g >= GuardianAnimal.Hedgehog && g <= GuardianAnimal.HornedOwl)
+export const startingReserveStack2 = guardianAnimals.filter((g) => g >= GuardianAnimal.Woodpecker && g <= GuardianAnimal.Cobra).concat(GuardianAnimal.Armadillo, GuardianAnimal.Capybara, GuardianAnimal.Crayfish, GuardianAnimal.Sloth, GuardianAnimal.Peafowl)
+export const startingReserveStack3 = guardianAnimals.filter((g) => g >= GuardianAnimal.Cricket && g <= GuardianAnimal.Tapir).concat(GuardianAnimal.Tiger, GuardianAnimal.FlyingSquirrel, GuardianAnimal.Koi, GuardianAnimal.Anteater, GuardianAnimal.Ara)
