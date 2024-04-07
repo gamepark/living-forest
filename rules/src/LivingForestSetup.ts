@@ -1,16 +1,19 @@
 import { MaterialGameSetup } from '@gamepark/rules-api'
+import { startingKodamaStack1, startingKodamaStack2, startingKodamaStack3 } from './Kodamas'
 import { LivingForestOptions } from './LivingForestOptions'
 import { LivingForestRules } from './LivingForestRules'
+import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve'
+import SpiritOfNature from './SpiritOfNature'
 import { getInitializationPlayersRocks } from './material/CircleOfSpirits'
 import { Fire } from './material/Fire'
-import GuardianAnimal, { startingGuardianAnimals } from './material/GuardianAnimal'
+import GuardianAnimal, { startingGuardianAnimalsAutumn, startingGuardianAnimalsSpring, startingGuardianAnimalsSummer, startingGuardianAnimalsWinter } from './material/GuardianAnimal'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { getInitializationDispenser } from './material/ProtectiveTree'
-import VictoryTiles, { VictoryTileTypes } from './material/VictoryTiles'
+import VictoryTiles, { VictoryTileType, VictoryTileTypes } from './material/VictoryTiles'
+import { Memory } from './rules/Memory'
 import { RuleId } from './rules/RuleId'
-import SpiritOfNature from './SpiritOfNature'
-import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } from './Reserve'
+import sampleSize from 'lodash/sampleSize'
 
 export const CARDS_PER_ROW = 4
 
@@ -18,7 +21,9 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
   Rules = LivingForestRules
 
   setupMaterial(options: LivingForestOptions) {
+    this.memorize(Memory.Kodama, true)
     this.setupReserveStack()
+    this.setupKodamaStack(options)
     this.setupReserveRows()
     this.setupDispenser(options)
     this.setupVaranDeck()
@@ -49,6 +54,29 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
     this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveStack).locationId(3).shuffle()
   }
 
+  setupKodamaStack(options: LivingForestOptions) {
+
+    const players = options.players.length
+    const kodamasNumber = players > 3 ? 5 : players < 3 ? 3 : 4
+    const kodamaStack1 = sampleSize(startingKodamaStack1, kodamasNumber)
+    this.material(MaterialType.GuardianAnimalCard).createItems(kodamaStack1.map((card) => ({
+      id: card,
+      location: { type: LocationType.KodamaStack, id: VictoryTileType.Flower }
+    })))
+
+    const kodamaStack2 = sampleSize(startingKodamaStack2, kodamasNumber)
+    this.material(MaterialType.GuardianAnimalCard).createItems(kodamaStack2.map((card) => ({
+      id: card,
+      location: { type: LocationType.KodamaStack, id: VictoryTileType.Tree }
+    })))
+
+    const kodamaStack3 = sampleSize(startingKodamaStack3, kodamasNumber)
+    this.material(MaterialType.GuardianAnimalCard).createItems(kodamaStack3.map((card) => ({
+      id: card,
+      location: { type: LocationType.KodamaStack, id: VictoryTileType.Fire }
+    })))
+  }
+
   setupFireTile() {
     this.material(MaterialType.FireTile).createItem({ id: Fire.Fire2, quantity: 20, location: { type: LocationType.FireStack, id: Fire.Fire2 } })
     this.material(MaterialType.FireTile).createItem({ id: Fire.Fire3, quantity: 20, location: { type: LocationType.FireStack, id: Fire.Fire3 } })
@@ -76,6 +104,7 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
 
   setupPlayer(player: SpiritOfNature, options: LivingForestOptions) {
     const spirits = options.players.map((p) => p.id)
+    const startingGuardianAnimals = player === SpiritOfNature.Spring ? startingGuardianAnimalsSpring : player === SpiritOfNature.Summer ? startingGuardianAnimalsSummer : player === SpiritOfNature.Autumn ? startingGuardianAnimalsAutumn : startingGuardianAnimalsWinter
     this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({
       id: card,
       location: { type: LocationType.PlayerDeckStack, player }
