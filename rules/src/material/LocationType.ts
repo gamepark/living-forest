@@ -17,5 +17,6 @@ export enum LocationType {
   TreeSpace,
   PlayerFireTileStack,
   PlayerFragmentTileStack,
-  PlayerReminder
+  PlayerReminder,
+  KodamaStack
 }

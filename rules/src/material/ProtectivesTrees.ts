@@ -5,6 +5,7 @@ const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
 
 type ProtectiveTreeDetails = {
     resources?: Partial<Record<Resource, number>>
+    kodama?: Resource
     cost?: number
 }
 
@@ -76,6 +77,36 @@ export const Tree11: ProtectiveTreeDetails = {
     cost: 11
 }
 
+export const Tree6K: ProtectiveTreeDetails = {
+    kodama: Resource.Wind,
+    cost: 6,
+}
+
+export const Tree7K: ProtectiveTreeDetails = {
+    kodama: Resource.Drop,
+    cost: 7
+}
+
+export const Tree8K: ProtectiveTreeDetails = {
+    kodama: Resource.Kodama,
+    cost: 8
+}
+
+export const Tree9K: ProtectiveTreeDetails = {
+    kodama: Resource.Seed,
+    cost: 9
+}
+
+export const Tree10K: ProtectiveTreeDetails = {
+    kodama: Resource.Wind,
+    cost: 10
+}
+
+export const Tree11K: ProtectiveTreeDetails = {
+    kodama: Resource.SacredFlower,
+    cost: 11
+}
+
 export const ProtectiveTreeDetail = {
     [ProtectiveTree.Tree3A]: Tree3A,
     [ProtectiveTree.Tree3B]: Tree3B,
@@ -89,4 +120,10 @@ export const ProtectiveTreeDetail = {
     [ProtectiveTree.Tree9]: Tree9,
     [ProtectiveTree.Tree10]: Tree10,
     [ProtectiveTree.Tree11]: Tree11,
+    [ProtectiveTree.Tree6K]: Tree6K,
+    [ProtectiveTree.Tree7K]: Tree7K,
+    [ProtectiveTree.Tree8K]: Tree9K,
+    [ProtectiveTree.Tree9K]: Tree9K,
+    [ProtectiveTree.Tree10K]: Tree10K,
+    [ProtectiveTree.Tree11K]: Tree11K,
 }

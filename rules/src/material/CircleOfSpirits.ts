@@ -3,7 +3,8 @@ import SpiritOfNature from '../SpiritOfNature'
 export function getTwoPlayersRocks(players: SpiritOfNature[]): Partial<Record<SpiritOfNature, number>> {
     return {
         [players[0]]: 0,
-        [players[1]]: 6
+        [players[1]]: 6,
+
     }
 }
 

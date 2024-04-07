@@ -148,7 +148,10 @@ enum GuardianAnimal {
 }
 
 export const guardianAnimals = Object.values(GuardianAnimal).filter(isEnumValue)
-export const startingGuardianAnimals = guardianAnimals.slice(0, 14)
+export const startingGuardianAnimalsSpring = guardianAnimals.filter((g) => g >= GuardianAnimal.BearSpring && g <= GuardianAnimal.OwlSpring).concat(GuardianAnimal.KodamaSpring)
+export const startingGuardianAnimalsSummer = guardianAnimals.filter((g) => g >= GuardianAnimal.BearSummer && g <= GuardianAnimal.OwlSummer).concat(GuardianAnimal.KodamaSummer)
+export const startingGuardianAnimalsAutumn = guardianAnimals.filter((g) => g >= GuardianAnimal.BearAutumn && g <= GuardianAnimal.OwlAutumn).concat(GuardianAnimal.KodamaAutumn)
+export const startingGuardianAnimalsWinter = guardianAnimals.filter((g) => g >= GuardianAnimal.BearWinter && g <= GuardianAnimal.OwlWinter).concat(GuardianAnimal.KodamaWinter)
 
 export const isVaran = (guardianAnimal: GuardianAnimal) => GuardianAnimal.FireVaran === guardianAnimal
 

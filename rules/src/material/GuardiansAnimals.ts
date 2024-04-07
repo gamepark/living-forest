@@ -1,8 +1,9 @@
 import Resource from './Resource';
 import GuardianAnimalDetails from './GuardianAnimalDescriptions';
 import CardType from './CardType';
+import { RuleId } from '../rules/RuleId';
 
-const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
+const { Sun = 1, Drop, Seed, Wind, SacredFlower, Kodama } = Resource
 const { Solitary, Gregarious } = CardType
 
 export const Bear: GuardianAnimalDetails = {
@@ -402,7 +403,7 @@ export const Crane: GuardianAnimalDetails = {
     cost: 6
 }
 
-export const Sloth: GuardianAnimalDetails = {
+export const Loris: GuardianAnimalDetails = {
     resources: {
         [Sun]: 1,
         [Drop]: -3,
@@ -564,3 +565,248 @@ export const FireVaran: GuardianAnimalDetails = {
     cost: 0,
     type: Solitary,
 }
+
+export const Anteater: GuardianAnimalDetails = {
+    resources: {},
+    cost: 15,
+    bonusAction: RuleId.PlantTree,
+}
+
+export const Ara: GuardianAnimalDetails = {
+    resources: {},
+    cost: 13,
+    bonusAction: RuleId.AttractAnimals,
+}
+
+export const Armadillo: GuardianAnimalDetails = {
+    resources: {
+        [SacredFlower]: 1
+    },
+    cost: 6,
+    allowMultiple: RuleId.CallKodama,
+}
+
+export const Capybara: GuardianAnimalDetails = {
+    resources: {
+        [Wind]: 1
+    },
+    cost: 10,
+    allowMultiple: RuleId.MoveOnCircleOfSpirit,
+}
+
+export const Crayfish: GuardianAnimalDetails = {
+    resources: {
+        [Drop]: 1
+    },
+    cost: 6,
+    allowMultiple: RuleId.ExtinguishFire,
+}
+
+export const FlyingSquirrel: GuardianAnimalDetails = {
+    resources: {},
+    cost: 15,
+    bonusAction: RuleId.MoveOnCircleOfSpirit,
+}
+
+export const Koi: GuardianAnimalDetails = {
+    resources: {},
+    cost: 12,
+    bonusAction: RuleId.ExtinguishFire,
+}
+
+export const Peafowl: GuardianAnimalDetails = {
+    resources: {
+        [Sun]: 1
+    },
+    cost: 6,
+    allowMultiple: RuleId.AttractAnimals,
+}
+
+export const Sloth: GuardianAnimalDetails = {
+    resources: {
+        [Seed]: 1
+    },
+    cost: 9,
+    allowMultiple: RuleId.PlantTree
+}
+
+export const Tiger: GuardianAnimalDetails = {
+    resources: {},
+    cost: 11,
+    bonusAction: RuleId.CallKodama
+}
+
+export const KodamaSpring: GuardianAnimalDetails = {
+    resources: {
+        [Kodama]: 1
+    },
+    cost: 0,
+}
+
+export const KodamaSummer: GuardianAnimalDetails = {
+    resources: {
+        [Kodama]: 1
+    },
+    cost: 0,
+}
+
+export const KodamaAutumn: GuardianAnimalDetails = {
+    resources: {
+        [Kodama]: 1
+    },
+    cost: 0,
+}
+
+export const KodamaWinter: GuardianAnimalDetails = {
+    resources: {
+        [Kodama]: 1
+    },
+    cost: 0,
+}
+
+export const KodamaFlower1: GuardianAnimalDetails = {
+    resources: {
+        [Kodama]: 1
+    },
+    cost: 1,
+}
+
+export const KodamaFlower2: GuardianAnimalDetails = {
+    resources: {
+        [Sun]: 1,
+        [Kodama]: 1
+    },
+    cost: 2,
+}
+
+export const KodamaFlower3: GuardianAnimalDetails = {
+    resources: {
+        [Sun]: 1,
+        [Kodama]: 1
+    },
+    cost: 2,
+}
+
+export const KodamaFlower4: GuardianAnimalDetails = {
+    resources: {
+        [Sun]: 1,
+        [Wind]: 1,
+        [Kodama]: 1
+    },
+    cost: 3,
+}
+
+export const KodamaFlower5: GuardianAnimalDetails = {
+    resources: {
+        [Sun]: 3,
+        [Kodama]: 1
+    },
+    cost: 3,
+}
+
+export const KodamaFlower6: GuardianAnimalDetails = {
+    resources: {
+        [SacredFlower]: 2,
+        [Kodama]: 1
+    },
+    cost: 4,
+}
+
+export const KodamaTree1: GuardianAnimalDetails = {
+    resources: {
+        [Kodama]: 1
+    },
+    cost: 1,
+}
+
+export const KodamaTree2: GuardianAnimalDetails = {
+    resources: {
+        [Seed]: 1,
+        [Kodama]: 1
+    },
+    cost: 2,
+}
+
+export const KodamaTree3: GuardianAnimalDetails = {
+    resources: {
+        [Seed]: 1,
+        [Kodama]: 1
+    },
+    cost: 2,
+}
+
+export const KodamaTree4: GuardianAnimalDetails = {
+    resources: {
+        [Seed]: 2,
+        [Kodama]: 1
+    },
+    cost: 3,
+}
+
+export const KodamaTree5: GuardianAnimalDetails = {
+    resources: {
+        [Seed]: 1,
+        [Wind]: 1,
+        [Kodama]: 1
+    },
+    cost: 3,
+}
+
+export const KodamaTree6: GuardianAnimalDetails = {
+    resources: {
+        [Seed]: 1,
+        [SacredFlower]: 1,
+        [Kodama]: 1
+    },
+    cost: 4,
+}
+
+export const KodamaWater1: GuardianAnimalDetails = {
+    resources: {
+        [Kodama]: 1
+    },
+    cost: 1,
+}
+
+export const KodamaWater2: GuardianAnimalDetails = {
+    resources: {
+        [Drop]: 1,
+        [Kodama]: 1
+    },
+    cost: 2,
+}
+
+export const KodamaWater3: GuardianAnimalDetails = {
+    resources: {
+        [Drop]: 1,
+        [Kodama]: 1
+    },
+    cost: 2,
+}
+
+export const KodamaWater4: GuardianAnimalDetails = {
+    resources: {
+        [Drop]: 2,
+        [Kodama]: 1
+    },
+    cost: 3,
+}
+
+export const KodamaWater5: GuardianAnimalDetails = {
+    resources: {
+        [Drop]: 1,
+        [Wind]: 1,
+        [Kodama]: 1
+    },
+    cost: 3,
+}
+
+export const KodamaWater6: GuardianAnimalDetails = {
+    resources: {
+        [Drop]: 1,
+        [SacredFlower]: 1,
+        [Kodama]: 1
+    },
+    cost: 4,
+}
+

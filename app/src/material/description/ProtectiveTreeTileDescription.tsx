@@ -21,7 +21,13 @@ export class ProtectiveTreeTileDescription extends TokenDescription {
     [ProtectiveTree.Tree8]: Images.tree8,
     [ProtectiveTree.Tree9]: Images.tree9,
     [ProtectiveTree.Tree10]: Images.tree10,
-    [ProtectiveTree.Tree11]: Images.tree11
+    [ProtectiveTree.Tree11]: Images.tree11,
+    [ProtectiveTree.Tree6K]: Images.tree6K,
+    [ProtectiveTree.Tree7K]: Images.tree7K,
+    [ProtectiveTree.Tree8K]: Images.tree8K,
+    [ProtectiveTree.Tree9K]: Images.tree9K,
+    [ProtectiveTree.Tree10K]: Images.tree10K,
+    [ProtectiveTree.Tree11K]: Images.tree11K,
   }
 
   help = ProtectiveTreeTileHelp

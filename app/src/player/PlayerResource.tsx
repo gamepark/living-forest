@@ -21,4 +21,5 @@ const ResourceImage: Record<Resource, string> = {
   [Resource.Seed]: Images.seed,
   [Resource.Wind]: Images.wind,
   [Resource.SacredFlower]: Images.sacredFlower,
+  [Resource.Kodama]: Images.Kodama,
 }

@@ -1,5 +1,6 @@
 import AttractGuardian from './attractGuardian.png'
 import AutumnPlayerBoard from './autumn-player-board.png'
+import AutumnPlayerBoardExtension from './autumn-player-board.png'
 import autumnSpiritCircle from './autumnSpiritCircle.png'
 import autumnVictoryFire from './autumnVictoryFire.png'
 import autumnVictorySacredFlower from './autumnVictorySacredFlower.png'
@@ -18,6 +19,7 @@ import MoveCircle from './moveCircle.png'
 import PlantTree from './plantTree.png'
 
 import ReserveHolder from './reserve-holder.png'
+import KodamaHolder from './KodamaHolder.png'
 import drop from './resources/drop.png'
 import gregarious from './resources/gregarious.png'
 import sacredFlower from './resources/sacredFlower.png'
@@ -25,15 +27,19 @@ import seed from './resources/seed.png'
 import solitary from './resources/solitary.png'
 import sun from './resources/sun.png'
 import wind from './resources/wind.png'
+import Kodama from './resources/wind.png'
 import SacredTree from './sacred-tree.png'
+import Onibi from './sacred-tree.png'
 
 import SpringPlayerBoard from './spring-player-board.png'
+import SpringPlayerBoardExtension from './spring-player-board.png'
 import springSpiritCircle from './springSpiritCircle.png'
 
 import springVictoryFire from './springVictoryFire.png'
 import springVictorySacredFlower from './springVictorySacredFlower.png'
 import springVictoryTree from './springVictoryTree.png'
 import SummerPlayerBoard from './summer-player-board.png'
+import SummerPlayerBoardExtension from './summer-player-board.png'
 import summerSpiritCircle from './summerSpiritCircle.png'
 
 
@@ -54,31 +60,47 @@ import tree6 from './trees/tree6.jpg'
 import tree7 from './trees/tree7.jpg'
 import tree8 from './trees/tree8.jpg'
 import tree9 from './trees/tree9.jpg'
+import tree6K from './trees/tree9.jpg'
+import tree7K from './trees/tree9.jpg'
+import tree8K from './trees/tree9.jpg'
+import tree9K from './trees/tree9.jpg'
+import tree10K from './trees/tree9.jpg'
+import tree11K from './trees/tree9.jpg'
 import VaranHolder from './varan-holder.png'
 import WinterPlayerBoard from './winter-player-board.png'
+import WinterPlayerBoardExtension from './winter-player-board.png'
 import winterSpiritCircle from './winterSpiritCircle.png'
 
 import winterVictoryFire from './winterVictoryFire.png'
 import winterVictorySacredFlower from './winterVictorySacredFlower.png'
 import winterVictoryTree from './winterVictoryTree.png'
 
+import ElementTileRecto from './winterVictoryTree.png'
+import ElementTileVerso from './winterVictoryTree.png'
+
 const Images = {
-  tree3A, tree3B, tree4A, tree4B, tree5A, tree5B, tree6, tree7, tree8, tree9, tree10, tree11,
+  tree3A, tree3B, tree4A, tree4B, tree5A, tree5B, tree6, tree7, tree8, tree9, tree10, tree11, tree6K, tree7K, tree8K, tree9K, tree10K, tree11K,
   springSpiritCircle, springVictoryFire, springVictorySacredFlower, springVictoryTree,
   summerSpiritCircle, summerVictoryFire, summerVictorySacredFlower, summerVictoryTree,
   autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
   winterSpiritCircle, winterVictoryFire, winterVictorySacredFlower, winterVictoryTree,
   circleOfSpirits,
-  sun, drop, seed, wind, sacredFlower, gregarious, solitary,
+  sun, drop, seed, wind, sacredFlower, gregarious, solitary, Kodama,
   fragment, fire, fire2, fire3, fire4, firePanel,
-  SacredTree,
+  SacredTree, Onibi,
   SpringPlayerBoard,
   SummerPlayerBoard,
   WinterPlayerBoard,
   AutumnPlayerBoard,
+  SpringPlayerBoardExtension,
+  SummerPlayerBoardExtension,
+  WinterPlayerBoardExtension,
+  AutumnPlayerBoardExtension,
   ReserveHolder,
   VaranHolder,
-  TakeFragment, ExtinguishFire, PlantTree, MoveCircle, AttractGuardian
+  KodamaHolder,
+  TakeFragment, ExtinguishFire, PlantTree, MoveCircle, AttractGuardian,
+  ElementTileRecto, ElementTileVerso
 }
 
 export default Images

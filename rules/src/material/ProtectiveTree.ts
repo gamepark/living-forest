@@ -1,7 +1,7 @@
 import { isEnumValue } from "@gamepark/rules-api"
 
 enum ProtectiveTree {
-    Tree3A = 1, Tree3B, Tree4A, Tree4B, Tree5A, Tree5B, Tree6, Tree7, Tree8, Tree9, Tree10, Tree11
+    Tree3A = 1, Tree3B, Tree4A, Tree4B, Tree5A, Tree5B, Tree6, Tree7, Tree8, Tree9, Tree10, Tree11, Tree6K, Tree7K, Tree8K, Tree9K, Tree10K, Tree11K
 }
 
 export default ProtectiveTree
@@ -19,6 +19,12 @@ export const dispenserTwoPlayers: Record<ProtectiveTree, number> = {
     [ProtectiveTree.Tree9]: 2,
     [ProtectiveTree.Tree10]: 2,
     [ProtectiveTree.Tree11]: 2,
+    [ProtectiveTree.Tree6K]: 2,
+    [ProtectiveTree.Tree7K]: 2,
+    [ProtectiveTree.Tree8K]: 2,
+    [ProtectiveTree.Tree9K]: 2,
+    [ProtectiveTree.Tree10K]: 2,
+    [ProtectiveTree.Tree11K]: 2,
 }
 
 export const dispenserThreePlayers: Record<ProtectiveTree, number> = {
@@ -34,7 +40,12 @@ export const dispenserThreePlayers: Record<ProtectiveTree, number> = {
     [ProtectiveTree.Tree9]: 2,
     [ProtectiveTree.Tree10]: 2,
     [ProtectiveTree.Tree11]: 2,
-
+    [ProtectiveTree.Tree6K]: 2,
+    [ProtectiveTree.Tree7K]: 2,
+    [ProtectiveTree.Tree8K]: 2,
+    [ProtectiveTree.Tree9K]: 2,
+    [ProtectiveTree.Tree10K]: 2,
+    [ProtectiveTree.Tree11K]: 2,
 }
 
 export const dispenserFourPlayers: Record<ProtectiveTree, number> = {
@@ -50,7 +61,12 @@ export const dispenserFourPlayers: Record<ProtectiveTree, number> = {
     [ProtectiveTree.Tree9]: 2,
     [ProtectiveTree.Tree10]: 2,
     [ProtectiveTree.Tree11]: 2,
-
+    [ProtectiveTree.Tree6K]: 2,
+    [ProtectiveTree.Tree7K]: 2,
+    [ProtectiveTree.Tree8K]: 2,
+    [ProtectiveTree.Tree9K]: 2,
+    [ProtectiveTree.Tree10K]: 2,
+    [ProtectiveTree.Tree11K]: 2,
 }
 
 export const protectiveTrees = Object.values(ProtectiveTree).filter(isEnumValue)

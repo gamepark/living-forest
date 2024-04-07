@@ -20,6 +20,7 @@ import { TreeSpaceLocator } from './TreeSpaceLocator'
 import { victoryTileAreaLocator } from './VictoryTileAreaLocator'
 import { playerFragmentStackLocator } from './PlayerFragmentStackLocator'
 import { sacredTreeLocator } from './SacredTreeLocator'
+import { kodamaStackLocator } from './KodamaStackLocator'
 
 export const locators: Record<LocationType, ItemLocator<SpiritOfNature, MaterialType, LocationType>> = {
   [LocationType.Table]: tableLocator,
@@ -40,5 +41,6 @@ export const locators: Record<LocationType, ItemLocator<SpiritOfNature, Material
   [LocationType.TreeSpace]: new TreeSpaceLocator(),
   [LocationType.PlayerFireTileStack]: playerFireTileStackLocator,
   [LocationType.PlayerFragmentTileStack]: playerFragmentStackLocator,
-  [LocationType.PlayerReminder]: playerReminderLocator
+  [LocationType.PlayerReminder]: playerReminderLocator,
+  [LocationType.KodamaStack]: kodamaStackLocator,
 }
