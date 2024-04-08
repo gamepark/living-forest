@@ -22,49 +22,58 @@ export const ProtectiveTreeTileHelp = ({ item, itemIndex, closeDialog }: Materia
     <h2>{t('rules.protected-tree.title')}</h2>
     <p css={alignIconText}>
       <Trans defaults="rules.protected-tree.get">
-        <span css={resourceStyle(ResourceImage[3])}/>
+        <span css={resourceStyle(ResourceImage[3])} />
       </Trans>
     </p>
     <p css={alignIconText}>
       <Trans defaults="rules.protected-tree.victory">
-        <span css={resourceStyle(ResourceImage[3])}/>
+        <span css={resourceStyle(ResourceImage[3])} />
       </Trans>
     </p>
-    <hr/>
+    <hr />
     <p css={alignIconText}>
       <Trans defaults="rules.cost" values={{ cost: detail.cost }}>
-        <span css={resourceStyle(ResourceImage[3])}/>
+        <span css={resourceStyle(ResourceImage[3])} />
       </Trans>
     </p>
     {detail.resources && (
       <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(detail.resources).map((element, index) => {
           return <span key={index}>{detail.resources[element] > 0 && detail.resources[element]}
-            {detail.resources[element] > 0 && <span css={resourceStyle(ResourceImage[element])}/>}
-        </span>
+            {detail.resources[element] > 0 && <span css={resourceStyle(ResourceImage[element])} />}
+          </span>
         })}
       </p>
     )}
+    {detail.kodama &&
+      <p css={alignIconText}>
+        {console.log(detail.kodama)}
+        <Trans defaults="rules.protective-tree.kodama" values={{ cost: detail.cost }}>
+          <span css={resourceStyle(ResourceImage[detail.kodama])} />
+          <span css={resourceStyle(ResourceImage[6])} />
+        </Trans>
+      </p>
+    }
     {item.id === ProtectiveTree.Tree11 && (
       <p>
         <Trans defaults="rules.protected-tree.special">
-          <strong/>
+          <strong />
         </Trans>
       </p>
     )}
     {takeProtectiveTree && !item.selected && (
       <>
-        <hr/>
+        <hr />
         <Trans defaults="rules.take-tree">
-          <PlayMoveButton move={rules.material(MaterialType.ProtectiveTreeTiles).index(takeProtectiveTree.itemIndex).selectItem()} local onPlay={closeDialog}/>
+          <PlayMoveButton move={rules.material(MaterialType.ProtectiveTreeTiles).index(takeProtectiveTree.itemIndex).selectItem()} local onPlay={closeDialog} />
         </Trans>
       </>
     )}
     {item.location?.type === LocationType.TreeDispenser && (
       <>
-        <hr/>
+        <hr />
         <p>
-          {t('rules.protected-tree.count', { number: rules.material(MaterialType.ProtectiveTreeTiles).location(LocationType.TreeDispenser).id(item.id).getItem()?.quantity ?? 0})}
+          {t('rules.protected-tree.count', { number: rules.material(MaterialType.ProtectiveTreeTiles).location(LocationType.TreeDispenser).id(item.id).getItem()?.quantity ?? 0 })}
         </p>
       </>
     )}

@@ -1,7 +1,7 @@
 import Resource from './Resource'
 import ProtectiveTree from './ProtectiveTree'
 
-const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource
+const { Sun = 1, Drop, Seed, Wind, SacredFlower, Kodama } = Resource
 
 type ProtectiveTreeDetails = {
     resources?: Partial<Record<Resource, number>>
@@ -78,7 +78,7 @@ export const Tree11: ProtectiveTreeDetails = {
 }
 
 export const Tree6K: ProtectiveTreeDetails = {
-    kodama: Resource.Wind,
+    kodama: Resource.Sun,
     cost: 6,
 }
 
@@ -88,7 +88,9 @@ export const Tree7K: ProtectiveTreeDetails = {
 }
 
 export const Tree8K: ProtectiveTreeDetails = {
-    kodama: Resource.Kodama,
+    resources: {
+        [Kodama]: 1
+    },
     cost: 8
 }
 
@@ -122,7 +124,7 @@ export const ProtectiveTreeDetail = {
     [ProtectiveTree.Tree11]: Tree11,
     [ProtectiveTree.Tree6K]: Tree6K,
     [ProtectiveTree.Tree7K]: Tree7K,
-    [ProtectiveTree.Tree8K]: Tree9K,
+    [ProtectiveTree.Tree8K]: Tree8K,
     [ProtectiveTree.Tree9K]: Tree9K,
     [ProtectiveTree.Tree10K]: Tree10K,
     [ProtectiveTree.Tree11K]: Tree11K,
