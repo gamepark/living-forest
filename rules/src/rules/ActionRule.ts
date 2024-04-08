@@ -32,16 +32,17 @@ export class ActionRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves = []
 
-    const allowMultipleTree = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.PlantTree)
-    if (allowMultipleTree) this.memorizeLastAction(RuleId.PlantTree)
-    const allowMultipleFire = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.ExtinguishFire)
-    if (allowMultipleFire) this.memorizeLastAction(RuleId.ExtinguishFire)
-    const allowMultipleCircle = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.MoveOnCircleOfSpirit)
-    if (allowMultipleCircle) this.memorizeLastAction(RuleId.MoveOnCircleOfSpirit)
-    const allowMultipleAnimal = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.AttractAnimals)
-    if (allowMultipleAnimal) this.memorizeLastAction(RuleId.AttractAnimals)
-    const allowMultipleKodama = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.CallKodama)
-    if (allowMultipleKodama) this.memorizeLastAction(RuleId.CallKodama)
+    this.allowMultiple(RuleId.PlantTree)
+    this.allowMultiple(RuleId.ExtinguishFire)
+    this.allowMultiple(RuleId.MoveOnCircleOfSpirit)
+    this.allowMultiple(RuleId.AttractAnimals)
+    this.allowMultiple(RuleId.CallKodama)
+
+    this.bonusAction(RuleId.PlantTree)
+    this.bonusAction(RuleId.ExtinguishFire)
+    this.bonusAction(RuleId.MoveOnCircleOfSpirit)
+    this.bonusAction(RuleId.AttractAnimals)
+    this.bonusAction(RuleId.CallKodama)
 
     const lastAction = this.lastAction
     if (lastAction !== RuleId.TakeFragment) moves.push(...new TakeFragmentRule(this.game).getPlayerMoves())
@@ -176,5 +177,15 @@ export class ActionRule extends PlayerTurnRule {
 
   get actionCount() {
     return this.remind(Memory.Actions)
+  }
+
+  allowMultiple(ruleId: RuleId) {
+    const allow = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === ruleId)
+    if (allow) this.memorizeLastAction(ruleId)
+  }
+
+  bonusAction(ruleId: RuleId) {
+    const allow = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].bonusAction === ruleId)
+    if (allow) this.memorize(Memory.Bonus, ruleId)
   }
 }
