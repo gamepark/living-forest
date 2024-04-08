@@ -27,10 +27,11 @@ import { PassingSacredTreeRule } from './rules/PassingSacredTreeRule'
 import { ReturnOfGuardianAnimalsRule } from './rules/ReturnOfGuardianAnimalsRule'
 import { RuleId } from './rules/RuleId'
 import SpiritOfNature from './SpiritOfNature'
+import { CallKodamaRule } from './rules/actions/CallKodamaRule'
 
 export class LivingForestRules extends SecretMaterialRules<SpiritOfNature, MaterialType, LocationType>
   implements CompetitiveRank<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature>,
-    TimeLimit<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature>{
+  TimeLimit<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature> {
 
   rankPlayers(playerA: SpiritOfNature, playerB: SpiritOfNature): number {
     return new ScoringRule(this.game).rankPlayers(playerA, playerB)
@@ -51,10 +52,11 @@ export class LivingForestRules extends SecretMaterialRules<SpiritOfNature, Mater
     [RuleId.ReturnOfGuardianAnimals]: ReturnOfGuardianAnimalsRule,
     [RuleId.PassingSacredTree]: PassingSacredTreeRule,
     [RuleId.MoveOnCircleOfSpirit]: MoveOnCircleOfSpiritRule,
-    [RuleId.PickVictoryTile]: PickVictoryTileRule
+    [RuleId.PickVictoryTile]: PickVictoryTileRule,
+    [RuleId.CallKodama]: CallKodamaRule
   }
 
-  locationsStrategies= {
+  locationsStrategies = {
     [MaterialType.GuardianAnimalCard]: {
       [LocationType.ReserveStack]: new PositiveSequenceStrategy(),
       [LocationType.ReserveRow]: new FillGapStrategy(),

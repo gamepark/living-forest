@@ -17,7 +17,6 @@ export class KodamaStackLocator extends DeckLocator {
 export const kodamaStackLocator = new KodamaStackLocator()
 
 export const getKodamaStackCoordinates = (level: number, players: SpiritOfNature[]) => {
-  console.log(level)
   const playerCount = players.length
   const x = playerCount < 3 ? 26 : (playerCount === 3 ? 58 : 21)
   const y = playerCount < 3 ? 14 : -32.9

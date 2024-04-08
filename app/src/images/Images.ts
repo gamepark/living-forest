@@ -27,7 +27,7 @@ import seed from './resources/seed.png'
 import solitary from './resources/solitary.png'
 import sun from './resources/sun.png'
 import wind from './resources/wind.png'
-import Kodama from './resources/wind.png'
+import Kodama from './resources/kodama.png'
 import SacredTree from './sacred-tree.png'
 import Onibi from './sacred-tree.png'
 

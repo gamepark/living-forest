@@ -33,6 +33,8 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
   const discard = item.location?.type === LocationType.PlayerDiscardStack
   const helpline = item.location?.type === LocationType.HelpLine
   const playerName = usePlayerName(item.location?.player)
+  console.log('rules');
+  console.log(rules.rules);
 
 
   //verso cards
@@ -83,26 +85,34 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
       <p>{t('rules.varan.destroy')}</p>
     </>
   }
-
+  const isKodama = Object.keys(description.resources).find(r => r === '6') !== undefined
   return (
     <>
-      <h2>{getAnimalTranslation(t, item.id)}</h2>
+      <h2>{isKodama ? t('rules.kodama.title') : getAnimalTranslation(t, item.id)}</h2>
       {activePlayer && discard && <p css={italic}>{t('rules.discard-stack')}</p>}
       {!activePlayer && discard && <p css={italic}>{t('rules.discard-stack-opponent', { player: playerName })}</p>}
       {activePlayer && helpline && <p css={italic}>{t('rules.help-line')}</p>}
       {!activePlayer && helpline && <p css={italic}>{t('rules.help-line-opponent')}</p>}
       <p>{t('rules.guardian-animal.description')}</p>
-      <Cost />
+      {isKodama && <p css={alignIconText}>
+        <Trans defaults="rules.kodama.description">
+          <span css={resourceStyle(ResourceImage[6])} />
+        </Trans>
+      </p>}
+
+      <Cost isKodama={isKodama} />
       <hr />
-      <Cost cost={description.cost} />
+      <Cost cost={description.cost} isKodama={isKodama} />
       <GregariousSolitary type={description.type} />
-      <p css={alignIcon}>{t('rules.resources')} :
+      {description.bonusAction && <p>{t(`rules.bonusAction`)} {t(`action.${description.bonusAction}`)}</p>}
+      {description.allowMultiple && <p>{t(`rules.allowMultiple`)} {t(`action.${description.allowMultiple}`)}</p>}
+      {Object.keys(description.resources).length > 0 && <p css={alignIcon}>{t('rules.resources')} :
         {Object.keys(description.resources).map((element, index) => {
           return <span key={index}>{description.resources[element]}
             <span css={resourceStyle(ResourceImage[element])} />
           </span>
         })}
-      </p>
+      </p>}
       {shuffleAndDraw && activePlayer && <hr />}
       {shuffleAndDraw && activePlayer &&
         <Trans defaults="rules.shuffle-draw">
@@ -116,12 +126,13 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
   )
 }
 
-export const Cost: FC<{ cost?: number }> = ({ cost }) => {
+export const Cost: FC<{ cost?: number, isKodama?: boolean }> = ({ cost, isKodama }) => {
+  const resourceImage = isKodama ? ResourceImage[5] : ResourceImage[1]
   if (cost !== undefined) {
     return (
       <p css={alignIconText}>
         <Trans defaults="rules.cost" values={{ cost: cost }}>
-          <span css={resourceStyle(ResourceImage[1])} />
+          <span css={resourceStyle(resourceImage)} />
         </Trans>
       </p>
     )
@@ -130,7 +141,7 @@ export const Cost: FC<{ cost?: number }> = ({ cost }) => {
   return (
     <p css={alignIconText}>
       <Trans defaults="rules.guardian-animal.get">
-        <span css={resourceStyle(ResourceImage[1])} />
+        <span css={resourceStyle(resourceImage)} />
       </Trans>
     </p>
   )
