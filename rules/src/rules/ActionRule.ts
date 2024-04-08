@@ -33,18 +33,6 @@ export class ActionRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves = []
 
-    // this.allowMultiple(RuleId.PlantTree)
-    // this.allowMultiple(RuleId.ExtinguishFire)
-    // this.allowMultiple(RuleId.MoveOnCircleOfSpirit)
-    // this.allowMultiple(RuleId.AttractAnimals)
-    // this.allowMultiple(RuleId.CallKodama)
-
-    // this.bonusAction(RuleId.PlantTree)
-    // this.bonusAction(RuleId.ExtinguishFire)
-    // this.bonusAction(RuleId.MoveOnCircleOfSpirit)
-    // this.bonusAction(RuleId.AttractAnimals)
-    // this.bonusAction(RuleId.CallKodama)
-
     const lastAction = this.lastAction
     if (lastAction !== RuleId.TakeFragment) moves.push(...new TakeFragmentRule(this.game).getPlayerMoves())
     if (lastAction !== RuleId.AttractAnimals) moves.push(...new AttractAnimalsRule(this.game).getPlayerMoves())
@@ -161,7 +149,6 @@ export class ActionRule extends PlayerTurnRule {
       .id(ProtectiveTree.Tree11)
 
     if (specialTree.length) return;
-    this.memorize(Memory.LastAction, ruleId)
 
     const isMultipleAllowedByAnimal = this
       .material(MaterialType.GuardianAnimalCard)
@@ -179,15 +166,5 @@ export class ActionRule extends PlayerTurnRule {
 
   get actionCount() {
     return this.remind(Memory.Actions)
-  }
-
-  allowMultiple(ruleId: RuleId) {
-    const allow = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === ruleId)
-    if (allow) this.memorizeLastAction(ruleId)
-  }
-
-  bonusAction(ruleId: RuleId) {
-    const allow = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].bonusAction === ruleId)
-    if (allow) this.memorize(Memory.Bonus, ruleId)
   }
 }
