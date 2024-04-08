@@ -28,11 +28,17 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
   const attract = useLegalMove((move: MaterialMove) =>
     isMoveItemType(MaterialType.GuardianAnimalCard)(move) && item.location?.type === LocationType.ReserveRow && move.itemIndex === itemIndex
   )
+  const call = useLegalMove((move: MaterialMove) =>
+    isMoveItemType(MaterialType.GuardianAnimalCard)(move) && item.location?.type === LocationType.KodamaStack && move.itemIndex === itemIndex
+  )
   const activePlayer = item.location?.player === player
   const deck = item.location?.type === LocationType.PlayerDeckStack
   const discard = item.location?.type === LocationType.PlayerDiscardStack
   const helpline = item.location?.type === LocationType.HelpLine
   const playerName = usePlayerName(item.location?.player)
+
+  console.log(legalMoves);
+
 
 
   //verso cards
@@ -119,6 +125,10 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
       {attract && <hr />}
       {attract && <Trans defaults="rules.attract">
         <PlayMoveButton move={attract} onPlay={closeDialog} />
+      </Trans>}
+      {call && <hr />}
+      {call && <Trans defaults="rules.call">
+        <PlayMoveButton move={call} onPlay={closeDialog} />
       </Trans>}
     </>
   )

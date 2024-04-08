@@ -4,5 +4,6 @@ export enum ActionType {
   AttractAnimals,
   ExtinguishFire,
   MoveOnCircleOfSpirit,
-  PlantProtectiveTree
+  PlantProtectiveTree,
+  CallKodama
 }

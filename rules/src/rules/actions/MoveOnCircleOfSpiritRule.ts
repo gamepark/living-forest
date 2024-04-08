@@ -11,6 +11,7 @@ import { AttractAnimalsRule } from './AttractAnimalsRule'
 import { ExtinguishFireRule } from './ExtinguishFireRule'
 import { PlantProtectiveTreeRule } from './PlantProtectiveTreeRule'
 import { TakeFragmentRule } from './TakeFragmentRule'
+import { CallKodamaRule } from './CallKodamaRule'
 
 export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
@@ -125,6 +126,8 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
         return new ExtinguishFireRule(this.game).getPlayerMoves().length
       case RuleId.AttractAnimals:
         return new AttractAnimalsRule(this.game).getPlayerMoves().length
+      case RuleId.CallKodama:
+        return new CallKodamaRule(this.game).getPlayerMoves().length
     }
 
     return false

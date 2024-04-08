@@ -13,6 +13,7 @@ import { TurnOrder } from './helper/TurnOrder'
 import ProtectiveTree from '../material/ProtectiveTree'
 import { CustomMoveType } from './CustomMoveType'
 import { GuardianAnimalDescriptions } from '../material/GuardianAnimalDescriptions'
+import { CallKodamaRule } from './actions/CallKodamaRule'
 
 
 export class ActionRule extends PlayerTurnRule {
@@ -32,17 +33,17 @@ export class ActionRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves = []
 
-    this.allowMultiple(RuleId.PlantTree)
-    this.allowMultiple(RuleId.ExtinguishFire)
-    this.allowMultiple(RuleId.MoveOnCircleOfSpirit)
-    this.allowMultiple(RuleId.AttractAnimals)
-    this.allowMultiple(RuleId.CallKodama)
+    // this.allowMultiple(RuleId.PlantTree)
+    // this.allowMultiple(RuleId.ExtinguishFire)
+    // this.allowMultiple(RuleId.MoveOnCircleOfSpirit)
+    // this.allowMultiple(RuleId.AttractAnimals)
+    // this.allowMultiple(RuleId.CallKodama)
 
-    this.bonusAction(RuleId.PlantTree)
-    this.bonusAction(RuleId.ExtinguishFire)
-    this.bonusAction(RuleId.MoveOnCircleOfSpirit)
-    this.bonusAction(RuleId.AttractAnimals)
-    this.bonusAction(RuleId.CallKodama)
+    // this.bonusAction(RuleId.PlantTree)
+    // this.bonusAction(RuleId.ExtinguishFire)
+    // this.bonusAction(RuleId.MoveOnCircleOfSpirit)
+    // this.bonusAction(RuleId.AttractAnimals)
+    // this.bonusAction(RuleId.CallKodama)
 
     const lastAction = this.lastAction
     if (lastAction !== RuleId.TakeFragment) moves.push(...new TakeFragmentRule(this.game).getPlayerMoves())
@@ -50,6 +51,7 @@ export class ActionRule extends PlayerTurnRule {
     if (lastAction !== RuleId.ExtinguishFire) moves.push(...new ExtinguishFireRule(this.game).getPlayerMoves())
     if (lastAction !== RuleId.MoveOnCircleOfSpirit) moves.push(...new MoveOnCircleOfSpiritRule(this.game).getPlayerMoves())
     if (lastAction !== RuleId.PlantTree) moves.push(...new PlantProtectiveTreeRule(this.game).getPlayerMoves())
+    if (lastAction !== RuleId.CallKodama) moves.push(...new CallKodamaRule(this.game).getPlayerMoves())
     return moves;
   }
 
