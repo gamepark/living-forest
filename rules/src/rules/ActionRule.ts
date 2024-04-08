@@ -12,6 +12,7 @@ import { PlantProtectiveTreeRule } from './actions/PlantProtectiveTreeRule'
 import { TurnOrder } from './helper/TurnOrder'
 import ProtectiveTree from '../material/ProtectiveTree'
 import { CustomMoveType } from './CustomMoveType'
+import { GuardianAnimalDescriptions } from '../material/GuardianAnimalDescriptions'
 
 
 export class ActionRule extends PlayerTurnRule {
@@ -23,13 +24,24 @@ export class ActionRule extends PlayerTurnRule {
     if (this.actionCount !== undefined) return []
 
     const playerState = new PlayerState(this.game, this.player)
-    const actionCount = playerState.solidarityGregariousDifference === 3? 1: 2
+    const actionCount = playerState.solidarityGregariousDifference === 3 ? 1 : 2
     this.memorize(Memory.Actions, actionCount)
     return []
   }
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves = []
+
+    const allowMultipleTree = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.PlantTree)
+    if (allowMultipleTree) this.memorizeLastAction(RuleId.PlantTree)
+    const allowMultipleFire = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.ExtinguishFire)
+    if (allowMultipleFire) this.memorizeLastAction(RuleId.ExtinguishFire)
+    const allowMultipleCircle = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.MoveOnCircleOfSpirit)
+    if (allowMultipleCircle) this.memorizeLastAction(RuleId.MoveOnCircleOfSpirit)
+    const allowMultipleAnimal = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.AttractAnimals)
+    if (allowMultipleAnimal) this.memorizeLastAction(RuleId.AttractAnimals)
+    const allowMultipleKodama = this.material(MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(this.player).filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === RuleId.CallKodama)
+    if (allowMultipleKodama) this.memorizeLastAction(RuleId.CallKodama)
 
     const lastAction = this.lastAction
     if (lastAction !== RuleId.TakeFragment) moves.push(...new TakeFragmentRule(this.game).getPlayerMoves())
@@ -146,6 +158,15 @@ export class ActionRule extends PlayerTurnRule {
       .id(ProtectiveTree.Tree11)
 
     if (specialTree.length) return;
+    this.memorize(Memory.LastAction, ruleId)
+
+    const isMultipleAllowedByAnimal = this
+      .material(MaterialType.GuardianAnimalCard)
+      .location(LocationType.HelpLine)
+      .player(this.player)
+      .filter((item) => GuardianAnimalDescriptions[item.id].allowMultiple === ruleId)
+
+    if (isMultipleAllowedByAnimal) return;
     this.memorize(Memory.LastAction, ruleId)
   }
 
