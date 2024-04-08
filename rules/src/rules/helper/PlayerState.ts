@@ -76,7 +76,12 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getTreeResources(resource: Resource) {
-    return sumBy(this.forest.getItems(), (item) => ProtectiveTreeDetail[item.id]?.resources?.[resource] ?? 0) ?? 0
+    let count = sumBy(this.forest.getItems(), (item) => ProtectiveTreeDetail[item.id]?.resources?.[resource] ?? 0) ?? 0
+    const treeKodamaBonuses = this.forest.filter((item) => ProtectiveTreeDetail[item.id]?.kodama === resource).length
+    const kodamaCardResources = sumBy(this.helpLine.getItems(), (item) => GuardianAnimalDescriptions[item.id]?.resources?.[Resource.Kodama] ?? 0) ?? 0
+    const kodamaTreeResources = sumBy(this.forest.getItems(), (item) => ProtectiveTreeDetail[item.id]?.resources?.[Resource.Kodama] ?? 0) ?? 0
+    count += treeKodamaBonuses * (kodamaCardResources + kodamaTreeResources)
+    return count
   }
 
   getHelpLineResources(resource: Resource) {

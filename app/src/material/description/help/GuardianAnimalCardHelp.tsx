@@ -33,8 +33,6 @@ export const GuardianAnimalCardHelp = ({ item, itemIndex, closeDialog }: Materia
   const discard = item.location?.type === LocationType.PlayerDiscardStack
   const helpline = item.location?.type === LocationType.HelpLine
   const playerName = usePlayerName(item.location?.player)
-  console.log('rules');
-  console.log(rules.rules);
 
 
   //verso cards
