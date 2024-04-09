@@ -6,7 +6,7 @@ import { startingReserveStack1, startingReserveStack2, startingReserveStack3 } f
 import SpiritOfNature from './SpiritOfNature'
 import { getInitializationPlayersRocks } from './material/CircleOfSpirits'
 import { Fire } from './material/Fire'
-import GuardianAnimal, { startingGuardianAnimalsAutumn, startingGuardianAnimalsSpring, startingGuardianAnimalsSummer, startingGuardianAnimalsWinter } from './material/GuardianAnimal'
+import GuardianAnimal, { startingGuardianAnimals } from './material/GuardianAnimal'
 import { LocationType } from './material/LocationType'
 import { MaterialType } from './material/MaterialType'
 import { getInitializationDispenser } from './material/ProtectiveTree'
@@ -104,7 +104,6 @@ export class LivingForestSetup extends MaterialGameSetup<SpiritOfNature, Materia
 
   setupPlayer(player: SpiritOfNature, options: LivingForestOptions) {
     const spirits = options.players.map((p) => p.id)
-    const startingGuardianAnimals = player === SpiritOfNature.Spring ? startingGuardianAnimalsSpring : player === SpiritOfNature.Summer ? startingGuardianAnimalsSummer : player === SpiritOfNature.Autumn ? startingGuardianAnimalsAutumn : startingGuardianAnimalsWinter
     this.material(MaterialType.GuardianAnimalCard).createItems(startingGuardianAnimals.map((card) => ({
       id: card,
       location: { type: LocationType.PlayerDeckStack, player }

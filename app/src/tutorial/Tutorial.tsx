@@ -161,7 +161,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.FoxWinter)
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Fox)
         ],
         margin: {
           right: 25,
@@ -290,9 +290,9 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
 
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.WeaselWinter), // weasel
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.BoarWinter), // boar
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.TanukiWinter) // tanu
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Weasel), // weasel
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Boar), // boar
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Tanuki) // tanu
         ]
       })
     },
@@ -335,8 +335,8 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.FoxWinter), // weasel
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.BearWinter) // boar
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Fox), // weasel
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Bear) // boar
         ],
         margin: {
           right: 25
@@ -491,8 +491,8 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       },
       focus: (game) => ({
         materials: [
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.BeetleWinter),
-          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.OwlWinter)
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Beetle),
+          this.material(game, MaterialType.GuardianAnimalCard).location(LocationType.HelpLine).player(SpiritOfNature.Spring).id(GuardianAnimal.Owl)
         ],
         margin: {
           right: 20

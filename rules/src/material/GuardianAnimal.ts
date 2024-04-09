@@ -1,20 +1,20 @@
 import { isEnumValue } from '@gamepark/rules-api'
 
 enum GuardianAnimal {
-  BearWinter = 1,
-  BeetleWinter,
-  LynxWinter,
-  FoxWinter,
-  GoldfishWinter,
-  TanukiWinter,
-  BoarWinter,
-  WeaselWinter,
-  HareWinter,
-  FawnWinter,
-  HummingbirdWinter,
-  BeeWinter,
-  BaboonWinter,
-  OwlWinter,
+  Bear = 1,
+  Beetle,
+  Lynx,
+  Fox,
+  Goldfish,
+  Tanuki,
+  Boar,
+  Weasel,
+  Hare,
+  Fawn,
+  Hummingbird,
+  Bee,
+  Baboon,
+  Owl,
   Hedgehog,
   Caterpillar,
   Flamingo,
@@ -99,59 +99,11 @@ enum GuardianAnimal {
   KodamaFlower3,
   KodamaFlower4,
   KodamaFlower5,
-  KodamaFlower6,
-
-  BearSpring = 201,
-  BeetleSpring,
-  LynxSpring,
-  FoxSpring,
-  GoldfishSpring,
-  TanukiSpring,
-  BoarSpring,
-  WeaselSpring,
-  HareSpring,
-  FawnSpring,
-  HummingbirdSpring,
-  BeeSpring,
-  BaboonSpring,
-  OwlSpring,
-
-  BearSummer = 301,
-  BeetleSummer,
-  LynxSummer,
-  FoxSummer,
-  GoldfishSummer,
-  TanukiSummer,
-  BoarSummer,
-  WeaselSummer,
-  HareSummer,
-  FawnSummer,
-  HummingbirdSummer,
-  BeeSummer,
-  BaboonSummer,
-  OwlSummer,
-
-  BearAutumn = 401,
-  BeetleAutumn,
-  LynxAutumn,
-  FoxAutumn,
-  GoldfishAutumn,
-  TanukiAutumn,
-  BoarAutumn,
-  WeaselAutumn,
-  HareAutumn,
-  FawnAutumn,
-  HummingbirdAutumn,
-  BeeAutumn,
-  BaboonAutumn,
-  OwlAutumn,
+  KodamaFlower6
 }
 
 export const guardianAnimals = Object.values(GuardianAnimal).filter(isEnumValue)
-export const startingGuardianAnimalsSpring = guardianAnimals.filter((g) => g >= GuardianAnimal.BearSpring && g <= GuardianAnimal.OwlSpring).concat(GuardianAnimal.KodamaSpring)
-export const startingGuardianAnimalsSummer = guardianAnimals.filter((g) => g >= GuardianAnimal.BearSummer && g <= GuardianAnimal.OwlSummer).concat(GuardianAnimal.KodamaSummer)
-export const startingGuardianAnimalsAutumn = guardianAnimals.filter((g) => g >= GuardianAnimal.BearAutumn && g <= GuardianAnimal.OwlAutumn).concat(GuardianAnimal.KodamaAutumn)
-export const startingGuardianAnimalsWinter = guardianAnimals.filter((g) => g >= GuardianAnimal.BearWinter && g <= GuardianAnimal.OwlWinter).concat(GuardianAnimal.KodamaWinter)
+export const startingGuardianAnimals = guardianAnimals.filter((g) => g >= GuardianAnimal.Bear && g <= GuardianAnimal.Owl).concat(GuardianAnimal.KodamaWinter)
 
 export const isVaran = (guardianAnimal: GuardianAnimal) => GuardianAnimal.FireVaran === guardianAnimal
 

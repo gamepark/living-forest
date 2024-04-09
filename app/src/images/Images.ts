@@ -13,6 +13,7 @@ import fire2 from './fire2.png'
 import fire3 from './fire3.png'
 import fire4 from './fire4.png'
 import firePanel from './firePanel.png'
+import treePanel from './treePanel.png'
 import fragment from './fragment.png'
 import MoveCircle from './moveCircle.png'
 
@@ -85,7 +86,7 @@ const Images = {
   autumnVictoryFire, autumnVictorySacredFlower, autumnVictoryTree, autumnSpiritCircle,
   winterSpiritCircle, winterVictoryFire, winterVictorySacredFlower, winterVictoryTree,
   circleOfSpirits,
-  sun, drop, seed, wind, sacredFlower, gregarious, solitary, Kodama,
+  sun, drop, seed, wind, sacredFlower, treePanel, gregarious, solitary, Kodama,
   fragment, fire, fire2, fire3, fire4, firePanel,
   SacredTree, Onibi,
   SpringPlayerBoard,

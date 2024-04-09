@@ -10,24 +10,12 @@ import Armadillo from '../../images/cards/Armadillo.jpg'
 import Axolotl from '../../images/cards/Axolotl.jpg'
 import Badger from '../../images/cards/Badger.jpg'
 import Bat from '../../images/cards/Bat.jpg'
-import BearAutumn from '../../images/cards/BearAutumn.jpg'
-import BearSpring from '../../images/cards/BearSpring.jpg'
-import BearSummer from '../../images/cards/BearSummer.jpg'
-import BearWinter from '../../images/cards/BearWinter.jpg'
+import Bear from '../../images/cards/Bear.jpg'
 import Beaver from '../../images/cards/Beaver.jpg'
-import BeeAutumn from '../../images/cards/BeeAutumn.jpg'
-import BeeSpring from '../../images/cards/BeeSpring.jpg'
-import BeeSummer from '../../images/cards/BeeSummer.jpg'
-import BeetleAutumn from '../../images/cards/BeetleAutumn.jpg'
-import BeetleSpring from '../../images/cards/BeetleSpring.jpg'
-import BeetleSummer from '../../images/cards/BeetleSummer.jpg'
-import BeetleWinter from '../../images/cards/BeetleWinter.jpg'
-import BeeWinter from '../../images/cards/BeeWinter.jpg'
+import Beetle from '../../images/cards/Beetle.jpg'
+import Bee from '../../images/cards/Bee.jpg'
 import Bison from '../../images/cards/Bison.jpg'
-import BoarAutumn from '../../images/cards/BoarAutumn.jpg'
-import BoarSpring from '../../images/cards/BoarSpring.jpg'
-import BoarSummer from '../../images/cards/BoarSummer.jpg'
-import BoarWinter from '../../images/cards/BoarWinter.jpg'
+import Boar from '../../images/cards/Boar.jpg'
 import Bull from '../../images/cards/Bull.jpg'
 import Butterfly from '../../images/cards/Butterfly.jpg'
 import Capybara from '../../images/cards/Capybara.jpg'
@@ -46,36 +34,21 @@ import Dog from '../../images/cards/Dog.jpg'
 import Dolphin from '../../images/cards/Dolphin.jpg'
 import Eagle from '../../images/cards/Eagle.jpg'
 import Elephant from '../../images/cards/Elephant.jpg'
-import FawnAutumn from '../../images/cards/FawnAutumn.jpg'
-import FawnSpring from '../../images/cards/FawnSpring.jpg'
-import FawnSummer from '../../images/cards/FawnSummer.jpg'
-import FawnWinter from '../../images/cards/FawnWinter.jpg'
+import Fawn from '../../images/cards/Fawn.jpg'
 import FireVaran from '../../images/cards/FireVaran.jpg'
 import Flamingo from '../../images/cards/Flamingo.jpg'
 import FlyingSquirrel from '../../images/cards/FlyingSquirrel.jpg'
-import FoxAutumn from '../../images/cards/FoxAutumn.jpg'
-import FoxSpring from '../../images/cards/FoxSpring.jpg'
-import FoxSummer from '../../images/cards/FoxSummer.jpg'
-import FoxWinter from '../../images/cards/FoxWinter.jpg'
+import Fox from '../../images/cards/Fox.jpg'
 import Frog from '../../images/cards/Frog.jpg'
 import Goat from '../../images/cards/Goat.jpg'
-import GoldfishAutumn from '../../images/cards/GoldfishAutumn.jpg'
-import GoldfishSpring from '../../images/cards/GoldfishSpring.jpg'
-import GoldfishSummer from '../../images/cards/GoldfishSummer.jpg'
-import GoldfishWinter from '../../images/cards/GoldfishWinter.jpg'
+import Goldfish from '../../images/cards/Goldfish.jpg'
 import Gorilla from '../../images/cards/Gorilla.jpg'
-import HareAutumn from '../../images/cards/HareAutumn.jpg'
-import HareSpring from '../../images/cards/HareSpring.jpg'
-import HareSummer from '../../images/cards/HareSummer.jpg'
-import HareWinter from '../../images/cards/HareWinter.jpg'
+import Hare from '../../images/cards/Hare.jpg'
 import Hedgehog from '../../images/cards/Hedgehog.jpg'
 import Hippopotamus from '../../images/cards/Hippopotamus.jpg'
 import HornedOwl from '../../images/cards/HornedOwl.jpg'
 import Horse from '../../images/cards/Horse.jpg'
-import HummingbirdAutumn from '../../images/cards/HummingbirdAutumn.jpg'
-import HummingbirdSpring from '../../images/cards/HummingbirdSpring.jpg'
-import HummingbirdSummer from '../../images/cards/HummingbirdSummer.jpg'
-import HummingbirdWinter from '../../images/cards/HummingbirdWinter.jpg'
+import Hummingbird from '../../images/cards/Hummingbird.jpg'
 import Koala from '../../images/cards/Koala.jpg'
 import KodamaAutumn from '../../images/cards/KodamaAutumn.jpg'
 import KodamaFlower1 from '../../images/cards/KodamaFlower1.jpg'
@@ -103,20 +76,11 @@ import Koi from '../../images/cards/Koi.jpg'
 import Lemur from '../../images/cards/Lemur.jpg'
 import Leopard from '../../images/cards/Leopard.jpg'
 import Loris from '../../images/cards/Loris.jpg'
-import LynxAutumn from '../../images/cards/LynxAutumn.jpg'
-import LynxSpring from '../../images/cards/LynxSpring.jpg'
-import LynxSummer from '../../images/cards/LynxSummer.jpg'
-import LynxWinter from '../../images/cards/LynxWinter.jpg'
+import Lynx from '../../images/cards/Lynx.jpg'
 import Marmot from '../../images/cards/Marmot.jpg'
 import Meerkat from '../../images/cards/Meerkat.jpg'
-import BaboonAutumn from '../../images/cards/BaboonAutumn.jpg'
-import BaboonSpring from '../../images/cards/BaboonSpring.jpg'
-import BaboonSummer from '../../images/cards/BaboonSummer.jpg'
-import BaboonWinter from '../../images/cards/BaboonWinter.jpg'
-import OwlAutumn from '../../images/cards/OwlAutumn.jpg'
-import OwlSpring from '../../images/cards/OwlSpring.jpg'
-import OwlSummer from '../../images/cards/OwlSummer.jpg'
-import OwlWinter from '../../images/cards/OwlWinter.jpg'
+import Baboon from '../../images/cards/Baboon.jpg'
+import Owl from '../../images/cards/Owl.jpg'
 import Panda from '../../images/cards/Panda.jpg'
 import Panther from '../../images/cards/Panther.jpg'
 import Peafowl from '../../images/cards/Peafowl.jpg'
@@ -131,18 +95,12 @@ import Sloth from '../../images/cards/Sloth.jpg'
 import Spider from '../../images/cards/Spider.jpg'
 import Squirrel from '../../images/cards/Squirrel.jpg'
 import Stag from '../../images/cards/Stag.jpg'
-import TanukiAutumn from '../../images/cards/TanukiAutumn.jpg'
-import TanukiSpring from '../../images/cards/TanukiSpring.jpg'
-import TanukiSummer from '../../images/cards/TanukiSummer.jpg'
-import TanukiWinter from '../../images/cards/TanukiWinter.jpg'
+import Tanuki from '../../images/cards/Tanuki.jpg'
 import Tapir from '../../images/cards/Tapir.jpg'
 import Tiger from '../../images/cards/Tiger.jpg'
 import Tortoise from '../../images/cards/Tortoise.jpg'
 import Toucan from '../../images/cards/Toucan.jpg'
-import WeaselAutumn from '../../images/cards/WeaselAutumn.jpg'
-import WeaselSpring from '../../images/cards/WeaselSpring.jpg'
-import WeaselSummer from '../../images/cards/WeaselSummer.jpg'
-import WeaselWinter from '../../images/cards/WeaselWinter.jpg'
+import Weasel from '../../images/cards/Weasel.jpg'
 import Wolf from '../../images/cards/Wolf.jpg'
 import Woodpecker from '../../images/cards/Woodpecker.jpg'
 import { GuardianAnimalCardHelp } from './help/GuardianAnimalCardHelp'
@@ -152,20 +110,20 @@ export class GuardianAnimalCardDescription extends CardDescription {
   height = 8.89
 
   images = {
-    [GuardianAnimal.BearWinter]: BearWinter,
-    [GuardianAnimal.BeetleWinter]: BeetleWinter,
-    [GuardianAnimal.LynxWinter]: LynxWinter,
-    [GuardianAnimal.FoxWinter]: FoxWinter,
-    [GuardianAnimal.GoldfishWinter]: GoldfishWinter,
-    [GuardianAnimal.TanukiWinter]: TanukiWinter,
-    [GuardianAnimal.BoarWinter]: BoarWinter,
-    [GuardianAnimal.WeaselWinter]: WeaselWinter,
-    [GuardianAnimal.HareWinter]: HareWinter,
-    [GuardianAnimal.FawnWinter]: FawnWinter,
-    [GuardianAnimal.HummingbirdWinter]: HummingbirdWinter,
-    [GuardianAnimal.BeeWinter]: BeeWinter,
-    [GuardianAnimal.BaboonWinter]: BaboonWinter,
-    [GuardianAnimal.OwlWinter]: OwlWinter,
+    [GuardianAnimal.Bear]: Bear,
+    [GuardianAnimal.Beetle]: Beetle,
+    [GuardianAnimal.Lynx]: Lynx,
+    [GuardianAnimal.Fox]: Fox,
+    [GuardianAnimal.Goldfish]: Goldfish,
+    [GuardianAnimal.Tanuki]: Tanuki,
+    [GuardianAnimal.Boar]: Boar,
+    [GuardianAnimal.Weasel]: Weasel,
+    [GuardianAnimal.Hare]: Hare,
+    [GuardianAnimal.Fawn]: Fawn,
+    [GuardianAnimal.Hummingbird]: Hummingbird,
+    [GuardianAnimal.Bee]: Bee,
+    [GuardianAnimal.Baboon]: Baboon,
+    [GuardianAnimal.Owl]: Owl,
 
     [GuardianAnimal.Hedgehog]: Hedgehog,
     [GuardianAnimal.Caterpillar]: Caterpillar,
@@ -251,52 +209,7 @@ export class GuardianAnimalCardDescription extends CardDescription {
     [GuardianAnimal.KodamaFlower3]: KodamaFlower3,
     [GuardianAnimal.KodamaFlower4]: KodamaFlower4,
     [GuardianAnimal.KodamaFlower5]: KodamaFlower5,
-    [GuardianAnimal.KodamaFlower6]: KodamaFlower6,
-
-    [GuardianAnimal.BearSpring]: BearSpring,
-    [GuardianAnimal.BeetleSpring]: BeetleSpring,
-    [GuardianAnimal.LynxSpring]: LynxSpring,
-    [GuardianAnimal.FoxSpring]: FoxSpring,
-    [GuardianAnimal.GoldfishSpring]: GoldfishSpring,
-    [GuardianAnimal.TanukiSpring]: TanukiSpring,
-    [GuardianAnimal.BoarSpring]: BoarSpring,
-    [GuardianAnimal.WeaselSpring]: WeaselSpring,
-    [GuardianAnimal.HareSpring]: HareSpring,
-    [GuardianAnimal.FawnSpring]: FawnSpring,
-    [GuardianAnimal.HummingbirdSpring]: HummingbirdSpring,
-    [GuardianAnimal.BeeSpring]: BeeSpring,
-    [GuardianAnimal.BaboonSpring]: BaboonSpring,
-    [GuardianAnimal.OwlSpring]: OwlSpring,
-
-    [GuardianAnimal.BearSummer]: BearSummer,
-    [GuardianAnimal.BeetleSummer]: BeetleSummer,
-    [GuardianAnimal.LynxSummer]: LynxSummer,
-    [GuardianAnimal.FoxSummer]: FoxSummer,
-    [GuardianAnimal.GoldfishSummer]: GoldfishSummer,
-    [GuardianAnimal.TanukiSummer]: TanukiSummer,
-    [GuardianAnimal.BoarSummer]: BoarSummer,
-    [GuardianAnimal.WeaselSummer]: WeaselSummer,
-    [GuardianAnimal.HareSummer]: HareSummer,
-    [GuardianAnimal.FawnSummer]: FawnSummer,
-    [GuardianAnimal.HummingbirdSummer]: HummingbirdSummer,
-    [GuardianAnimal.BeeSummer]: BeeSummer,
-    [GuardianAnimal.BaboonSummer]: BaboonSummer,
-    [GuardianAnimal.OwlSummer]: OwlSummer,
-
-    [GuardianAnimal.BearAutumn]: BearAutumn,
-    [GuardianAnimal.BeetleAutumn]: BeetleAutumn,
-    [GuardianAnimal.LynxAutumn]: LynxAutumn,
-    [GuardianAnimal.FoxAutumn]: FoxAutumn,
-    [GuardianAnimal.GoldfishAutumn]: GoldfishAutumn,
-    [GuardianAnimal.TanukiAutumn]: TanukiAutumn,
-    [GuardianAnimal.BoarAutumn]: BoarAutumn,
-    [GuardianAnimal.WeaselAutumn]: WeaselAutumn,
-    [GuardianAnimal.HareAutumn]: HareAutumn,
-    [GuardianAnimal.FawnAutumn]: FawnAutumn,
-    [GuardianAnimal.HummingbirdAutumn]: HummingbirdAutumn,
-    [GuardianAnimal.BeeAutumn]: BeeAutumn,
-    [GuardianAnimal.BaboonAutumn]: BaboonAutumn,
-    [GuardianAnimal.OwlAutumn]: OwlAutumn,
+    [GuardianAnimal.KodamaFlower6]: KodamaFlower6
   }
 
   canShortClick(move: MaterialMove<number, number, number>, context: ItemContext<number, number, number>): boolean {
