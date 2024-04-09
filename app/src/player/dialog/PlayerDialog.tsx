@@ -98,5 +98,5 @@ const avatar = css`
 const VictoryImage: Record<VictoryTileType, string> = {
   [VictoryTileType.Fire]: Images.firePanel,
   [VictoryTileType.Flower]: Images.sacredFlower,
-  [VictoryTileType.Tree]: Images.seed
+  [VictoryTileType.Tree]: Images.treePanel
 }

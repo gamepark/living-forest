@@ -41,5 +41,5 @@ const victoriesStyle = css`
 export const VictoryImage: Record<VictoryTileType, string> = {
   [VictoryTileType.Fire]: Images.firePanel,
   [VictoryTileType.Flower]: Images.sacredFlower,
-  [VictoryTileType.Tree]: Images.SacredTree,
+  [VictoryTileType.Tree]: Images.treePanel,
 }
