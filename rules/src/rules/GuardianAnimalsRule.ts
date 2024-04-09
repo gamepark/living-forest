@@ -89,6 +89,9 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
 
     const drawUntilSolitary = this.isDrawUntilSolitary(playerId)
     const card = this.material(MaterialType.GuardianAnimalCard).getItem(move.itemIndex)!
+    if (!card.id) {
+      console.error("There is a card that has no id in the help line", JSON.stringify(move), JSON.stringify(card))
+    }
     if (drawUntilSolitary && GuardianAnimalDescriptions[card.id].type !== CardType.Solitary) {
       if (!deckLength && discardLength) {
         return [this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId)]
