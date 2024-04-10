@@ -1,7 +1,7 @@
 import {
   CompetitiveRank,
   FillGapStrategy,
-  hideItemId,
+  hideItemId, isCustomMoveType,
   MaterialGame,
   MaterialMove,
   PositiveSequenceStrategy,
@@ -17,6 +17,7 @@ import { MoveOnCircleOfSpiritRule } from './rules/actions/MoveOnCircleOfSpiritRu
 import { PickVictoryTileRule } from './rules/actions/PickVictoryTileRule'
 import { PlantProtectiveTreeRule } from './rules/actions/PlantProtectiveTreeRule'
 import { TakeFragmentRule } from './rules/actions/TakeFragmentRule'
+import { CustomMoveType } from './rules/CustomMoveType'
 import { EndOfTurnRule } from './rules/EndOfTurnRule'
 import { GuardianAnimalsArrivalRule } from './rules/GuardianAnimalsArrivalRule'
 import { GuardianAnimalsRule } from './rules/GuardianAnimalsRule'
@@ -34,6 +35,10 @@ export class LivingForestRules extends SecretMaterialRules<SpiritOfNature, Mater
 
   rankPlayers(playerA: SpiritOfNature, playerB: SpiritOfNature): number {
     return new ScoringRule(this.game).rankPlayers(playerA, playerB)
+  }
+
+  isUnpredictableMove(move: MaterialMove<SpiritOfNature, MaterialType, LocationType>, player: SpiritOfNature): boolean {
+    return super.isUnpredictableMove(move, player) || isCustomMoveType(CustomMoveType.ShuffleAndDraw)(move)
   }
 
 
