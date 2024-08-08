@@ -4,6 +4,7 @@ import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { Location } from '@gamepark/rules-api'
+import { forestBoardDescription } from '../material/description/ForestBoardDescription'
 import { TreeSpaceDescription } from './description/TreeSpaceDescription'
 
 export class TreeSpaceLocator extends ItemLocator<SpiritOfNature, MaterialType, LocationType> {
@@ -17,7 +18,7 @@ export class TreeSpaceLocator extends ItemLocator<SpiritOfNature, MaterialType, 
     }
   }
 
-  getParentItemId(location: Location): number | undefined {
-    return location.player
+  getParentItem(location: Location) {
+    return forestBoardDescription.getPlayerBoard(location.player!)
   }
 }

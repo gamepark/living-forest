@@ -15,7 +15,11 @@ export class ForestBoardDescription extends BoardDescription {
   }
 
   getStaticItems({ rules: { players } }: MaterialContext): MaterialItem<number, number>[] {
-    return players.map((p) => ({ id: p, location: { type: LocationType.Table } }))
+    return players.map(player => this.getPlayerBoard(player))
+  }
+
+  getPlayerBoard(player: SpiritOfNature) {
+    return { id: player, location: { type: LocationType.Table, player } }
   }
 
   images = {
