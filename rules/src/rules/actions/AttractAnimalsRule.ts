@@ -1,5 +1,5 @@
 import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
-import Resource from '../../material/Resource'
+import { Resource } from '../../material/Resource'
 import { PlayerState } from '../helper/PlayerState'
 import { MaterialType } from '../../material/MaterialType'
 import { LocationType } from '../../material/LocationType'
@@ -12,7 +12,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves: MaterialMove[] = this.attractAnimalMoves
     if (this.playerState.getSpent(Resource.Sun)) {
-      moves.push(this.rules().startRule(RuleId.Action))
+      moves.push(this.startRule(RuleId.Action))
     }
 
     return moves
@@ -27,7 +27,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (!isMoveItemType(MaterialType.GuardianAnimalCard)(move)) return []
     if (this.possible) return []
-    return [this.rules().startRule(RuleId.Action)]
+    return [this.startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {

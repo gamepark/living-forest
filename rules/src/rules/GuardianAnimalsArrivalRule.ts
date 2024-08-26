@@ -24,7 +24,7 @@ export class GuardianAnimalsArrivalRule extends MaterialRulesPart {
       )
     }
 
-    moves.push(this.rules().startRule(RuleId.ReturnOfGuardianAnimals))
+    moves.push(this.startRule(RuleId.ReturnOfGuardianAnimals))
     return moves
   }
 }

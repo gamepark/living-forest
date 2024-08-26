@@ -21,7 +21,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     const moves = []
     if (playerState.solidarityGregariousDifference < 3) {
       if (!deck.length) {
-        moves.push(this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId))
+        moves.push(this.customMove(CustomMoveType.ShuffleAndDraw, playerId))
       } else {
         moves.push(this.drawACardMove(playerId))
       }
@@ -30,7 +30,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     const deckLength = this.getDeck(playerId).length
     const discardLength = this.getDiscard(playerId).length
     if (playerState.solidarityGregariousDifference < 2 && (deckLength || discardLength)) {
-      moves.push(this.rules().customMove(CustomMoveType.DrawUntilSolitary, playerId))
+      moves.push(this.customMove(CustomMoveType.DrawUntilSolitary, playerId))
     }
 
     if (!playerState.isEmptyHelpLine) {
@@ -41,7 +41,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
       if (fragments.length) {
         moves.push(...fragments.moveItems({ type: LocationType.FragmentStack }))
       }
-      moves.push(this.rules().endPlayerTurn(playerId))
+      moves.push(this.endPlayerTurn(playerId))
     }
 
     return moves
@@ -84,7 +84,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     const discardLength = this.getDiscard(playerId).length
 
     if (!deckLength && !discardLength) {
-      return [this.rules().endPlayerTurn(playerId)]
+      return [this.endPlayerTurn(playerId)]
     }
 
     const drawUntilSolitary = this.isDrawUntilSolitary(playerId)
@@ -95,7 +95,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     }
     if (drawUntilSolitary && GuardianAnimalDescriptions[card.id].type !== CardType.Solitary) {
       if (!deckLength && discardLength) {
-        return [this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId)]
+        return [this.customMove(CustomMoveType.ShuffleAndDraw, playerId)]
       }
 
       return [this.drawACardMove(playerId)]
@@ -106,7 +106,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     const fragments = this.material(MaterialType.FragmentTile).location(LocationType.PlayerFragmentTileStack).player(playerId)
     const playerState = new PlayerState(this.game, playerId)
     if ((playerState.solidarityGregariousDifference >= 3 && !fragments.length)) {
-      return [this.rules().endPlayerTurn(playerId)]
+      return [this.endPlayerTurn(playerId)]
     }
 
     return []
@@ -128,7 +128,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
       const discardLength = this.getDiscard(playerId).length
       this.memorize(Memory.DrawUntilSolitary, true, playerId)
       if (!deckLength && discardLength) {
-        return [this.rules().customMove(CustomMoveType.ShuffleAndDraw, playerId)]
+        return [this.customMove(CustomMoveType.ShuffleAndDraw, playerId)]
       } else if (deckLength) {
         return [this.drawACardMove(playerId)]
       }
@@ -167,6 +167,6 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
   getMovesAfterPlayersDone(): MaterialMove[] {
     this.game.players.forEach((p) => this.forget(Memory.DrawUntilSolitary, p))
     const sacredTree = this.material(MaterialType.SacredTree).getItem()!
-    return [this.rules().startPlayerTurn(RuleId.Action, sacredTree.location.player!)]
+    return [this.startPlayerTurn(RuleId.Action, sacredTree.location.player!)]
   }
 }

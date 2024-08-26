@@ -68,7 +68,7 @@ import {
     Wolf,
     Woodpecker
 } from './GuardiansAnimals'
-import Resource from './Resource'
+import { Resource } from './Resource'
 
 
 type GuardianAnimalDetails = {

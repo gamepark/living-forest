@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
-import Resource from '@gamepark/living-forest/material/Resource'
+import { Resource } from '@gamepark/living-forest/material/Resource'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import { PlayMoveButton, useLegalMoves, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'

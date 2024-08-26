@@ -1,4 +1,4 @@
-import Resource from './Resource'
+import { Resource } from './Resource'
 import ProtectiveTree from './ProtectiveTree'
 
 const { Sun = 1, Drop, Seed, Wind, SacredFlower } = Resource

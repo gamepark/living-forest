@@ -29,7 +29,7 @@ export class OnibiAttacksPlayerRule extends MaterialRulesPart {
       }
     }
 
-    moves.push(this.rules().startRule(RuleId.OnibiAttacksSacredTree))
+    moves.push(this.startRule(RuleId.OnibiAttacksSacredTree))
     return moves
   }
 }

@@ -17,7 +17,7 @@ export class TakeFragmentRule extends PlayerTurnRule {
     if (!isMoveItemType(MaterialType.FragmentTile)(move)) return []
     this.memorize(Memory.FragmentTaken, (fragment) => (fragment ?? 0) + 1)
     if (this.takenFragment < this.fragmentToTake) return this.takeFragmentMoves
-    return [this.rules().startRule(RuleId.Action)]
+    return [this.startRule(RuleId.Action)]
   }
 
   get takeFragmentMoves() {

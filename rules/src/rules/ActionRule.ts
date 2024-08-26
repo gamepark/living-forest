@@ -86,7 +86,7 @@ export class ActionRule extends PlayerTurnRule {
       // Here, we don't care about consequences
       attractRule.afterItemMove(move)
       if (attractRule.possible) {
-        return [this.rules().startRule(RuleId.AttractAnimals)]
+        return [this.startRule(RuleId.AttractAnimals)]
       } else {
         attractRule.onRuleEnd()
       }
@@ -99,7 +99,7 @@ export class ActionRule extends PlayerTurnRule {
       // Here, we don't care about consequences
       estinguishFire.afterItemMove(move)
       if (estinguishFire.possible) {
-        return [this.rules().startRule(RuleId.ExtinguishFire)]
+        return [this.startRule(RuleId.ExtinguishFire)]
       } else {
         estinguishFire.onRuleEnd()
       }
@@ -130,13 +130,13 @@ export class ActionRule extends PlayerTurnRule {
 
       // If someone has triggered the end of game and all players played => end of the game
       if (this.game.players.some((player) => new PlayerState(this.game, player).hasEnded)) {
-        return [this.rules().endGame()]
+        return [this.endGame()]
       }
 
-      return [this.rules().startRule(RuleId.EndOfTurn)]
+      return [this.startRule(RuleId.EndOfTurn)]
     }
 
-    return [this.rules().startPlayerTurn(RuleId.Action, turnOrder.getNextPlayer(this.player))]
+    return [this.startPlayerTurn(RuleId.Action, turnOrder.getNextPlayer(this.player))]
   }
 
   memorizeLastAction(ruleId: RuleId) {

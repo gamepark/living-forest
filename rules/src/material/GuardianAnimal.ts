@@ -1,4 +1,4 @@
-import { isEnumValue } from '@gamepark/rules-api'
+import { getEnumValues } from '@gamepark/rules-api'
 
 enum GuardianAnimal {
   Bear = 1,
@@ -69,7 +69,7 @@ enum GuardianAnimal {
   FireVaran
 }
 
-export const guardianAnimals = Object.values(GuardianAnimal).filter(isEnumValue)
+export const guardianAnimals = getEnumValues(GuardianAnimal)
 export const startingGuardianAnimals = guardianAnimals.slice(0, 14)
 
 export const isVaran = (guardianAnimal: GuardianAnimal) => GuardianAnimal.FireVaran === guardianAnimal

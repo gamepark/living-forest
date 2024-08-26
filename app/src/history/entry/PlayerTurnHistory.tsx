@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import Resource from '@gamepark/living-forest/material/Resource'
+import { Resource } from '@gamepark/living-forest/material/Resource'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { Memory } from '@gamepark/living-forest/rules/Memory'
 import { HistoryEntry, MaterialHistoryProps, Picture, usePlayerName } from '@gamepark/react-game'

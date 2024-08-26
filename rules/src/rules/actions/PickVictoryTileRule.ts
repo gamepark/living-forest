@@ -30,7 +30,7 @@ export class PickVictoryTileRule extends PlayerTurnRule {
   afterItemMove(_move: ItemMove<number, number, number>): MaterialMove<number, number, number>[] {
     if (!this.passedPlayers.length) {
       this.forget(Memory.PassedPlayers)
-      return [this.rules().startRule(RuleId.MoveOnCircleOfSpirit)]
+      return [this.startRule(RuleId.MoveOnCircleOfSpirit)]
     }
 
     return []

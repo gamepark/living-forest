@@ -3,6 +3,6 @@ import { RuleId } from './RuleId'
 
 export class EndOfTurnRule extends MaterialRulesPart {
   onRuleStart(_move: RuleMove): MaterialMove[] {
-    return [this.rules().startRule(RuleId.OnibiAttacksPlayer)]
+    return [this.startRule(RuleId.OnibiAttacksPlayer)]
   }
 }

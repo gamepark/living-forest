@@ -10,7 +10,7 @@ export class PassingSacredTreeRule extends MaterialRulesPart {
     const nextFirstPlayer = new TurnOrder(this.game).nextFirstPlayer
     return [
       this.material(MaterialType.SacredTree).moveItem({ type: LocationType.SacredTree, player: nextFirstPlayer, id: MaterialType.SacredTree  }),
-      this.rules().startSimultaneousRule(RuleId.GuardianAnimals, this.game.players)
+      this.startSimultaneousRule(RuleId.GuardianAnimals, this.game.players)
     ]
   }
 }

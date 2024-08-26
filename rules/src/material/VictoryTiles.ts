@@ -1,4 +1,4 @@
-import { isEnumValue } from '@gamepark/rules-api'
+import { getEnumValues } from '@gamepark/rules-api'
 
 enum VictoryTiles {
     WinterTree = 1,
@@ -22,7 +22,7 @@ export enum VictoryTileType {
 }
 
 
-export const victoryTileTypes = Object.values(VictoryTileType).filter<VictoryTileType>(isEnumValue)
+export const victoryTileTypes = getEnumValues(VictoryTileType)
 
 export const VictoryTileTypes: Record<VictoryTiles, VictoryTileType> = {
     [VictoryTiles.WinterTree]: VictoryTileType.Tree,

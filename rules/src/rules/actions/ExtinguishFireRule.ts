@@ -1,7 +1,7 @@
 import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
-import Resource from '../../material/Resource'
+import { Resource } from '../../material/Resource'
 import { PlayerState } from '../helper/PlayerState'
 import { Memory, SpentPoint } from '../Memory'
 import { RuleId } from '../RuleId'
@@ -12,7 +12,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     const moves: MaterialMove[] = this.extinguishFireMoves
 
     if (this.playerState.getSpent(Resource.Drop)) {
-      moves.push(this.rules().startRule(RuleId.Action))
+      moves.push(this.startRule(RuleId.Action))
     }
     return moves
   }
@@ -22,7 +22,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     this.updateSpent(move)
 
     if (this.possible) return []
-    return [this.rules().startRule(RuleId.Action)]
+    return [this.startRule(RuleId.Action)]
   }
 
   updateSpent(move: MoveItem) {

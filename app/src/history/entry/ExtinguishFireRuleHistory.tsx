@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import Resource from '@gamepark/living-forest/material/Resource'
+import { Resource } from '@gamepark/living-forest/material/Resource'
 import { HistoryEntry, MaterialHistoryProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { isMoveItemType, MaterialMoveBuilder } from '@gamepark/rules-api'
 import { FC } from 'react'

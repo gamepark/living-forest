@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { getPlayerName } from '@gamepark/living-forest/LivingForestOptions'
-import Resource, { resources } from '@gamepark/living-forest/material/Resource'
+import { Resource, resources } from '@gamepark/living-forest/material/Resource'
 import { VictoryTileType, victoryTileTypes } from '@gamepark/living-forest/material/VictoryTiles'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'

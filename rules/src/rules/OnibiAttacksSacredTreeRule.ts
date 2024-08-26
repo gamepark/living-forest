@@ -41,7 +41,7 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
       }
     }
 
-    moves.push(this.rules().startRule(RuleId.GuardianAnimalsArrival))
+    moves.push(this.startRule(RuleId.GuardianAnimalsArrival))
     return moves
   }
 

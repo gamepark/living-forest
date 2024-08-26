@@ -2,7 +2,7 @@
 import { GuardianAnimalDescriptions } from '@gamepark/living-forest/material/GuardianAnimalDescriptions'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import Resource from '@gamepark/living-forest/material/Resource'
+import { Resource } from '@gamepark/living-forest/material/Resource'
 import { HistoryEntry, MaterialHistoryProps, Picture, usePlayerName } from '@gamepark/react-game'
 import { isMoveItemType } from '@gamepark/rules-api'
 import { FC } from 'react'

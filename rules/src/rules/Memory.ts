@@ -1,4 +1,4 @@
-import Resource from '../material/Resource'
+import { Resource } from '../material/Resource'
 
 export enum Memory {
   Actions = 1,

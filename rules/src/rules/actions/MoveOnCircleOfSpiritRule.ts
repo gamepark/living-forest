@@ -32,7 +32,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
     const hasAction = this.canDoAction(ruleId)
     if (!hasAction) this.memorize(Memory.Actions, (action) => action - 1)
     this.forget(Memory.RemainingMoves)
-    return [this.rules().startRule(!hasAction ? RuleId.Action : ruleId)]
+    return [this.startRule(!hasAction ? RuleId.Action : ruleId)]
   }
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {
@@ -65,7 +65,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
       // Ignore path with greater distance
       if (!moves.some((m) => isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(m) && m.data.target === newPosition)) {
-        moves.push(this.rules().customMove(CustomMoveType.MoveOnCircleOfSpirit, { target: newPosition, distance: i }))
+        moves.push(this.customMove(CustomMoveType.MoveOnCircleOfSpirit, { target: newPosition, distance: i }))
       }
     }
 
@@ -101,7 +101,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
         if (passedPlayers.length > 0 && this.material(MaterialType.VictoryTile).player((p: SpiritOfNature | undefined) => !!p && passedPlayers.includes(p)).length) {
           this.memorize(Memory.PassedPlayers, passedPlayers)
           this.memorize(Memory.RemainingMoves, (remaining) => remaining === undefined ? distance - i : remaining - i)
-          moves.push(this.rules().startRule(RuleId.PickVictoryTile))
+          moves.push(this.startRule(RuleId.PickVictoryTile))
           return moves
         }
 

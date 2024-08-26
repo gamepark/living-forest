@@ -16,7 +16,7 @@ export class ReturnOfGuardianAnimalsRule extends MaterialRulesPart {
       )
     }
 
-    moves.push(this.rules().startRule(RuleId.PassingSacredTree))
+    moves.push(this.startRule(RuleId.PassingSacredTree))
     return moves
   }
 }

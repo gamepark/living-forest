@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react'
+import { Resource, resources } from '@gamepark/living-forest/material/Resource'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { Player } from '@gamepark/react-client'
 import { FC } from 'react'
-import Resource, { resources } from '@gamepark/living-forest/material/Resource'
 import { PlayerResource } from './PlayerResource'
-import { css } from '@emotion/react'
 
 export type PlayerResourcesProps = {
   player: Player

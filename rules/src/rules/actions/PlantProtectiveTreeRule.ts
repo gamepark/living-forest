@@ -69,7 +69,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     // Only decrease action count if there is no bonus action
     if (!actions.length) {
       this.memorize(Memory.Actions, (action) => action - 1)
-      return [this.rules().startRule(RuleId.Action)]
+      return [this.startRule(RuleId.Action)]
     }
 
     return actions
@@ -105,21 +105,21 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
 
     if (attrackAnimal) {
       this.memorize(Memory.Bonus, 3)
-      return [this.rules().startRule(RuleId.AttractAnimals)]
+      return [this.startRule(RuleId.AttractAnimals)]
     }
 
     const triggerFragment = (move.location?.x === 4 && move.location?.y === 0) || (move.location?.x === 0 && move.location?.y === 2)
     if (triggerFragment) {
       this.memorize(Memory.Bonus, 1)
       return [
-        this.rules().startRule(RuleId.TakeFragment)
+        this.startRule(RuleId.TakeFragment)
       ]
     }
 
     const extinguishFire = move.location?.x === 4 && move.location?.y === 2
     if (extinguishFire) {
       this.memorize(Memory.Bonus, 2)
-      return [this.rules().startRule(RuleId.ExtinguishFire)]
+      return [this.startRule(RuleId.ExtinguishFire)]
     }
 
     return []

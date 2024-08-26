@@ -5,7 +5,7 @@ import { getSolitaryGregariousDifference, GuardianAnimalDescriptions } from '../
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
 import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
-import Resource from '../../material/Resource'
+import { Resource } from '../../material/Resource'
 import { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
 import SpiritOfNature from '../../SpiritOfNature'
 import { Memory, SpentPoint } from '../Memory'
