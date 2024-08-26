@@ -1,19 +1,13 @@
-import { ItemContext, LineLocator } from '@gamepark/react-game'
-import { Coordinates, MaterialItem } from '@gamepark/rules-api'
+import { ListLocator, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
-import { getReserveStackCoordinates } from './ReserveStackLocator'
+import { reserveStackLocator } from './ReserveStackLocator'
 
-export class ReserveRowLocator extends LineLocator {
-  delta = { x: -0.05, y: -0.05, z: 0.1 }
+export class ReserveRowLocator extends ListLocator {
+  gap = { x: guardianAnimalCardDescription.width + 1 }
 
-  getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
-    const stackPosition = getReserveStackCoordinates(item.location.id, context.rules.players)
-    const x = stackPosition.x + 1 + ((guardianAnimalCardDescription.width + 1) * (item.location.x! + 1))
-    const y = stackPosition.y
-    return {
-      x,
-      y,
-      z: 0
-    }
+  getCoordinates(location: Location, context: MaterialContext) {
+    const { x, y } = reserveStackLocator.getCoordinates(location, context)
+    return { x: x + guardianAnimalCardDescription.width + 2, y }
   }
 }

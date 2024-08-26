@@ -1,28 +1,20 @@
-import { ItemContext, LineLocator } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { FragmentStockDescription } from './description/FragmentStockDescription'
-import { getVaranDeckHolderCoordinates } from './description/VaranDeckDescription'
+import { DeckLocator, DropAreaDescription, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
+import { varanDeckLocator } from './VaranDeckLocator'
 
-export class FragmentStockLocator extends LineLocator {
-  locationDescription = new FragmentStockDescription()
+export class FragmentStockLocator extends DeckLocator {
+  locationDescription = new DropAreaDescription({ width: 5, height: 5, borderRadius: 2.5 })
   limit = 10
-  delta = { x: -0.05, y: -0.05, z: 0.1 }
 
-  getCoordinates(_item: MaterialItem, { rules: { players }}: ItemContext) {
-    const holder = getVaranDeckHolderCoordinates(players)
-    return {
-      x: holder.x - 3.6,
-      y: holder.y + 0.7,
-      z: 0.05
+  getAreaCoordinates(_location: Location, { rules: { players } }: MaterialContext) {
+    if (players.length < 3) {
+      return { x: -23.6, y: -23.6 }
     }
-  }
-}
-
-export const fragmentStockCoordinate = (players: SpiritOfNature[]) => {
-  if (players.length < 3) {
-    return { x: -23.5, y: -23.5, z: 0}
+    return { x: 69.4, y: -4.5 }
   }
 
-  return { x: 69.5, y: -4.4, z: 0}
+  getCoordinates(location: Location, context: MaterialContext) {
+    const { x, y } = varanDeckLocator.getAreaCoordinates(location, context)
+    return { x: x - 3.6, y: y + 0.7 }
+  }
 }

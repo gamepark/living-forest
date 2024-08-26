@@ -1,21 +1,29 @@
-import { ItemLocator } from '@gamepark/react-game'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { Location, XYCoordinates } from '@gamepark/rules-api'
-import { StandeeOnCircleOfSpiritBoardDescription } from './description/StandeeOnCircleOfSpiritBoardDescription'
+import { isItemContext, ItemContext, Locator, MaterialContext } from '@gamepark/react-game'
+import { Location, MaterialItem, XYCoordinates } from '@gamepark/rules-api'
+import { CircleOfSpiritRockDescription } from './description/CircleOfSpiritRockDescription'
 
-export class StandeeOnCircleOfSpiritBoardLocator extends ItemLocator {
-  locationDescription = new StandeeOnCircleOfSpiritBoardDescription()
+export class StandeeOnCircleOfSpiritBoardLocator extends Locator {
+  locationDescription = new CircleOfSpiritRockDescription()
   parentItemType = MaterialType.CircleOfSpiritBoard
+  rotationUnit = 'rad'
 
-  getPosition() {
-    return { x: 0, y: -2, z: 0}
+  getPositionOnParent({ x = 0 }: Location): XYCoordinates {
+    const angle = -(x + 8.5) * Math.PI / 6
+    const radius = 32.5
+    return {
+      x: 50 + radius * Math.sin(angle) - 0.6,
+      y: 50 + radius * Math.cos(angle)
+    }
   }
 
-  getPositionOnParent(location: Location): XYCoordinates {
-    const angle = (location.x! + 8.5) * 360 / 12
-    const radius = 33.5
-    const x = 50 + radius * Math.sin(-angle * Math.PI / 180)
-    const y = 50 + radius * Math.cos(-angle * Math.PI / 180)
-    return { x, y }
+  getRotateZ({ x = 0 }: Location<number, number>, context: MaterialContext) {
+    if (isItemContext(context)) return 0
+    return (x + 8.5) * Math.PI / 6
+  }
+
+  getItemCoordinates(item: MaterialItem, context: ItemContext) {
+    const { x = 0, y = 0, z } = super.getItemCoordinates(item, context)
+    return { x: x, y: y - 2, z }
   }
 }

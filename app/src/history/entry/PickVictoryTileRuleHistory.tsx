@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { HistoryEntry, MaterialHistoryProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
-import { displayMaterialHelp, isMoveItemType, MoveItem } from '@gamepark/rules-api'
+import { isMoveItemType, MaterialMoveBuilder, MoveItem } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
 import { getColor } from '../../utils/ColorUtils'
 import { rulesLinkButton } from '../LivingForestHistory'
+import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
 type PickVictoryTileRuleHistoryProps = { move: MoveItem } & Omit<MaterialHistoryProps, 'move'>
 

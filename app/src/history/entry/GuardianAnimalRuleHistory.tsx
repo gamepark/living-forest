@@ -5,12 +5,13 @@ import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { HistoryEntry, MaterialHistoryProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
-import { displayMaterialHelp, isEndPlayerTurn, isMoveItemType } from '@gamepark/rules-api'
+import { isEndPlayerTurn, isMoveItemType, MaterialMoveBuilder } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { getAnimalTranslation } from '../../utils/AnimalName'
 import { getColor } from '../../utils/ColorUtils'
 import { rulesLinkButton } from '../LivingForestHistory'
+import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
 type GuardianAnimalRuleHistoryProps = {} & MaterialHistoryProps
 

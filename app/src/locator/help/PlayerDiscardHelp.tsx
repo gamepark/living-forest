@@ -4,8 +4,9 @@ import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { LocationHelpProps, MaterialComponent, pointerCursorCss, usePlay, usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
-import { displayMaterialHelp } from '@gamepark/rules-api'
+import { MaterialMoveBuilder } from '@gamepark/rules-api'
 import { useTranslation } from 'react-i18next'
+import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
 export const PlayerDiscardHelp = ({ location }: LocationHelpProps) => {
   const { t } = useTranslation()

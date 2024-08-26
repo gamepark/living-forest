@@ -1,4 +1,4 @@
-import { Dummy, isEndPlayerTurn, isMoveItemType, MaterialGame, MaterialMove } from '@gamepark/rules-api'
+import { isEndPlayerTurn, isMoveItemType, MaterialGame, MaterialMove, RandomBot } from '@gamepark/rules-api'
 import { LivingForestRules } from '../LivingForestRules'
 import { isVaran } from '../material/GuardianAnimal'
 import { LocationType } from '../material/LocationType'
@@ -7,21 +7,21 @@ import { PlayerState } from '../rules/helper/PlayerState'
 import { RuleId } from '../rules/RuleId'
 import SpiritOfNature from '../SpiritOfNature'
 
-export class LivingForestDummy extends Dummy<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature> {
+export class LivingForestBot extends RandomBot<MaterialGame<SpiritOfNature, MaterialType, LocationType>, MaterialMove<SpiritOfNature, MaterialType, LocationType>, SpiritOfNature> {
 
-  constructor() {
-    super(LivingForestRules)
+  constructor(player: SpiritOfNature) {
+    super(LivingForestRules, player)
   }
 
-  getLegalMoves(game: MaterialGame<SpiritOfNature, MaterialType, LocationType>, player: SpiritOfNature): MaterialMove<SpiritOfNature, MaterialType, LocationType>[] {
+  override getLegalMoves(game: MaterialGame<SpiritOfNature, MaterialType, LocationType>): MaterialMove<SpiritOfNature, MaterialType, LocationType>[] {
     const rules = new LivingForestRules(game)
-    const legalMoves = super.getLegalMoves(game, player)
+    const legalMoves = super.getLegalMoves(game)
     if (game.rule?.id === RuleId.GuardianAnimals) {
-      const playerState = new PlayerState(game, player)
+      const playerState = new PlayerState(game, this.player)
       const lastHelpCard = rules
         .material(MaterialType.GuardianAnimalCard)
         .location(LocationType.HelpLine)
-        .player(player)
+        .player(this.player)
         .maxBy((item) => item.location.x!).getItem()
 
       if (lastHelpCard && isVaran(lastHelpCard.id)) {
@@ -40,7 +40,7 @@ export class LivingForestDummy extends Dummy<MaterialGame<SpiritOfNature, Materi
       }
     }
 
-    if (game.rule?.id === RuleId.Action && game.rule.player === player) {
+    if (game.rule?.id === RuleId.Action && game.rule.player === this.player) {
       const moves = legalMoves.filter((move) => !isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.FragmentTile)(move))
       if (moves.length) return moves
     }

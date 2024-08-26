@@ -9,13 +9,10 @@ import Images from '../../images/Images'
 import { FileTileRules } from './help/FireTileHelp'
 
 export class FireTileDescription extends TokenDescription {
-  width = 3
-  ratio = 74 / 100
-  borderRadius = 1
   images = {
     [Fire.Fire2]: Images.fire2,
     [Fire.Fire3]: Images.fire3,
-    [Fire.Fire4]: Images.fire4,
+    [Fire.Fire4]: Images.fire4
   }
 
   getItemExtraCss(item: MaterialItem) {
@@ -29,20 +26,14 @@ export class FireTileDescription extends TokenDescription {
   }
 
   getSize(id: Fire) {
-    let height = 0
     switch (id) {
       case Fire.Fire2:
-        height = 2.7
-        break
+        return { width: 2, height: 2.7 }
       case Fire.Fire3:
-        height = 3.1
-        break
+        return { width: 2.3, height: 3.1 }
       case Fire.Fire4:
-        height = 3.5
-        break
+        return { width: 2.6, height: 3.5 }
     }
-
-    return { height, width: this.ratio * height }
   }
 
   help = FileTileRules
@@ -51,7 +42,7 @@ export class FireTileDescription extends TokenDescription {
     if (!isMoveItemType(MaterialType.FireTile)(move) || move.location.type !== LocationType.PlayerFireTileStack) return false
     const { rules } = context
     const item = rules.material(context.type).getItem(context.index)!
-    return move.itemIndex === context.index && item.location.type === LocationType.CircleOfSpiritBoardFire;
+    return move.itemIndex === context.index && item.location.type === LocationType.CircleOfSpiritBoardFire
 
   }
 }

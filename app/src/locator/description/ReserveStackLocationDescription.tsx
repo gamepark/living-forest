@@ -5,8 +5,8 @@ import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { LocationDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
 
-export class VaranDeckDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
-  width = 8
-  height = 10.5
-  image = Images.VaranHolder
+export class ReserveStackLocationDescription extends LocationDescription<SpiritOfNature, MaterialType, LocationType> {
+  width = 14.7
+  height = 32
+  image = Images.ReserveHolder
 }

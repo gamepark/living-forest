@@ -1,19 +1,19 @@
-import { DeckLocator, ItemContext } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
-import { getVaranDeckHolderCoordinates, VaranDeckDescription } from './description/VaranDeckDescription'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { DeckLocator, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
+import { VaranDeckDescription } from './description/VaranDeckDescription'
 
-export class VaranDeckLocator extends DeckLocator {
-  limit = 10
+class VaranDeckLocator extends DeckLocator {
+  location = { type: LocationType.VaranDeck, id: 99 }
   locationDescription = new VaranDeckDescription()
+  limit = 10
 
-  delta = { x: -0.05, y: -0.05, z: 0.05 }
+  getAreaCoordinates = (_: Location, { rules }: MaterialContext) => rules.players.length === 2 ? { x: -20, y: -24 } : { x: 18, y: 22.5 }
 
-  getCoordinates(_item: MaterialItem, { rules: { players }}: ItemContext) {
-    const holder = getVaranDeckHolderCoordinates(players)
-    return {
-      x: holder.x + 2.1,
-      y: holder.y,
-      z: 0.05
-    }
+  getCoordinates(location: Location, context: MaterialContext) {
+    const { x, y } = this.getAreaCoordinates(location, context)
+    return { x: x + 2.1, y }
   }
 }
+
+export const varanDeckLocator = new VaranDeckLocator()

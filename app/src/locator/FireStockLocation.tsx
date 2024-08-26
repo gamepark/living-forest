@@ -1,20 +1,13 @@
-import { ItemContext, LineLocator } from '@gamepark/react-game'
-import { MaterialItem } from '@gamepark/rules-api'
-import { getReserveStackCoordinates } from './ReserveStackLocator'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { DeckLocator, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
+import { reserveStackLocator } from './ReserveStackLocator'
 
-export class FireStockLocation extends LineLocator {
+export class FireStockLocation extends DeckLocator {
   limit = 10
 
-  delta = { x: -0.05, y: -0.05, z: 0.05}
-
-  getCoordinates(item: MaterialItem, context: ItemContext) {
-    const stackPosition = getReserveStackCoordinates(item.location.id - 1, context.rules.players)
-    const x = stackPosition.x - 6.1
-    const y = stackPosition.y - 0.8
-    return {
-      x,
-      y,
-      z: 0.05
-    }
+  getCoordinates(location: Location, context: MaterialContext) {
+    const { x, y } = reserveStackLocator.getCoordinates({type: LocationType.ReserveStack, id: location.id - 1}, context)
+    return { x: x - 6, y: y - 0.8 }
   }
 }

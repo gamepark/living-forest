@@ -1,28 +1,24 @@
-import { DeckLocator, ItemContext } from '@gamepark/react-game'
-import { Coordinates, MaterialItem } from '@gamepark/rules-api'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { DeckLocator, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
-import { ReserveStackLocatorDescription } from './description/ReserveStackLocatorDescription'
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import { ReserveStackLocationDescription } from './description/ReserveStackLocationDescription'
 
 export class ReserveStackLocator extends DeckLocator {
-  locationDescription = new ReserveStackLocatorDescription()
-  limit = 20
-  delta = { x: -0.05, y: -0.05, z: 0.05 }
+  location = { type: LocationType.ReserveStack }
+  locationDescription = new ReserveStackLocationDescription()
 
-  getCoordinates(item: MaterialItem, { rules: { players } }: ItemContext): Coordinates {
-    return getReserveStackCoordinates(item.location.id, players)
+  getAreaCoordinates(_location: Location, context: MaterialContext) {
+    const { x, y } = reserveStackLocator.getCoordinates({ type: LocationType.Table, id: 1 }, context)
+    return { x: x - 2.4, y: y + 9.8 }
+  }
+
+  getCoordinates(location: Location, { rules }: MaterialContext) {
+    const players = rules.players.length
+    const x = players === 2 ? 36 : players === 3 ? 32 : 21
+    const y = players === 2 ? -24 : -32.9
+    return { x, y: y + (guardianAnimalCardDescription.height + 1.2) * (location.id - 1) }
   }
 }
 
 export const reserveStackLocator = new ReserveStackLocator()
-
-export const getReserveStackCoordinates = (level: number, players: SpiritOfNature[]) => {
-  const playerCount = players.length
-  const x = playerCount < 3 ? 36: (playerCount === 3? 32: 21)
-  const y = playerCount < 3 ? -24: -32.9
-  return {
-    x,
-    y: y + ((guardianAnimalCardDescription.height + 1.2) * (level - 1)),
-    z: 0.05
-  }
-}

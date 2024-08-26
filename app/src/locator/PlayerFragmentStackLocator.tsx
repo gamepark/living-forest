@@ -1,21 +1,15 @@
-import { ItemContext, PileLocator } from '@gamepark/react-game'
-import { Coordinates, MaterialItem } from '@gamepark/rules-api'
+import { DropAreaDescription, MaterialContext, PileLocator } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
-import { PlayerFragmentStackDescription } from './description/PlayerFragmentStackDescription'
 
 export class PlayerFragmentLocator extends PileLocator {
+  locationDescription = new DropAreaDescription({ width: 5, height: 5, borderRadius: 2.5 })
   radius = 1.4
-  locationDescription = new PlayerFragmentStackDescription()
   maxAngle = 20
 
-  getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
-    const { rules, player } = context
-    const parentPosition = getPlayerBoardPositionOnTable(rules, item.location.player!, player)
-    return {
-      x: parentPosition.x - 16,
-      y: parentPosition.y + 4.5,
-      z: 0.1
-    }
+  getCoordinates(location: Location, { rules, player }: MaterialContext) {
+    const { x, y } = getPlayerBoardPositionOnTable(rules, location.player!, player)
+    return { x: x - 16, y: y + 4.5 }
   }
 }
 

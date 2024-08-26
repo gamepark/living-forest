@@ -19,7 +19,7 @@ import { ResourceImage, resourceStyle, TypeImage } from '../material/description
 import { TutorialSetup } from './TutorialSetup'
 
 export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, LocationType> {
-  version = 2
+  version = 3
   options = { players: [{ id: SpiritOfNature.Spring }, { id: SpiritOfNature.Winter }] }
   setup = new TutorialSetup()
 
@@ -138,14 +138,14 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorialStep! - 1].focus!(game),
+      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 1].focus!(game),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) && move.location.type === LocationType.HelpLine
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorialStep! - 2].focus!(game),
+      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 2].focus!(game),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) && move.location.type === LocationType.HelpLine
@@ -450,7 +450,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorialStep! - 1].focus!(game),
+      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 1].focus!(game),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -458,7 +458,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorialStep! - 2].focus!(game),
+      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 2].focus!(game),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -466,7 +466,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorialStep! - 3].focus!(game),
+      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 3].focus!(game),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -474,7 +474,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorialStep! - 4].focus!(game),
+      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 4].focus!(game),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -761,7 +761,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorialStep! - 1].focus!(game),
+      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 1].focus!(game),
       popup: {
         text: () => <Trans defaults="tuto.varan">
           <strong/>

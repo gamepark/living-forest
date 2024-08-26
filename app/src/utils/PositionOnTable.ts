@@ -28,5 +28,5 @@ const getPositionForIndex = (index: number, players: SpiritOfNature[]) => {
   const baseY = twoPlayers? 2: 0
   const rightMargin = 13
   const playerX = (forestBoardDescription.width + rightMargin) * (index > 1? 2: 0 )
-  return { x: baseX + playerX, y: baseY + (!top ? 18 : -20), z: 0.05 }
+  return { x: baseX + playerX, y: baseY + (!top ? 18 : -20) }
 }

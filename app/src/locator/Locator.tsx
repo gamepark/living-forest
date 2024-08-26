@@ -1,27 +1,27 @@
-import { ItemLocator } from '@gamepark/react-game'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
-import { playerReminderLocator } from './reminder/PlayerReminderLocator'
-import { tableLocator } from './TableLocator'
-import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { VaranDeckLocator } from './VaranDeckLocator'
-import { playerDeckLocator } from './PlayerDeckLocator'
-import { reserveStackLocator } from './ReserveStackLocator'
-import { ReserveRowLocator } from './ReserveRowLocator'
-import { FragmentStockLocator } from './FragmentStockLocation'
-import { ProtectiveTreeDeckLocator } from './ProtectiveTreeDeckLocator'
-import { HelpLineLocator } from './HelpLineLocator'
-import { StandeeOnCircleOfSpiritBoardLocator } from './StandeeOnCircleOfSpiritBoardLocator'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import { Locator } from '@gamepark/react-game'
 import { FireOnCircleOfSpiritBoardLocator } from './FireOnCircleOfSpiritBoardLocator'
 import { FireStockLocation } from './FireStockLocation'
+import { FragmentStockLocator } from './FragmentStockLocation'
+import { HelpLineLocator } from './HelpLineLocator'
+import { playerDeckLocator } from './PlayerDeckLocator'
 import { playerDiscardLocator } from './PlayerDiscardLocator'
 import { playerFireTileStackLocator } from './PlayerFireStackLocator'
-import { TreeSpaceLocator } from './TreeSpaceLocator'
-import { victoryTileAreaLocator } from './VictoryTileAreaLocator'
 import { playerFragmentStackLocator } from './PlayerFragmentStackLocator'
+import { ProtectiveTreeDeckLocator } from './ProtectiveTreeDeckLocator'
+import { playerReminderLocator } from './reminder/PlayerReminderLocator'
+import { ReserveRowLocator } from './ReserveRowLocator'
+import { reserveStackLocator } from './ReserveStackLocator'
 import { sacredTreeLocator } from './SacredTreeLocator'
+import { StandeeOnCircleOfSpiritBoardLocator } from './StandeeOnCircleOfSpiritBoardLocator'
+import { tableLocator } from './TableLocator'
+import { TreeSpaceLocator } from './TreeSpaceLocator'
+import { varanDeckLocator } from './VaranDeckLocator'
+import { victoryTileAreaLocator } from './VictoryTileAreaLocator'
 
-export const locators: Record<LocationType, ItemLocator<SpiritOfNature, MaterialType, LocationType>> = {
+export const locators: Record<LocationType, Locator<SpiritOfNature, MaterialType, LocationType>> = {
   [LocationType.Table]: tableLocator,
   [LocationType.ForestBoard]: tableLocator,
   [LocationType.CircleOfSpiritBoardSpace]: new StandeeOnCircleOfSpiritBoardLocator(),
@@ -32,7 +32,7 @@ export const locators: Record<LocationType, ItemLocator<SpiritOfNature, Material
   [LocationType.ReserveRow]: new ReserveRowLocator(),
   [LocationType.TreeDispenser]: new ProtectiveTreeDeckLocator(),
   [LocationType.VictoryTileArea]: victoryTileAreaLocator,
-  [LocationType.VaranDeck]: new VaranDeckLocator(),
+  [LocationType.VaranDeck]: varanDeckLocator,
   [LocationType.FragmentStack]: new FragmentStockLocator(),
   [LocationType.HelpLine]: new HelpLineLocator(),
   [LocationType.FireStack]: new FireStockLocation(),

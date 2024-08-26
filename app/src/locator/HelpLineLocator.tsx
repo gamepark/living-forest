@@ -1,25 +1,31 @@
-import { ItemContext, LineLocator } from '@gamepark/react-game'
-import { Coordinates, MaterialItem } from '@gamepark/rules-api'
-
-import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
+import { css } from '@emotion/react'
+import { LocationType } from '@gamepark/living-forest/material/LocationType'
+import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
+import { DropAreaDescription, ListLocator, MaterialContext } from '@gamepark/react-game'
+import { Location } from '@gamepark/rules-api'
 import { guardianAnimalCardDescription } from '../material/description/GuardianAnimalCardDescription'
-import { HelpLineDescription } from './description/HelpLineDescription'
+import { getPlayerBoardPositionOnTable } from '../utils/PositionOnTable'
+import { HelpLineRules } from './description/HelpLineRules'
 
-export class HelpLineLocator extends LineLocator {
+export class HelpLineLocator extends ListLocator {
+  getLocations = ({ rules }: MaterialContext) => rules.players.map(player => ({ type: LocationType.HelpLine, player }))
   locationDescription = new HelpLineDescription()
-  delta = { x: 2, y: 0, z: 0.1 }
-  getDeltaMax(): Partial<Coordinates> {
-    return { x: 33.6 }
-  }
+  gap = { x: 2 }
+  maxGap = { x: this.locationDescription.width - guardianAnimalCardDescription.width }
 
-  getCoordinates(item: MaterialItem, context: ItemContext): Coordinates {
-    const { rules, player } = context
-    const boardPosition = getPlayerBoardPositionOnTable(rules, item.location.player!, player)
-
-    return {
-      x: boardPosition.x - 19 + guardianAnimalCardDescription.width / 2,
-      y: boardPosition.y - 13,
-      z: 0.1
-    }
+  getCoordinates(location: Location, { rules, player }: MaterialContext) {
+    const { x, y } = getPlayerBoardPositionOnTable(rules, location.player!, player)
+    return { x: x - 19 + guardianAnimalCardDescription.width / 2, y: y - 13 }
   }
+}
+
+export class HelpLineDescription extends DropAreaDescription<SpiritOfNature, MaterialType, LocationType> {
+  width = 38.2
+  height = guardianAnimalCardDescription.height
+  extraCss = css`
+    background-color: rgba(0, 128, 0, 0.5);
+    border-radius: 0.4em;
+  `
+  help = HelpLineRules
 }

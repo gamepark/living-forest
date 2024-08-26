@@ -6,8 +6,7 @@ import { VictoryTileHelp } from './help/VictoryTileHelp'
 
 export class VictoryTileDescription extends BoardDescription {
   width = 4.6
-  ratio = 301 / 207
-  height = 4.6 / this.ratio
+  height = 3.16
 
   getFrontExtraCss() {
     return css`
@@ -27,7 +26,7 @@ export class VictoryTileDescription extends BoardDescription {
     [VictoryTiles.AutumnFlower]: Images.autumnVictorySacredFlower,
     [VictoryTiles.WinterTree]: Images.winterVictoryTree,
     [VictoryTiles.WinterFire]: Images.winterVictoryFire,
-    [VictoryTiles.WinterFlower]: Images.winterVictorySacredFlower,
+    [VictoryTiles.WinterFlower]: Images.winterVictorySacredFlower
   }
 
   help = VictoryTileHelp

@@ -1,16 +1,17 @@
-import { BoardDescription, MaterialContext } from '@gamepark/react-game'
-import Images from '../../images/Images'
-import { MaterialItem } from '@gamepark/rules-api'
+import { forestTreeSpaces } from '@gamepark/living-forest/material/ForestTreeSpaces'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { forestTreeSpaces } from '@gamepark/living-forest/material/ForestTreeSpaces'
+import { BoardDescription, ItemContext, MaterialContext } from '@gamepark/react-game'
+import { MaterialItem } from '@gamepark/rules-api'
+import Images from '../../images/Images'
 import { ForestBoardHelp } from './help/ForestBoardHelp'
 
 export class ForestBoardDescription extends BoardDescription {
   height = 17.72
   width = 29
 
-  getLocations(item: MaterialItem) {
+  getLocations(item: MaterialItem, { player }: ItemContext) {
+    if (item.location.player !== player) return []
     return forestTreeSpaces.map((coordinates) => ({ type: LocationType.TreeSpace, ...coordinates, player: item.id }))
   }
 
@@ -26,7 +27,7 @@ export class ForestBoardDescription extends BoardDescription {
     [SpiritOfNature.Autumn]: Images.AutumnPlayerBoard,
     [SpiritOfNature.Winter]: Images.WinterPlayerBoard,
     [SpiritOfNature.Spring]: Images.SpringPlayerBoard,
-    [SpiritOfNature.Summer]: Images.SummerPlayerBoard,
+    [SpiritOfNature.Summer]: Images.SummerPlayerBoard
   }
 
   help = ForestBoardHelp

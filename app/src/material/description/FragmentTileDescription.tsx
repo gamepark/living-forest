@@ -7,7 +7,7 @@ import { FragmentTileHelp } from './help/FragmentTileHelp'
 
 export class FragmentTileDescription extends TokenDescription {
   width = 3
-  ratio = 1
+  height = 3
   borderRadius = 0.2
   image = Images.fragment
 
@@ -28,7 +28,7 @@ export class FragmentTileDescription extends TokenDescription {
   isTopItem(move: MaterialMove, context: ItemContext): boolean {
     // Only compute it for element that goes to player fragment token
     if (!isMoveItemType(MaterialType.FragmentTile)(move) || move.location?.type !== LocationType.PlayerFragmentTileStack) return true
-    const  { displayIndex, index, rules, type } = context
+    const { displayIndex, index, rules, type } = context
     const shineIndex = (Math.min(rules.material(type).getItem(index)?.quantity ?? 0, 10) - 1)
     return displayIndex === shineIndex
   }

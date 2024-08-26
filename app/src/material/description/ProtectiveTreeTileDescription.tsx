@@ -1,10 +1,9 @@
+import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
 import { TokenDescription } from '@gamepark/react-game'
 import Images from '../../images/Images'
-import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
 import { ProtectiveTreeTileHelp } from './help/ProtectiveTreeTileHelp'
 
 export class ProtectiveTreeTileDescription extends TokenDescription {
-  ratio = 1
   width = 3.6
   height = 3.6
   borderRadius = 0.3
