@@ -1,4 +1,5 @@
 import { isEndPlayerTurn, isMoveItemType, MaterialGame, MaterialMove, RandomBot } from '@gamepark/rules-api'
+import partition from 'lodash/partition'
 import { LivingForestRules } from '../LivingForestRules'
 import { isVaran } from '../material/GuardianAnimal'
 import { LocationType } from '../material/LocationType'
@@ -24,20 +25,17 @@ export class LivingForestBot extends RandomBot<MaterialGame<SpiritOfNature, Mate
         .player(this.player)
         .maxBy((item) => item.location.x!).getItem()
 
+      const [spendFragment, drawOrPass] = partition(legalMoves, move =>
+        isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.FragmentTile)(move) && move.location.type === LocationType.FragmentStack
+      )
       if (lastHelpCard && isVaran(lastHelpCard.id)) {
-        const moves = legalMoves.filter((move) => isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.FragmentTile)(move) && move.location.type === LocationType.FragmentStack)
-        if (moves.length) return moves
+        if (spendFragment.length) return spendFragment
       }
 
-      const remainingMoves = legalMoves.filter((move) => !isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.FragmentTile)(move))
+      const [pass, draw] = partition(drawOrPass, isEndPlayerTurn)
       const diff = playerState.solidarityGregariousDifference
-      if (diff < 3) {
-        if (diff === 2) {
-          return remainingMoves.filter((move) => isEndPlayerTurn(move))
-        }
-        const moves = remainingMoves.filter((move) => isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.GuardianAnimalCard)(move) && move.location.type === LocationType.HelpLine)
-        if (moves.length) return moves
-      }
+      if (diff === 2 && pass.length) return pass
+      return draw
     }
 
     if (game.rule?.id === RuleId.Action && game.rule.player === this.player) {
