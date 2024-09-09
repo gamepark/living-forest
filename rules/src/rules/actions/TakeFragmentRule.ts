@@ -21,10 +21,11 @@ export class TakeFragmentRule extends PlayerTurnRule {
   }
 
   get takeFragmentMoves() {
-    return [this
+    const stock = this
       .material(MaterialType.FragmentTile)
       .location(LocationType.FragmentStack)
-      .moveItem({ type: LocationType.PlayerFragmentTileStack, player: this.player })]
+    if (!stock.length) return []
+    return [stock.moveItem({ type: LocationType.PlayerFragmentTileStack, player: this.player })]
   }
 
   get fragmentToTake() {
