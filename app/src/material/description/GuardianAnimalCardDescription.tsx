@@ -3,15 +3,15 @@ import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { CardDescription, ItemContext } from '@gamepark/react-game'
-import { isMoveItemType, MaterialMove } from '@gamepark/rules-api'
+import { isMoveItemType, MaterialItem, MaterialMove, MaterialMoveBuilder } from '@gamepark/rules-api'
 import Axolotl from '../../images/cards/Axolotl.jpg'
 import Baboon from '../../images/cards/Baboon.jpg'
 import Badger from '../../images/cards/Badger.jpg'
 import Bat from '../../images/cards/Bat.jpg'
 import Bear from '../../images/cards/Bear.jpg'
 import Beaver from '../../images/cards/Beaver.jpg'
-import Beetle from '../../images/cards/Beetle.jpg'
 import Bee from '../../images/cards/Bee.jpg'
+import Beetle from '../../images/cards/Beetle.jpg'
 import Bison from '../../images/cards/Bison.jpg'
 import Boar from '../../images/cards/Boar.jpg'
 import Bull from '../../images/cards/Bull.jpg'
@@ -72,6 +72,7 @@ import Weasel from '../../images/cards/Weasel.jpg'
 import Wolf from '../../images/cards/Wolf.jpg'
 import Woodpecker from '../../images/cards/Woodpecker.jpg'
 import { GuardianAnimalCardHelp } from './help/GuardianAnimalCardHelp'
+import displayLocationHelp = MaterialMoveBuilder.displayLocationHelp
 
 export class GuardianAnimalCardDescription extends CardDescription {
   backImage = CardBack
@@ -161,6 +162,13 @@ export class GuardianAnimalCardDescription extends CardDescription {
   }
 
   help = GuardianAnimalCardHelp
+
+  displayHelp(item: MaterialItem, context: ItemContext) {
+    if (item.location.type === LocationType.PlayerDiscardStack) {
+      return displayLocationHelp(item.location)
+    }
+    return super.displayHelp(item, context)
+  }
 }
 
 export const guardianAnimalCardDescription = new GuardianAnimalCardDescription()
