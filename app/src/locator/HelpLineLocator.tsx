@@ -18,6 +18,8 @@ export class HelpLineLocator extends ListLocator {
     const { x, y } = getPlayerBoardPositionOnTable(rules, location.player!, player)
     return { x: x - 19 + guardianAnimalCardDescription.width / 2, y: y - 13 }
   }
+
+  getHoverTransform = () => ['translateZ(10em)', 'scale(2)']
 }
 
 export class HelpLineDescription extends DropAreaDescription<SpiritOfNature, MaterialType, LocationType> {

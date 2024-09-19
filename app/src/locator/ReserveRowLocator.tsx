@@ -10,4 +10,6 @@ export class ReserveRowLocator extends ListLocator {
     const { x, y } = reserveStackLocator.getCoordinates(location, context)
     return { x: x + guardianAnimalCardDescription.width + 2, y }
   }
+
+  getHoverTransform = () => ['translateY(3em)', 'translateZ(10em)', 'scale(2)']
 }
