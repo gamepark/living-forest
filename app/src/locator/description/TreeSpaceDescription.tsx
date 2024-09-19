@@ -17,7 +17,7 @@ export class TreeSpaceDescription extends DropAreaDescription<SpiritOfNature, Ma
 
   canShortClick(move: MaterialMove, location: Location, { rules }: MaterialContext) {
     if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return false
-    const item = rules.material(MaterialType.ProtectiveTreeTiles).getItem(move.itemIndex)!
+    const item = rules.material(MaterialType.ProtectiveTreeTiles).getItem(move.itemIndex)
     if (!item.selected) return false
     return isEqual(move.location, location)
   }

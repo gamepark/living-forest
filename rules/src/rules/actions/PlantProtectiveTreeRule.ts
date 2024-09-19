@@ -60,7 +60,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     const actions = this.onPlantTree(move)
     const isSpecialTree = this
       .material(MaterialType.ProtectiveTreeTiles)
-      .getItem(move.itemIndex)?.id === ProtectiveTree.Tree11
+      .getItem(move.itemIndex).id === ProtectiveTree.Tree11
 
     if (isSpecialTree) {
       this.forget(Memory.LastAction)

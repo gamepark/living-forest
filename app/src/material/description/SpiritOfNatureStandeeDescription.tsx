@@ -35,7 +35,7 @@ export class SpiritOfNatureStandeeDescription extends TokenDescription {
   canDrag(move: MaterialMove, context: ItemContext): boolean {
     const { player, index, rules } = context
     if (!isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move)) return super.canDrag(move, context)
-    const standee = rules.material(MaterialType.SpiritOfNatureStandee).getItem(index)!
+    const standee = rules.material(MaterialType.SpiritOfNatureStandee).getItem(index)
     return standee.id === player;
   }
 

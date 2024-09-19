@@ -22,7 +22,7 @@ export class PickVictoryTileRule extends PlayerTurnRule {
 
   beforeItemMove(move: ItemMove<number, number, number>): MaterialMove<number, number, number>[] {
     if (!isMoveItemType(MaterialType.VictoryTile)(move)) return []
-    const tile = this.material(MaterialType.VictoryTile).getItem(move.itemIndex)!
+    const tile = this.material(MaterialType.VictoryTile).getItem(move.itemIndex)
     this.memorize(Memory.PassedPlayers, (passedPlayers) => (passedPlayers ?? []).filter((p: SpiritOfNature) => p !== tile.location.player))
     return []
   }

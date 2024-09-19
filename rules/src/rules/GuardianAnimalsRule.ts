@@ -74,7 +74,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
 
   afterItemMove(move: ItemMove): MaterialMove[] {
     if (isShuffleItemType(MaterialType.GuardianAnimalCard)(move)) {
-      const player = this.material(MaterialType.GuardianAnimalCard).getItem(move.indexes[0])!.location.player!
+      const player = this.material(MaterialType.GuardianAnimalCard).getItem(move.indexes[0]).location.player!
       return [this.drawACardMove(player)]
     }
 
@@ -88,7 +88,7 @@ export class GuardianAnimalsRule extends SimultaneousRule<SpiritOfNature, Materi
     }
 
     const drawUntilSolitary = this.isDrawUntilSolitary(playerId)
-    const card = this.material(MaterialType.GuardianAnimalCard).getItem(move.itemIndex)!
+    const card = this.material(MaterialType.GuardianAnimalCard).getItem(move.itemIndex)
     if (!card.id) {
       console.error("There is a card that has no id in the help line", JSON.stringify(move), JSON.stringify(card))
       return []

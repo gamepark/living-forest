@@ -26,7 +26,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   }
 
   updateSpent(move: MoveItem) {
-    const item = this.material(move.itemType).getItem(move.itemIndex)!
+    const item = this.material(move.itemType).getItem(move.itemIndex)
     this.memorize<SpentPoint>(Memory.SpentPoints, (s ) => {
       const spent = { ...s }
       if (!(Resource.Drop in spent)) {

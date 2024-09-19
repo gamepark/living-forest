@@ -41,7 +41,7 @@ export class FireTileDescription extends TokenDescription {
   canShortClick(move: MaterialMove, context: ItemContext): boolean {
     if (!isMoveItemType(MaterialType.FireTile)(move) || move.location.type !== LocationType.PlayerFireTileStack) return false
     const { rules } = context
-    const item = rules.material(context.type).getItem(context.index)!
+    const item = rules.material(context.type).getItem(context.index)
     return move.itemIndex === context.index && item.location.type === LocationType.CircleOfSpiritBoardFire
 
   }
