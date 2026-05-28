@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css, Interpolation, Theme } from '@emotion/react'
 import { HistoryEntry, HistoryEntryProps, Picture } from '@gamepark/react-game'
 

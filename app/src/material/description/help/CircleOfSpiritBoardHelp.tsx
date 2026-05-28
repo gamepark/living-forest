@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { Trans, useTranslation } from 'react-i18next'
 import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardHelp'
 
@@ -8,7 +7,7 @@ export const CircleOfSpiritBoardHelp = () => {
   return <>
     <h2>{t('rules.circle-spirit.title')}</h2>
     <p css={alignIconText}>
-      <Trans defaults="rules.circle-spirit.description">
+      <Trans i18nKey="rules.circle-spirit.description">
         <span css={resourceStyle(ResourceImage[4])} />
         <span css={resourceStyle(ResourceImage[4])} />
       </Trans>

@@ -1,5 +1,5 @@
 import { isEndPlayerTurn, isMoveItemType, MaterialGame, MaterialMove, RandomBot } from '@gamepark/rules-api'
-import partition from 'lodash/partition'
+import { partition } from 'es-toolkit/compat'
 import { LivingForestRules } from '../LivingForestRules'
 import { isVaran } from '../material/GuardianAnimal'
 import { LocationType } from '../material/LocationType'
@@ -26,7 +26,7 @@ export class LivingForestBot extends RandomBot<MaterialGame<SpiritOfNature, Mate
         .maxBy((item) => item.location.x!).getItem()
 
       const [spendFragment, drawOrPass] = partition(legalMoves, move =>
-        isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.FragmentTile)(move) && move.location.type === LocationType.FragmentStack
+        isMoveItemType(MaterialType.FragmentTile)(move) && move.location.type === LocationType.FragmentStack
       )
       if (lastHelpCard && isVaran(lastHelpCard.id)) {
         if (spendFragment.length) return spendFragment
@@ -39,7 +39,7 @@ export class LivingForestBot extends RandomBot<MaterialGame<SpiritOfNature, Mate
     }
 
     if (game.rule?.id === RuleId.Action && game.rule.player === this.player) {
-      const moves = legalMoves.filter((move) => !isMoveItemType<SpiritOfNature, MaterialType, LocationType>(MaterialType.FragmentTile)(move))
+      const moves = legalMoves.filter((move) => !isMoveItemType(MaterialType.FragmentTile)(move))
       if (moves.length) return moves
     }
 

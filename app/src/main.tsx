@@ -1,21 +1,23 @@
 import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LivingForestSetup } from '@gamepark/living-forest/LivingForestSetup'
-import { GameProvider, setupTranslation } from '@gamepark/react-game'
+import { GameProvider, LogDescription } from '@gamepark/react-game'
+import { MaterialMove } from '@gamepark/rules-api'
 import { StrictMode } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { livingForestAnimations } from './animation/LivingForestAnimations'
 import App from './App'
 import { LivingForestHistoryHistory } from './history/LivingForestHistory'
 import { locators } from './locator/Locator'
 import { material } from './material/Material'
-import translations from './translations.json'
 import { Tutorial } from './tutorial/Tutorial'
 import { ai } from './tutorial/TutorialAi'
 
-setupTranslation(translations, { debug: false })
+const logs: LogDescription<MaterialMove> = {
+  getMovePlayedLogDescription: () => ({ Component: LivingForestHistoryHistory })
+}
 
-ReactDOM.render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <GameProvider game="living-forest"
       GameSetup={LivingForestSetup}
@@ -24,13 +26,11 @@ ReactDOM.render(
       material={material}
       locators={locators}
       animations={livingForestAnimations}
-      MaterialHistory={LivingForestHistoryHistory}
+      logs={logs}
       tutorial={new Tutorial()}
       ai={ai}
     >
       <App />
     </GameProvider>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 )
-

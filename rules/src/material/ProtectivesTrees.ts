@@ -76,7 +76,7 @@ export const Tree11: ProtectiveTreeDetails = {
     cost: 11
 }
 
-export const ProtectiveTreeDetail = {
+export const ProtectiveTreeDetail: Record<ProtectiveTree, ProtectiveTreeDetails> = {
     [ProtectiveTree.Tree3A]: Tree3A,
     [ProtectiveTree.Tree3B]: Tree3B,
     [ProtectiveTree.Tree4A]: Tree4A,

@@ -1,8 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { RuleId } from '@gamepark/living-forest/rules/RuleId'
-import { linkButtonCss, MaterialHistoryProps } from '@gamepark/react-game'
+import { linkButtonCss, MaterialLogProps } from '@gamepark/react-game'
 import { isEndGame, isMoveItemType, isStartPlayerTurn, isStartRule, isStartSimultaneousRule, MaterialGame } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { ActionRuleHistory } from './entry/ActionRuleHistory'
@@ -18,9 +17,9 @@ import { PlayerTurnHistory } from './entry/PlayerTurnHistory'
 
 export type LivingForestHistoryProps = {
   game: MaterialGame
-} & MaterialHistoryProps
+} & MaterialLogProps
 
-export const LivingForestHistoryHistory: FC<MaterialHistoryProps> = (props) => {
+export const LivingForestHistoryHistory: FC<MaterialLogProps> = (props) => {
   const { move, context } = props
   const game = context.game
 

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialHelpProps, PlayMoveButton, useLegalMove } from '@gamepark/react-game'
 import { Trans, useTranslation } from 'react-i18next'
 import { MaterialMove, isMoveItemType } from '@gamepark/rules-api'
@@ -16,20 +15,20 @@ export const FileTileRules = ({ item, itemIndex, closeDialog }: MaterialHelpProp
     <h2>{t('rules.fire-tile.title')}</h2>
     <p>{t('rules.fire-tile.points')}</p>
     <p css={alignIconText}>
-      <Trans defaults="rules.circle-spirit.end">
+      <Trans i18nKey="rules.circle-spirit.end">
         <span css={resourceStyle(ResourceImage[2])} />
       </Trans>
     </p>
     <hr />
 
     <p css={alignIconText}>
-      <Trans defaults="rules.circle-spirit.extinguish" values={{ number: item.id }}>
+      <Trans i18nKey="rules.circle-spirit.extinguish" values={{ number: item.id }}>
         <span css={resourceStyle(ResourceImage[2])} />
       </Trans>
     </p>
     <p>{t('rules.fire-tile.victory')}</p>
     {extinguish && <hr />}
-    {extinguish && <Trans defaults="rules.extinguish-fire">
+    {extinguish && <Trans i18nKey="rules.extinguish-fire">
       <PlayMoveButton move={extinguish} onPlay={closeDialog} />
     </Trans>}
   </>

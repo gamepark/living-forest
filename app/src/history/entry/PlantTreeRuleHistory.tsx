@@ -1,8 +1,8 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
+import ProtectiveTree from '@gamepark/living-forest/material/ProtectiveTree'
 import { ProtectiveTreeDetail } from '@gamepark/living-forest/material/ProtectivesTrees'
 import { Resource } from '@gamepark/living-forest/material/Resource'
-import { HistoryEntry, MaterialHistoryProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
+import { HistoryEntry, MaterialLogProps, Picture, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { isMoveItemType, MaterialMoveBuilder } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
@@ -11,21 +11,21 @@ import { getColor } from '../../utils/ColorUtils'
 import { pictureCss, rulesLinkButton } from '../LivingForestHistory'
 import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
-type PlantTreeRuleHistoryProps = {} & MaterialHistoryProps
+type PlantTreeRuleHistoryProps = {} & MaterialLogProps
 
 export const PlantTreeRuleHistory: FC<PlantTreeRuleHistoryProps> = (props) => {
   const { move, context } = props
   const actionPlayer = context.action.playerId
   const name = usePlayerName(actionPlayer)
   if (!isMoveItemType(MaterialType.ProtectiveTreeTiles)(move)) return null
-  const itemId = context.game.items[move.itemType][move.itemIndex]?.id
+  const itemId = context.game.items[move.itemType]?.[move.itemIndex]?.id as ProtectiveTree | undefined
 
   return (
     <HistoryEntry depth={2} backgroundColor={`${getColor(actionPlayer)}40`}>
       <div css={pictureCss}>
-        <Trans defaults="history.plant" values={{
+        <Trans i18nKey="history.plant" values={{
           player: name,
-          cost: ProtectiveTreeDetail[itemId].cost
+          cost: itemId !== undefined ? ProtectiveTreeDetail[itemId].cost : 0
         }}>
           <strong/>
           <PlayMoveButton css={rulesLinkButton} move={displayMaterialHelp(MaterialType.ProtectiveTreeTiles, { id: itemId })} local/>

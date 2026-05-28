@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
 import { Memory } from '@gamepark/living-forest/rules/Memory'
-import { MaterialHistoryProps } from '@gamepark/react-game'
+import { MaterialLogProps } from '@gamepark/react-game'
 import { isCustomMoveType, isMoveItemType } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { AttractAnimalRuleHistory } from './AttractAnimalRuleHistory'
@@ -15,7 +14,7 @@ import { PlantTreeRuleHistory } from './PlantTreeRuleHistory'
 import { SkipSecondActionHistory } from './SkipSecondActionHistory'
 import { TakeFragmentRuleHistory } from './TakeFragmentRuleHistory'
 
-type ActionRuleHistoryProps = {} & MaterialHistoryProps
+type ActionRuleHistoryProps = {} & MaterialLogProps
 
 export const ActionRuleHistory: FC<ActionRuleHistoryProps> = (props) => {
   const { move, context } = props

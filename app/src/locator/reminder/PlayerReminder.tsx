@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { Avatar, usePlayerName } from '@gamepark/react-game'

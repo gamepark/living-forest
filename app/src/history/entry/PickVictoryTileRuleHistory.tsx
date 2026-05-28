@@ -1,6 +1,5 @@
-/** @jsxImportSource @emotion/react */
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { HistoryEntry, MaterialHistoryProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
+import { HistoryEntry, MaterialLogProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { isMoveItemType, MaterialMoveBuilder, MoveItem } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
@@ -8,20 +7,20 @@ import { getColor } from '../../utils/ColorUtils'
 import { rulesLinkButton } from '../LivingForestHistory'
 import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
-type PickVictoryTileRuleHistoryProps = { move: MoveItem } & Omit<MaterialHistoryProps, 'move'>
+type PickVictoryTileRuleHistoryProps = { move: MoveItem } & Omit<MaterialLogProps, 'move'>
 
 export const PickVictoryTileRuleHistory: FC<PickVictoryTileRuleHistoryProps> = (props) => {
   const { move, context } = props
   const actionPlayer = context.action.playerId
   const name = usePlayerName(actionPlayer)
-  const target = context.game.items[move.itemType][move.itemIndex]?.location?.player
+  const target = context.game.items[move.itemType]?.[move.itemIndex]?.location?.player
   const targetName = usePlayerName(target)
   if (!isMoveItemType(MaterialType.VictoryTile)(move)) return null
-  const itemId = context.game.items[move.itemType][move.itemIndex]?.id
+  const itemId = context.game.items[move.itemType]?.[move.itemIndex]?.id
 
   return (
     <HistoryEntry depth={3} backgroundColor={`${getColor(actionPlayer)}40`}>
-      <Trans defaults="history.victory-tile" values={{
+      <Trans i18nKey="history.victory-tile" values={{
         player: name,
         target: targetName
       }}>

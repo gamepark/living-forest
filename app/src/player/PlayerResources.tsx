@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Resource, resources } from '@gamepark/living-forest/material/Resource'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'

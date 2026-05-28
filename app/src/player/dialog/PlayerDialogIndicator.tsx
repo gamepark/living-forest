@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { FC } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons/faStar'
@@ -22,7 +21,7 @@ const PlayerDialogIndicator: FC<PlayerDialogIndicatorProps> = (props) => {
   return (
     <div css={indicator}>
       <div
-        css={[iconStyle(ratio, width), !!image && iconImageStyle(image, radius), !!image && shadow && shadowCss(image)]}>
+        css={[iconStyle(ratio, width), !!image && iconImageStyle(image, radius), !!image && shadow && shadowCss]}>
         {!!icon && <FontAwesomeIcon icon={faStar} css={fontIcon} fill="#28B8CE" />}
       </div>
       <div css={detail}>

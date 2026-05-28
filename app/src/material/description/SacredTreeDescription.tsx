@@ -5,6 +5,7 @@ import { SacredTreeHelp } from './help/SacredTreeHelp'
 export class SacredTreeDescription extends TokenDescription {
   width = 5
   ratio = 356 / 320
+  transparency = true
   image = Images.SacredTree
   help = SacredTreeHelp
 }

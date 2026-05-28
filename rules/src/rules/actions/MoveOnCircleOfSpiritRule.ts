@@ -74,7 +74,7 @@ export class MoveOnCircleOfSpiritRule extends PlayerTurnRule {
 
   onCustomMove(move: CustomMove) {
     if (!isCustomMoveType(CustomMoveType.MoveOnCircleOfSpirit)(move)) return []
-    delete this.game.droppedItem
+    delete this.game.droppedItems
     const standee = this.standee
     const position = standee.getItem()!.location.x!
     const { distance } = move.data

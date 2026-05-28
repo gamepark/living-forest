@@ -1,20 +1,19 @@
-/** @jsxImportSource @emotion/react */
 import { Fire } from '@gamepark/living-forest/material/Fire'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
-import { HistoryEntry, MaterialHistoryProps } from '@gamepark/react-game'
-import { isMoveItemType, MaterialGame, MoveItem, StartRule } from '@gamepark/rules-api'
+import { HistoryEntry, MaterialLogProps } from '@gamepark/react-game'
+import { isMoveItemType, MaterialGame, MaterialMove, MoveItem, StartRule } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { bold } from '../LivingForestHistory'
 
-type OnibiAttacksSacredTreeRuleHistoryProps = { move: StartRule } & Omit<MaterialHistoryProps, 'move'>
+type OnibiAttacksSacredTreeRuleHistoryProps = { move: StartRule } & Omit<MaterialLogProps, 'move'>
 
 export const OnibiAttacksSacredTreeRuleHistory: FC<OnibiAttacksSacredTreeRuleHistoryProps> = (props) => {
   const { t } = useTranslation()
   const { move, context } = props
   const { action } = context
-  const fireTiles = action.consequences.filter((move) =>
+  const fireTiles = action.consequences.filter((move: MaterialMove) =>
     isMoveItemType(MaterialType.FireTile)(move)
     && move.location.type === LocationType.CircleOfSpiritBoardFire
   ).length
@@ -35,7 +34,7 @@ export const NewFireTileHistory: FC<NewFireTileHistoryProps> = (props) => {
   const { context } = props
   const { t } = useTranslation()
   const action = context.action
-  const fireTileMoves: MoveItem[] = action.consequences.filter((move) =>
+  const fireTileMoves: MoveItem[] = action.consequences.filter((move: MaterialMove): move is MoveItem =>
     isMoveItemType(MaterialType.FireTile)(move)
     && move.location.type === LocationType.CircleOfSpiritBoardFire
   )
@@ -63,9 +62,9 @@ export const NewFireTileHistory: FC<NewFireTileHistoryProps> = (props) => {
 const getCountByFireTile = (game: MaterialGame, moves: MoveItem[]): Partial<Record<Fire, number>> => {
   const counts: Partial<Record<Fire, number>> = {}
   for (const move of moves) {
-    const tile = game.items[move.itemType]![move.itemIndex]?.id
-    if (!(tile in counts)) counts[tile] = 1
-    else counts[tile]++
+    const tile = game.items[move.itemType]?.[move.itemIndex]?.id as Fire | undefined
+    if (tile === undefined) continue
+    counts[tile] = (counts[tile] ?? 0) + 1
   }
 
   return counts

@@ -1,9 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import { pointerWithin } from '@dnd-kit/core'
 import { css } from '@emotion/react'
-import { GameTable, GameTableNavigation, usePlayers } from '@gamepark/react-game'
+import { DevToolsHub, GameTable, GameTableNavigation, usePlayers } from '@gamepark/react-game'
 import { PlayerPanels } from './player/PlayerPanels'
-//import { css } from '@emotion/react'
 
 export default function GameDisplay() {
   const players = usePlayers()
@@ -12,17 +10,17 @@ export default function GameDisplay() {
   const twoPlayers = players.length === 2
 
   return <>
-    <GameTable 
+    <GameTable
     xMin={-28}
     xMax={bigTable ? 90: 95}
     yMin={!twoPlayers ? -39: -30}
     snapToCenter={false}
     yMax={!twoPlayers? 28: 30}
-    collisionAlgorithm={pointerWithin} 
+    collisionAlgorithm={pointerWithin}
     margin={{ top: 7, left: 0, right: bigTable? 38: 0, bottom: 0 }}
-    //css={css`background-color: rgba(255, 255, 255, 0.7)`}
     >
       <GameTableNavigation scaleStep={0.2} css={navigationPosition(players.length)} />
+      {process.env.NODE_ENV === 'development' && <DevToolsHub fabBottom="calc(5em)" />}
     </GameTable>
     <PlayerPanels/>
   </>

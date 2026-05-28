@@ -9,6 +9,7 @@ import { SpiritOfNatureStandeeHelp } from './help/SpiritOfNatureStandeeHelp'
 
 export class SpiritOfNatureStandeeDescription extends TokenDescription {
   height = 5.1
+  transparency = true
 
   images = {
     [SpiritOfNature.Autumn]: Images.autumnSpiritCircle,

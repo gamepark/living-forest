@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { faCircleQuestion } from '@fortawesome/free-regular-svg-icons/faCircleQuestion'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -38,18 +37,18 @@ export const GameOverHeader = () => {
     const headerKey = getHeaderKey(rules.game, firstPlayer.id!, isWinningWithTotalPoints, player)
     if (!headerKey) return <></>
     return <>
-      {t(headerKey.text, { player: winnerName, score: headerKey.score })}
+      {t(headerKey.text, { ns: headerKey.ns, player: winnerName, score: headerKey.score })}
       {dialog}
     </>
   } else {
     const players = rules.players
     const winners = rankedPlayers.filter((r) => r.rank === firstPlayer?.rank).map((r) => r.id)
     if (winners.length === players.length) {
-      return <>{t('result.comp.tie.all')}</>
+      return <>{t('result.comp.tie.all', { ns: 'common' })}</>
     } else if (player !== undefined && winners.includes(player)) {
-      return <>{t('result.comp.tie.you', { tied: winners.length - 1 })}</>
+      return <>{t('result.comp.tie.you', { ns: 'common', tied: winners.length - 1 })}</>
     } else {
-      return <>{t('result.comp.tie.other', { tied: winners.length })}</>
+      return <>{t('result.comp.tie.other', { ns: 'common', tied: winners.length })}</>
     }
   }
 }
@@ -57,7 +56,7 @@ export const GameOverHeader = () => {
 export const getHeaderKey = (game: MaterialGame, winner: SpiritOfNature, isWinningWithTotalPoints: boolean, playerId?: SpiritOfNature) => {
   const me = playerId && playerId === winner
   const playerState = new PlayerState(game, winner)
-  if (isWinningWithTotalPoints) return { text: me? 'result.score.victory': 'result.score.winner', score: playerState.points }
+  if (isWinningWithTotalPoints) return { text: me? 'result.score.victory': 'result.score.winner', ns: 'common', score: playerState.points }
   if (playerState.firePoints >= 12) return { text: me? 'header.winner.fire.me': 'header.winner.fire', score: playerState.firePoints }
   if (playerState.flowerPoints >= 12) return  { text: me? 'header.winner.flower.me': 'header.winner.flower', score: playerState.flowerPoints }
   if (playerState.treePoints >= 12) return  { text: me? 'header.winner.tree.me': 'header.winner.tree', score: playerState.treePoints }

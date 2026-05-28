@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LocationHelpProps } from '@gamepark/react-game'
 import { FC } from 'react'
@@ -14,12 +13,12 @@ export const TreeSpaceHelp: FC<LocationHelpProps> = ({ location }) => {
       <p>{t('rules.forest-space.fragments')}</p>
     }
     {((location.x === 4 && location.y === 2)) &&
-      <Trans defaults="rules.forest-space.extinguish">
+      <Trans i18nKey="rules.forest-space.extinguish">
         <span css={resourceStyle(ResourceImage[2])} />
       </Trans>
     }
     {((location.x === 0 && location.y === 0)) &&
-      <Trans defaults="rules.forest-space.attract">
+      <Trans i18nKey="rules.forest-space.attract">
         <span css={resourceStyle(ResourceImage[1])} />
       </Trans>
     }

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
 import { rockRules } from '@gamepark/living-forest/rules/helper/RockRule'
 import { RuleId } from '@gamepark/living-forest/rules/RuleId'
@@ -14,28 +13,28 @@ export const CircleOfSpiritSpaceHelp: FC<LocationHelpProps> = (({ location, clos
   const effect = rockRules[location.x!]
   return <>
     <h2>{t('rules.circle-spirit-space.title')}</h2>
-    <p><Trans defaults="rules.circle-spirit-space.desc"><strong /></Trans></p>
+    <p><Trans i18nKey="rules.circle-spirit-space.desc"><strong /></Trans></p>
     {RuleId.TakeFragment === effect &&
       <p>
-        <Trans defaults="rules.circle-spirit-space.fragment"><strong /></Trans>
+        <Trans i18nKey="rules.circle-spirit-space.fragment"><strong /></Trans>
       </p>
     }
     {RuleId.ExtinguishFire === effect &&
       <p>
-        <Trans defaults="rules.circle-spirit-space.extinguish"><strong /></Trans>
+        <Trans i18nKey="rules.circle-spirit-space.extinguish"><strong /></Trans>
       </p>
     }
     {RuleId.AttractAnimals === effect &&
       <p>
-        <Trans defaults="rules.circle-spirit-space.attract"><strong /></Trans>
+        <Trans i18nKey="rules.circle-spirit-space.attract"><strong /></Trans>
       </p>
     }
     {RuleId.PlantTree === effect &&
       <p>
-        <Trans defaults="rules.circle-spirit-space.plant"><strong /></Trans>
+        <Trans i18nKey="rules.circle-spirit-space.plant"><strong /></Trans>
       </p>
     }
-    {move && <Trans defaults="rules.circle-spirit-space.button">
+    {move && <Trans i18nKey="rules.circle-spirit-space.button">
       <PlayMoveButton move={move} onPlay={closeDialog} />
     </Trans>}
   </>

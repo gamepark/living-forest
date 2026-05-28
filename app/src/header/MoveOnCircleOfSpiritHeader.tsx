@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'
 import { useTranslation } from 'react-i18next'

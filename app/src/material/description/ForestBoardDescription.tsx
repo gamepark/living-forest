@@ -9,6 +9,7 @@ import { ForestBoardHelp } from './help/ForestBoardHelp'
 export class ForestBoardDescription extends BoardDescription {
   height = 17.72
   width = 29
+  transparency = true
 
   getLocations(item: MaterialItem, { player }: ItemContext) {
     if (item.location.player !== player) return []

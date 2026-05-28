@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { Resource } from '@gamepark/living-forest/material/Resource'
 import { FC } from 'react'
 import Images from '../images/Images'

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { TurnOrder } from '@gamepark/living-forest/rules/helper/TurnOrder'
 import { usePlayerId, usePlayerName, useRules } from '@gamepark/react-game'

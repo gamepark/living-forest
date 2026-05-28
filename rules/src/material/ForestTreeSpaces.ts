@@ -1,5 +1,5 @@
 import { XYCoordinates } from '@gamepark/rules-api'
-import range from 'lodash/range'
+import { range } from 'es-toolkit/compat'
 
 export const forestTreeSpaces: XYCoordinates[] = [
   ...range(5).map(x => ({ x, y: 0 })),

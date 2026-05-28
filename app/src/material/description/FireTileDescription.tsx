@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Fire } from '@gamepark/living-forest/material/Fire'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
@@ -9,6 +8,8 @@ import Images from '../../images/Images'
 import { FileTileRules } from './help/FireTileHelp'
 
 export class FireTileDescription extends TokenDescription {
+  transparency = true
+
   images = {
     [Fire.Fire2]: Images.fire2,
     [Fire.Fire3]: Images.fire3,

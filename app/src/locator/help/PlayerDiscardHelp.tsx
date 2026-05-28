@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'

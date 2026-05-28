@@ -22,7 +22,7 @@ The project has dependencies, which you can find inside [/app/package.json](/app
 
 You must install the dependencies using Yarn. Run this command line in the project's folder: `yarn install`
 
-Now, you should be able to start the game on your computer: `yarn start`
+Now, you should be able to start the game on your computer: `yarn dev`
 
 It should open a browser window on http://localhost:3000 and display the first version of your game. It is a debug session: if you change something in the code, it will automatically apply the changes!
 

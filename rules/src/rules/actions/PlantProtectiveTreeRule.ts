@@ -79,7 +79,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     const resources = this.resources
     return this.material(MaterialType.ProtectiveTreeTiles)
       .location(LocationType.TreeDispenser)
-      .filter((item) => ProtectiveTreeDetail[item.id].cost <= resources)
+      .filter<ProtectiveTree>((item) => (ProtectiveTreeDetail[item.id]?.cost ?? 0) <= resources)
   }
 
   get plantedTrees() {

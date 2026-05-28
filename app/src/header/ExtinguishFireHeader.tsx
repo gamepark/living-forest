@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { Resource } from '@gamepark/living-forest/material/Resource'
@@ -24,7 +23,7 @@ export const ExtinguishFireHeader = () => {
     if (pass) {
       return (
         <div css={[alignIcon, centerCss]}>
-          <Trans defaults="header.extinguish-fire-pass.me">
+          <Trans i18nKey="header.extinguish-fire-pass.me">
             <PlayMoveButton css={marginLeft} move={pass}/>
             <DropResource/>
           </Trans>
@@ -34,7 +33,7 @@ export const ExtinguishFireHeader = () => {
     } else {
       return (
         <div css={[alignIcon, centerCss]}>
-          <Trans defaults="header.extinguish-fire.me">
+          <Trans i18nKey="header.extinguish-fire.me">
             <strong/>
             <DropResource/>
           </Trans>

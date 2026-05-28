@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { Trans, useTranslation } from 'react-i18next'
 import { ResourceImage, alignIconText, resourceStyle } from './GuardianAnimalCardHelp'
 
@@ -10,7 +9,7 @@ export const ForestBoardHelp = () => {
     <p>{t('rules.forest.victory')}</p>
     <hr />
     <p css={alignIconText}>
-      <Trans defaults="rules.forest.resources">
+      <Trans i18nKey="rules.forest.resources">
         <span css={resourceStyle(ResourceImage[2])} />
         <span css={resourceStyle(ResourceImage[1])} />
         <span css={resourceStyle(ResourceImage[4])} />
@@ -18,14 +17,14 @@ export const ForestBoardHelp = () => {
       </Trans>
     </p>
     <p css={alignIconText}>
-      <Trans defaults="rules.forest.bonus.tl">
+      <Trans i18nKey="rules.forest.bonus.tl">
         <span css={resourceStyle(ResourceImage[1])} />
       </Trans>
     </p>
     <p>{t('rules.forest.bonus.tr')}</p>
     <p>{t('rules.forest.bonus.bl')}</p>
     <p css={alignIconText}>
-      <Trans defaults="rules.forest.bonus.br">
+      <Trans i18nKey="rules.forest.bonus.br">
         <span css={resourceStyle(ResourceImage[2])} />
       </Trans>
     </p>

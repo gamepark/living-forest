@@ -6,6 +6,7 @@ import { CircleOfSpiritBoardHelp } from './help/CircleOfSpiritBoardHelp'
 export class CircleOfSpiritBoardDescription extends BoardDescription {
   ratio = 1
   width = 31.5
+  transparency = true
 
   locations = Array.from(Array(12)).map((_, id) => ({ type: LocationType.CircleOfSpiritBoardSpace, x: id }))
 

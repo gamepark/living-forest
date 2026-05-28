@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { VictoryTileType } from '@gamepark/living-forest/material/VictoryTiles'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
@@ -21,7 +20,7 @@ export const GameOverRule: FC<GameOverRuleProps> = () => {
     <div css={container}>
       <h1>{t('header.gameover.summary.title')}</h1>
       <p css={resume}>
-        <Trans defaults="header.gameover.summary">
+        <Trans i18nKey="header.gameover.summary">
           <strong/>
           <span css={resourceStyle(VictoryImage[VictoryTileType.Tree])}/>
           <span css={resourceStyle(VictoryImage[VictoryTileType.Fire])}/>

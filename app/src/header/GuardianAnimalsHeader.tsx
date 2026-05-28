@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
@@ -41,7 +40,7 @@ export const GuardianAnimalsHeader = () => {
       actions.push(
         <PlayMoveButton key="ds" move={drawUntilSolitary} css={flexButton} delayed>
           <div css={alignIcon}>
-            <Trans defaults="header.guardian-animal.draw-until-solitary">
+            <Trans i18nKey="header.guardian-animal.draw-until-solitary">
               <div css={solitaryCss}/>
             </Trans>
           </div>
@@ -51,7 +50,7 @@ export const GuardianAnimalsHeader = () => {
 
     if (canUseFragment) actions.push(<PlayMoveButton key="f" move={spendFragment}>{t('header.guardian-animal.fragment')}</PlayMoveButton>)
     if (canPass) actions.push(<PlayMoveButton key="p" move={pass}>{t('header.guardian-animal.pass')}</PlayMoveButton>)
-    let content = undefined
+    let content
     if (actions.length === 1) {
       content = actions
     } else {

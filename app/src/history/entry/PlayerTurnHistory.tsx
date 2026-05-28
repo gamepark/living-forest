@@ -1,9 +1,8 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { Resource } from '@gamepark/living-forest/material/Resource'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
 import { Memory } from '@gamepark/living-forest/rules/Memory'
-import { HistoryEntry, MaterialHistoryProps, Picture, usePlayerName } from '@gamepark/react-game'
+import { HistoryEntry, MaterialLogProps, Picture, usePlayerName } from '@gamepark/react-game'
 import { StartPlayerTurn } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -11,7 +10,7 @@ import { ResourceImage } from '../../material/description/help/GuardianAnimalCar
 import { getColor } from '../../utils/ColorUtils'
 import { bold } from '../LivingForestHistory'
 
-type PlayerTurnHistoryProps = { move: StartPlayerTurn } & MaterialHistoryProps
+type PlayerTurnHistoryProps = { move: StartPlayerTurn } & MaterialLogProps
 
 export const PlayerTurnHistory: FC<PlayerTurnHistoryProps> = (props) => {
   const { move, context } = props
@@ -30,7 +29,7 @@ export const PlayerTurnHistory: FC<PlayerTurnHistoryProps> = (props) => {
       {justStarts && <HistoryEntry borderTop borderBottom css={bold}>{t('history.players')}</HistoryEntry>}
       <HistoryEntry player={player} backgroundColor={`${getColor(player)}40`} borderTop={!justStarts}>
         <div css={pictureCss}>
-          <Trans defaults="history.player-turn" values={{ player: name, action: current }}>
+          <Trans i18nKey="history.player-turn" values={{ player: name, action: current }}>
             <strong/>
             <>
               <span>{state.sunResources} <Picture src={ResourceImage[Resource.Sun]}/></span>

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import CardType from '@gamepark/living-forest/material/CardType'
 import { forestTreeSpaces } from '@gamepark/living-forest/material/ForestTreeSpaces'
@@ -10,7 +9,7 @@ import { Resource } from '@gamepark/living-forest/material/Resource'
 import { CustomMoveType } from '@gamepark/living-forest/rules/CustomMoveType'
 import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
-import { MaterialTutorial, TutorialStep } from '@gamepark/react-game'
+import { MaterialContext, MaterialTutorial, TutorialStep } from '@gamepark/react-game'
 import { isCustomMoveType, isEndPlayerTurn, isMoveItemType, isStartRule, MaterialGame } from '@gamepark/rules-api'
 import { TFunction } from 'i18next'
 import { Trans } from 'react-i18next'
@@ -33,7 +32,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
   steps: TutorialStep[] = [
     {
       popup: {
-        text: () => <Trans defaults="tuto.welcome"><strong/></Trans>
+        text: () => <Trans i18nKey="tuto.welcome"><strong/></Trans>
       }
     },
     {
@@ -44,7 +43,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.start"><strong/></Trans>,
+        text: () => <Trans i18nKey="tuto.start"><strong/></Trans>,
         position: { x: -5, y: 20 }
       },
       move: {
@@ -71,7 +70,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.animals">
+        text: () => <Trans i18nKey="tuto.animals">
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
           <span css={resourceStyle(ResourceImage[Resource.Drop])}/>
           <span css={resourceStyle(ResourceImage[Resource.Seed])}/>
@@ -94,7 +93,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.sun">
+        text: () => <Trans i18nKey="tuto.sun">
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
         </Trans>,
         position: { x: -5, y: 0 }
@@ -138,14 +137,14 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 1].focus!(game),
+      focus: (game: MaterialGame, context: MaterialContext) => this.steps[game.tutorial!.step - 1].focus!(game, context),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) && move.location.type === LocationType.HelpLine
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 2].focus!(game),
+      focus: (game: MaterialGame, context: MaterialContext) => this.steps[game.tutorial!.step - 2].focus!(game, context),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) => isMoveItemType(MaterialType.GuardianAnimalCard)(move) && move.location.type === LocationType.HelpLine
@@ -153,7 +152,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.solitary">
+        text: () => <Trans i18nKey="tuto.solitary">
           <strong/>
           <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>,
@@ -194,7 +193,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.pass">
+        text: () => <Trans i18nKey="tuto.pass">
           <strong/>
           <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>,
@@ -247,7 +246,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.solitary.malus">
+        text: () => <Trans i18nKey="tuto.solitary.malus">
           <strong/>
           <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>
@@ -256,12 +255,12 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     {
       popup: {
         text: () => <>
-          <Trans defaults="tuto.actions.list"/>
-          <span css={actionItem}><span css={resourceStyle(Images.TakeFragment)}/> <Trans defaults="rules.take-fragment"><span/></Trans></span>
-          <span css={actionItem}><span css={resourceStyle(Images.AttractGuardian)}/> <Trans defaults="tuto.actions.list.sun"/></span>
-          <span css={actionItem}><span css={resourceStyle(Images.ExtinguishFire)}/> <Trans defaults="tuto.actions.list.water"/></span>
-          <span css={actionItem}><span css={resourceStyle(Images.MoveCircle)}/> <Trans defaults="tuto.actions.list.wind"/></span>
-          <span css={actionItem}><span css={resourceStyle(Images.PlantTree)}/> <Trans defaults="header.plant-tree.me"><span/></Trans></span>
+          <Trans i18nKey="tuto.actions.list"/>
+          <span css={actionItem}><span css={resourceStyle(Images.TakeFragment)}/> <Trans i18nKey="rules.take-fragment"><span/></Trans></span>
+          <span css={actionItem}><span css={resourceStyle(Images.AttractGuardian)}/> <Trans i18nKey="tuto.actions.list.sun"/></span>
+          <span css={actionItem}><span css={resourceStyle(Images.ExtinguishFire)}/> <Trans i18nKey="tuto.actions.list.water"/></span>
+          <span css={actionItem}><span css={resourceStyle(Images.MoveCircle)}/> <Trans i18nKey="tuto.actions.list.wind"/></span>
+          <span css={actionItem}><span css={resourceStyle(Images.PlantTree)}/> <Trans i18nKey="header.plant-tree.me"><span/></Trans></span>
         </>
       }
     },
@@ -282,7 +281,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.action.sun.rule" values={{ number: '3' }}>
+        text: () => <Trans i18nKey="tuto.action.sun.rule" values={{ number: '3' }}>
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
         </Trans>,
         position: { x: 10, y: 0 }
@@ -328,7 +327,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.action.water.rule" values={{ 'number': '2' }}>
+        text: () => <Trans i18nKey="tuto.action.water.rule" values={{ 'number': '2' }}>
           <span css={resourceStyle(ResourceImage[Resource.Drop])}/>
         </Trans>,
         position: { x: 10, y: 0 }
@@ -450,7 +449,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 1].focus!(game),
+      focus: (game: MaterialGame, context: MaterialContext) => this.steps[game.tutorial!.step - 1].focus!(game, context),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -458,7 +457,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 2].focus!(game),
+      focus: (game: MaterialGame, context: MaterialContext) => this.steps[game.tutorial!.step - 2].focus!(game, context),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -466,7 +465,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 3].focus!(game),
+      focus: (game: MaterialGame, context: MaterialContext) => this.steps[game.tutorial!.step - 3].focus!(game, context),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -474,7 +473,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 4].focus!(game),
+      focus: (game: MaterialGame, context: MaterialContext) => this.steps[game.tutorial!.step - 4].focus!(game, context),
       move: {
         player: SpiritOfNature.Spring,
         filter: (move) =>
@@ -483,7 +482,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.solitary.2">
+        text: () => <Trans i18nKey="tuto.solitary.2">
           <strong/>
           <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
         </Trans>,
@@ -550,7 +549,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.trees">
+        text: () => <Trans i18nKey="tuto.trees">
           <span css={resourceStyle(ResourceImage[Resource.Seed])}/>
         </Trans>,
         position: { x: 35, y: 10 }
@@ -561,7 +560,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.trees.bonus">
+        text: () => <Trans i18nKey="tuto.trees.bonus">
           <strong/>
         </Trans>,
         position: { x: 0, y: 25 }
@@ -572,7 +571,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.lines.bonus">
+        text: () => <Trans i18nKey="tuto.lines.bonus">
           <span css={resourceStyle(ResourceImage[Resource.Seed])}/>
         </Trans>,
         position: { x: 0, y: -27 }
@@ -588,7 +587,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.tree.plant">
+        text: () => <Trans i18nKey="tuto.tree.plant">
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
         </Trans>
       },
@@ -615,7 +614,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.wind">
+        text: () => <Trans i18nKey="tuto.wind">
           <strong/>
         </Trans>,
         position: { x: -45, y: 0 }
@@ -631,7 +630,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.wind.move">
+        text: () => <Trans i18nKey="tuto.wind.move">
           <span css={resourceStyle(ResourceImage[Resource.Wind])}/>
         </Trans>,
         position: { x: -40, y: 0 }
@@ -668,7 +667,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.wind.steal">
+        text: () => <Trans i18nKey="tuto.wind.steal">
           <strong/>
         </Trans>,
         position: { x: 10, y: -5 }
@@ -679,7 +678,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.wind.action">
+        text: () => <Trans i18nKey="tuto.wind.action">
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
         </Trans>,
         position: { x: -45, y: 0 }
@@ -700,7 +699,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.sun.tree.bonus" values={{ 'number': '5' }}>
+        text: () => <Trans i18nKey="tuto.sun.tree.bonus" values={{ 'number': '5' }}>
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
         </Trans>,
         position: { x: -15, y: 5 }
@@ -723,7 +722,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.gregarious">
+        text: () => <Trans i18nKey="tuto.gregarious">
           <strong/>
           <span css={resourceStyle(TypeImage[CardType.Gregarious])}/>
           <span css={resourceStyle(TypeImage[CardType.Solitary])}/>
@@ -753,7 +752,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
         margin: { top: 10, right: 10 }
       }),
       popup: {
-        text: () => <Trans defaults="tuto.varan.rule">
+        text: () => <Trans i18nKey="tuto.varan.rule">
           <strong/>
           <span css={resourceStyle(ResourceImage[Resource.Drop])}/>,
         </Trans>,
@@ -761,9 +760,9 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
       }
     },
     {
-      focus: (game: MaterialGame) => this.steps[game.tutorial!.step - 1].focus!(game),
+      focus: (game: MaterialGame, context: MaterialContext) => this.steps[game.tutorial!.step - 1].focus!(game, context),
       popup: {
-        text: () => <Trans defaults="tuto.varan">
+        text: () => <Trans i18nKey="tuto.varan">
           <strong/>
           <span css={resourceStyle(ResourceImage[Resource.Drop])}/>
         </Trans>,
@@ -799,7 +798,7 @@ export class Tutorial extends MaterialTutorial<SpiritOfNature, MaterialType, Loc
     },
     {
       popup: {
-        text: () => <Trans defaults="tuto.game.over">
+        text: () => <Trans i18nKey="tuto.game.over">
           <strong/>
           <span css={resourceStyle(ResourceImage[Resource.Sun])}/>
           <span css={resourceStyle(ResourceImage[Resource.Seed])}/>

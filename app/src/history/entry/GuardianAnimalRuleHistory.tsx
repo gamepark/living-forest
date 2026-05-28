@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import { PlayerState } from '@gamepark/living-forest/rules/helper/PlayerState'
-import { HistoryEntry, MaterialHistoryProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
+import { HistoryEntry, MaterialLogProps, PlayMoveButton, usePlayerName } from '@gamepark/react-game'
 import { isEndPlayerTurn, isMoveItemType, MaterialMoveBuilder } from '@gamepark/rules-api'
 import { FC } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -13,7 +12,7 @@ import { getColor } from '../../utils/ColorUtils'
 import { rulesLinkButton } from '../LivingForestHistory'
 import displayMaterialHelp = MaterialMoveBuilder.displayMaterialHelp
 
-type GuardianAnimalRuleHistoryProps = {} & MaterialHistoryProps
+type GuardianAnimalRuleHistoryProps = {} & MaterialLogProps
 
 export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (props) => {
   const { move, context } = props
@@ -25,7 +24,7 @@ export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (pr
   if (isMoveItemType(MaterialType.FragmentTile)(move) && move.location?.type === LocationType.FragmentStack) {
     return (
       <HistoryEntry player={actionPlayer} backgroundColor={`${getColor(actionPlayer)}40`}>
-        <Trans defaults="history.guardian.fragment" values={{
+        <Trans i18nKey="history.guardian.fragment" values={{
           player: name
         }}>
           <strong/>
@@ -35,12 +34,12 @@ export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (pr
   }
 
   if (isMoveItemType(MaterialType.GuardianAnimalCard)(move)) {
-    const itemId = move.reveal?.id ?? game.items[move.itemType][move.itemIndex]?.id
+    const itemId = move.reveal?.id ?? game.items[move.itemType]?.[move.itemIndex]?.id
 
     if (move.location?.type === LocationType.HelpLine) {
       return (
         <HistoryEntry player={actionPlayer} backgroundColor={`${getColor(actionPlayer)}40`}>
-          <Trans defaults="history.guardian.draw" values={{
+          <Trans i18nKey="history.guardian.draw" values={{
             player: name,
             card: getAnimalTranslation(t, itemId)
           }}>
@@ -54,7 +53,7 @@ export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (pr
     if (move.location?.type === LocationType.PlayerDiscardStack) {
       return (
         <HistoryEntry depth={1} backgroundColor={`${getColor(actionPlayer)}40`}>
-          <Trans defaults="history.guardian.discard" values={{
+          <Trans i18nKey="history.guardian.discard" values={{
             player: name,
             card: getAnimalTranslation(t, itemId)
           }}>
@@ -68,7 +67,7 @@ export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (pr
     if (move.location?.type === LocationType.VaranDeck) {
       return (
         <HistoryEntry player={actionPlayer} backgroundColor={`${getColor(actionPlayer)}40`}>
-          <Trans defaults="history.guardian.varan" values={{
+          <Trans i18nKey="history.guardian.varan" values={{
             player: name
           }}>
             <strong/>
@@ -86,7 +85,7 @@ export const GuardianAnimalRuleHistory: FC<GuardianAnimalRuleHistoryProps> = (pr
     const actionCount = playerState.solidarityGregariousDifference === 3 ? 1 : 2
     return (
       <HistoryEntry player={actionPlayer} backgroundColor={`${getColor(actionPlayer)}40`}>
-        <Trans defaults={actionCount === 2 ? 'history.guardian.pass' : 'history.guardian.stop'} values={{
+        <Trans i18nKey={actionCount === 2 ? 'history.guardian.pass' : 'history.guardian.stop'} values={{
           player: name
         }}>
           <strong/>

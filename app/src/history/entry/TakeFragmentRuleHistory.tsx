@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
-import { HistoryEntry, MaterialHistoryProps, usePlayerName } from '@gamepark/react-game'
+import { HistoryEntry, MaterialLogProps, usePlayerName } from '@gamepark/react-game'
 import { FC } from 'react'
 import { Trans } from 'react-i18next'
 import { getColor } from '../../utils/ColorUtils'
 
-type TakeFragmentRuleHistoryProps = {} & MaterialHistoryProps
+type TakeFragmentRuleHistoryProps = {} & MaterialLogProps
 
 export const TakeFragmentRuleHistory: FC<TakeFragmentRuleHistoryProps> = (props) => {
   const { context } = props
@@ -12,7 +11,7 @@ export const TakeFragmentRuleHistory: FC<TakeFragmentRuleHistoryProps> = (props)
   const name = usePlayerName(actionPlayer)
   return (
     <HistoryEntry depth={2} backgroundColor={`${getColor(actionPlayer)}40`}>
-      <Trans defaults="history.fragment" values={{
+      <Trans i18nKey="history.fragment" values={{
         player: name
       }}>
         <strong/>

@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import GuardianAnimal from '@gamepark/living-forest/material/GuardianAnimal'
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'

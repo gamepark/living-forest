@@ -1,8 +1,7 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { usePlayerId, usePlayers, useRules } from '@gamepark/react-game'
-import orderBy from 'lodash/orderBy'
+import { orderBy } from 'es-toolkit/compat'
 import { FC, useMemo } from 'react'
 import { getBoardIndex } from '../utils/PositionOnTable'
 import { LivingForestPlayerPanel } from './LivingForestPlayerPanel'

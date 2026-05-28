@@ -13,7 +13,7 @@ export const VictoryTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpPr
   return <>
     <h2>{t('rules.victory-tile.title')}</h2>
     <p>{t('rules.victory-tile.description')}</p>
-    {takeVictory && <Trans defaults="rules.take-victory">
+    {takeVictory && <Trans i18nKey="rules.take-victory">
       <PlayMoveButton move={takeVictory} onPlay={closeDialog} />
     </Trans>}
   </>

@@ -19,10 +19,10 @@ export const FragmentTileHelp = ({ item, itemIndex, closeDialog }: MaterialHelpP
     <p>{t('rules.fragment.description')}</p>
     <p>{t('rules.fragment.get')}</p>
     {(takeFragment || spendFragment) && <hr />}
-    {takeFragment && <Trans defaults="rules.take-fragment">
+    {takeFragment && <Trans i18nKey="rules.take-fragment">
       <PlayMoveButton move={takeFragment} onPlay={closeDialog} />
     </Trans>}
-    {spendFragment && <Trans defaults="rules.spend-fragment">
+    {spendFragment && <Trans i18nKey="rules.spend-fragment">
       <PlayMoveButton move={spendFragment} onPlay={closeDialog} />
     </Trans>}
   </>

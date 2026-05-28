@@ -1,11 +1,10 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
-import { HistoryEntry, MaterialHistoryProps } from '@gamepark/react-game'
+import { HistoryEntry, MaterialLogProps } from '@gamepark/react-game'
 import { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { getColor } from '../../utils/ColorUtils'
 
-type SkipSecondActionHistoryProps = { player: number } & Omit<MaterialHistoryProps, 'move'>
+type SkipSecondActionHistoryProps = { player: number } & Omit<MaterialLogProps, 'move'>
 
 export const SkipSecondActionHistory: FC<SkipSecondActionHistoryProps> = (props) => {
   const { t } = useTranslation()

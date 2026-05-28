@@ -9,6 +9,7 @@ export class FragmentTileDescription extends TokenDescription {
   width = 3
   height = 3
   borderRadius = 0.2
+  transparency = true
   image = Images.fragment
 
   help = FragmentTileHelp

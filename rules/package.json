@@ -2,6 +2,7 @@
   "name": "@gamepark/living-forest",
   "version": "1.1.0",
   "description": "Living Forest rules for Game Park",
+  "sideEffects": false,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,14 +15,20 @@
     "access": "public"
   },
   "scripts": {
+    "test": "vitest",
     "build": "tsc",
-    "prepublishOnly": "tsc"
+    "prepublishOnly": "tsc",
+    "publish": "lerna publish",
+    "lint": "eslint --fix"
   },
   "peerDependencies": {
-    "@gamepark/rules-api": ">=6.24"
+    "@gamepark/rules-api": ">=7",
+    "es-toolkit": "^1.45.1"
   },
   "devDependencies": {
-    "@gamepark/rules-api": "~6.24.2",
-    "i18next": "^22.0.3"
+    "@gamepark/rules-api": "~7.6.3",
+    "es-toolkit": "^1.46.1",
+    "madge": "^8.0.0",
+    "vitest": "^4.1.6"
   }
 }

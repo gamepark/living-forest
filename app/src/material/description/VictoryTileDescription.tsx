@@ -7,6 +7,7 @@ import { VictoryTileHelp } from './help/VictoryTileHelp'
 export class VictoryTileDescription extends BoardDescription {
   width = 4.6
   height = 3.16
+  transparency = true
 
   getFrontExtraCss() {
     return css`

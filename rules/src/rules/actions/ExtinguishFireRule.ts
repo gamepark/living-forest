@@ -26,14 +26,10 @@ export class ExtinguishFireRule extends PlayerTurnRule {
   }
 
   updateSpent(move: MoveItem) {
-    const item = this.material(move.itemType).getItem(move.itemIndex)
-    this.memorize<SpentPoint>(Memory.SpentPoints, (s ) => {
+    const item = this.material(move.itemType).getItem<number>(move.itemIndex)
+    this.memorize<SpentPoint>(Memory.SpentPoints, (s) => {
       const spent = { ...s }
-      if (!(Resource.Drop in spent)) {
-        spent[Resource.Drop] = 0
-      }
-
-      spent[Resource.Drop] += item.id
+      spent[Resource.Drop] = (spent[Resource.Drop] ?? 0) + item.id
       return spent
     })
   }
@@ -50,7 +46,7 @@ export class ExtinguishFireRule extends PlayerTurnRule {
     const resources = this.resources
     const fire = this.material(MaterialType.FireTile).location(LocationType.CircleOfSpiritBoardFire)
     return fire
-      .filter((item) => item.id <= resources)
+      .filter<number>((item) => item.id <= resources)
       .moveItems(this.toPlayerArea)
   }
 

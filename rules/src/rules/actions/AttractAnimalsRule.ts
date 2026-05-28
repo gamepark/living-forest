@@ -1,4 +1,5 @@
 import { isMoveItemType, ItemMove, MaterialMove, MoveItem, PlayerTurnRule } from '@gamepark/rules-api'
+import GuardianAnimal from '../../material/GuardianAnimal'
 import { Resource } from '../../material/Resource'
 import { PlayerState } from '../helper/PlayerState'
 import { MaterialType } from '../../material/MaterialType'
@@ -31,15 +32,11 @@ export class AttractAnimalsRule extends PlayerTurnRule {
   }
 
   updateSpent(move: MoveItem) {
-    const item = this.material(move.itemType).getItem(move.itemIndex)
+    const item = this.material(move.itemType).getItem<GuardianAnimal>(move.itemIndex)
     this.memorize<SpentPoint>(Memory.SpentPoints, (s = {}) => {
       const spent = { ...s }
-      if (!(Resource.Sun in spent)) {
-        spent[Resource.Sun] = 0
-      }
-
       // FIXME: THIS FAIL SOMETIMES.... IT SEEMS TO IMPACT ONLY THE HISTORY ON RELOAD
-      spent[Resource.Sun] += GuardianAnimalDescriptions[item.id]?.cost ?? 0
+      spent[Resource.Sun] = (spent[Resource.Sun] ?? 0) + (GuardianAnimalDescriptions[item.id]?.cost ?? 0)
       return spent
     })
   }
@@ -56,7 +53,7 @@ export class AttractAnimalsRule extends PlayerTurnRule {
     const resources = this.resources
     const reserve = this.material(MaterialType.GuardianAnimalCard).location(LocationType.ReserveRow)
     return reserve
-      .filter((item) => GuardianAnimalDescriptions[item.id]!.cost <= resources)
+      .filter<GuardianAnimal>((item) => GuardianAnimalDescriptions[item.id]!.cost <= resources)
       .moveItems({ type: LocationType.PlayerDeckStack, player: this.player })
   }
 

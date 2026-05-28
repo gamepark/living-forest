@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { RuleId } from '@gamepark/living-forest/rules/RuleId'
 import { FailuresDialog, FullscreenDialog, LoadingScreen, MaterialHeader, MaterialImageLoader, Menu, useGame } from '@gamepark/react-game'
 import { MaterialGame } from '@gamepark/rules-api'
@@ -31,7 +30,7 @@ export default function App() {
   return (
     <>
       <GameDisplay />
-      <LoadingScreen display={loading} author="Aske Christiansen" artist="Apolline Etienne" publisher="Ludonaute" developer="Laetitia Decoudu" />
+      <LoadingScreen display={loading} />
       <MaterialImageLoader onImagesLoad={() => setImagesLoading(false)} />
       <MaterialHeader rulesStepsHeaders={headers} GameOver={GameOverHeader} loading={loading} />
       <Menu />

@@ -1,12 +1,13 @@
 import { Material, MaterialGame, MaterialRulesPart } from '@gamepark/rules-api'
-import sumBy from 'lodash/sumBy'
-import uniqBy from 'lodash/uniqBy'
+import { sumBy, uniqBy } from 'es-toolkit/compat'
+import GuardianAnimal from '../../material/GuardianAnimal'
 import { getSolitaryGregariousDifference, GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescriptions'
 import { LocationType } from '../../material/LocationType'
 import { MaterialType } from '../../material/MaterialType'
+import ProtectiveTree from '../../material/ProtectiveTree'
 import { ProtectiveTreeDetail } from '../../material/ProtectivesTrees'
 import { Resource } from '../../material/Resource'
-import { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
+import VictoryTiles, { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
 import SpiritOfNature from '../../SpiritOfNature'
 import { Memory, SpentPoint } from '../Memory'
 
@@ -76,11 +77,11 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   getTreeResources(resource: Resource) {
-    return sumBy(this.forest.getItems(), (item) => ProtectiveTreeDetail[item.id]?.resources?.[resource] ?? 0) ?? 0
+    return sumBy(this.forest.getItems<ProtectiveTree>(), (item) => ProtectiveTreeDetail[item.id]?.resources?.[resource] ?? 0) ?? 0
   }
 
   getHelpLineResources(resource: Resource) {
-    return sumBy(this.helpLine.getItems(), (item) => GuardianAnimalDescriptions[item.id]?.resources?.[resource] ?? 0) ?? 0
+    return sumBy(this.helpLine.getItems<GuardianAnimal>(), (item) => GuardianAnimalDescriptions[item.id]?.resources?.[resource] ?? 0) ?? 0
   }
 
   getForestBonus(resource: Resource) {
@@ -139,6 +140,6 @@ export class PlayerState extends MaterialRulesPart {
   }
 
   countVictoryTileOfType(victory: VictoryTileType) {
-    return this.victoryTiles.filter((item) => VictoryTileTypes[item.id] === victory).length
+    return this.victoryTiles.filter<VictoryTiles>((item) => VictoryTileTypes[item.id] === victory).length
   }
 }

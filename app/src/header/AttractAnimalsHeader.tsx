@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { Resource } from '@gamepark/living-forest/material/Resource'
@@ -23,7 +22,7 @@ export const AttractAnimalsHeader = () => {
     if (pass) {
       return (
         <div css={[alignIcon, centerCss]}>
-          <Trans defaults="header.attract-animal-pass">
+          <Trans i18nKey="header.attract-animal-pass">
             <PlayMoveButton css={marginLeft} move={pass}/>
             <SunResource/>
           </Trans>
@@ -32,7 +31,7 @@ export const AttractAnimalsHeader = () => {
     } else {
       return (
         <div css={[alignIcon, centerCss]}>
-          <Trans defaults="header.attract-animal.me">
+          <Trans i18nKey="header.attract-animal.me">
             <strong/>
             <SunResource/>
           </Trans>

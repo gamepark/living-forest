@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import { LocationType } from '@gamepark/living-forest/material/LocationType'
 import { MaterialType } from '@gamepark/living-forest/material/MaterialType'
 import SpiritOfNature from '@gamepark/living-forest/SpiritOfNature'
 import { DropAreaDescription, MaterialContext } from '@gamepark/react-game'
 import { isMoveItemType, Location, MaterialMove } from '@gamepark/rules-api'
-import { isEqual } from 'lodash'
+import { isEqual } from 'es-toolkit/compat'
 import { protectiveTreeTileDescription } from '../../material/description/ProtectiveTreeTileDescription'
 import { TreeSpaceHelp } from '../help/TreeSpaceHelp'
 
