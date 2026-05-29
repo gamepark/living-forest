@@ -38,7 +38,7 @@
   "rules.sacred-tree.title": "Sacred Tree",
   "rules.sacred-tree.description": "The Spirit of Nature holding the Sacred Tree begins the turn. At the end of the turn, the Sacred Tree passes to the next player.",
   "rules.spirit-nature.title": "Spirit of Nature",
-  "rules.spirit-nature.description": "You play as a Spirit of Nature trying to save the Forest and its Sacred Tree from Onibi's relentless attacks. Either by planting 12 different Protector Trees, harvesting 12 Sacred Flowers or putting out 12 Fires.",
+  "rules.spirit-nature.description": "You play as a Spirit of Nature trying to save the Forest and its Sacred Tree from Onibi's relentless attacks. Either by planting 12 different Protective Trees, harvesting 12 Sacred Flowers or putting out 12 Fires.",
   "rules.victory-tile.title": "Victory Tile",
   "rules.victory-tile.description": "When you start the game, you have 3 Victory tiles representing respectively a Fire, a Sacred Flower and a Protective Tree. These count towards your victory points. When you move around the Circle of Spirits and overtake a player, you can steal a Victory tile.",
   "rules.protected-tree.type": "There are three types of Guardian Animals: solitary represented by a black coin, gregarious represented by a white coin and neutral with no coin. A Gregarious symbol cancels out a Solitary symbol. If your Help Line contains strictly less than three Solitary symbols (not cancelled by Gregarious symbols), you can perform 2 different Actions. Otherwise, you can only perform one action",
