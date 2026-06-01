@@ -11,6 +11,19 @@ export class ProtectiveTreeDeckLocator extends FlexLocator {
 
   getCoordinates = (_: Location, { rules }: MaterialContext) => rules.players.length === 2 ? { x: -25, y: -8.5 } : { x: 13.5, y: 2.5 }
 
+  // getItemCoordinates reads the dispenser tiles quantities (mutable game state) to lift the selected top tile,
+  // so we must declare these as position dependencies (in addition to the base list count).
+  getPositionDependencies(location: Location, context: MaterialContext) {
+    return [
+      super.getPositionDependencies(location, context),
+      context.rules
+        .material(MaterialType.ProtectiveTreeTiles)
+        .location(LocationType.TreeDispenser)
+        .getItems()
+        .map((tile) => tile.quantity ?? 1)
+    ]
+  }
+
   getItemCoordinates(item: MaterialItem, context: ItemContext) {
     let { x = 0, y = 0, z = 0 } = super.getItemCoordinates(item, context)
     const { rules, displayIndex } = context
