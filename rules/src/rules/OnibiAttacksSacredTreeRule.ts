@@ -49,7 +49,7 @@ export class OnibiAttacksSacredTreeRule extends MaterialRulesPart {
     const tokenCount = this.material(MaterialType.FireTile).location(LocationType.FireStack).locationId(fire).getItem()?.quantity ?? 1
     const moves: MaterialMove[] = []
     for (let i = 0; i < Math.min(tokens, tokenCount); i++) {
-      moves.push(fireStack.locationId(fire).moveItem({ type: LocationType.CircleOfSpiritBoardFire }))
+      moves.push(fireStack.locationId(fire).moveItem({ type: LocationType.CircleOfSpiritBoardFire }, 1))
     }
 
     return moves

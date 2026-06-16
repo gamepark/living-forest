@@ -18,7 +18,7 @@ export class PlantProtectiveTreeRule extends PlayerTurnRule {
     const availableTrees = this.availableTrees
     return forestTreeSpaces
       .filter((space) => this.isAvailableSpace(space, playerTrees))
-      .flatMap((space) => availableTrees.moveItems({ type: LocationType.TreeSpace, ...space, player: this.player }))
+      .flatMap((space) => availableTrees.moveItems({ type: LocationType.TreeSpace, ...space, player: this.player }, 1))
 
 
   }
