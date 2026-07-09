@@ -6,7 +6,11 @@ import { RuleId } from '../RuleId'
 
 export class TakeFragmentRule extends PlayerTurnRule {
   onRuleStart() {
-    return this.takeFragmentMoves
+    const moves = this.takeFragmentMoves
+    // Entered with nothing to take (e.g. triggered as a plant-tree bonus while the fragment stock is empty):
+    // fall back to the action rule instead of leaving the player with no legal move.
+    if (!moves.length) return [this.startRule(RuleId.Action)]
+    return moves
   }
 
   getPlayerMoves(): MaterialMove<number, number, number>[] {

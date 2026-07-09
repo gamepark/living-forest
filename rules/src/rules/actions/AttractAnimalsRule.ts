@@ -10,6 +10,15 @@ import { GuardianAnimalDescriptions } from '../../material/GuardianAnimalDescrip
 
 export class AttractAnimalsRule extends PlayerTurnRule {
 
+  onRuleStart(): MaterialMove[] {
+    // Entered with nothing to attract (e.g. triggered as a plant-tree bonus while no card is affordable):
+    // fall back to the action rule instead of leaving the player with no legal move.
+    if (!this.possible && !this.playerState.getSpent(Resource.Sun)) {
+      return [this.startRule(RuleId.Action)]
+    }
+    return []
+  }
+
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const moves: MaterialMove[] = this.attractAnimalMoves
     if (this.playerState.getSpent(Resource.Sun)) {

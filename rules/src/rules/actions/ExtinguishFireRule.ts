@@ -8,6 +8,15 @@ import { RuleId } from '../RuleId'
 
 export class ExtinguishFireRule extends PlayerTurnRule {
 
+  onRuleStart(): MaterialMove[] {
+    // Entered with nothing to extinguish (e.g. triggered as a plant-tree bonus while no fire is affordable):
+    // fall back to the action rule instead of leaving the player with no legal move.
+    if (!this.possible && !this.playerState.getSpent(Resource.Drop)) {
+      return [this.startRule(RuleId.Action)]
+    }
+    return []
+  }
+
   getPlayerMoves(): MaterialMove[] {
     const moves: MaterialMove[] = this.extinguishFireMoves
 
