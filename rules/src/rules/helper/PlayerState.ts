@@ -10,6 +10,7 @@ import { Resource } from '../../material/Resource'
 import VictoryTiles, { VictoryTileType, VictoryTileTypes } from '../../material/VictoryTiles'
 import SpiritOfNature from '../../SpiritOfNature'
 import { Memory, SpentPoint } from '../Memory'
+import { RuleId } from '../RuleId'
 
 export class PlayerState extends MaterialRulesPart {
   private helpLine: Material
@@ -73,7 +74,23 @@ export class PlayerState extends MaterialRulesPart {
 
   getModifier(type: Resource, realtime: boolean = true) {
     if (!realtime) return 0
-    return (this.bonus ?? 0) - this.getSpent(type)
+    // The bonus (from planting on a bonus space) only applies to the resource used by the triggered action,
+    // not to every resource. Otherwise it would inflate unrelated counters such as the Sacred Flowers.
+    const bonus = this.bonusResource === type ? this.bonus : 0
+    return bonus - this.getSpent(type)
+  }
+
+  // Resource boosted by the bonus of the action currently running (see PlantProtectiveTreeRule).
+  // TakeFragment has no resource bonus (its bonus is a number of fragments).
+  get bonusResource(): Resource | undefined {
+    switch (this.game.rule?.id) {
+      case RuleId.AttractAnimals:
+        return Resource.Sun
+      case RuleId.ExtinguishFire:
+        return Resource.Drop
+      default:
+        return undefined
+    }
   }
 
   getTreeResources(resource: Resource) {
