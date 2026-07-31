@@ -11,7 +11,7 @@ export class PlayerDiscardLocator extends DeckLocator {
 
   getCoordinates(location: Location, { rules, player }: MaterialContext) {
     const { x, y } = getPlayerBoardPositionOnTable(rules, location.player!, player)
-    return { x: x + 15.5, y: y - 3 }
+    return { x: x + 15.5, y: y - 3, z: 0.1 }
   }
 }
 
