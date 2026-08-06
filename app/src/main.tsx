@@ -1,4 +1,4 @@
-import { LivingForestOptionsSpec } from '@gamepark/living-forest/LivingForestOptions'
+import { LivingForestOptionsSpecV2 } from '@gamepark/living-forest/LivingForestOptions'
 import { LivingForestRules } from '@gamepark/living-forest/LivingForestRules'
 import { LivingForestSetup } from '@gamepark/living-forest/LivingForestSetup'
 import { GameProvider, LogDescription } from '@gamepark/react-game'
@@ -22,7 +22,7 @@ createRoot(document.getElementById('root')!).render(
     <GameProvider game="living-forest"
       GameSetup={LivingForestSetup}
       Rules={LivingForestRules}
-      optionsSpec={LivingForestOptionsSpec}
+      optionsSpec={LivingForestOptionsSpecV2}
       material={material}
       locators={locators}
       animations={livingForestAnimations}
