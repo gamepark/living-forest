@@ -9,7 +9,7 @@ import { RuleId } from '../RuleId'
 export class PickVictoryTileRule extends PlayerTurnRule {
   getPlayerMoves(): MaterialMove<number, number, number>[] {
     const player = this.passedPlayers?.[0]
-    if (!player) console.error("Trying to move victory tile to a non existing player")
+    if (!player) return []
     return this.material(MaterialType.VictoryTile)
       .location(LocationType.VictoryTileArea)
       .player((p) => p === player)
